@@ -1,26 +1,45 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="app-wrapper" :style="{'background-image':'url(' + getBackgroundUrl() + ')'}">
+    <Interface/>
+    <Battle/>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Battle from './components/Battle.vue'
+import Interface from './components//interface/Interface.vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Battle,
+    Interface
+  },
+
+  data:function(){
+    return {
+      background: 'plaine'
+    }
+  },
+
+  methods: {
+    getBackgroundUrl: function(){
+      return require('./assets/img/backgrounds/' + this.background + '.png')
+    }
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss">
+
+body {
+  margin: 0;
+}
+
+.app-wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 </style>
