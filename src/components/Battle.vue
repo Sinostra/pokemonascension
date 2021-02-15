@@ -4,8 +4,8 @@
             <Pokemon :number="'010'"/>
         </div>
         <div class="foe-pokemon">
-            <!-- <Pokemon :number="'014'"/> -->
-            <!-- <Pokemon :number="'056'"/> -->
+            <Pokemon :number="'009'"/>
+            <Pokemon :number="'056'"/>
         </div>
     </div>
 </template>
@@ -30,19 +30,22 @@ export default {
 }
 </script>
 <style lang='scss' scoped>
-
 .battle-wrapper {
     display: flex;
     justify-content: space-between;
     width: 100%;
 
-    .player-pokemon {
-        transform: scaleX(-1);
-    }
-
     .player-pokemon, .foe-pokemon {
-        display: flex;
+        position: relative;
+        width: 100%;
     }
 }
+</style>
 
+<style lang='scss'>
+.player-pokemon {
+    .pokemon-wrapper img {
+        transform: scaleX(-1);
+    }
+}
 </style>

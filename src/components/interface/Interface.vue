@@ -1,12 +1,20 @@
 <template>
     <div class="interface-wrapper">
-
+        <GameInterface/>
+        <BattleInterface/>
     </div>
 </template>
 
 <script>
+import GameInterface from './GameInterface.vue'
+import BattleInterface from './BattleInterface.vue'
 export default {
     name: "Interface",
+
+    components: {
+        GameInterface,
+        BattleInterface
+    },
 
     data: function() {
         return {
@@ -14,15 +22,12 @@ export default {
         }
     },
 
-    props: ['deck'],
-
     methods: {
 
     }
 }
 </script>
 <style lang='scss' scoped>
-
 .interface-wrapper {
     position: absolute;
     top: 0;
@@ -30,6 +35,8 @@ export default {
     width: 100%;
     height: 100%;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    display: none;
 }
-
 </style>
