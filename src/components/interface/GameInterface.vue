@@ -19,3 +19,10 @@ export default {
     }
 } 
 </script>
+<style lang="scss" scoped>
+.game-interface {
+    width: 100%;
+    height: 70px;
+    background: blue;
+}
+</style>

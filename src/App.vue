@@ -17,19 +17,21 @@ export default {
 
   data:function(){
     return {
-      background: 'plaine'
+      background: 'forest'
     }
   },
 
   methods: {
     getBackgroundUrl: function(){
-      return require('./assets/img/backgrounds/' + this.background + '.png')
+      return require('./assets/img/backgrounds/' + this.background + '.jpg')
     }
   }
 }
 </script>
 
 <style lang="scss">
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,600;0,700;0,800;1,600;1,700;1,800&display=swap');
 
 body {
   margin: 0;
@@ -39,7 +41,7 @@ body {
   height: 100vh;
   display: flex;
   align-items: flex-end;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: bottom;
 }
 </style>

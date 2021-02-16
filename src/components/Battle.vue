@@ -1,7 +1,7 @@
 <template>
     <div class="battle-wrapper">
         <div class="player-pokemon">
-            <Pokemon :number="'010'"/>
+            <Pokemon :number="'001'"/>
         </div>
         <div class="foe-pokemon">
             <Pokemon :number="'009'"/>
@@ -44,8 +44,44 @@ export default {
 
 <style lang='scss'>
 .player-pokemon {
-    .pokemon-wrapper img {
-        transform: scaleX(-1);
+    .pokemon-wrapper {
+        bottom: 81px;
+        left: 312px;
+
+        img {
+            transform: scaleX(-1);
+            margin-bottom: 30px;
+        }
+    }
+}
+
+.foe-pokemon {
+    .pokemon-wrapper {
+        display: flex;
+        flex-direction: column-reverse;
+
+        .heathBar {
+            width: 50%;
+            border: 1px solid #000;
+            height: 10px;
+            margin: 0 auto;
+            .currentHealth {
+                height: 10px;
+            }
+        }
+        .infos {
+           width: 50%;
+           margin: 0 auto;
+        }
+        &:first-of-type {
+            bottom: 182px;
+            left: 241px;
+        }
+
+        &:last-of-type {
+            bottom: 182px;
+            left: 80px;
+        }
     }
 }
 </style>

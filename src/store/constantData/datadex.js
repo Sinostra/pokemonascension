@@ -6,7 +6,9 @@ export default {
             "german": "Bisasam"
         },
         
-        "type": ["grass", "poison"]
+        "type": ["grass", "poison"],
+        "hp": 45,
+        "size": 25
     },
 
     "002": {
@@ -16,7 +18,9 @@ export default {
             "german": "Bisaknosp"
         },
         
-        "type": ["grass", "poison"]
+        "type": ["grass", "poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "003": {
@@ -26,7 +30,9 @@ export default {
             "german": "Bisaflor"
         },
         
-        "type": ["grass", "poison"]
+        "type": ["grass", "poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "004": {
@@ -36,7 +42,9 @@ export default {
             "german": "Glumanda"
         },
         
-        "type": ["fire"]
+        "type": ["fire"],
+        "hp": 45,
+        "size": 30
     },
 
     "005": {
@@ -46,7 +54,9 @@ export default {
             "german": "Glutexo"
         },
         
-        "type": ["fire"]
+        "type": ["fire"],
+        "hp": 45,
+        "size": 30
     },
 
     "006": {
@@ -57,6 +67,8 @@ export default {
         },
         
         "type": ["fire", "flying"],
+        "hp": 45,
+        "size": 30
     },
 
     "007": {
@@ -66,7 +78,9 @@ export default {
             "german": "Schiggy"
         },
         
-        "type": ["water"]
+        "type": ["water"],
+        "hp": 45,
+        "size": 30
     },
 
     "008": {
@@ -76,7 +90,9 @@ export default {
             "german": "Schillok"
         },
         
-        "type": ["water"]
+        "type": ["water"],
+        "hp": 45,
+        "size": 30
     },
 
     "009": {
@@ -86,7 +102,9 @@ export default {
             "german": "Turtok"
         },
         
-        "type": ["water"]
+        "type": ["water"],
+        "hp": 45,
+        "size": 40
     },
 
     "010": {
@@ -96,7 +114,9 @@ export default {
             "german": "Raupy"
         },
         
-        "type": ["bug"]
+        "type": ["bug"],
+        "hp": 45,
+        "size": 30
     },
 
     "011": {
@@ -106,7 +126,9 @@ export default {
             "german": "Safcon"
         },
         
-        "type": ["bug"]
+        "type": ["bug"],
+        "hp": 45,
+        "size": 30
     },
 
     "012": {
@@ -116,7 +138,9 @@ export default {
             "german": "Smettbo"
         },
         
-        "type": ["bug", "flying"]
+        "type": ["bug", "flying"],
+        "hp": 45,
+        "size": 30
     },
 
     "013": {
@@ -126,7 +150,9 @@ export default {
             "german": "Hornliu"
         },
         
-        "type": ["bug", "poison"]
+        "type": ["bug", "poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "014": {
@@ -136,7 +162,9 @@ export default {
             "german": "Kokuna"
         },
         
-        "type": ["bug", "poison"]
+        "type": ["bug", "poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "015": {
@@ -146,7 +174,9 @@ export default {
             "german": "Bibor"
         },
         
-        "type": ["bug", "poison"]
+        "type": ["bug", "poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "016": {
@@ -156,7 +186,9 @@ export default {
             "german": "Taubsi"
         },
         
-        "type": ["normal", "flying"]
+        "type": ["normal", "flying"],
+        "hp": 45,
+        "size": 30
     },
 
     "017": {
@@ -166,7 +198,9 @@ export default {
             "german": "Tauboga"
         },
         
-        "type": ["normal", "flying"]
+        "type": ["normal", "flying"],
+        "hp": 45,
+        "size": 30
     },
 
     "018": {
@@ -176,7 +210,9 @@ export default {
             "german": "Tauboss"
         },
         
-        "type": ["normal", "flying"]
+        "type": ["normal", "flying"],
+        "hp": 45,
+        "size": 30
     },
 
     "019": {
@@ -187,6 +223,8 @@ export default {
         },
         
         "type": ["normal"],
+        "hp": 45,
+        "size": 30
     },
 
     "020": {
@@ -197,6 +235,8 @@ export default {
         },
         
         "type": ["normal"],
+        "hp": 45,
+        "size": 30
     },
 
     "021": {
@@ -206,7 +246,9 @@ export default {
             "german": "Habitak"
         },
         
-        "type": ["normal", "flying"]
+        "type": ["normal", "flying"],
+        "hp": 45,
+        "size": 30
     },
 
     "022": {
@@ -216,7 +258,9 @@ export default {
             "german": "Ibitak"
         },
         
-        "type": ["normal", "flying"]
+        "type": ["normal", "flying"],
+        "hp": 45,
+        "size": 30
     },
 
     "023": {
@@ -226,7 +270,9 @@ export default {
             "german": "Rettan"
         },
         
-        "type": ["poison"]
+        "type": ["poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "024": {
@@ -236,7 +282,9 @@ export default {
             "german": "Arbok"
         },
         
-        "type": ["poison"]
+        "type": ["poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "025": {
@@ -246,7 +294,9 @@ export default {
             "german": "Pikachu"
         },
         
-        "type": ["electric"]
+        "type": ["electric"],
+        "hp": 45,
+        "size": 30
     },
 
     "026": {
@@ -257,6 +307,8 @@ export default {
         },
         
         "type": ["electric"],
+        "hp": 45,
+        "size": 30
     },
 
     "027": {
@@ -267,6 +319,8 @@ export default {
         },
         
         "type": ["ground"],
+        "hp": 45,
+        "size": 30
     },
 
     "028": {
@@ -277,6 +331,8 @@ export default {
         },
         
         "type": ["ground"],
+        "hp": 45,
+        "size": 30
     },
 
     "029": {
@@ -286,7 +342,9 @@ export default {
             "german": "Nidoran♀"
         },
         
-        "type": ["poison"]
+        "type": ["poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "030": {
@@ -296,7 +354,9 @@ export default {
             "german": "Nidorina"
         },
         
-        "type": ["poison"]
+        "type": ["poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "031": {
@@ -306,7 +366,9 @@ export default {
             "german": "Nidoqueen"
         },
         
-        "type": ["poison", "ground"]
+        "type": ["poison", "ground"],
+        "hp": 45,
+        "size": 30
     },
 
     "032": {
@@ -316,7 +378,9 @@ export default {
             "german": "Nidoran♂"
         },
         
-        "type": ["poison"]
+        "type": ["poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "033": {
@@ -326,7 +390,9 @@ export default {
             "german": "Nidorino"
         },
         
-        "type": ["poison"]
+        "type": ["poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "034": {
@@ -336,7 +402,9 @@ export default {
             "german": "Nidoking"
         },
         
-        "type": ["poison", "ground"]
+        "type": ["poison", "ground"],
+        "hp": 45,
+        "size": 30
     },
 
     "035": {
@@ -346,7 +414,9 @@ export default {
             "german": "Piepi"
         },
         
-        "type": ["fairy"]
+        "type": ["fairy"],
+        "hp": 45,
+        "size": 30
     },
 
     "036": {
@@ -356,7 +426,9 @@ export default {
             "german": "Pixi"
         },
         
-        "type": ["fairy"]
+        "type": ["fairy"],
+        "hp": 45,
+        "size": 30
     },
 
     "037": {
@@ -367,6 +439,8 @@ export default {
         },
         
         "type": ["fire"],
+        "hp": 45,
+        "size": 30
     },
 
     "038": {
@@ -377,6 +451,8 @@ export default {
         },
         
         "type": ["fire"],
+        "hp": 45,
+        "size": 30
     },
 
     "039": {
@@ -386,7 +462,9 @@ export default {
             "german": "Pummeluff"
         },
         
-        "type": ["normal", "fairy"]
+        "type": ["normal", "fairy"],
+        "hp": 45,
+        "size": 30
     },
 
     "040": {
@@ -396,7 +474,9 @@ export default {
             "german": "Knuddeluff"
         },
         
-        "type": ["normal", "fairy"]
+        "type": ["normal", "fairy"],
+        "hp": 45,
+        "size": 30
     },
 
     "041": {
@@ -406,7 +486,9 @@ export default {
             "german": "Zubat"
         },
         
-        "type": ["poison", "flying"]
+        "type": ["poison", "flying"],
+        "hp": 45,
+        "size": 30
     },
 
     "042": {
@@ -416,7 +498,9 @@ export default {
             "german": "Golbat"
         },
         
-        "type": ["poison", "flying"]
+        "type": ["poison", "flying"],
+        "hp": 45,
+        "size": 30
     },
 
     "043": {
@@ -426,7 +510,9 @@ export default {
             "german": "Myrapla"
         },
         
-        "type": ["grass", "poison"]
+        "type": ["grass", "poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "044": {
@@ -436,7 +522,9 @@ export default {
             "german": "Duflor"
         },
         
-        "type": ["grass", "poison"]
+        "type": ["grass", "poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "045": {
@@ -446,7 +534,9 @@ export default {
             "german": "Giflor"
         },
         
-        "type": ["grass", "poison"]
+        "type": ["grass", "poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "046": {
@@ -456,7 +546,9 @@ export default {
             "german": "Paras"
         },
         
-        "type": ["bug", "grass"]
+        "type": ["bug", "grass"],
+        "hp": 45,
+        "size": 30
     },
 
     "047": {
@@ -466,7 +558,9 @@ export default {
             "german": "Parasek"
         },
         
-        "type": ["bug", "grass"]
+        "type": ["bug", "grass"],
+        "hp": 45,
+        "size": 30
     },
 
     "048": {
@@ -476,7 +570,9 @@ export default {
             "german": "Bluzuk"
         },
         
-        "type": ["bug", "poison"]
+        "type": ["bug", "poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "049": {
@@ -486,7 +582,9 @@ export default {
             "german": "Omot"
         },
         
-        "type": ["bug", "poison"]
+        "type": ["bug", "poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "050": {
@@ -497,6 +595,8 @@ export default {
         },
         
         "type": ["ground"],
+        "hp": 45,
+        "size": 30
     },
 
     "051": {
@@ -507,6 +607,8 @@ export default {
         },
         
         "type": ["ground"],
+        "hp": 45,
+        "size": 30
     },
 
     "052": {
@@ -517,6 +619,8 @@ export default {
         },
         
         "type": ["normal"],
+        "hp": 45,
+        "size": 30
     },
 
     "053": {
@@ -527,6 +631,8 @@ export default {
         },
         
         "type": ["normal"],
+        "hp": 45,
+        "size": 30
     },
 
     "054": {
@@ -536,7 +642,9 @@ export default {
             "german": "Enton"
         },
         
-        "type": ["water"]
+        "type": ["water"],
+        "hp": 45,
+        "size": 30
     },
 
     "055": {
@@ -546,7 +654,9 @@ export default {
             "german": "Entoron"
         },
         
-        "type": ["water"]
+        "type": ["water"],
+        "hp": 45,
+        "size": 30
     },
 
     "056": {
@@ -556,7 +666,9 @@ export default {
             "german": "Menki"
         },
         
-        "type": ["fighting"]
+        "type": ["fighting"],
+        "hp": 45,
+        "size": 28
     },
 
     "057": {
@@ -566,7 +678,9 @@ export default {
             "german": "Rasaff"
         },
         
-        "type": ["fighting"]
+        "type": ["fighting"],
+        "hp": 45,
+        "size": 30
     },
 
     "058": {
@@ -576,7 +690,9 @@ export default {
             "german": "Fukano"
         },
         
-        "type": ["fire"]
+        "type": ["fire"],
+        "hp": 45,
+        "size": 30
     },
 
     "059": {
@@ -586,7 +702,9 @@ export default {
             "german": "Arkani"
         },
         
-        "type": ["fire"]
+        "type": ["fire"],
+        "hp": 45,
+        "size": 30
     },
 
     "060": {
@@ -596,7 +714,9 @@ export default {
             "german": "Quapsel"
         },
         
-        "type": ["water"]
+        "type": ["water"],
+        "hp": 45,
+        "size": 30
     },
 
     "061": {
@@ -606,7 +726,9 @@ export default {
             "german": "Quaputzi"
         },
         
-        "type": ["water"]
+        "type": ["water"],
+        "hp": 45,
+        "size": 30
     },
 
     "062": {
@@ -616,7 +738,9 @@ export default {
             "german": "Quappo"
         },
         
-        "type": ["water", "fighting"]
+        "type": ["water", "fighting"],
+        "hp": 45,
+        "size": 30
     },
 
     "063": {
@@ -626,7 +750,9 @@ export default {
             "german": "Abra"
         },
         
-        "type": ["psychic"]
+        "type": ["psychic"],
+        "hp": 45,
+        "size": 30
     },
 
     "064": {
@@ -636,7 +762,9 @@ export default {
             "german": "Kadabra"
         },
         
-        "type": ["psychic"]
+        "type": ["psychic"],
+        "hp": 45,
+        "size": 30
     },
 
     "065": {
@@ -646,7 +774,9 @@ export default {
             "german": "Simsala"
         },
         
-        "type": ["psychic"]
+        "type": ["psychic"],
+        "hp": 45,
+        "size": 30
     },
 
     "066": {
@@ -656,7 +786,9 @@ export default {
             "german": "Machollo"
         },
         
-        "type": ["fighting"]
+        "type": ["fighting"],
+        "hp": 45,
+        "size": 30
     },
 
     "067": {
@@ -666,7 +798,9 @@ export default {
             "german": "Maschock"
         },
         
-        "type": ["fighting"]
+        "type": ["fighting"],
+        "hp": 45,
+        "size": 30
     },
 
     "068": {
@@ -676,7 +810,9 @@ export default {
             "german": "Machomei"
         },
         
-        "type": ["fighting"]
+        "type": ["fighting"],
+        "hp": 45,
+        "size": 30
     },
 
     "069": {
@@ -686,7 +822,9 @@ export default {
             "german": "Knofensa"
         },
         
-        "type": ["grass", "poison"]
+        "type": ["grass", "poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "070": {
@@ -696,7 +834,9 @@ export default {
             "german": "Ultrigaria"
         },
         
-        "type": ["grass", "poison"]
+        "type": ["grass", "poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "071": {
@@ -706,7 +846,9 @@ export default {
             "german": "Sarzenia"
         },
         
-        "type": ["grass", "poison"]
+        "type": ["grass", "poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "072": {
@@ -716,7 +858,9 @@ export default {
             "german": "Tentacha"
         },
         
-        "type": ["water", "poison"]
+        "type": ["water", "poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "073": {
@@ -726,7 +870,9 @@ export default {
             "german": "Tentoxa"
         },
         
-        "type": ["water", "poison"]
+        "type": ["water", "poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "074": {
@@ -737,6 +883,8 @@ export default {
         },
         
         "type": ["rock", "ground"],
+        "hp": 45,
+        "size": 30
     },
 
     "075": {
@@ -747,6 +895,8 @@ export default {
         },
         
         "type": ["rock", "ground"],
+        "hp": 45,
+        "size": 30
     },
 
     "076": {
@@ -757,6 +907,8 @@ export default {
         },
         
         "type": ["rock", "ground"],
+        "hp": 45,
+        "size": 30
     },
 
     "077": {
@@ -767,6 +919,8 @@ export default {
         },
         
         "type": ["fire"],
+        "hp": 45,
+        "size": 30
     },
 
     "078": {
@@ -777,6 +931,8 @@ export default {
         },
         
         "type": ["fire"],
+        "hp": 45,
+        "size": 30
     },
 
     "079": {
@@ -787,6 +943,8 @@ export default {
         },
         
         "type": ["water", "psychic"],
+        "hp": 45,
+        "size": 30
     },
 
     "080": {
@@ -797,16 +955,20 @@ export default {
         },
         
         "type": ["water", "psychic"],
+        "hp": 45,
+        "size": 30
     },
 
     "081": {
         "name": {
             "english": "Magnemite",
             "french": "Magnéti",
-            "german": "Magnetilo"
+            "german": "Magnetilo",
         },
         
-        "type": ["electric", "steel"]
+        "type": ["electric", "steel"],
+        "hp": 45,
+        "size": 30
     },
 
     "082": {
@@ -816,7 +978,9 @@ export default {
             "german": "Magneton"
         },
         
-        "type": ["electric", "steel"]
+        "type": ["electric", "steel"],
+        "hp": 45,
+        "size": 30
     },
 
     "083": {
@@ -827,6 +991,8 @@ export default {
         },
         
         "type": ["normal", "flying"],
+        "hp": 45,
+        "size": 30
     },
 
     "084": {
@@ -836,7 +1002,9 @@ export default {
             "german": "Dodu"
         },
         
-        "type": ["normal", "flying"]
+        "type": ["normal", "flying"],
+        "hp": 45,
+        "size": 30
     },
 
     "085": {
@@ -846,7 +1014,9 @@ export default {
             "german": "Dodri"
         },
         
-        "type": ["normal", "flying"]
+        "type": ["normal", "flying"],
+        "hp": 45,
+        "size": 30
     },
 
     "086": {
@@ -856,7 +1026,9 @@ export default {
             "german": "Jurob"
         },
         
-        "type": ["water"]
+        "type": ["water"],
+        "hp": 45,
+        "size": 30
     },
 
     "087": {
@@ -866,7 +1038,9 @@ export default {
             "german": "Jugong"
         },
         
-        "type": ["water", "ice"]
+        "type": ["water", "ice"],
+        "hp": 45,
+        "size": 30
     },
 
     "088": {
@@ -877,6 +1051,8 @@ export default {
         },
         
         "type": ["poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "089": {
@@ -887,6 +1063,8 @@ export default {
         },
         
         "type": ["poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "090": {
@@ -896,7 +1074,9 @@ export default {
             "german": "Muschas"
         },
         
-        "type": ["water"]
+        "type": ["water"],
+        "hp": 45,
+        "size": 30
     },
 
     "091": {
@@ -906,7 +1086,9 @@ export default {
             "german": "Austos"
         },
         
-        "type": ["water", "ice"]
+        "type": ["water", "ice"],
+        "hp": 45,
+        "size": 30
     },
 
     "092": {
@@ -916,7 +1098,9 @@ export default {
             "german": "Nebulak"
         },
         
-        "type": ["ghost", "poison"]
+        "type": ["ghost", "poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "093": {
@@ -926,7 +1110,9 @@ export default {
             "german": "Alpollo"
         },
         
-        "type": ["ghost", "poison"]
+        "type": ["ghost", "poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "094": {
@@ -936,7 +1122,9 @@ export default {
             "german": "Gengar"
         },
         
-        "type": ["ghost", "poison"]
+        "type": ["ghost", "poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "095": {
@@ -946,7 +1134,9 @@ export default {
             "german": "Onix"
         },
         
-        "type": ["rock", "ground"]
+        "type": ["rock", "ground"],
+        "hp": 45,
+        "size": 30
     },
 
     "096": {
@@ -956,7 +1146,9 @@ export default {
             "german": "Traumato"
         },
         
-        "type": ["psychic"]
+        "type": ["psychic"],
+        "hp": 45,
+        "size": 30
     },
 
     "097": {
@@ -966,7 +1158,9 @@ export default {
             "german": "Hypno"
         },
         
-        "type": ["psychic"]
+        "type": ["psychic"],
+        "hp": 45,
+        "size": 30
     },
 
     "098": {
@@ -976,7 +1170,9 @@ export default {
             "german": "Krabby"
         },
         
-        "type": ["water"]
+        "type": ["water"],
+        "hp": 45,
+        "size": 30
     },
 
     "099": {
@@ -986,7 +1182,9 @@ export default {
             "german": "Kingler"
         },
         
-        "type": ["water"]
+        "type": ["water"],
+        "hp": 45,
+        "size": 30
     },
 
     "100": {
@@ -996,7 +1194,9 @@ export default {
             "german": "Voltobal"
         },
         
-        "type": ["electric"]
+        "type": ["electric"],
+        "hp": 45,
+        "size": 30
     },
 
     "101": {
@@ -1006,7 +1206,9 @@ export default {
             "german": "Lektrobal"
         },
         
-        "type": ["electric"]
+        "type": ["electric"],
+        "hp": 45,
+        "size": 30
     },
 
     "102": {
@@ -1016,7 +1218,9 @@ export default {
             "german": "Owei"
         },
         
-        "type": ["grass", "psychic"]
+        "type": ["grass", "psychic"],
+        "hp": 45,
+        "size": 30
     },
 
     "103": {
@@ -1027,6 +1231,8 @@ export default {
         },
         
         "type": ["grass", "psychic"],
+        "hp": 45,
+        "size": 30
     },
 
     "104": {
@@ -1036,7 +1242,9 @@ export default {
             "german": "Tragosso"
         },
         
-        "type": ["ground"]
+        "type": ["ground"],
+        "hp": 45,
+        "size": 30
     },
 
     "105": {
@@ -1047,6 +1255,8 @@ export default {
         },
         
         "type": ["ground"],
+        "hp": 45,
+        "size": 30
     },
 
     "106": {
@@ -1056,7 +1266,9 @@ export default {
             "german": "Kicklee"
         },
         
-        "type": ["fighting"]
+        "type": ["fighting"],
+        "hp": 45,
+        "size": 30
     },
 
     "107": {
@@ -1066,7 +1278,9 @@ export default {
             "german": "Nockchan"
         },
         
-        "type": ["fighting"]
+        "type": ["fighting"],
+        "hp": 45,
+        "size": 30
     },
 
     "108": {
@@ -1076,7 +1290,9 @@ export default {
             "german": "Schlurp"
         },
         
-        "type": ["normal"]
+        "type": ["normal"],
+        "hp": 45,
+        "size": 30
     },
 
     "109": {
@@ -1086,7 +1302,9 @@ export default {
             "german": "Smogon"
         },
         
-        "type": ["poison"]
+        "type": ["poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "110": {
@@ -1097,6 +1315,8 @@ export default {
         },
         
         "type": ["poison"],
+        "hp": 45,
+        "size": 30
     },
 
     "111": {
@@ -1106,7 +1326,9 @@ export default {
             "german": "Rihorn"
         },
         
-        "type": ["ground", "rock"]
+        "type": ["ground", "rock"],
+        "hp": 45,
+        "size": 30
     },
 
     "112": {
@@ -1116,7 +1338,9 @@ export default {
             "german": "Rizeros"
         },
         
-        "type": ["ground", "rock"]
+        "type": ["ground", "rock"],
+        "hp": 45,
+        "size": 30
     },
 
     "113": {
@@ -1126,7 +1350,9 @@ export default {
             "german": "Chaneira"
         },
         
-        "type": ["normal"]
+        "type": ["normal"],
+        "hp": 45,
+        "size": 30
     },
 
     "114": {
@@ -1136,7 +1362,9 @@ export default {
             "german": "Tangela"
         },
         
-        "type": ["grass"]
+        "type": ["grass"],
+        "hp": 45,
+        "size": 30
     },
 
     "115": {
@@ -1146,7 +1374,9 @@ export default {
             "german": "Kangama"
         },
         
-        "type": ["normal"]
+        "type": ["normal"],
+        "hp": 45,
+        "size": 30
     },
 
     "116": {
@@ -1156,7 +1386,9 @@ export default {
             "german": "Seeper"
         },
         
-        "type": ["water"]
+        "type": ["water"],
+        "hp": 45,
+        "size": 30
     },
 
     "117": {
@@ -1166,7 +1398,9 @@ export default {
             "german": "Seemon"
         },
         
-        "type": ["water"]
+        "type": ["water"],
+        "hp": 45,
+        "size": 30
     },
 
     "118": {
@@ -1176,7 +1410,9 @@ export default {
             "german": "Goldini"
         },
         
-        "type": ["water"]
+        "type": ["water"],
+        "hp": 45,
+        "size": 30
     },
 
     "119": {
@@ -1186,7 +1422,9 @@ export default {
             "german": "Golking"
         },
         
-        "type": ["water"]
+        "type": ["water"],
+        "hp": 45,
+        "size": 30
     },
 
     "120": {
@@ -1196,7 +1434,9 @@ export default {
             "german": "Sterndu"
         },
         
-        "type": ["water"]
+        "type": ["water"],
+        "hp": 45,
+        "size": 30
     },
 
     "121": {
@@ -1206,7 +1446,9 @@ export default {
             "german": "Starmie"
         },
         
-        "type": ["water", "psychic"]
+        "type": ["water", "psychic"],
+        "hp": 45,
+        "size": 30
     },
 
     "122": {
@@ -1217,6 +1459,8 @@ export default {
         },
         
         "type": ["psychic", "fairy"],
+        "hp": 45,
+        "size": 30
     },
 
     "123": {
@@ -1226,7 +1470,9 @@ export default {
             "german": "Sichlor"
         },
         
-        "type": ["bug", "flying"]
+        "type": ["bug", "flying"],
+        "hp": 45,
+        "size": 30
     },
 
     "124": {
@@ -1236,7 +1482,9 @@ export default {
             "german": "Rossana"
         },
         
-        "type": ["ice", "psychic"]
+        "type": ["ice", "psychic"],
+        "hp": 45,
+        "size": 30
     },
 
     "125": {
@@ -1246,7 +1494,9 @@ export default {
             "german": "Elektek"
         },
         
-        "type": ["electric"]
+        "type": ["electric"],
+        "hp": 45,
+        "size": 30
     },
 
     "126": {
@@ -1256,7 +1506,9 @@ export default {
             "german": "Magmar"
         },
         
-        "type": ["fire"]
+        "type": ["fire"],
+        "hp": 45,
+        "size": 30
     },
 
     "127": {
@@ -1267,6 +1519,8 @@ export default {
         },
         
         "type": ["bug"],
+        "hp": 45,
+        "size": 30
     },
 
     "128": {
@@ -1276,7 +1530,9 @@ export default {
             "german": "Tauros"
         },
         
-        "type": ["normal"]
+        "type": ["normal"],
+        "hp": 45,
+        "size": 30
     },
 
     "129": {
@@ -1286,7 +1542,9 @@ export default {
             "german": "Karpador"
         },
         
-        "type": ["water"]
+        "type": ["water"],
+        "hp": 45,
+        "size": 30
     },
 
     "130": {
@@ -1297,6 +1555,8 @@ export default {
         },
         
         "type": ["water", "flying"],
+        "hp": 45,
+        "size": 30
     },
 
     "131": {
@@ -1306,7 +1566,9 @@ export default {
             "german": "Lapras"
         },
         
-        "type": ["water", "ice"]
+        "type": ["water", "ice"],
+        "hp": 45,
+        "size": 30
     },
 
     "132": {
@@ -1316,7 +1578,9 @@ export default {
             "german": "Ditto"
         },
         
-        "type": ["normal"]
+        "type": ["normal"],
+        "hp": 45,
+        "size": 30
     },
 
     "133": {
@@ -1326,7 +1590,9 @@ export default {
             "german": "Evoli"
         },
         
-        "type": ["normal"]
+        "type": ["normal"],
+        "hp": 45,
+        "size": 30
     },
 
     "134": {
@@ -1336,7 +1602,9 @@ export default {
             "german": "Aquana"
         },
         
-        "type": ["water"]
+        "type": ["water"],
+        "hp": 45,
+        "size": 30
     },
 
     "135": {
@@ -1346,7 +1614,9 @@ export default {
             "german": "Blitza"
         },
         
-        "type": ["electric"]
+        "type": ["electric"],
+        "hp": 45,
+        "size": 30
     },
 
     "136": {
@@ -1356,7 +1626,9 @@ export default {
             "german": "Flamara"
         },
         
-        "type": ["fire"]
+        "type": ["fire"],
+        "hp": 45,
+        "size": 30
     },
 
     "137": {
@@ -1366,7 +1638,9 @@ export default {
             "german": "Porygon"
         },
         
-        "type": ["normal"]
+        "type": ["normal"],
+        "hp": 45,
+        "size": 30
     },
 
     "138": {
@@ -1376,7 +1650,9 @@ export default {
             "german": "Amonitas"
         },
         
-        "type": ["rock", "water"]
+        "type": ["rock", "water"],
+        "hp": 45,
+        "size": 30
     },
 
     "139": {
@@ -1386,7 +1662,9 @@ export default {
             "german": "Amoroso"
         },
         
-        "type": ["rock", "water"]
+        "type": ["rock", "water"],
+        "hp": 45,
+        "size": 30
     },
 
     "140": {
@@ -1396,7 +1674,9 @@ export default {
             "german": "Kabuto"
         },
         
-        "type": ["rock", "water"]
+        "type": ["rock", "water"],
+        "hp": 45,
+        "size": 30
     },
 
     "141": {
@@ -1406,7 +1686,9 @@ export default {
             "german": "Kabutops"
         },
         
-        "type": ["rock", "water"]
+        "type": ["rock", "water"],
+        "hp": 45,
+        "size": 30
     },
 
     "142": {
@@ -1416,7 +1698,9 @@ export default {
             "german": "Aerodactyl"
         },
         
-        "type": ["rock", "flying"]
+        "type": ["rock", "flying"],
+        "hp": 45,
+        "size": 30
     },
 
     "143": {
@@ -1426,7 +1710,9 @@ export default {
             "german": "Relaxo"
         },
         
-        "type": ["normal"]
+        "type": ["normal"],
+        "hp": 45,
+        "size": 30
     },
 
     "144": {
@@ -1437,6 +1723,8 @@ export default {
         },
         
         "type": ["ice", "flying"],
+        "hp": 45,
+        "size": 30
     },
 
     "145": {
@@ -1447,6 +1735,8 @@ export default {
         },
         
         "type": ["electric", "flying"],
+        "hp": 45,
+        "size": 30
     },
 
     "146": {
@@ -1457,6 +1747,8 @@ export default {
         },
         
         "type": ["fire", "flying"],
+        "hp": 45,
+        "size": 30
     },
 
     "147": {
@@ -1466,7 +1758,9 @@ export default {
             "german": "Dratini"
         },
         
-        "type": ["dragon"]
+        "type": ["dragon"],
+        "hp": 45,
+        "size": 30
     },
 
     "148": {
@@ -1476,7 +1770,9 @@ export default {
             "german": "Dragonair"
         },
         
-        "type": ["dragon"]
+        "type": ["dragon"],
+        "hp": 45,
+        "size": 30
     },
 
     "149": {
@@ -1486,7 +1782,9 @@ export default {
             "german": "Dragoran"
         },
         
-        "type": ["dragon", "flying"]
+        "type": ["dragon", "flying"],
+        "hp": 45,
+        "size": 30
     },
 
     "150": {
@@ -1497,6 +1795,8 @@ export default {
         },
         
         "type": ["psychic"],
+        "hp": 45,
+        "size": 30
     },
 
     "151": {
@@ -1506,7 +1806,9 @@ export default {
             "german": "Mew"
         },
         
-        "type": ["psychic"]
+        "type": ["psychic"],
+        "hp": 45,
+        "size": 30
     },
 
 }

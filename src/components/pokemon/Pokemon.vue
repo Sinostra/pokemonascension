@@ -1,5 +1,5 @@
 <template>
-    <div class="pokemon-wrapper">
+    <div class="pokemon-wrapper" :style="{'width': $store.state.constantDex[number]['size'] + '%'}">
         <img :src="getSprite()">
         <!-- <div v-on:click="dealDamage(2)" class="btn">Click here !</div> -->
         <div class="healthBar-infos-wrapper">
@@ -7,7 +7,7 @@
                 <div class="currentHealth" :class="getHealthBarClass()" :style="{'width': getHealthBarPercent() + '%'}"></div>
             </div>
             <div class="infos">
-                <div class="healthAmount">{{pv}} / {{maxPv}}</div>
+                <div class="healthAmount">{{pv}}/{{maxPv}}</div>
                 <div class="type-picto"></div>
             </div>
         </div>
@@ -21,8 +21,8 @@ export default {
 
     data: function() {
         return {
-            maxPv: 30,
-            pv: 30
+            maxPv: 1,
+            pv: 1
         }
     },
 
@@ -53,6 +53,11 @@ export default {
             if(amount + this.pv > this.maxPv) this.pv = this.maxPv
             else this.pv += amount
         }
+    },
+
+    mounted: function(){
+        this.maxPv = this.$store.state.constantDex[this.number]['hp']
+        this.pv = this.maxPv
     }
 }
 </script>
@@ -60,8 +65,6 @@ export default {
 
 .pokemon-wrapper {
     position: absolute;
-    bottom: 0;
-    left: 0;
 
     img {
         display: block;
@@ -70,24 +73,34 @@ export default {
 }
 
 .heathBar {
-    min-height: 5px;
-    background-color: black;
+    height: 15px;
+    background-color: #363636;
+    border: 2px solid #000;
 
     .currentHealth {
-        height: 5px;
+        height: 15px;
 
         &.green {
-            background: green;
+            background: #45c43a;
         }
 
         &.orange {
-            background: orange;
+            background: #e5bf37;
         }
 
         &.red {
-            background: red;
+            background: #ef3131;
         }
     }
+}
+
+.healthAmount {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 800;
+    font-style: italic;
+    color: #fff;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
 }
 
 .btn {
