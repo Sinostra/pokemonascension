@@ -1,7 +1,7 @@
 <template>
     <div class="battle-wrapper">
         <div class="player-pokemon">
-            <Pokemon :number="'001'"/>
+            <Pokemon :number="'025'"/>
         </div>
         <div class="foe-pokemon">
             <Pokemon :number="'009'"/>

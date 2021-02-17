@@ -296,7 +296,7 @@ export default {
         
         "type": ["electric"],
         "hp": 45,
-        "size": 30
+        "size": 20
     },
 
     "026": {

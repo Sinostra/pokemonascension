@@ -1,7 +1,7 @@
 <template>
   <div class="app-wrapper" :style="{'background-image':'url(' + getBackgroundUrl() + ')'}">
-    <Interface/>
     <Battle/>
+    <Interface/>
   </div>
 </template>
 

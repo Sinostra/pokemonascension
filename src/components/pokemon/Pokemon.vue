@@ -22,7 +22,7 @@ export default {
     data: function() {
         return {
             maxPv: 1,
-            pv: 1
+            pv: 1,
         }
     },
 
@@ -31,6 +31,7 @@ export default {
     methods: {
         getSprite() {
             return require('../../assets/img/sprites/' + this.number + '.png')
+            // return require('../../assets/025_Pika.gif')
         },
 
         getHealthBarPercent() {
@@ -65,6 +66,7 @@ export default {
 
 .pokemon-wrapper {
     position: absolute;
+    z-index: 3;
 
     img {
         display: block;

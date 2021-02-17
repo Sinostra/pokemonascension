@@ -15,30 +15,66 @@ export default {
 
     data: function() {
         return {
-            playerHand: ['001', '002', '003', '003', '002', '001', '001', '001'],
+            playerHand: ['001', '002', '003', '003', '002', '001', '001', '001', '001', '01'],
         }
     },
 
     methods: {
         displayCardsInHand(index){
-            var baseRotate = 5
-            var baseLeft = 40
-            var leftShift = 2
             var handSize = this.playerHand.length
-            var lastIndexToRotate = (Math.floor(handSize / 2)) - 1
+            var evenHand = handSize % 2 == 0
 
+            //Une rotation de carte
+            var baseRotate = 10
+
+            //L'endroit où la carte du milieu se positionne
+            var baseBottom = -10
+
+            //L'écart vertical entre deux cartes
+            var bottomShift = 15
+
+            //L'endroit où la première carte se positionne
+            var baseLeft = 30
+
+            //L'écart horizontal entre deux cartes
+            var leftShift = 4
+
+            //Détermine le milieu
+            var lastIndexToRotate = (Math.floor(handSize / 2))
+            
+            //Décale le mileu dans une main paire
+            if(evenHand) lastIndexToRotate -= 1
+
+            //Où on est par rapport à la main entière
             var difference = lastIndexToRotate - index;
-            var finalRotate = baseRotate + (baseRotate * difference)
 
-            if(handSize % 2 == 0 && index > lastIndexToRotate) {
-                finalRotate -= baseRotate
+            //Sert à mettre en place une symétrie entre les différences en cas de main paire : (2,1,0,0,-1,-2) au lieu de (2,1,0,-1,-2,-3)
+            if(evenHand && difference < 0) {
+                difference += 1
+            }
+
+            //Rotation finale calculée en fonction de la différence (donc la position par rapport à la carte du milieu, plus on en est loin, plus la rotation sera importante)
+            var finalRotate = baseRotate * difference
+
+            //Permet de ne pas avoir de rotation à 0 dans une main paire
+            if(evenHand) {
+                if(index <= lastIndexToRotate) finalRotate += baseRotate
+                else finalRotate -= baseRotate
             }
 
             finalRotate *= -1
-            var finalLeft = baseLeft + index * leftShift
 
-            console.log(finalRotate)
-            return 'transform : rotate(' + finalRotate + 'deg); left : ' + finalLeft + '%;'
+            var finalBottom = baseBottom - (bottomShift * Math.abs(difference))
+
+            //On ajoute une rotation à toutes les cartes après celle du milieu quand le nombre de cartes en main est pair, pour ne pas avoir de carte avec une rotation à 0
+            if(handSize % 2 == 0 && index > lastIndexToRotate) {
+                // finalRotate -= baseRotate
+            }
+
+            // finalRotate *= -1
+            var finalLeft = baseLeft + index * leftShift
+            
+            return 'transform : rotate(' + finalRotate + 'deg); left : ' + finalLeft + '%; bottom: ' + finalBottom + 'px;' 
 
         },
 
@@ -86,6 +122,12 @@ export default {
         transform: translate(-50%);
         position: absolute;
         cursor: pointer;
+
+        &:hover {
+            z-index: 2;
+            width: 156px;
+            height: 240px;
+        }
     }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-<div class="game-interface">
+<div class="game-interface" :style="{'background-image':'url(' + getBackground() + ')'}">
     
 </div>
 </template>
@@ -15,14 +15,16 @@ export default {
     },
 
     methods: {
-
+        getBackground() {
+            return require('./../../assets/img/interface/top_border.jpg')
+        },
     }
 } 
 </script>
 <style lang="scss" scoped>
 .game-interface {
     width: 100%;
-    height: 70px;
-    background: blue;
+    height: 50px;
+    background-position: bottom;
 }
 </style>
