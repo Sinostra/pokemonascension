@@ -30,7 +30,7 @@ export default {
 
     methods: {
         getSprite() {
-            return require('../../assets/img/sprites/' + this.number + '.png')
+            return require('../../../assets/img/sprites/' + this.number + '.png')
         },
 
         getHealthBarPercent() {

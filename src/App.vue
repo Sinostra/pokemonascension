@@ -1,30 +1,27 @@
 <template>
-  <div class="app-wrapper" :style="{'background-image':'url(' + getBackgroundUrl() + ')'}">
-    <Battle/>
-    <Interface/>
-  </div>
+  <Background/>
+  <Interface/>
+  <BattleManager/>
 </template>
 
 <script>
-import Battle from './components/Battle.vue'
-import Interface from './components//interface/Interface.vue'
+import Background from './components/Background.vue'
+import BattleManager from './components/Battle.vue'
+import Interface from './components/Interface.vue'
 export default {
   name: 'App',
   components: {
-    Battle,
+    Background,
+    BattleManager,
     Interface
   },
 
   data:function(){
     return {
-      background: 'forest'
     }
   },
 
   methods: {
-    getBackgroundUrl: function(){
-      return require('./assets/img/backgrounds/' + this.background + '.jpg')
-    }
   }
 }
 </script>
@@ -37,11 +34,10 @@ body {
   margin: 0;
 }
 
-.app-wrapper {
+#app {
+  width: 100%;
   height: 100vh;
   display: flex;
   align-items: flex-end;
-  background-size: 100%;
-  background-position: bottom;
 }
 </style>

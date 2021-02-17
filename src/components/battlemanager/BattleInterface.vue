@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Card from './Card.vue'
+import Card from './battleinterface/Card.vue'
 export default {
     name: 'BattleInterface',
 

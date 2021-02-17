@@ -1,19 +1,16 @@
 <template>
     <div class="interface-wrapper">
         <GameInterface/>
-        <BattleInterface/>
     </div>
 </template>
 
 <script>
-import GameInterface from './GameInterface.vue'
-import BattleInterface from './BattleInterface.vue'
+import GameInterface from './interface/GameInterface.vue'
 export default {
     name: "Interface",
 
     components: {
         GameInterface,
-        BattleInterface
     },
 
     data: function() {
