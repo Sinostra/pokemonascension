@@ -3,19 +3,35 @@
     <div class="top-wrapper"></div>
     <div class="bottom-wrapper">
         <div class="player-hand">
-            <div v-on:click="removeCard(index)" :style="displayCardsInHand(index)" v-for="(card, index) in playerHand" :key="index" class="card">{{index}}</div>
+            <Card v-for="(card, index) in playerHand" :key="index" :style="displayCardsInHand(index)" :id="card.id" :class="card.selected ? 'selected' : ''" v-on:click="selectCard(index)"/>
         </div>
     </div>
 </div>
 </template>
 
 <script>
+import Card from './Card.vue'
 export default {
     name: 'BattleInterface',
 
+    components: {
+        Card
+    },
+
     data: function() {
         return {
-            playerHand: ['001', '002', '003', '003', '002', '001', '001', '001', '001', '01'],
+            playerHand: [
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+            ]
         }
     },
 
@@ -78,13 +94,19 @@ export default {
 
         },
 
+        selectCard(clickedIndex) {
+            for(var i = 0; i < this.playerHand.length; i++) {
+                this.playerHand[i].selected = i == clickedIndex
+            }
+        },
+
         removeCard(index) {
             this.playerHand.splice(index, 1)
         }
     },
 
     mounted: function() {
-        
+        console.log(this.playerHand[2])
     }
 } 
 </script>
@@ -110,24 +132,5 @@ export default {
     padding-top: 30px;
     height: 30vh;
     overflow: hidden;
-    .card {
-        width: 130px;
-        height: 200px;
-        background: #182552;
-        color: #fff;
-        border-radius: 10px;
-        border: 2px solid #000;
-        bottom: -80px;
-        left: 50%;
-        transform: translate(-50%);
-        position: absolute;
-        cursor: pointer;
-
-        &:hover {
-            z-index: 2;
-            width: 156px;
-            height: 240px;
-        }
-    }
 }
 </style>
