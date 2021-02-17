@@ -98,6 +98,9 @@ export default {
             for(var i = 0; i < this.playerHand.length; i++) {
                 this.playerHand[i].selected = i == clickedIndex
             }
+
+            this.$store.dispatch('changeCardSelection', this.playerHand[clickedIndex]['id'])
+            console.log(this.$store.state.fight.selectedCard)
         },
 
         removeCard(index) {
@@ -106,7 +109,7 @@ export default {
     },
 
     mounted: function() {
-        console.log(this.playerHand[2])
+
     }
 } 
 </script>

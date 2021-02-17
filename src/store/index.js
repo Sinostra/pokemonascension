@@ -1,15 +1,16 @@
 import { createStore } from 'vuex'
-import datadex from './constantData/datadex'
+import pokedex from './constantData/pokedex/pokedex'
+import fight from './fight/fight'
 
 export default createStore({
   state: {
-    constantDex: datadex
   },
   mutations: {
   },
   actions: {
   },
   modules: {
-    datadex
+    pokedex,
+    fight
   }
 })

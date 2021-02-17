@@ -1,5 +1,5 @@
 <template>
-    <div class="pokemon-wrapper" :style="{'width': $store.state.constantDex[number]['size'] + '%'}">
+    <div class="pokemon-wrapper" @click="clickOnWrapper()" :style="{'width': $store.state.pokedex.constantDex[number]['size'] + '%'}">
         <img :src="getSprite()">
         <!-- <div v-on:click="dealDamage(2)" class="btn">Click here !</div> -->
         <div class="healthBar-infos-wrapper">
@@ -31,7 +31,6 @@ export default {
     methods: {
         getSprite() {
             return require('../../assets/img/sprites/' + this.number + '.png')
-            // return require('../../assets/025_Pika.gif')
         },
 
         getHealthBarPercent() {
@@ -43,6 +42,12 @@ export default {
             if(healthPercentage > 67) return 'green'
             else if(healthPercentage > 33 && healthPercentage <= 67) return 'orange'
             else return 'red'
+        },
+
+        clickOnWrapper() {
+            if(this.$store.state.fight.selectedCard != null) {
+                console.log('card played')
+            }
         },
 
         dealDamage(amount) {
@@ -57,7 +62,7 @@ export default {
     },
 
     mounted: function(){
-        this.maxPv = this.$store.state.constantDex[this.number]['hp']
+        this.maxPv = this.$store.state.pokedex.constantDex[this.number]['hp']
         this.pv = this.maxPv
     }
 }
