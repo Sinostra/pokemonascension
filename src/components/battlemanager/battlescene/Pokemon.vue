@@ -22,10 +22,17 @@ export default {
     data: function() {
         return {
             maxPv: 1,
+            fainted: false
         }
     },
 
     props: ['number', 'pv'],
+
+    watch: {
+        pv: function(newVal) {
+            if(newVal == 0) this.fainted = true
+        }
+    },
 
     methods: {
         getSprite() {
@@ -34,7 +41,8 @@ export default {
 
         getWrapperClass() {
             return {
-                cardSelected: this.$store.state.fight.selectedCard != null
+                cardSelected: this.$store.state.fight.selectedCard != null,
+                fainted : this.fainted
             }
         },
 
@@ -73,6 +81,10 @@ export default {
         &:hover {
             filter: drop-shadow(2px 4px 6px black);
         }
+    }
+
+    &.fainted {
+        display: none;
     }
 
     img {
