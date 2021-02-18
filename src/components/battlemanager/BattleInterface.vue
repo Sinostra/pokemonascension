@@ -1,5 +1,6 @@
 <template>
 <div class="battle-interface">
+    <div class="btn" @click="drawCards(2)">click here to draw 2</div>
     <div class="top-wrapper"></div>
     <div class="bottom-wrapper">
         <div class="player-hand">
@@ -42,19 +43,27 @@ export default {
 
     data: function() {
         return {
+            drawPile: [
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+            ],
             selectedCard: null,
             playerHand: [
                 {id: '001', selected: false},
                 {id: '001', selected: false},
                 {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-            ]
+            ],
+            discardPile: [],
+            maxHandSize: 10
         }
     },
 
@@ -125,8 +134,25 @@ export default {
             }
         },
 
+        drawCards(amount) {
+            var drawnCards = this.drawPile.splice(0, amount)
+            for(var i = 0; i < drawnCards.length; i++) {
+                if(this.playerHand.length < this.maxHandSize) {
+                    this.playerHand.push(drawnCards[i])
+                }
+
+                else this.discard(drawnCards[i])
+                
+            }
+        },
+
+        discard(card) {
+            this.discardPile.push(card)
+        },
+
         removeCard(index) {
-            this.playerHand.splice(index, 1)
+            this.playerHand[index]['selected'] = false
+            this.discard(this.playerHand.splice(index, 1))
         }
     },
 

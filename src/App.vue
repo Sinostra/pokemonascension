@@ -40,4 +40,14 @@ body {
   display: flex;
   align-items: flex-end;
 }
+
+.btn {
+  margin: 50px 0;
+  padding: 20px;
+  background: black;
+  color: #fff;
+  cursor: pointer;
+  z-index: 200;
+  max-width: 300px;
+}
 </style>

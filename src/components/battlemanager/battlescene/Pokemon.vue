@@ -123,12 +123,4 @@ export default {
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
 }
-
-.btn {
-    margin: 50px 0;
-    padding: 20px;
-    background: black;
-    color: #fff;
-    cursor: pointer;
-}
 </style>
