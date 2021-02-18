@@ -21,7 +21,7 @@ export default {
 
     methods: {
         onClick: function() {
-            console.log('click on interface')
+            this.$store.dispatch('changeCardSelection', null)
         }
     }
 }

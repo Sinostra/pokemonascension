@@ -1,7 +1,7 @@
 <template>
     <div class="battlemanager">
         <BattleScene v-on:card-played="detectedCardPlayed = true"/>
-        <BattleInterface :detectedCardPlayed="detectedCardPlayed" v-on:cardDiscarded="detectedCardPlayed = false"/>
+        <BattleInterface :detectedCardPlayed="detectedCardPlayed" :cardUnselected="$store.state.fight.selectedCard" v-on:cardDiscarded="detectedCardPlayed = false"/>
     </div>
 </template>
 

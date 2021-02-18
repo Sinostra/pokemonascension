@@ -19,7 +19,7 @@ export default {
         selectedCard: null
     },
 
-    props: ['detectedCardPlayed'],
+    props: ['detectedCardPlayed', 'cardUnselected'],
 
     watch: {
         detectedCardPlayed: function(newVal) {
@@ -28,11 +28,21 @@ export default {
                 this.$emit('cardDiscarded')
                 this.$store.dispatch('changeCardSelection', null)
             }
+        },
+
+        cardUnselected: function(newVal) {
+            if(newVal == null) {
+                for(var i = 0; i < this.playerHand.length; i++) {
+                    this.playerHand[i].selected = false
+                }
+            }
         }
+
     },
 
     data: function() {
         return {
+            selectedCard: null,
             playerHand: [
                 {id: '001', selected: false},
                 {id: '001', selected: false},
@@ -108,12 +118,11 @@ export default {
         },
 
         selectCard(clickedIndex) {
+            this.$store.dispatch('changeCardSelection', this.playerHand[clickedIndex]['id'])
             this.selectedCard = clickedIndex
             for(var i = 0; i < this.playerHand.length; i++) {
                 this.playerHand[i].selected = i == clickedIndex
             }
-
-            this.$store.dispatch('changeCardSelection', this.playerHand[clickedIndex]['id'])
         },
 
         removeCard(index) {
