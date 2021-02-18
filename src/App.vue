@@ -1,10 +1,13 @@
 <template>
-  <Background/>
-  <Interface/>
-  <BattleManager/>
+  <div class="global-wrapper" :class="getAppClass()">
+    <Background/>
+    <Interface/>
+    <!-- <BattleManager/> -->
+  </div>
 </template>
 
 <script>
+import { useWindowSize } from 'vue-window-size';
 import Background from './components/Background.vue'
 import BattleManager from './components/BattleManager.vue'
 import Interface from './components/Interface.vue'
@@ -22,7 +25,19 @@ export default {
   },
 
   methods: {
-  }
+    getAppClass: function(){
+      if(this.windowWidth > 1.8 * this.windowHeight) return 'height-mesure'
+      else return 'width-mesure'
+    }
+  },
+
+  setup() {
+    const { width, height } = useWindowSize();
+    return {
+      windowWidth: width,
+      windowHeight: height,
+    };
+  },
 }
 </script>
 
@@ -30,15 +45,46 @@ export default {
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,600;0,700;0,800;1,600;1,700;1,800&display=swap');
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  background: black;
 }
 
 #app {
-  width: 100%;
-  height: 100vh;
   display: flex;
-  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.global-wrapper {
+  
+  position: relative;
+
+  &.width-mesure {
+    width: 100vw;
+    min-width: 100vw;
+    max-width: 100vw;
+    height: calc(100vw / (16 / 9));
+    min-height: calc(100vw / (16 / 9));
+    max-height: calc(100vw / (16 / 9));
+  }
+
+  &.height-mesure {
+    height: 100vh;
+    min-height: 100vh;
+    max-height: 100vh;
+    flex: 1;
+    max-width: calc(100vh * (16 / 9));
+  }
 }
 
 .btn {

@@ -24,7 +24,7 @@ export default {
 <style lang="scss" scoped>
 .game-interface {
     width: 100%;
-    height: 50px;
+    height: 6%;
     background-position: bottom;
 }
 </style>

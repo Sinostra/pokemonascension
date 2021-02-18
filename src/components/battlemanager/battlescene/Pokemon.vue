@@ -41,7 +41,7 @@ export default {
 
         getWrapperClass() {
             return {
-                cardSelected: this.$store.state.fight.selectedCard != null,
+                cardSelected: this.$store.state.battle.selectedCard != null,
                 fainted : this.fainted
             }
         },
@@ -58,7 +58,7 @@ export default {
         },
 
         clickOnWrapper() {
-            if(this.$store.state.fight.selectedCard != null) {
+            if(this.$store.state.battle.selectedCard != null) {
                 this.$emit('card-played')
             }
         },
@@ -76,12 +76,42 @@ export default {
     position: absolute;
     z-index: 3;
 
-    &.foe.cardSelected {
-        cursor: pointer;
-        &:hover {
-            filter: drop-shadow(2px 4px 6px black);
+
+    &.player {
+        left: 47%;
+        transform: translate(-50%);
+        img {
+            transform: scaleX(-1);
+            margin-bottom: 30px;
         }
     }
+
+    &.foe {
+        display: flex;
+        flex-direction: column-reverse;
+
+        &.cardSelected {
+            cursor: pointer;
+            &:hover {
+                filter: drop-shadow(2px 4px 6px black);
+            }
+        }
+
+        .heathBar {
+            width: 50%;
+            border: 1px solid #000;
+            height: 10px;
+            margin: 0 auto;
+            .currentHealth {
+                height: 10px;
+            }
+        }
+        .infos {
+           width: 50%;
+           margin: 0 auto;
+        }
+    }
+
 
     &.fainted {
         display: none;

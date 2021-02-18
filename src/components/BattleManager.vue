@@ -1,7 +1,7 @@
 <template>
     <div class="battlemanager">
-        <BattleScene v-on:card-played="detectedCardPlayed = true"/>
-        <BattleInterface :detectedCardPlayed="detectedCardPlayed" :cardUnselected="$store.state.fight.selectedCard" v-on:cardDiscarded="detectedCardPlayed = false"/>
+        <!-- <BattleScene v-on:card-played="detectedCardPlayed = true"/> -->
+        <BattleInterface :detectedCardPlayed="detectedCardPlayed" :cardUnselected="$store.state.battle.selectedCard" v-on:cardDiscarded="detectedCardPlayed = false"/>
     </div>
 </template>
 
@@ -30,7 +30,9 @@ export default {
 
 <style lang='scss' scoped>
 .battlemanager {
+    position: absolute;
     width: 100%;
+    height: 100%;
 }
 
 </style>

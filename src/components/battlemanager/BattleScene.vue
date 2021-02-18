@@ -58,6 +58,7 @@ export default {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    height: 100vh;
 
     .player-pokemon, .foe-pokemon {
         position: relative;
@@ -69,42 +70,24 @@ export default {
 <style lang='scss'>
 .player-pokemon {
     .pokemon-wrapper {
-        bottom: 81px;
         left: 312px;
-
-        img {
-            transform: scaleX(-1);
-            margin-bottom: 30px;
-        }
+        bottom: calc(3vw * var(--ratio));
     }
 }
 
 .foe-pokemon {
     .pokemon-wrapper {
-        display: flex;
-        flex-direction: column-reverse;
-
-        .heathBar {
-            width: 50%;
-            border: 1px solid #000;
-            height: 10px;
-            margin: 0 auto;
-            .currentHealth {
-                height: 10px;
-            }
-        }
-        .infos {
-           width: 50%;
-           margin: 0 auto;
-        }
+        
         &:first-of-type {
-            bottom: 182px;
-            left: 241px;
+            bottom: calc(7vw * var(--ratio));
+            left: 50%;
+            transform: translate(-50%);
         }
 
         &:last-of-type {
-            bottom: 182px;
-            left: 80px;
+            bottom: calc(7vw * var(--ratio));
+            left: 26%;
+            transform: translate(-50%);
         }
     }
 }

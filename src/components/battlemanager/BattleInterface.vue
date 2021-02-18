@@ -1,6 +1,6 @@
 <template>
 <div class="battle-interface">
-    <div class="btn" @click="drawCards(1)">click here to draw 1</div>
+    <!-- <div class="btn" @click="drawCards(1)">click here to draw 1</div> -->
     <div class="top-wrapper"></div>
     <div class="bottom-wrapper">
         <div class="drawPile">{{drawPile.length}}</div>
@@ -60,16 +60,16 @@ export default {
                 {id: '001', selected: false},
                 {id: '001', selected: false},
                 {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
             ],
             selectedCard: null,
             playerHand: [
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
                 {id: '001', selected: false},
                 {id: '001', selected: false},
                 {id: '001', selected: false},
@@ -85,10 +85,10 @@ export default {
             var evenHand = handSize % 2 == 0
 
             //Une rotation de carte
-            var baseRotate = 10
+            var baseRotate =  5
 
             //L'endroit où la carte du milieu se positionne
-            var baseBottom = -10
+            var baseBottom = -12
 
             //L'écart vertical entre deux cartes
             var bottomShift = 15
@@ -147,7 +147,6 @@ export default {
         },
 
         drawCards(amount) {
-            console.log(amount)
             for(var i = 0; i < amount; i++) {
 
                 if(this.drawPile.length == 0) {
@@ -170,7 +169,7 @@ export default {
 
         removeCard(index) {
             this.playerHand[index]['selected'] = false
-            this.discard(this.playerHand.splice(index, 1))
+            this.discard(this.playerHand.splice(index, 1)[0])
         }
     },
 
@@ -182,12 +181,20 @@ export default {
 
 <style lang="scss" scoped>
 .battle-interface {
-    flex: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
 
     .top-wrapper {
+        height: 6%;
+        position: relative;
+    }
+
+    .bottom-wrapper {
         flex: 1;
+        position: relative;
     }
 }
 .player-hand {
@@ -198,8 +205,7 @@ export default {
     transform: translate(-50%);
     bottom: 0;
     width: 100%;
-    padding-top: 30px;
-    height: 30vh;
+    height: 100%;
     overflow: hidden;
     z-index: 1;
 }

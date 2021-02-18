@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
 import pokedex from './constantData/pokedex/pokedex'
-import fight from './fight/fight'
+import battle from './battle/battle'
 
 export default createStore({
   state: {
@@ -11,6 +11,6 @@ export default createStore({
   },
   modules: {
     pokedex,
-    fight
+    battle
   }
 })
