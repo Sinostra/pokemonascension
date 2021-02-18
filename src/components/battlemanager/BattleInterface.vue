@@ -15,7 +15,20 @@ export default {
     name: 'BattleInterface',
 
     components: {
-        Card
+        Card,
+        selectedCard: null
+    },
+
+    props: ['detectedCardPlayed'],
+
+    watch: {
+        detectedCardPlayed: function(newVal) {
+            if(newVal) {
+                this.removeCard(this.selectedCard)
+                this.$emit('cardDiscarded')
+                this.$store.dispatch('changeCardSelection', null)
+            }
+        }
     },
 
     data: function() {
@@ -95,12 +108,12 @@ export default {
         },
 
         selectCard(clickedIndex) {
+            this.selectedCard = clickedIndex
             for(var i = 0; i < this.playerHand.length; i++) {
                 this.playerHand[i].selected = i == clickedIndex
             }
 
             this.$store.dispatch('changeCardSelection', this.playerHand[clickedIndex]['id'])
-            console.log(this.$store.state.fight.selectedCard)
         },
 
         removeCard(index) {
@@ -135,5 +148,6 @@ export default {
     padding-top: 30px;
     height: 30vh;
     overflow: hidden;
+    z-index: 1;
 }
 </style>

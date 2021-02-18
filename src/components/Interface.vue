@@ -1,5 +1,5 @@
 <template>
-    <div class="interface-wrapper">
+    <div class="interface-wrapper" @click="onClick()">
         <GameInterface/>
     </div>
 </template>
@@ -20,7 +20,9 @@ export default {
     },
 
     methods: {
-
+        onClick: function() {
+            console.log('click on interface')
+        }
     }
 }
 </script>
@@ -31,7 +33,6 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0;
     display: flex;
     flex-direction: column;
     z-index: 1;

@@ -1,5 +1,5 @@
 <template>
-    <div class="pokemon-wrapper" @click="clickOnWrapper()" :style="{'width': $store.state.pokedex.constantDex[number]['size'] + '%'}">
+    <div class="pokemon-wrapper" :class="getWrapperClass()" @click="clickOnWrapper()" :style="{'width': $store.state.pokedex.constantDex[number]['size'] + '%'}">
         <img :src="getSprite()">
         <!-- <div v-on:click="dealDamage(2)" class="btn">Click here !</div> -->
         <div class="healthBar-infos-wrapper">
@@ -22,15 +22,20 @@ export default {
     data: function() {
         return {
             maxPv: 1,
-            pv: 1,
         }
     },
 
-    props: ['number'],
+    props: ['number', 'pv'],
 
     methods: {
         getSprite() {
             return require('../../../assets/img/sprites/' + this.number + '.png')
+        },
+
+        getWrapperClass() {
+            return {
+                cardSelected: this.$store.state.fight.selectedCard != null
+            }
         },
 
         getHealthBarPercent() {
@@ -46,24 +51,14 @@ export default {
 
         clickOnWrapper() {
             if(this.$store.state.fight.selectedCard != null) {
-                console.log('card played')
+                this.$emit('card-played')
             }
         },
 
-        dealDamage(amount) {
-            if(amount > this.pv) this.pv = 0
-            else this.pv -= amount
-        },
-
-        heal(amount) {
-            if(amount + this.pv > this.maxPv) this.pv = this.maxPv
-            else this.pv += amount
-        }
     },
 
     mounted: function(){
         this.maxPv = this.$store.state.pokedex.constantDex[this.number]['hp']
-        this.pv = this.maxPv
     }
 }
 </script>
@@ -72,6 +67,13 @@ export default {
 .pokemon-wrapper {
     position: absolute;
     z-index: 3;
+
+    &.foe.cardSelected {
+        cursor: pointer;
+        &:hover {
+            filter: drop-shadow(2px 4px 6px black);
+        }
+    }
 
     img {
         display: block;

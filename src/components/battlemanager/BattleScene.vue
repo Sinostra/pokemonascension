@@ -1,11 +1,10 @@
 <template>
     <div class="battle-wrapper">
         <div class="player-pokemon">
-            <Pokemon :number="'025'"/>
+            <Pokemon :number="pokemonInBattle['player']['id']" :pv="pokemonInBattle['player']['pv']" class="player"/>
         </div>
         <div class="foe-pokemon">
-            <Pokemon :number="'009'"/>
-            <Pokemon :number="'056'"/>
+            <Pokemon v-for="(pokemon, index) in pokemonInBattle['foes']" :key="index" v-on:card-played="onCardPlayedEvent(index)" :number="pokemonInBattle['foes'][index]['id']" :pv="pokemonInBattle['foes'][index]['pv']" class="foe"/>
         </div>
     </div>
 </template>
@@ -17,7 +16,14 @@ export default {
 
     data: function(){
         return {
-            battle: false
+            battle: false,
+            pokemonInBattle: {
+                player: {id: '025', pv: 45},
+                foes: [
+                    {id: '009', pv: 45},
+                    {id: '056', pv: 45},
+                ]
+            }
         }
     },
 
@@ -26,6 +32,23 @@ export default {
     },
 
     methods: {
+        onCardPlayedEvent: function(index) {
+            this.$emit('card-played')
+            this.dealDamage(25, index)
+        },
+
+        dealDamage(amount, index) {
+            var pokemon = this.pokemonInBattle['foes'][index]
+            if(amount > pokemon['pv']) pokemon['pv'] = 0
+            else pokemon['pv'] -= amount
+        },
+
+        heal(amount, index) {
+            var pokemon = this.pokemonInBattle['foes'][index]
+            var pokemonPvMax = this.$store.state.pokedex.constantDex[pokemon['id']]['hp']
+            if(amount + pokemon['pv'] > pokemonPvMax) pokemon['pv'] = pokemonPvMax
+            else pokemon['pv'] += amount
+        }
     }
 }
 </script>

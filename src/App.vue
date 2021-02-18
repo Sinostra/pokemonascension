@@ -6,7 +6,7 @@
 
 <script>
 import Background from './components/Background.vue'
-import BattleManager from './components/Battle.vue'
+import BattleManager from './components/BattleManager.vue'
 import Interface from './components/Interface.vue'
 export default {
   name: 'App',

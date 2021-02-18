@@ -1,7 +1,7 @@
 <template>
     <div class="battlemanager">
-        <BattleScene/>
-        <BattleInterface/>
+        <BattleScene v-on:card-played="detectedCardPlayed = true"/>
+        <BattleInterface :detectedCardPlayed="detectedCardPlayed" v-on:cardDiscarded="detectedCardPlayed = false"/>
     </div>
 </template>
 
@@ -9,14 +9,21 @@
 import BattleScene from './battlemanager/BattleScene.vue'
 import BattleInterface from './battlemanager/BattleInterface.vue'
 export default {
-    name: "Battle",
+    name: "BattleManager",
 
     components: {
         BattleScene,
         BattleInterface
     },
 
+    data: function() {
+        return {
+            detectedCardPlayed: false
+        }
+    },
+
     methods: {
+
     }
 }
 </script>
