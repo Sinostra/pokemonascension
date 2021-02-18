@@ -1,11 +1,13 @@
 <template>
 <div class="battle-interface">
-    <div class="btn" @click="drawCards(2)">click here to draw 2</div>
+    <div class="btn" @click="drawCards(1)">click here to draw 1</div>
     <div class="top-wrapper"></div>
     <div class="bottom-wrapper">
+        <div class="drawPile">{{drawPile.length}}</div>
         <div class="player-hand">
             <Card v-for="(card, index) in playerHand" :key="index" :style="displayCardsInHand(index)" :id="card.id" :class="card.selected ? 'selected' : ''" v-on:click="selectCard(index)"/>
         </div>
+        <div class="discardPile">{{discardPile.length}}</div>
     </div>
 </div>
 </template>
@@ -44,6 +46,16 @@ export default {
     data: function() {
         return {
             drawPile: [
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
+                {id: '001', selected: false},
                 {id: '001', selected: false},
                 {id: '001', selected: false},
                 {id: '001', selected: false},
@@ -135,15 +147,21 @@ export default {
         },
 
         drawCards(amount) {
-            var drawnCards = this.drawPile.splice(0, amount)
-            for(var i = 0; i < drawnCards.length; i++) {
-                if(this.playerHand.length < this.maxHandSize) {
-                    this.playerHand.push(drawnCards[i])
+            console.log(amount)
+            for(var i = 0; i < amount; i++) {
+
+                if(this.drawPile.length == 0) {
+                    this.drawPile = this.discardPile.splice(0, this.discardPile.length)
                 }
 
-                else this.discard(drawnCards[i])
                 
+                if (this.playerHand.length < this.maxHandSize) {
+                    this.playerHand.push(this.drawPile.shift())
+                }
+
+                else this.discard(this.drawPile.shift())
             }
+            
         },
 
         discard(card) {
@@ -184,5 +202,21 @@ export default {
     height: 30vh;
     overflow: hidden;
     z-index: 1;
+}
+
+.drawPile, .discardPile {
+    position: absolute;
+    bottom: 160px;
+    color: blanchedalmond;
+    background: black;
+    padding: 20px;
+}
+
+.drawPile {
+    left: 20px;
+}
+
+.discardPile {
+    right: 20px;
 }
 </style>

@@ -34,7 +34,7 @@ export default {
     methods: {
         onCardPlayedEvent: function(index) {
             this.$emit('card-played')
-            this.dealDamage(25, index)
+            this.dealDamage(0, index)
         },
 
         dealDamage(amount, index) {
