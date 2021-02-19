@@ -8,13 +8,12 @@ export default {
 
     data: function(){
         return {
-            backgroundUsed: 'forest'
         }
     },
 
     methods: {
         getBackgroundUrl: function(){
-            return require('./../assets/img/backgrounds/' + this.backgroundUsed + '.jpg')
+            return require('./../assets/img/backgrounds/' + this.$store.state.battle.backgroundUsed + '.jpg')
         }
     }
 }

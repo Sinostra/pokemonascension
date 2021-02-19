@@ -3,14 +3,14 @@
         <img :src="getSprite()" @click="clickOnImg()" :style="{'width': $store.state.pokedex.constantDex[number]['size'] + '%'}">
         <!-- <div v-on:click="dealDamage(2)" class="btn">Click here !</div> -->
         <div class="healthBar-infos-wrapper">
-            <div class="heathBar">
+            <!-- <div class="heathBar">
                 <div class="currentHealth" :class="getHealthBarClass()" :style="{'width': getHealthBarPercent() + '%'}"></div>
             </div>
             <div class="infos">
                 <div class="healthAmount text">{{pv}}/{{maxPv}}</div>
                 <div class="type-picto"></div>
             </div>
-            <div class="type"></div>
+            <div class="type"></div> -->
         </div>
     </div>
     
@@ -88,8 +88,6 @@ export default {
     width: 20%;
 
     &.player {
-        left: 15%;
-        bottom: 17%;
         img {
             transform: scaleX(-1);
             margin-bottom: 5%;
