@@ -3,11 +3,18 @@
     <!-- <div class="btn" @click="drawCards(1)">click here to draw 1</div> -->
     <div class="top-wrapper"></div>
     <div class="bottom-wrapper">
-        <div class="drawPile">{{drawPile.length}}</div>
+        <div class="drawPile">
+            <div class="number text">{{drawPile.length}}</div>
+        </div>
         <div class="player-hand">
             <Card v-for="(card, index) in playerHand" :key="index" :style="displayCardsInHand(index)" :id="card.id" :class="card.selected ? 'selected' : ''" v-on:click="selectCard(index)"/>
         </div>
-        <div class="discardPile">{{discardPile.length}}</div>
+        <div class="discardPile">
+            <div class="number text">{{discardPile.length}}</div>
+        </div>
+        <div class="end-turn-btn text">
+            End Turn
+        </div>
     </div>
 </div>
 </template>
@@ -89,6 +96,7 @@ export default {
 
             //L'endroit où la carte du milieu se positionne
             var baseBottom = -3
+            // var baseBottom = 0
 
             //L'endroit où la première carte se positionne
             var baseLeft = 45 - (handSize * 1.5)
@@ -122,7 +130,7 @@ export default {
             finalRotate *= -1
 
             //L'écart vertical entre deux cartes
-            var bottomShift = 0.5 * Math.abs(difference)
+            var bottomShift = 1.5 * Math.abs(difference)
 
             var finalBottom = baseBottom - (bottomShift * Math.abs(difference))
 
@@ -203,27 +211,61 @@ export default {
     position: absolute;
     left: 50%;
     transform: translate(-50%);
-    bottom: 0;
     width: 100%;
-    height: 100%;
-    overflow: hidden;
+    height: 30%;
     z-index: 1;
-    bottom: -1%;
+    bottom: -3%;
 }
 
 .drawPile, .discardPile {
     position: absolute;
-    bottom: 160px;
-    color: blanchedalmond;
-    background: black;
-    padding: 20px;
+    bottom: 2%;
+    z-index: 2;
+    cursor: pointer;
+    width: 10%;
+    height: 9%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    .number {
+        position: absolute;
+        width: 20%;
+        height: 40%;
+        top: 22%;
+        display: flex;
+        color: #fff;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .drawPile {
-    left: 20px;
+    left: 5%;
+    background-image: url('../../assets/img/interface/pioche.png');
+    .number {
+        right: 5%;
+    }
 }
 
 .discardPile {
-    right: 20px;
+    right: 5%;
+    background-image: url('../../assets/img/interface/defausse.png');
+    .number {
+        left: 3%;
+    }
+}
+
+.end-turn-btn {
+    position: absolute;
+    right: 3%;
+    bottom: 15%;
+    background: #182552;
+    color: #fff;
+    padding: 0.2% 2%;
+    z-index: 2;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 2px #fff solid;
+    border-radius: 5px;
 }
 </style>

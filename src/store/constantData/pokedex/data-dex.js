@@ -104,7 +104,7 @@ export default {
         
         "type": ["water"],
         "hp": 45,
-        "size": 40
+        "size": 85
     },
 
     "010": {
@@ -296,7 +296,7 @@ export default {
         
         "type": ["electric"],
         "hp": 45,
-        "size": 20
+        "size": 60
     },
 
     "026": {
@@ -1244,7 +1244,7 @@ export default {
         
         "type": ["ground"],
         "hp": 45,
-        "size": 15
+        "size": 60
     },
 
     "105": {

@@ -47,6 +47,7 @@ export default {
 
 * {
   box-sizing: border-box;
+  user-select: none;
 }
 
 body {
@@ -68,6 +69,10 @@ body {
 .global-wrapper {
   
   position: relative;
+
+  .text {
+    font-family: "Open Sans", sans-serif;
+  }
 
   &.width-mesure {
     width: 100vw;

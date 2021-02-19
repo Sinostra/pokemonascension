@@ -60,11 +60,6 @@ export default {
     justify-content: space-between;
     width: 100%;
     height: 100%;
-
-    .player-pokemon, .foe-pokemon {
-        position: relative;
-        width: 100%;
-    }
 }
 </style>
 
@@ -75,12 +70,12 @@ export default {
         
         &:first-of-type {
             bottom: 25%;
-            left: 30%;
+            left: 68%;
         }
 
         &:last-of-type {
             bottom: 25%;
-            left: 14%;
+            left: 56%;
         }
     }
 }
