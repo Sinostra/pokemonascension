@@ -2,7 +2,7 @@
   <div class="global-wrapper" :class="getAppClass()">
     <Background/>
     <Interface/>
-    <!-- <BattleManager/> -->
+    <BattleManager/>
   </div>
 </template>
 

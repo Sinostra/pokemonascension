@@ -20,8 +20,8 @@ export default {
             pokemonInBattle: {
                 player: {id: '025', pv: 45},
                 foes: [
-                    {id: '009', pv: 45},
-                    {id: '056', pv: 45},
+                    // {id: '009', pv: 45},
+                    {id: '104', pv: 45},
                 ]
             }
         }
@@ -34,7 +34,7 @@ export default {
     methods: {
         onCardPlayedEvent: function(index) {
             this.$emit('card-played')
-            this.dealDamage(0, index)
+            this.dealDamage(5, index)
         },
 
         dealDamage(amount, index) {
@@ -55,10 +55,11 @@ export default {
 
 <style lang='scss' scoped>
 .battle-wrapper {
+    position: absolute;
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 100vh;
+    height: 100%;
 
     .player-pokemon, .foe-pokemon {
         position: relative;
@@ -68,26 +69,18 @@ export default {
 </style>
 
 <style lang='scss'>
-.player-pokemon {
-    .pokemon-wrapper {
-        left: 312px;
-        bottom: calc(3vw * var(--ratio));
-    }
-}
 
 .foe-pokemon {
     .pokemon-wrapper {
         
         &:first-of-type {
-            bottom: calc(7vw * var(--ratio));
-            left: 50%;
-            transform: translate(-50%);
+            bottom: 23%;
+            left: 30%;
         }
 
         &:last-of-type {
-            bottom: calc(7vw * var(--ratio));
-            left: 26%;
-            transform: translate(-50%);
+            bottom: 23%;
+            left: 8%;
         }
     }
 }

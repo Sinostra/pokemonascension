@@ -36,7 +36,7 @@ export default {
 
     methods: {
         getSprite() {
-            return require('../../../assets/img/sprites/' + this.number + '.png')
+            return require('../../../assets/img/sprites/' + this.number + '.gif')
         },
 
         getWrapperClass() {
@@ -78,11 +78,11 @@ export default {
 
 
     &.player {
-        left: 47%;
-        transform: translate(-50%);
+        left: 18%;
+        bottom: 6%;
         img {
             transform: scaleX(-1);
-            margin-bottom: 30px;
+            margin-bottom: 10%;
         }
     }
 
@@ -100,10 +100,9 @@ export default {
         .heathBar {
             width: 50%;
             border: 1px solid #000;
-            height: 10px;
             margin: 0 auto;
             .currentHealth {
-                height: 10px;
+                padding: 5% 0;
             }
         }
         .infos {
@@ -124,12 +123,11 @@ export default {
 }
 
 .heathBar {
-    height: 15px;
     background-color: #363636;
     border: 2px solid #000;
 
     .currentHealth {
-        height: 15px;
+        padding: 6% 0;
 
         &.green {
             background: #45c43a;
@@ -150,6 +148,7 @@ export default {
     font-weight: 800;
     font-style: italic;
     color: #fff;
+    font-size: 100%;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
 }

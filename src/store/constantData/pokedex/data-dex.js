@@ -1244,7 +1244,7 @@ export default {
         
         "type": ["ground"],
         "hp": 45,
-        "size": 30
+        "size": 15
     },
 
     "105": {
