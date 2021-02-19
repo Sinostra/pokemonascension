@@ -76,6 +76,9 @@ body {
     height: calc(100vw / (16 / 9));
     min-height: calc(100vw / (16 / 9));
     max-height: calc(100vw / (16 / 9));
+    .text {
+      font-size: 2vw;  
+    }
   }
 
   &.height-mesure {
@@ -84,6 +87,9 @@ body {
     max-height: 100vh;
     flex: 1;
     max-width: calc(100vh * (16 / 9));
+    .text {
+      font-size: 2vh;  
+    }
   }
 }
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="card">{{id}}</div>
+    <div class="card text">{{id}}</div>
 </template>
 
 <script>
@@ -20,8 +20,8 @@ export default {
 </script>
 <style lang='scss' scoped>
 .card {
-    width: 130px;
-    height: 200px;
+    width: 10.2%;
+    height: 29.5%;
     background: #182552;
     color: #fff;
     border-radius: 10px;
@@ -35,8 +35,8 @@ export default {
     }
     &:hover {
         z-index: 2;
-        width: 156px;
-        height: 240px;
+        width: 12.2%;
+        height: 35.4%;
     }
 }
 </style>

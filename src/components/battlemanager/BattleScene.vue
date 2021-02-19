@@ -20,7 +20,7 @@ export default {
             pokemonInBattle: {
                 player: {id: '025', pv: 45},
                 foes: [
-                    // {id: '009', pv: 45},
+                    {id: '009', pv: 45},
                     {id: '104', pv: 45},
                 ]
             }
@@ -74,13 +74,13 @@ export default {
     .pokemon-wrapper {
         
         &:first-of-type {
-            bottom: 23%;
+            bottom: 25%;
             left: 30%;
         }
 
         &:last-of-type {
-            bottom: 23%;
-            left: 8%;
+            bottom: 25%;
+            left: 14%;
         }
     }
 }

@@ -88,13 +88,10 @@ export default {
             var baseRotate =  5
 
             //L'endroit où la carte du milieu se positionne
-            var baseBottom = -12
-
-            //L'écart vertical entre deux cartes
-            var bottomShift = 15
+            var baseBottom = -3
 
             //L'endroit où la première carte se positionne
-            var baseLeft = 30
+            var baseLeft = 45 - (handSize * 1.5)
 
             //L'écart horizontal entre deux cartes
             var leftShift = 4
@@ -124,6 +121,9 @@ export default {
 
             finalRotate *= -1
 
+            //L'écart vertical entre deux cartes
+            var bottomShift = 0.5 * Math.abs(difference)
+
             var finalBottom = baseBottom - (bottomShift * Math.abs(difference))
 
             //On ajoute une rotation à toutes les cartes après celle du milieu quand le nombre de cartes en main est pair, pour ne pas avoir de carte avec une rotation à 0
@@ -134,7 +134,7 @@ export default {
             // finalRotate *= -1
             var finalLeft = baseLeft + index * leftShift
             
-            return 'transform : rotate(' + finalRotate + 'deg); left : ' + finalLeft + '%; bottom: ' + finalBottom + 'px;' 
+            return 'transform : rotate(' + finalRotate + 'deg); left : ' + finalLeft + '%; bottom: ' + finalBottom + '%;' 
 
         },
 
@@ -208,6 +208,7 @@ export default {
     height: 100%;
     overflow: hidden;
     z-index: 1;
+    bottom: -1%;
 }
 
 .drawPile, .discardPile {

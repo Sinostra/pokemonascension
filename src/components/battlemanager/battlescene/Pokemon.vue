@@ -7,7 +7,7 @@
                 <div class="currentHealth" :class="getHealthBarClass()" :style="{'width': getHealthBarPercent() + '%'}"></div>
             </div>
             <div class="infos">
-                <div class="healthAmount">{{pv}}/{{maxPv}}</div>
+                <div class="healthAmount text">{{pv}}/{{maxPv}}</div>
                 <div class="type-picto"></div>
             </div>
         </div>
