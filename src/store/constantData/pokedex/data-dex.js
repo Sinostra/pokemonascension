@@ -104,7 +104,11 @@ export default {
         
         "type": ["water"],
         "hp": 45,
-        "size": 85
+        "size": 85,
+        "hpBar" : {
+            "left" : 26,
+            "top" : -77
+        }
     },
 
     "010": {
@@ -1244,7 +1248,11 @@ export default {
         
         "type": ["ground"],
         "hp": 45,
-        "size": 60
+        "size": 60,
+        "hpBar" : {
+            "left" : 11,
+            "top" : -17
+        }
     },
 
     "105": {

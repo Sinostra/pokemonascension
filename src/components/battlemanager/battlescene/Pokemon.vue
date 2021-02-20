@@ -2,15 +2,15 @@
     <div class="pokemon-wrapper" :class="getWrapperClass()">
         <img :src="getSprite()" @click="clickOnImg()" :style="{'width': $store.state.pokedex.constantDex[number]['size'] + '%'}">
         <!-- <div v-on:click="dealDamage(2)" class="btn">Click here !</div> -->
-        <div class="healthBar-infos-wrapper">
-            <!-- <div class="heathBar">
+        <div class="healthBar-infos-wrapper" :style="getHeathBarPosition()">
+            <div class="heathBar">
                 <div class="currentHealth" :class="getHealthBarClass()" :style="{'width': getHealthBarPercent() + '%'}"></div>
             </div>
             <div class="infos">
                 <div class="healthAmount text">{{pv}}/{{maxPv}}</div>
                 <div class="type-picto"></div>
             </div>
-            <div class="type"></div> -->
+            <!-- <div class="type"></div> -->
         </div>
     </div>
     
@@ -23,11 +23,11 @@ export default {
     data: function() {
         return {
             maxPv: 1,
-            fainted: false
+            fainted: false,
         }
     },
 
-    props: ['number', 'pv'],
+    props: ['number', 'pv', 'isPlayer'],
 
     watch: {
         pv: function(newVal) {
@@ -40,14 +40,15 @@ export default {
             return require('../../../assets/img/sprites/' + this.number + '.gif')
         },
 
-        getPokemonTpye(number) {
-            var types = this.$store.state.pokedex.constantDex[number]['type']
+        // WIP 
+        // getPokemonTpye(number) {
+        //     var types = this.$store.state.pokedex.constantDex[number]['type']
 
-        },
+        // },
 
-        getPokemonTpyeIcon(type) {
-            return require('../../../assets/img/types/' + type + '.png')
-        },
+        // getPokemonTpyeIcon(type) {
+        //     return require('../../../assets/img/types/' + type + '.png')
+        // },
 
         getWrapperClass() {
             return {
@@ -65,6 +66,13 @@ export default {
             if(healthPercentage > 67) return 'green'
             else if(healthPercentage > 33 && healthPercentage <= 67) return 'orange'
             else return 'red'
+        },
+
+        getHeathBarPosition() {
+            if(!this.isPlayer) {
+                var hpBarPosition = this.$store.state.pokedex.constantDex[this.number]['hpBar']
+                return 'left: ' +  hpBarPosition['left'] + '%; top: ' +  hpBarPosition['top'] + '%;'
+            }
         },
 
         clickOnImg() {
@@ -86,37 +94,32 @@ export default {
     position: absolute;
     z-index: 3;
     width: 20%;
+    height: 20%;
 
     &.player {
         img {
             transform: scaleX(-1);
-            margin-bottom: 5%;
         }
     }
 
     &.foe {
-        display: flex;
-        flex-direction: column-reverse;
 
         &.cardSelected {
             cursor: pointer;
-            &img:hover {
+            &:hover {
                 filter: drop-shadow(2px 4px 6px black);
             }
         }
 
-        .heathBar {
-            width: 50%;
-            border: 1px solid #000;
-            margin: 0 auto;
-            .currentHealth {
-                padding: 5% 0;
+        .healthBar-infos-wrapper {
+
+            .heathBar {
+                width: 75%;
+                height: 30%;
+                border: 1px solid #000;
             }
         }
-        .infos {
-           width: 50%;
-           margin: 0 auto;
-        }
+
     }
 
 
@@ -125,51 +128,61 @@ export default {
     }
 
     img {
+        position: absolute;
+        bottom: 0;
+        left: 0;
         display: block;
     }
-}
-.healthBar-infos-wrapper {
-    position: absolute;
-    width: 50%;
 
-    .heathBar {
-        background-color: #363636;
-        border: 2px solid #000;
+    .healthBar-infos-wrapper {
+        position: absolute;
+        width: 50%;
+        height: 20%;
+        bottom: -25%;
+        left: 6%;
 
-        .currentHealth {
-            padding: 6% 0;
+        .heathBar {
+            width: 100%;
+            height: 50%;
+            background-color: #363636;
+            border: 2px solid #000;
+            position: relative;
 
-            &.green {
-                background: #45c43a;
-            }
+            .currentHealth {
+                height: 100%;
 
-            &.orange {
-                background: #e5bf37;
-            }
+                &.green {
+                    background: #45c43a;
+                }
 
-            &.red {
-                background: #ef3131;
+                &.orange {
+                    background: #e5bf37;
+                }
+
+                &.red {
+                    background: #ef3131;
+                }
             }
         }
-    }
 
-    .healthAmount {
-        font-family: 'Open Sans', sans-serif;
-        font-weight: 800;
-        font-style: italic;
-        color: #fff;
-        font-size: 100%;
-        -webkit-text-stroke-width: 1px;
-        -webkit-text-stroke-color: black;
-    }
+        .healthAmount {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 800;
+            font-style: italic;
+            color: #fff;
+            font-size: 100%;
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: black;
+        }
 
-    .type {
-        position: absolute;
-        width: 17%;
-        height: 50%;
-        top: 0;
-        right: -20%;
-        background: #fff;
+        .type {
+            position: absolute;
+            width: 17%;
+            height: 50%;
+            top: 0;
+            right: -20%;
+            background: #fff;
+        }
     }
 }
 </style>

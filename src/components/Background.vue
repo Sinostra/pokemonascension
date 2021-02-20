@@ -13,7 +13,7 @@ export default {
 
     methods: {
         getBackgroundUrl: function(){
-            return require('./../assets/img/backgrounds/' + this.$store.state.battle.backgroundUsed + '.jpg')
+            return require('./../assets/img/backgrounds/' + this.$store.state.battle.backgroundUsed + '.gif')
         }
     }
 }
