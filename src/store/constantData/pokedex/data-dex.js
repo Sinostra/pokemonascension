@@ -1246,7 +1246,7 @@ export default {
             "german": "Tragosso"
         },
         
-        "type": ["ground"],
+        "type": ["ground", "rock"],
         "hp": 45,
         "size": 60,
         "hpBar" : {
@@ -1334,7 +1334,7 @@ export default {
             "german": "Rihorn"
         },
         
-        "type": ["ground", "rock"],
+        "type": ["ground"],
         "hp": 45,
         "size": 30
     },

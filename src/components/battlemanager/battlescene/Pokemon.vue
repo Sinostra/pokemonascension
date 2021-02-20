@@ -1,7 +1,6 @@
 <template>
     <div class="pokemon-wrapper" :class="getWrapperClass()">
         <img :src="getSprite()" @click="clickOnImg()" :style="{'width': $store.state.pokedex.constantDex[number]['size'] + '%'}">
-        <!-- <div v-on:click="dealDamage(2)" class="btn">Click here !</div> -->
         <div class="healthBar-infos-wrapper" :style="getHeathBarPosition()">
             <div class="heathBar">
                 <div class="currentHealth" :class="getHealthBarClass()" :style="{'width': getHealthBarPercent() + '%'}"></div>
@@ -10,7 +9,11 @@
                 <div class="healthAmount text">{{pv}}/{{maxPv}}</div>
                 <div class="type-picto"></div>
             </div>
-            <!-- <div class="type"></div> -->
+            <div class="types-wrapper">
+                <div class="type" v-for="(type, index) in $store.state.pokedex.constantDex[number]['type']" :key="index">
+                    <img :src="getPokemonTpyeIcon($store.state.pokedex.constantDex[number]['type'][index])">
+                </div>
+            </div>
         </div>
     </div>
     
@@ -37,18 +40,12 @@ export default {
 
     methods: {
         getSprite() {
-            return require('../../../assets/img/sprites/' + this.number + '.gif')
+            return require('../../../assets/img/sprites/' + this.number + this.$store.state.settings.pokemonSpritesExtension)
         },
 
-        // WIP 
-        // getPokemonTpye(number) {
-        //     var types = this.$store.state.pokedex.constantDex[number]['type']
-
-        // },
-
-        // getPokemonTpyeIcon(type) {
-        //     return require('../../../assets/img/types/' + type + '.png')
-        // },
+        getPokemonTpyeIcon(type) {
+            return require('../../../assets/img/types/' + type + '.png')
+        },
 
         getWrapperClass() {
             return {
@@ -99,6 +96,15 @@ export default {
     &.player {
         img {
             transform: scaleX(-1);
+        }
+
+        .healthBar-infos-wrapper .types-wrapper {
+            top: -15%;
+            right: -21%;
+
+            .type img {
+                transform: scaleX(1);
+            }
         }
     }
 
@@ -175,13 +181,25 @@ export default {
             -webkit-text-stroke-color: black;
         }
 
-        .type {
+        .types-wrapper {
             position: absolute;
-            width: 17%;
-            height: 50%;
-            top: 0;
-            right: -20%;
-            background: #fff;
+            width: 20%;
+            height: 100%;
+            top: -30%;
+            right: 2%;
+
+            .type {
+                position: absolute;
+                width: 100%;
+
+                &:nth-child(2) {
+                    left: 100%;
+                }
+                img {
+                    position: static;
+                    width: 100%;
+                }
+            }
         }
     }
 }

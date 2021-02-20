@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 import pokedex from './constantData/pokedex/pokedex'
 import backgrounds from './constantData/background/background'
 import battle from './battle/battle'
+import settings from './settings/settings'
 
 export default createStore({
   state: {
@@ -13,6 +14,7 @@ export default createStore({
   modules: {
     pokedex,
     backgrounds,
-    battle
+    battle,
+    settings
   }
 })

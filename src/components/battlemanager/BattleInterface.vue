@@ -203,6 +203,7 @@ export default {
     .bottom-wrapper {
         flex: 1;
         position: relative;
+        overflow: hidden;
     }
 }
 .player-hand {
