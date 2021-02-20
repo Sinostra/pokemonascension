@@ -5,17 +5,34 @@ export default {
             "bottom": 17
         },
 
+        "gmp" : {
+            "foes": [
+                {
+                    "left": 73,
+                    "bottom": 25
+                },
+                {
+                    "left": 56,
+                    "bottom": 25
+                },
+                {
+                    "left": 39,
+                    "bottom": 25
+                }
+            ]
+        },
+
         "foes": [
             {
-                "left": 73,
+                "left": 68,
+                "bottom": 23
+            },
+            {
+                "left": 57,
                 "bottom": 25
             },
             {
-                "left": 56,
-                "bottom": 25
-            },
-            {
-                "left": 39,
+                "left": 44,
                 "bottom": 25
             }
         ]

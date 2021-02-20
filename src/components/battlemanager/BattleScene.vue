@@ -18,11 +18,11 @@ export default {
         return {
             battle: false,
             pokemonInBattle: {
-                player: {id: '009', pv: 45},
+                player: {id: '025', pv: 45},
                 foes: [
                     {id: '009', pv: 45},
-                    {id: '009', pv: 45},
-                    {id: '009', pv: 45}
+                    {id: '104', pv: 45},
+                    {id: '017', pv: 45}
                 ]
             }
         }

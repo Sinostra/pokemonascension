@@ -71,15 +71,15 @@ export default {
             selectedCard: null,
             playerHand: [
                 {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
+                {id: '002', selected: false},
+                {id: '003', selected: false},
+                {id: '004', selected: false},
+                {id: '005', selected: false},
+                {id: '006', selected: false},
+                {id: '007', selected: false},
+                {id: '008', selected: false},
+                {id: '009', selected: false},
+                {id: '010', selected: false},
             ],
             discardPile: [],
             maxHandSize: 10
@@ -215,7 +215,7 @@ export default {
     width: 100%;
     height: 30%;
     z-index: 1;
-    bottom: -3%;
+    bottom: -6%;
 }
 
 .drawPile, .discardPile {

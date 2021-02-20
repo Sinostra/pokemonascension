@@ -8,7 +8,7 @@ export default {
         
         "type": ["grass", "poison"],
         "hp": 45,
-        "size": 25
+        "size": 45
     },
 
     "002": {
@@ -20,7 +20,7 @@ export default {
         
         "type": ["grass", "poison"],
         "hp": 45,
-        "size": 30
+        "size": 61
     },
 
     "003": {
@@ -32,7 +32,7 @@ export default {
         
         "type": ["grass", "poison"],
         "hp": 45,
-        "size": 30
+        "size": 100
     },
 
     "004": {
@@ -44,7 +44,7 @@ export default {
         
         "type": ["fire"],
         "hp": 45,
-        "size": 30
+        "size": 40
     },
 
     "005": {
@@ -56,7 +56,7 @@ export default {
         
         "type": ["fire"],
         "hp": 45,
-        "size": 30
+        "size": 55
     },
 
     "006": {
@@ -68,7 +68,7 @@ export default {
         
         "type": ["fire", "flying"],
         "hp": 45,
-        "size": 30
+        "size": 150
     },
 
     "007": {
@@ -204,7 +204,11 @@ export default {
         
         "type": ["normal", "flying"],
         "hp": 45,
-        "size": 30
+        "size": 80,
+        "hpBar" : {
+            "left" : 16,
+            "top" : -51
+        }
     },
 
     "018": {
@@ -1246,7 +1250,7 @@ export default {
             "german": "Tragosso"
         },
         
-        "type": ["ground", "rock"],
+        "type": ["ground"],
         "hp": 45,
         "size": 60,
         "hpBar" : {
@@ -1334,7 +1338,7 @@ export default {
             "german": "Rihorn"
         },
         
-        "type": ["ground"],
+        "type": ["ground", "rock"],
         "hp": 45,
         "size": 30
     },
