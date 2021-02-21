@@ -104,10 +104,10 @@ export default {
         
         "type": ["water"],
         "hp": 45,
-        "size": 85,
+        "size": 120,
         "hpBar" : {
-            "left" : 26,
-            "top" : -77
+            "left" : 42,
+            "top" : -69
         }
     },
 
@@ -204,10 +204,10 @@ export default {
         
         "type": ["normal", "flying"],
         "hp": 45,
-        "size": 80,
+        "size": 100,
         "hpBar" : {
-            "left" : 16,
-            "top" : -51
+            "left" : 25,
+            "top" : -36
         }
     },
 
@@ -1255,7 +1255,7 @@ export default {
         "size": 60,
         "hpBar" : {
             "left" : 11,
-            "top" : -17
+            "top" : 11
         }
     },
 

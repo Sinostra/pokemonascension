@@ -3,6 +3,7 @@
     <!-- <div class="btn" @click="drawCards(1)">click here to draw 1</div> -->
     <div class="top-wrapper"></div>
     <div class="bottom-wrapper">
+        <div class="energy-wrapper text" :style="getFontSize()">{{$store.state.battle.currentEnergy}}/{{$store.state.battle.maxEnergy}}</div>
         <div class="drawPile" :style="getFontSize()">
             <div class="number text">{{drawPile.length}}</div>
         </div>
@@ -26,15 +27,17 @@ export default {
 
     components: {
         Card,
-        selectedCard: null
     },
 
     props: ['detectedCardPlayed', 'cardUnselected'],
 
+
+    //Tous les events relatifs aux cartes (jeu, désélection) devraient passer par le store battle et être écoutés par le BattleManager pour toujours arriver vers BattleInterface
+    //Actuellement, il y a Interface, Pokémon et BattleManager qui interagissent avec les cartes
     watch: {
         detectedCardPlayed: function(newVal) {
             if(newVal) {
-                this.removeCard(this.selectedCard)
+                this.discard(this.playerHand.splice(this.selectedCard, 1)[0])
                 this.$emit('cardDiscarded')
                 this.$store.dispatch('changeCardSelection', null)
             }
@@ -141,8 +144,11 @@ export default {
 
             // finalRotate *= -1
             var finalLeft = baseLeft + index * leftShift
+
+            return 'transform : rotate(' + finalRotate + 'deg); left : ' + finalLeft + '%; bottom: ' + finalBottom + '%;'
             
-            return 'transform : rotate(' + finalRotate + 'deg); left : ' + finalLeft + '%; bottom: ' + finalBottom + '%;' 
+            // if(this.selectedCard && this.selectedCard == index) return 'transform : rotate(0deg); left : ' + finalLeft + '%; bottom: ' + finalBottom + '%;'
+            // else return 'transform : rotate(' + finalRotate + 'deg); left : ' + finalLeft + '%; bottom: ' + finalBottom + '%;'
 
         },
 
@@ -177,7 +183,7 @@ export default {
 
         getFontSize(multiplier = 1) {
             return 'font-size: ' + (this.$store.state.baseFontSize) * multiplier + 'px;'
-        }
+        },
     },
 
     mounted: function() {
@@ -204,6 +210,21 @@ export default {
         overflow: hidden;
     }
 }
+
+.energy-wrapper {
+    position: absolute;
+    left: 5%;
+    bottom: 20%;
+    width: 5.023%;
+    height: 9.5%;
+    color: #fff;
+    background: #182552;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .player-hand {
     display: flex;
     justify-content: center;
@@ -212,7 +233,7 @@ export default {
     transform: translate(-50%);
     width: 100%;
     height: 30%;
-    z-index: 1;
+    z-index: 4;
     bottom: -6%;
 }
 

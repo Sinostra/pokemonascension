@@ -28,15 +28,15 @@ export default {
     border: 2px solid #000;
     position: absolute;
     cursor: pointer;
-    &.selected {
-        z-index: 2;
-        width: 12.2%;
-        height: 106%;
-    }
     &:hover {
         z-index: 2;
         width: 12.2%;
         height: 106%;
+    }
+    &.selected {
+        z-index: 2;
+        width: 15.5%;
+        height: 136%;
     }
 }
 </style>

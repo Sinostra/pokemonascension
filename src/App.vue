@@ -1,5 +1,5 @@
 <template>
-  <div class="global-wrapper" :class="getAppClass()">
+  <div class="global-wrapper" :class="getAppClass()" v-on:mousemove="updateMouseCoordinates">
     <Background/>
     <Interface/>
     <BattleManager/>
@@ -21,7 +21,7 @@ export default {
 
   data:function(){
     return {
-      wrapperWidth: null
+      wrapperWidth: null,
     }
   },
 
@@ -33,6 +33,11 @@ export default {
 
     setBaseFontSize: function() {
       this.$store.dispatch('changebaseFontSize', document.querySelector('.global-wrapper').offsetWidth / 100)
+    },
+
+    updateMouseCoordinates(event) {
+      this.$store.dispatch('updateMousePositionX', event['x'])
+      this.$store.dispatch('updateMousePositionY', event['y'])
     }
   },
 

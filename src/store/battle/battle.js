@@ -2,7 +2,8 @@ export default {
     state: {
         backgroundUsed: 'forest',
         selectedCard: null,
-        energy: 0
+        currentEnergy: 3,
+        maxEnergy: 3
     },
     mutations: {
         changebackgroundUsed(state, value) {
@@ -11,8 +12,11 @@ export default {
         changeCardSelection(state, value) {
             state.selectedCard = value
         },
-        changeEnergy(state, value) {
-            state.energy = value
+        changeCurrentEnergy(state, value) {
+            state.currentEnergy = value
+        },
+        changeMaxEnergy(state, value) {
+            state.maxEnergy = value
         }
     },
     actions: {
@@ -22,8 +26,11 @@ export default {
         changeCardSelection(context, value) {
             context.commit('changeCardSelection', value)
         },
-        changeEnergy(context, value) {
-            context.commit('changeEnergy', value)
+        changeCurrentEnergy(context, value) {
+            context.commit('changeCurrentEnergy', value)
+        },
+        changeMaxEnergy(context, value) {
+            context.commit('changeMaxEnergy', value)
         }
     },
 }

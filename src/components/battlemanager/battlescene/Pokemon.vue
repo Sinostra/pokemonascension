@@ -1,5 +1,5 @@
 <template>
-    <div class="pokemon-wrapper" :class="getWrapperClass()" :style="getFontSize()">
+    <div class="pokemon-wrapper" :class="getWrapperClass()" :style="getFontSize(1.2)">
         <img :src="getSprite()" @click="clickOnImg()" :style="{'width': $store.state.pokedex.constantDex[number]['size'] + '%'}">
         <div class="healthBar-infos-wrapper" :style="getHeathBarPosition()">
             <div class="heathBar">
@@ -98,7 +98,7 @@ export default {
 .pokemon-wrapper {
     position: absolute;
     z-index: 3;
-    width: 20%;
+    width: 14%;
     height: 20%;
 
     &.player {
