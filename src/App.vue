@@ -21,6 +21,7 @@ export default {
 
   data:function(){
     return {
+      wrapperWidth: null
     }
   },
 
@@ -28,6 +29,10 @@ export default {
     getAppClass: function(){
       if(this.windowWidth > 1.8 * this.windowHeight) return 'height-mesure'
       else return 'width-mesure'
+    },
+
+    setBaseFontSize: function() {
+      this.$store.dispatch('changebaseFontSize', document.querySelector('.global-wrapper').offsetWidth / 100)
     }
   },
 
@@ -38,6 +43,12 @@ export default {
       windowHeight: height,
     };
   },
+
+  mounted:function() {
+    window.addEventListener("resize", this.setBaseFontSize);
+    window.dispatchEvent(new Event('resize'));
+  }
+
 }
 </script>
 
@@ -81,9 +92,6 @@ body {
     height: calc(100vw / (16 / 9));
     min-height: calc(100vw / (16 / 9));
     max-height: calc(100vw / (16 / 9));
-    .text {
-      font-size: 2vw;  
-    }
   }
 
   &.height-mesure {
@@ -92,9 +100,6 @@ body {
     max-height: 100vh;
     flex: 1;
     max-width: calc(100vh * (16 / 9));
-    .text {
-      font-size: 2vh;  
-    }
   }
 }
 

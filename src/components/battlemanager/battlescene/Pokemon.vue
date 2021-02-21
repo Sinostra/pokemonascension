@@ -1,12 +1,12 @@
 <template>
-    <div class="pokemon-wrapper" :class="getWrapperClass()">
+    <div class="pokemon-wrapper" :class="getWrapperClass()" :style="getFontSize()">
         <img :src="getSprite()" @click="clickOnImg()" :style="{'width': $store.state.pokedex.constantDex[number]['size'] + '%'}">
         <div class="healthBar-infos-wrapper" :style="getHeathBarPosition()">
             <div class="heathBar">
                 <div class="currentHealth" :class="getHealthBarClass()" :style="{'width': getHealthBarPercent() + '%'}"></div>
             </div>
             <div class="infos">
-                <div class="healthAmount text">{{pv}}/{{maxPv}}</div>
+                <div class="healthAmount text" :style="getTextStrokeWidth()">{{pv}}/{{maxPv}}</div>
                 <div class="type-picto"></div>
             </div>
             <div class="types-wrapper">
@@ -77,6 +77,14 @@ export default {
                 this.$emit('card-played')
             }
         },
+
+        getFontSize(multiplier = 1) {
+            return 'font-size: ' + (this.$store.state.baseFontSize) * multiplier + 'px;'
+        },
+
+        getTextStrokeWidth() {
+            return '-webkit-text-stroke-width: ' + (this.$store.state.baseFontSize) / 12 + 'px;'
+        }
 
     },
 
@@ -176,8 +184,6 @@ export default {
             font-weight: 800;
             font-style: italic;
             color: #fff;
-            font-size: 100%;
-            -webkit-text-stroke-width: 1px;
             -webkit-text-stroke-color: black;
         }
 

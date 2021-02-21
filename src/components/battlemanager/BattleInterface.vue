@@ -3,16 +3,16 @@
     <!-- <div class="btn" @click="drawCards(1)">click here to draw 1</div> -->
     <div class="top-wrapper"></div>
     <div class="bottom-wrapper">
-        <div class="drawPile">
+        <div class="drawPile" :style="getFontSize()">
             <div class="number text">{{drawPile.length}}</div>
         </div>
-        <div class="player-hand">
+        <div class="player-hand" :style="getFontSize()">
             <Card v-for="(card, index) in playerHand" :key="index" :style="displayCardsInHand(index)" :id="card.id" :class="card.selected ? 'selected' : ''" v-on:click="selectCard(index)"/>
         </div>
-        <div class="discardPile">
+        <div class="discardPile" :style="getFontSize()">
             <div class="number text">{{discardPile.length}}</div>
         </div>
-        <div class="end-turn-btn text">
+        <div class="end-turn-btn text" :style="getFontSize()">
             End Turn
         </div>
     </div>
@@ -175,14 +175,12 @@ export default {
             this.discardPile.push(card)
         },
 
-        removeCard(index) {
-            this.playerHand[index]['selected'] = false
-            this.discard(this.playerHand.splice(index, 1)[0])
+        getFontSize(multiplier = 1) {
+            return 'font-size: ' + (this.$store.state.baseFontSize) * multiplier + 'px;'
         }
     },
 
     mounted: function() {
-
     }
 } 
 </script>

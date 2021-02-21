@@ -6,11 +6,21 @@ import settings from './settings/settings'
 
 export default createStore({
   state: {
+    baseFontSize: 16
   },
+
   mutations: {
+    changebaseFontSize(state, value) {
+      state.baseFontSize = value
+    },
   },
+
   actions: {
+    changebaseFontSize(context, value) {
+      context.commit('changebaseFontSize', value)
+    },
   },
+
   modules: {
     pokedex,
     backgrounds,
