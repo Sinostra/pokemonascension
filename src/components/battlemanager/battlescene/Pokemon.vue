@@ -1,6 +1,6 @@
 <template>
     <div class="pokemon-wrapper" :class="getWrapperClass()" :style="getFontSize(1.2)">
-        <img :src="getSprite()" @click="clickOnImg()" :style="{'width': $store.state.pokedex.constantDex[number]['size'] + '%'}">
+        <img :src="getSprite()" :style="{'width': $store.state.pokedex.constantDex[number]['size'] + '%'}">
         <div class="healthBar-infos-wrapper" :style="getHeathBarPosition()">
             <div class="heathBar">
                 <div class="currentHealth" :class="getHealthBarClass()" :style="{'width': getHealthBarPercent() + '%'}"></div>
@@ -69,12 +69,6 @@ export default {
             if(!this.isPlayer) {
                 var hpBarPosition = this.$store.state.pokedex.constantDex[this.number]['hpBar']
                 return 'left: ' +  hpBarPosition['left'] + '%; top: ' +  hpBarPosition['top'] + '%;'
-            }
-        },
-
-        clickOnImg() {
-            if(this.$store.state.battle.selectedCard != null) {
-                this.$emit('card-played')
             }
         },
 

@@ -8,7 +8,7 @@
             <div class="number text">{{drawPile.length}}</div>
         </div>
         <div class="player-hand" :style="getFontSize()">
-            <Card v-for="(card, index) in playerHand" :key="index" :style="displayCardsInHand(index)" :id="card.id" :class="card.selected ? 'selected' : ''" v-on:click="selectCard(index)"/>
+            <Card v-for="(card, index) in playerHand" :key="index" :style="displayCardsInHand(index)" :id="card.id" :class="getCardClass(index)" v-on:click="selectCard(index)"/>
         </div>
         <div class="discardPile" :style="getFontSize()">
             <div class="number text">{{discardPile.length}}</div>
@@ -29,62 +29,49 @@ export default {
         Card,
     },
 
-    props: ['detectedCardPlayed', 'cardUnselected'],
+    props: ['cardClickedInterface', 'cardClickedPokemon'],
 
 
     //Tous les events relatifs aux cartes (jeu, désélection) devraient passer par le store battle et être écoutés par le BattleManager pour toujours arriver vers BattleInterface
     //Actuellement, il y a Interface, Pokémon et BattleManager qui interagissent avec les cartes
     watch: {
-        detectedCardPlayed: function(newVal) {
+        cardClickedInterface: function(newVal) {
             if(newVal) {
-                this.discard(this.playerHand.splice(this.selectedCard, 1)[0])
-                this.$emit('cardDiscarded')
-                this.$store.dispatch('changeCardSelection', null)
+                console.log('card played on interface')
+                this.$store.dispatch('changeinterfaceClicked', false)
+                // this.discard(this.playerHand.splice(this.selectedCard, 1)[0])
+                // this.$store.dispatch('changeCardSelection', null)
             }
         },
 
-        cardUnselected: function(newVal) {
-            if(newVal == null) {
-                for(var i = 0; i < this.playerHand.length; i++) {
-                    this.playerHand[i].selected = false
-                }
+        cardClickedPokemon: function(newVal) {
+            if(newVal) {
+                console.log('card played on pokemon')
+                this.$store.dispatch('changepokemonClicked', false)
+                // this.discard(this.playerHand.splice(this.selectedCard, 1)[0])
+                // this.$store.dispatch('changeCardSelection', null)
             }
         }
-
     },
 
     data: function() {
         return {
-            drawPile: [
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-                {id: '001', selected: false},
-            ],
-            selectedCard: null,
+            drawPile: [],
+            
             playerHand: [
-                {id: '001', selected: false},
-                {id: '002', selected: false},
-                {id: '003', selected: false},
-                {id: '004', selected: false},
-                {id: '005', selected: false},
-                {id: '006', selected: false},
-                {id: '007', selected: false},
-                {id: '008', selected: false},
-                {id: '009', selected: false},
-                {id: '010', selected: false},
+                {id: '001'},
+                {id: '002'},
+                {id: '003'},
+                {id: '004'},
+                {id: '005'},
+                {id: '006'},
+                {id: '007'},
+                {id: '008'},
+                {id: '009'},
+                {id: '010'},
             ],
             discardPile: [],
+            selectedCard: null,
             maxHandSize: 10
         }
     },
@@ -155,9 +142,10 @@ export default {
         selectCard(clickedIndex) {
             this.$store.dispatch('changeCardSelection', this.playerHand[clickedIndex]['id'])
             this.selectedCard = clickedIndex
-            for(var i = 0; i < this.playerHand.length; i++) {
-                this.playerHand[i].selected = i == clickedIndex
-            }
+        },
+
+        getCardClass(index) {
+            if(this.selectedCard == index && this.$store.state.battle.selectedCard != null) return 'selected' 
         },
 
         drawCards(amount) {

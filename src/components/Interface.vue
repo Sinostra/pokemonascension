@@ -21,7 +21,9 @@ export default {
 
     methods: {
         onClick: function() {
-            this.$store.dispatch('changeCardSelection', null)
+            if(this.$store.state.battle.selectedCard != null) {
+                this.$store.dispatch('changeinterfaceClicked', true)
+            }
         }
     }
 }

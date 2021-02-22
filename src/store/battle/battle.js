@@ -1,7 +1,12 @@
 export default {
     state: {
         backgroundUsed: 'forest',
+
+
         selectedCard: null,
+        interfaceClicked: false,
+        pokemonClicked: false,
+
         currentEnergy: 3,
         maxEnergy: 3
     },
@@ -9,9 +14,19 @@ export default {
         changebackgroundUsed(state, value) {
             state.backgroundUsed = value
         },
+
+
         changeCardSelection(state, value) {
             state.selectedCard = value
         },
+        changeinterfaceClicked(state, value) {
+            state.interfaceClicked = value
+        },
+        changepokemonClicked(state, value) {
+            state.pokemonClicked = value
+        },
+
+
         changeCurrentEnergy(state, value) {
             state.currentEnergy = value
         },
@@ -23,9 +38,19 @@ export default {
         changebackgroundUsed(context, value) {
             context.commit('changebackgroundUsed', value)
         },
+
+
         changeCardSelection(context, value) {
             context.commit('changeCardSelection', value)
         },
+        changeinterfaceClicked(context, value) {
+            context.commit('changeinterfaceClicked', value)
+        },
+        changepokemonClicked(context, value) {
+            context.commit('changepokemonClicked', value)
+        },
+
+
         changeCurrentEnergy(context, value) {
             context.commit('changeCurrentEnergy', value)
         },

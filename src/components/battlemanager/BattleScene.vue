@@ -4,7 +4,7 @@
             <Pokemon :number="pokemonInBattle['player']['id']" :pv="pokemonInBattle['player']['pv']" :isPlayer="true" class="player" :style="getWrapperPosition(true)"/>
         </div>
         <div class="foe-pokemon">
-            <Pokemon v-for="(pokemon, index) in pokemonInBattle['foes']" :key="index" v-on:card-played="onCardPlayedEvent(index)" :number="pokemonInBattle['foes'][index]['id']" :pv="pokemonInBattle['foes'][index]['pv']" :isPlayer="false" class="foe" :style="getWrapperPosition(false, index)"/>
+            <Pokemon v-for="(pokemon, index) in pokemonInBattle['foes']" :key="index" :number="pokemonInBattle['foes'][index]['id']" :pv="pokemonInBattle['foes'][index]['pv']" :isPlayer="false" class="foe" :style="getWrapperPosition(false, index)" @click="clickOnPokemon(index)"/>
         </div>
     </div>
 </template>
@@ -24,7 +24,9 @@ export default {
                     {id: '104', pv: 45},
                     {id: '017', pv: 45}
                 ]
-            }
+            },
+
+            lastClickedPokemon: null
         }
     },
 
@@ -47,11 +49,6 @@ export default {
             }
         },
 
-        onCardPlayedEvent: function(index) {
-            this.$emit('card-played')
-            this.dealDamage(5, index)
-        },
-
         dealDamage(amount, index) {
             var pokemon = this.pokemonInBattle['foes'][index]
             if(amount > pokemon['pv']) pokemon['pv'] = 0
@@ -63,6 +60,14 @@ export default {
             var pokemonPvMax = this.$store.state.pokedex.constantDex[pokemon['id']]['hp']
             if(amount + pokemon['pv'] > pokemonPvMax) pokemon['pv'] = pokemonPvMax
             else pokemon['pv'] += amount
+        },
+
+        clickOnPokemon(index) {
+            if(this.$store.state.battle.selectedCard != null) {
+                this.lastClickedPokemon = index
+                this.$store.dispatch('changepokemonClicked', true)
+                console.log('last clicked pokemon : ' + index)
+            }
         }
     }
 }
