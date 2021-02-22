@@ -50,7 +50,6 @@ export default {
         getWrapperClass() {
             return {
                 cardSelected: this.$store.state.battle.selectedCard != null,
-                fainted : this.fainted
             }
         },
 
@@ -128,11 +127,6 @@ export default {
             }
         }
 
-    }
-
-
-    &.fainted {
-        display: none;
     }
 
     img {

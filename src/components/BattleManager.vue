@@ -1,7 +1,7 @@
 <template>
     <div class="battlemanager">
-        <BattleScene/>
-        <BattleInterface :cardClickedInterface="$store.state.battle.interfaceClicked" :cardClickedPokemon="$store.state.battle.pokemonClicked" />
+        <BattleScene :cardPlayed="$store.state.battle.cardPlayed"/>
+        <BattleInterface :cardClickedInterface="$store.state.battle.interfaceClicked" :cardClickedPokemon="$store.state.battle.pokemonClicked" :cardPlayed="$store.state.battle.cardPlayed" />
     </div>
 </template>
 

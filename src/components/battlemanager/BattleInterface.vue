@@ -29,46 +29,59 @@ export default {
         Card,
     },
 
-    props: ['cardClickedInterface', 'cardClickedPokemon'],
+    props: ['cardClickedInterface', 'cardClickedPokemon', 'cardPlayed'],
 
-
-    //Tous les events relatifs aux cartes (jeu, désélection) devraient passer par le store battle et être écoutés par le BattleManager pour toujours arriver vers BattleInterface
-    //Actuellement, il y a Interface, Pokémon et BattleManager qui interagissent avec les cartes
     watch: {
         cardClickedInterface: function(newVal) {
+            //Le joueur a cliqué dans l'interface avec une carte sélectionnée
             if(newVal) {
-                console.log('card played on interface')
+                var selectedCardData = this.$store.state.cards.dataCards[this.$store.state.battle.selectedCard]
+                //Si la carte a besoin d'une cible spécifique
+                if(selectedCardData['target']) {
+                    //On la déselectionne
+                    this.$store.dispatch('changeCardSelection', null)
+                }
+
+                else {
+                    if(selectedCardData['draw'] > 0) this.drawCards(selectedCardData['draw'])
+                    this.$store.dispatch('changecardPlayed', true)
+                    
+                }
                 this.$store.dispatch('changeinterfaceClicked', false)
-                // this.discard(this.playerHand.splice(this.selectedCard, 1)[0])
-                // this.$store.dispatch('changeCardSelection', null)
+                
             }
         },
 
+        //Le joueur a cliqué sur un Pokémon avec une carte sélectionnée
         cardClickedPokemon: function(newVal) {
             if(newVal) {
-                console.log('card played on pokemon')
+                this.$store.dispatch('changecardPlayed', true)
                 this.$store.dispatch('changepokemonClicked', false)
-                // this.discard(this.playerHand.splice(this.selectedCard, 1)[0])
-                // this.$store.dispatch('changeCardSelection', null)
+            }
+        },
+
+        //Sert à repérer quand BattleScene a fini de jouer sa carte, pour la déselectionner et la défausser à ce moment-là
+        cardPlayed: function(newVal) {
+            if(!newVal) {
+                this.discard(this.playerHand.splice(this.selectedCard, 1)[0])
+                this.$store.dispatch('changeCardSelection', null)
             }
         }
     },
 
     data: function() {
         return {
-            drawPile: [],
+            drawPile: [
+                {id: '001'},
+                {id: '002'},
+                {id: '001'},
+            ],
             
             playerHand: [
                 {id: '001'},
                 {id: '002'},
                 {id: '003'},
-                {id: '004'},
-                {id: '005'},
-                {id: '006'},
-                {id: '007'},
-                {id: '008'},
-                {id: '009'},
-                {id: '010'},
+                {id: '001'},
             ],
             discardPile: [],
             selectedCard: null,

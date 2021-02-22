@@ -14,6 +14,34 @@ import Pokemon from './battlescene/Pokemon.vue'
 export default {
     name: "BattleScene",
 
+    components: {
+        Pokemon,
+    },
+
+    props: ['cardPlayed'],
+
+    watch: {
+        cardPlayed: function(newVal) {
+            if(newVal) {
+                var selectedCardData = this.$store.state.cards.dataCards[this.$store.state.battle.selectedCard]
+                if(selectedCardData['damage'] > 0) {
+                    if(selectedCardData['damageAOE']) {
+                        for(var i = 0; i < this.pokemonInBattle['foes'].length; i++) {
+                            this.dealDamage(selectedCardData['damage'] * selectedCardData['damageTimes'], i)
+                        }
+                    }
+    
+                    else {
+                        this.dealDamage(selectedCardData['damage'] * selectedCardData['damageTimes'], this.lastClickedPokemon)
+                    }
+                }
+
+                //Remettre le bool à false permet à la main de déselectionner sa carte et de la défausser
+                this.$store.dispatch('changecardPlayed', false)
+            }
+        }
+    },
+
     data: function(){
         return {
             battle: false,
@@ -28,10 +56,6 @@ export default {
 
             lastClickedPokemon: null
         }
-    },
-
-    components: {
-        Pokemon,
     },
 
     methods: {
@@ -51,7 +75,10 @@ export default {
 
         dealDamage(amount, index) {
             var pokemon = this.pokemonInBattle['foes'][index]
-            if(amount > pokemon['pv']) pokemon['pv'] = 0
+            if(amount >= pokemon['pv']) {
+                pokemon['pv'] = 0
+                this.pokemonInBattle['foes'].splice(this.pokemonInBattle['foes'][index], 1)
+            } 
             else pokemon['pv'] -= amount
         },
 
@@ -66,7 +93,6 @@ export default {
             if(this.$store.state.battle.selectedCard != null) {
                 this.lastClickedPokemon = index
                 this.$store.dispatch('changepokemonClicked', true)
-                console.log('last clicked pokemon : ' + index)
             }
         }
     }

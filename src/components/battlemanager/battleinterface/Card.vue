@@ -1,5 +1,8 @@
 <template>
-    <div class="card text">{{id}}</div>
+    <div class="card">
+        <div class="cost">{{$store.state.cards.dataCards[id]['cost']}}</div>
+        <div class="name">{{$store.state.cards.dataCards[id]['name']}}</div>
+    </div>
 </template>
 
 <script>
@@ -7,7 +10,8 @@ export default {
     name: 'Card',
 
     data: function(){
-        return {}
+        return {
+        }
     },
 
     props:['id'],
