@@ -43,8 +43,17 @@ export default {
                 }
 
                 else {
-                    if(selectedCardData['draw'] > 0) this.drawCards(selectedCardData['draw'])
-                    this.$store.dispatch('changecardPlayed', true)
+                    var currentEnergy = this.$store.state.battle.currentEnergy
+                    if(currentEnergy >= selectedCardData['cost']) {
+                        if(selectedCardData['draw'] > 0) this.drawCards(selectedCardData['draw'])
+                        this.$store.dispatch('changecardPlayed', true)
+                        currentEnergy -= selectedCardData['cost']
+                        this.$store.dispatch('changeCurrentEnergy', currentEnergy)
+                    }
+
+                    else {
+                        this.$store.dispatch('changeCardSelection', null)
+                    }
                     
                 }
                 this.$store.dispatch('changeinterfaceClicked', false)
@@ -55,7 +64,18 @@ export default {
         //Le joueur a cliqué sur un Pokémon avec une carte sélectionnée
         cardClickedPokemon: function(newVal) {
             if(newVal) {
-                this.$store.dispatch('changecardPlayed', true)
+                var selectedCardData = this.$store.state.cards.dataCards[this.$store.state.battle.selectedCard]
+                var currentEnergy = this.$store.state.battle.currentEnergy
+                if(currentEnergy >= selectedCardData['cost']) {
+                    this.$store.dispatch('changecardPlayed', true)
+                    currentEnergy -= selectedCardData['cost']
+                    this.$store.dispatch('changeCurrentEnergy', currentEnergy)
+                }
+
+                else {
+                    this.$store.dispatch('changeCardSelection', null)
+                }
+
                 this.$store.dispatch('changepokemonClicked', false)
             }
         },
