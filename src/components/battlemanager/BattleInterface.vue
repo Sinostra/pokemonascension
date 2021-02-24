@@ -71,8 +71,7 @@ export default {
         return {
             drawPile: [
                 {id: '001'},
-                {id: '002'},
-                {id: '001'},
+                {id: '005'},
             ],
             
             playerHand: [
@@ -185,6 +184,7 @@ export default {
             var currentEnergy = this.$store.state.battle.currentEnergy
             if(currentEnergy >= selectedCardData['cost']) {
                 if(selectedCardData['draw'] > 0) this.drawCards(selectedCardData['draw'])
+                if(selectedCardData['energy'] > 0) currentEnergy += selectedCardData['energy']
                 this.$store.dispatch('changecardPlayed', true)
                 currentEnergy -= selectedCardData['cost']
                 this.$store.dispatch('changeCurrentEnergy', currentEnergy)
