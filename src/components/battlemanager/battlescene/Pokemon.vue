@@ -9,6 +9,9 @@
                 <div class="healthAmount text" :style="getTextStrokeWidth()">{{pv}}/{{maxPv}}</div>
                 <div class="type-picto"></div>
             </div>
+            <div class="block-wrapper">
+                {{block}}
+            </div>
             <div class="types-wrapper">
                 <div class="type" v-for="(type, index) in $store.state.pokedex.constantDex[number]['type']" :key="index">
                     <img :src="getPokemonTpyeIcon($store.state.pokedex.constantDex[number]['type'][index])">
@@ -30,7 +33,7 @@ export default {
         }
     },
 
-    props: ['number', 'pv', 'isPlayer'],
+    props: ['number', 'pv', 'block','isPlayer'],
 
     watch: {
         pv: function(newVal) {
@@ -194,6 +197,15 @@ export default {
                     width: 100%;
                 }
             }
+        }
+
+        .block-wrapper {
+            position: absolute;
+            background: #e0e0e0;
+            color: black;
+            top: -14%;
+            left: -30%;
+            padding: 10%;
         }
     }
 }

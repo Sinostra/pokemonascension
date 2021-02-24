@@ -1,10 +1,10 @@
 <template>
     <div class="battle-wrapper">
         <div class="player-pokemon">
-            <Pokemon :number="pokemonInBattle['player']['id']" :pv="pokemonInBattle['player']['pv']" :isPlayer="true" class="player" :style="getWrapperPosition(true)"/>
+            <Pokemon :number="pokemonInBattle['player']['id']" :pv="pokemonInBattle['player']['pv']" :block="0" :isPlayer="true" class="player" :style="getWrapperPosition(true)"/>
         </div>
         <div class="foe-pokemon">
-            <Pokemon v-for="(pokemon, index) in pokemonInBattle['foes']" :key="index" :number="pokemonInBattle['foes'][index]['id']" :pv="pokemonInBattle['foes'][index]['pv']" :isPlayer="false" class="foe" :style="getWrapperPosition(false, index)" @click="clickOnPokemon(index)"/>
+            <Pokemon v-for="(pokemon, index) in pokemonInBattle['foes']" :key="index" :number="pokemonInBattle['foes'][index]['id']" :pv="pokemonInBattle['foes'][index]['pv']" :block="pokemonInBattle['foes'][index]['block']" :isPlayer="false" class="foe" :style="getWrapperPosition(false, index)" @click="clickOnPokemon(index)"/>
         </div>
     </div>
 </template>
@@ -48,9 +48,9 @@ export default {
             pokemonInBattle: {
                 player: {id: '025', pv: 45},
                 foes: [
-                    {id: '009', pv: 45},
-                    {id: '104', pv: 45},
-                    {id: '017', pv: 45}
+                    {id: '009', pv: 45, block: 10},
+                    {id: '104', pv: 45, block: 10},
+                    {id: '017', pv: 45, block: 10}
                 ]
             },
 
@@ -74,12 +74,27 @@ export default {
         },
 
         dealDamage(amount, index) {
+            var ignoresBlock = this.$store.state.cards.dataCards[this.$store.state.battle.selectedCard]['ignoreBlock']
             var pokemon = this.pokemonInBattle['foes'][index]
-            if(amount >= pokemon['pv']) {
-                pokemon['pv'] = 0
-                this.pokemonInBattle['foes'].splice(this.pokemonInBattle['foes'][index], 1)
-            } 
-            else pokemon['pv'] -= amount
+            if(ignoresBlock || pokemon['block'] == 0) {
+                if(amount >= pokemon['pv']) {
+                    pokemon['pv'] = 0
+                    this.pokemonInBattle['foes'].splice(this.pokemonInBattle['foes'][index], 1)
+                } 
+                else pokemon['pv'] -= amount
+            }
+
+            else {
+                if(amount <= pokemon['block']) {
+                    pokemon['block'] -= amount
+                }
+
+                else {
+                    var difference = amount - pokemon['block']
+                    pokemon['block'] = 0
+                    pokemon['pv'] -= difference
+                }
+            }
         },
 
         heal(amount, index) {

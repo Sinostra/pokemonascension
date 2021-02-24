@@ -6,7 +6,9 @@ export default {
         "draw": 0,
         "damage": 6,
         "damageTimes": 1,
-        "damageAOE": false
+        "damageAOE": false,
+        "block": 0,
+        "ignoreBlock": false
     },
 
 
@@ -17,7 +19,9 @@ export default {
         "draw": 0,
         "damage": 3,
         "damageTimes": 1,
-        "damageAOE": true
+        "damageAOE": true,
+        "block": 0,
+        "ignoreBlock": false
     },
 
     "003": {
@@ -27,6 +31,20 @@ export default {
         "draw": 2,
         "damage": 0,
         "damageTimes": 0,
-        "damageAOE": false
-    }
+        "damageAOE": false,
+        "block": 0,
+        "ignoreBlock": false
+    },
+
+    "004": {
+        "name": "protect",
+        "cost": 1,
+        "target": false,
+        "draw": 0,
+        "damage": 0,
+        "damageTimes": 0,
+        "damageAOE": false,
+        "block": 5,
+        "ignoreBlock": false
+    },
 }
