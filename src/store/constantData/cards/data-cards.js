@@ -33,7 +33,7 @@ export default {
         "type": "psychic",
         "cost": 0,
         "target": false,
-        "draw": 2,
+        "draw": 3,
         "damage": 0,
         "damageTimes": 0,
         "damageAOE": false,

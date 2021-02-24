@@ -2,6 +2,7 @@ export default {
     state: {
         backgroundUsed: 'forest',
 
+        playerTurn: true,
 
         selectedCard: null,
         interfaceClicked: false,
@@ -10,13 +11,16 @@ export default {
         cardPlayed: false,
 
         currentEnergy: 3,
-        maxEnergy: 3
+        maxEnergy: 3,
     },
     mutations: {
         changebackgroundUsed(state, value) {
             state.backgroundUsed = value
         },
 
+        changePlayerTurn(state, value) {
+            state.playerTurn = value
+        },
 
         changeCardSelection(state, value) {
             state.selectedCard = value
@@ -42,6 +46,10 @@ export default {
     actions: {
         changebackgroundUsed(context, value) {
             context.commit('changebackgroundUsed', value)
+        },
+
+        changePlayerTurn(context, value) {
+            context.commit('changePlayerTurn', value)
         },
 
 

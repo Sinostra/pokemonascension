@@ -18,7 +18,10 @@ export default {
         Pokemon,
     },
 
-    props: ['cardPlayed'],
+    props: [
+        'cardPlayed',
+        'turnEnded'
+    ],
 
     watch: {
         cardPlayed: function(newVal) {
@@ -42,6 +45,16 @@ export default {
 
                 //Remettre le bool à false permet à la main de déselectionner sa carte et de la défausser
                 this.$store.dispatch('changecardPlayed', false)
+            }
+        },
+
+        turnEnded: function(newVal) {
+            if(!newVal) {
+                console.log('turn ended')
+                //Reset du blocage des IA
+                //TODO : tour de l'IA
+                this.pokemonInBattle['player']['block'] = 0
+                this.$store.dispatch('changePlayerTurn', true)
             }
         }
     },
@@ -113,7 +126,7 @@ export default {
                 this.lastClickedPokemon = index
                 this.$store.dispatch('changepokemonClicked', true)
             }
-        }
+        },
     }
 }
 </script>

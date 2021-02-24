@@ -13,7 +13,7 @@
         <div class="discardPile" :style="getFontSize()">
             <div class="number text">{{discardPile.length}}</div>
         </div>
-        <div class="end-turn-btn text" :style="getFontSize()">
+        <div class="end-turn-btn text" :style="getFontSize()" @click="endTurn()">
             End Turn
         </div>
     </div>
@@ -29,7 +29,12 @@ export default {
         Card,
     },
 
-    props: ['cardClickedInterface', 'cardClickedPokemon', 'cardPlayed'],
+    props: [
+        'cardClickedInterface',
+        'cardClickedPokemon',
+        'cardPlayed',
+        'turnStarted'
+    ],
 
     watch: {
         cardClickedInterface: function(newVal) {
@@ -64,6 +69,14 @@ export default {
                 this.discard(this.playerHand.splice(this.selectedCard, 1)[0])
                 this.$store.dispatch('changeCardSelection', null)
             }
+        },
+
+        turnStarted: function(newVal) {
+            if(newVal) {
+                console.log('new turn started')
+                this.drawCards(5)
+                this.$store.dispatch('changeCurrentEnergy', this.$store.state.battle.maxEnergy)
+            }
         }
     },
 
@@ -80,7 +93,9 @@ export default {
                 {id: '003'},
                 {id: '004'},
             ],
+
             discardPile: [],
+
             selectedCard: null,
             maxHandSize: 10
         }
@@ -159,6 +174,12 @@ export default {
         },
 
         drawCards(amount) {
+
+            if(amount > this.drawPile.length + this.discardPile.length) {
+                var difference = amount - (this.drawPile.length + this.discardPile.length)
+                amount -= difference
+            }
+
             for(var i = 0; i < amount; i++) {
 
                 if(this.drawPile.length == 0) {
@@ -191,6 +212,14 @@ export default {
             }
 
             else this.$store.dispatch('changeCardSelection', null)
+        },
+
+        endTurn() {
+            this.playerHand.forEach((card) => {
+                this.discard(card)
+                this.playerHand = []
+            })
+            this.$store.dispatch('changePlayerTurn', false)
         },
 
         getFontSize(multiplier = 1) {
@@ -252,7 +281,7 @@ export default {
 .drawPile, .discardPile {
     position: absolute;
     bottom: 2%;
-    z-index: 2;
+    z-index: 5;
     cursor: pointer;
     width: 10%;
     height: 9%;
@@ -294,7 +323,7 @@ export default {
     background: #182552;
     color: #fff;
     padding: 0.2% 2%;
-    z-index: 2;
+    z-index: 5;
     text-transform: uppercase;
     cursor: pointer;
     border: 2px #fff solid;
