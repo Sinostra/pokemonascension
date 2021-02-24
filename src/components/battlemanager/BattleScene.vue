@@ -1,7 +1,7 @@
 <template>
     <div class="battle-wrapper">
         <div class="player-pokemon">
-            <Pokemon :number="pokemonInBattle['player']['id']" :pv="pokemonInBattle['player']['pv']" :block="0" :isPlayer="true" class="player" :style="getWrapperPosition(true)"/>
+            <Pokemon :number="pokemonInBattle['player']['id']" :pv="pokemonInBattle['player']['pv']" :block="pokemonInBattle['player']['block']" :isPlayer="true" class="player" :style="getWrapperPosition(true)"/>
         </div>
         <div class="foe-pokemon">
             <Pokemon v-for="(pokemon, index) in pokemonInBattle['foes']" :key="index" :number="pokemonInBattle['foes'][index]['id']" :pv="pokemonInBattle['foes'][index]['pv']" :block="pokemonInBattle['foes'][index]['block']" :isPlayer="false" class="foe" :style="getWrapperPosition(false, index)" @click="clickOnPokemon(index)"/>
@@ -36,6 +36,10 @@ export default {
                     }
                 }
 
+                if(selectedCardData['block'] > 0) {
+                    this.pokemonInBattle['player']['block'] += selectedCardData['block']
+                }
+
                 //Remettre le bool à false permet à la main de déselectionner sa carte et de la défausser
                 this.$store.dispatch('changecardPlayed', false)
             }
@@ -46,7 +50,7 @@ export default {
         return {
             battle: false,
             pokemonInBattle: {
-                player: {id: '025', pv: 45},
+                player: {id: '025', pv: 45, block: 0},
                 foes: [
                     {id: '009', pv: 45, block: 10},
                     {id: '104', pv: 45, block: 10},

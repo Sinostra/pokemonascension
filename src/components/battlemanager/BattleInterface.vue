@@ -79,7 +79,7 @@ export default {
                 {id: '001'},
                 {id: '002'},
                 {id: '003'},
-                {id: '001'},
+                {id: '004'},
             ],
             discardPile: [],
             selectedCard: null,
