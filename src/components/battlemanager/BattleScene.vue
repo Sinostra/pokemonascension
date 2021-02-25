@@ -50,7 +50,6 @@ export default {
 
         turnEnded: function(newVal) {
             if(!newVal) {
-                console.log('turn ended')
                 //Reset du blocage des IA
                 //TODO : tour de l'IA
                 this.pokemonInBattle['player']['block'] = 0
@@ -65,9 +64,9 @@ export default {
             pokemonInBattle: {
                 player: {id: '025', pv: 45, block: 0},
                 foes: [
-                    {id: '009', pv: 45, block: 10},
-                    {id: '104', pv: 45, block: 10},
-                    {id: '017', pv: 45, block: 10}
+                    {id: '009', pv: 45, block: 0},
+                    {id: '104', pv: 45, block: 0},
+                    {id: '017', pv: 45, block: 0}
                 ]
             },
 

@@ -73,7 +73,6 @@ export default {
 
         turnStarted: function(newVal) {
             if(newVal) {
-                console.log('new turn started')
                 this.drawCards(5)
                 this.$store.dispatch('changeCurrentEnergy', this.$store.state.battle.maxEnergy)
             }
@@ -85,13 +84,14 @@ export default {
             drawPile: [
                 {id: '001'},
                 {id: '005'},
-            ],
-            
-            playerHand: [
                 {id: '001'},
                 {id: '002'},
                 {id: '003'},
                 {id: '004'},
+                
+            ],
+            
+            playerHand: [
             ],
 
             discardPile: [],
@@ -115,9 +115,11 @@ export default {
 
             //L'endroit où la première carte se positionne
             var baseLeft = 45 - (handSize * 1.5)
+            // var baseLeft = 30 - (handSize * 1.5)
 
             //L'écart horizontal entre deux cartes
             var leftShift = 4
+            // var leftShift = 6
 
             //Détermine le milieu
             var lastIndexToRotate = (Math.floor(handSize / 2))
@@ -228,6 +230,7 @@ export default {
     },
 
     mounted: function() {
+        this.$store.dispatch('changePlayerTurn', true)
     }
 } 
 </script>
@@ -283,9 +286,9 @@ export default {
     bottom: 2%;
     z-index: 5;
     cursor: pointer;
-    width: 10%;
+    width: 7%;
     height: 9%;
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     .number {
@@ -301,7 +304,7 @@ export default {
 }
 
 .drawPile {
-    left: 5%;
+    left: 2%;
     background-image: url('../../assets/img/interface/pioche.png');
     .number {
         right: 5%;
@@ -309,7 +312,7 @@ export default {
 }
 
 .discardPile {
-    right: 5%;
+    right: 2%;
     background-image: url('../../assets/img/interface/defausse.png');
     .number {
         left: 3%;

@@ -2,7 +2,7 @@ export default {
     state: {
         backgroundUsed: 'forest',
 
-        playerTurn: true,
+        playerTurn: false,
 
         selectedCard: null,
         interfaceClicked: false,

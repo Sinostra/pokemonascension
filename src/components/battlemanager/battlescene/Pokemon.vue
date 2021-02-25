@@ -182,7 +182,7 @@ export default {
             position: absolute;
             width: 20%;
             height: 100%;
-            top: -30%;
+            top: -15%;
             right: 2%;
 
             .type {
@@ -204,9 +204,28 @@ export default {
             background: #e0e0e0;
             color: black;
             top: -14%;
-            left: -30%;
+            left: -35%;
             padding: 10%;
         }
     }
 }
+
+/* Anim faint */
+
+// Blanc
+// .anim {
+//     filter: brightness(10)
+// }
+
+
+// Rose
+// .anim {
+//     filter: brightness(10) brightness(0.5) sepia(1) hue-rotate(311deg) saturate(10) brightness(3);
+// }
+
+//Rouge
+// .anim {
+//     filter: brightness(10) brightness(0.5) sepia(1) hue-rotate(311deg) saturate(10) brightness(1.8)
+// }
+
 </style>
