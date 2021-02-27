@@ -30,12 +30,12 @@ export default {
                 if(selectedCardData['damage'] > 0) {
                     if(selectedCardData['damageAOE']) {
                         for(var i = 0; i < this.pokemonInBattle['foes'].length; i++) {
-                            this.dealDamage(selectedCardData['damage'] * selectedCardData['damageTimes'], i)
+                            this.dealDamage(selectedCardData['damage'] * selectedCardData['damageTimes'], selectedCardData['ignoreBlock'], i)
                         }
                     }
     
                     else {
-                        this.dealDamage(selectedCardData['damage'] * selectedCardData['damageTimes'], this.lastClickedPokemon)
+                        this.dealDamage(selectedCardData['damage'] * selectedCardData['damageTimes'], selectedCardData['ignoreBlock'], this.lastClickedPokemon)
                     }
                 }
 
@@ -50,6 +50,10 @@ export default {
 
         turnEnded: function(newVal) {
             if(!newVal) {
+                this.pokemonInBattle['foes'].forEach(pokemon => {
+                    pokemon['block'] = 0
+                });
+                this.playEnnemyTurn()
                 //Reset du blocage des IA
                 //TODO : tour de l'IA
                 this.pokemonInBattle['player']['block'] = 0
@@ -64,9 +68,9 @@ export default {
             pokemonInBattle: {
                 player: {id: '025', pv: 45, block: 0},
                 foes: [
-                    {id: '009', pv: 45, block: 0},
-                    {id: '104', pv: 45, block: 0},
-                    {id: '017', pv: 45, block: 0}
+                    {id: '009', pv: 45, block: 0, pattern: this.$store.state.pokedex.constantDex['009']['pattern']},
+                    {id: '104', pv: 45, block: 0, pattern: this.$store.state.pokedex.constantDex['104']['pattern']},
+                    {id: '017', pv: 45, block: 0, pattern: this.$store.state.pokedex.constantDex['017']['pattern']}
                 ]
             },
 
@@ -89,13 +93,13 @@ export default {
             }
         },
 
-        dealDamage(amount, index) {
-            var ignoresBlock = this.$store.state.cards.dataCards[this.$store.state.battle.selectedCard]['ignoreBlock']
-            var pokemon = this.pokemonInBattle['foes'][index]
+        dealDamage(amount, ignoresBlock, index = 'player') {
+            if(index == 'player') var pokemon = this.pokemonInBattle['player']
+            else var pokemon = this.pokemonInBattle['foes'][index]
             if(ignoresBlock || pokemon['block'] == 0) {
                 if(amount >= pokemon['pv']) {
                     pokemon['pv'] = 0
-                    this.pokemonInBattle['foes'].splice(this.pokemonInBattle['foes'][index], 1)
+                    // this.pokemonInBattle['foes'].splice(index, 1)
                 } 
                 else pokemon['pv'] -= amount
             }
@@ -113,8 +117,9 @@ export default {
             }
         },
 
-        heal(amount, index) {
-            var pokemon = this.pokemonInBattle['foes'][index]
+        heal(amount, index = 'player') {
+            if(index == 'player') var pokemon = this.pokemonInBattle['player']
+            else var pokemon = this.pokemonInBattle['foes'][index]
             var pokemonPvMax = this.$store.state.pokedex.constantDex[pokemon['id']]['hp']
             if(amount + pokemon['pv'] > pokemonPvMax) pokemon['pv'] = pokemonPvMax
             else pokemon['pv'] += amount
@@ -126,6 +131,19 @@ export default {
                 this.$store.dispatch('changepokemonClicked', true)
             }
         },
+
+        playEnnemyTurn() {
+            this.pokemonInBattle['foes'].forEach(pokemon => {
+                var moveThisTurn = pokemon['pattern'].shift()
+                if(moveThisTurn['damage'] > 0) {
+                    this.dealDamage(moveThisTurn['damage'], false)
+                }
+                if(moveThisTurn['block'] > 0) {
+                    pokemon['block'] += moveThisTurn['block']
+                }
+                pokemon['pattern'].push(moveThisTurn)
+            });
+        }
     }
 }
 </script>

@@ -2,6 +2,7 @@
     <div class="card">
         <div class="cost">{{$store.state.cards.dataCards[id]['cost']}}</div>
         <div class="name">{{$store.state.cards.dataCards[id]['name']}}</div>
+        <div class="type" :style="(getFontSize(0.8))" >{{$store.state.cards.dataCards[id]['type']}}</div>
     </div>
 </template>
 
@@ -17,7 +18,9 @@ export default {
     props:['id'],
 
     methods: {
-
+        getFontSize(multiplier = 1) {
+            return 'font-size: ' + (this.$store.state.baseFontSize) * multiplier + 'px;'
+        },
     }
 }
 
@@ -26,7 +29,9 @@ export default {
 .card {
     width: 10.2%;
     height: 100%;
-    background: #182552;
+    background-color: #182552;
+    background-image: url("../../../assets/img/cards/Bord_R2.png");
+    background-size: contain;
     color: #fff;
     border-radius: 10px;
     border: 2px solid #000;
@@ -36,11 +41,50 @@ export default {
         z-index: 2;
         width: 12.2%;
         height: 106%;
+        .type {
+            height: 6%;
+        }
     }
     &.selected {
         z-index: 2;
         width: 15.5%;
         height: 136%;
+    }
+
+    .cost {
+        position: absolute;
+        width: 16%;
+        height: 11%;
+        left: 1%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'gill sans bold';
+    }
+
+    .name {
+        position: absolute;
+        top: 4%;
+        left: 24%;
+        color: black;
+        // font-family: 'futura';
+    }
+
+    .type {
+        position: absolute;
+        width: 21%;
+        height: 5%;
+        top: 7%;
+        right: 11%;
+        font-family: 'futura condensed';
+        color: #000;
+        text-transform: uppercase;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        /* Font size du texte doit être en fonction de la longueur de son conteneur, ici, type */
     }
 }
 </style>

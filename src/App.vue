@@ -60,6 +60,18 @@ export default {
 <style lang="scss">
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,600;0,700;0,800;1,600;1,700;1,800&display=swap');
+@font-face {
+  font-family: 'gill sans bold';
+  src: url("./assets/fonts/Gill_Sans_MT_Extra_Bold.ttf");
+}
+@font-face {
+  font-family: 'futura condensed';
+  src: url("./assets/fonts/Futura_LT_Condensed_Medium.ttf");
+}
+@font-face {
+  font-family: 'futura';
+  src: url("./assets/fonts/Futura_LT_Bold.ttf");
+}
 
 * {
   box-sizing: border-box;

@@ -108,7 +108,24 @@ export default {
         "hpBar" : {
             "left" : 42,
             "top" : -69
-        }
+        },
+        "pattern": [
+            {
+                'damage': 5,
+                'block': 5,
+                'type': 'normal'
+            },
+            {
+                'damage': 7,
+                'block': 0,
+                'type': 'water'
+            },
+            {
+                'damage': 0,
+                'block': 7,
+                'type': 'normal'
+            }
+        ]
     },
 
     "010": {
@@ -208,7 +225,24 @@ export default {
         "hpBar" : {
             "left" : 25,
             "top" : -36
-        }
+        },
+        "pattern": [
+            {
+                'damage': 5,
+                'block': 5,
+                'type': 'normal'
+            },
+            {
+                'damage': 7,
+                'block': 0,
+                'type': 'water'
+            },
+            {
+                'damage': 0,
+                'block': 7,
+                'type': 'normal'
+            }
+        ]
     },
 
     "018": {
@@ -1256,7 +1290,24 @@ export default {
         "hpBar" : {
             "left" : 11,
             "top" : 11
-        }
+        },
+        "pattern": [
+            {
+                'damage': 5,
+                'block': 5,
+                'type': 'normal'
+            },
+            {
+                'damage': 7,
+                'block': 0,
+                'type': 'water'
+            },
+            {
+                'damage': 0,
+                'block': 7,
+                'type': 'normal'
+            }
+        ]
     },
 
     "105": {
