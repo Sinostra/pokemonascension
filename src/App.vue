@@ -1,5 +1,5 @@
 <template>
-  <div class="global-wrapper" :class="getAppClass()" v-on:mousemove="updateMouseCoordinates">
+  <div class="global-wrapper" :class="getAppClass()">
     <Background/>
     <Interface/>
     <BattleManager/>
@@ -65,12 +65,16 @@ export default {
   src: url("./assets/fonts/Gill_Sans_MT_Extra_Bold.ttf");
 }
 @font-face {
+  font-family: 'gill sans';
+  src: url("./assets/fonts/Gill_Sans.ttf");
+}
+@font-face {
   font-family: 'futura condensed';
   src: url("./assets/fonts/Futura_LT_Condensed_Medium.ttf");
 }
 @font-face {
   font-family: 'futura';
-  src: url("./assets/fonts/Futura_LT_Bold.ttf");
+  src: url("./assets/fonts/Futura LT Condensed Extra Bold.ttf");
 }
 
 * {

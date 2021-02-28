@@ -66,11 +66,11 @@ export default {
         return {
             battle: false,
             pokemonInBattle: {
-                player: {id: '025', pv: 45, block: 0},
+                player: {id: '025', pv: 45, block: 0, fainted: false},
                 foes: [
-                    {id: '009', pv: 45, block: 0, pattern: this.$store.state.pokedex.constantDex['009']['pattern']},
-                    {id: '104', pv: 45, block: 0, pattern: this.$store.state.pokedex.constantDex['104']['pattern']},
-                    {id: '017', pv: 45, block: 0, pattern: this.$store.state.pokedex.constantDex['017']['pattern']}
+                    {id: '009', pv: 45, block: 0, pattern: this.$store.state.pokedex.constantDex['009']['pattern'], fainted: false},
+                    {id: '104', pv: 45, block: 0, pattern: this.$store.state.pokedex.constantDex['104']['pattern'], fainted: false},
+                    {id: '017', pv: 45, block: 0, pattern: this.$store.state.pokedex.constantDex['017']['pattern'], fainted: false}
                 ]
             },
 
@@ -96,9 +96,11 @@ export default {
         dealDamage(amount, ignoresBlock, index = 'player') {
             if(index == 'player') var pokemon = this.pokemonInBattle['player']
             else var pokemon = this.pokemonInBattle['foes'][index]
+
             if(ignoresBlock || pokemon['block'] == 0) {
                 if(amount >= pokemon['pv']) {
                     pokemon['pv'] = 0
+                    pokemon['fainted'] = true
                     // this.pokemonInBattle['foes'].splice(index, 1)
                 } 
                 else pokemon['pv'] -= amount
@@ -120,6 +122,7 @@ export default {
         heal(amount, index = 'player') {
             if(index == 'player') var pokemon = this.pokemonInBattle['player']
             else var pokemon = this.pokemonInBattle['foes'][index]
+
             var pokemonPvMax = this.$store.state.pokedex.constantDex[pokemon['id']]['hp']
             if(amount + pokemon['pv'] > pokemonPvMax) pokemon['pv'] = pokemonPvMax
             else pokemon['pv'] += amount
@@ -156,10 +159,6 @@ export default {
     width: 100%;
     height: 100%;
 }
-</style>
-
-<style lang='scss'>
-
 </style>
 
 

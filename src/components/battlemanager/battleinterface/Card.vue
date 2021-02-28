@@ -1,8 +1,9 @@
 <template>
     <div class="card">
-        <div class="cost">{{$store.state.cards.dataCards[id]['cost']}}</div>
-        <div class="name">{{$store.state.cards.dataCards[id]['name']}}</div>
-        <div class="type" :style="(getFontSize(0.8))" >{{$store.state.cards.dataCards[id]['type']}}</div>
+        <div class="cost" :style="(getFontSize())">{{$store.state.cards.dataCards[id]['cost']}}</div>
+        <div class="name" :style="(getFontSize(0.6))">{{$store.state.cards.dataCards[id]['name']}}</div>
+        <div class="type" :style="(getFontSize(0.6))">{{$store.state.cards.dataCards[id]['type']}}</div>
+        <div class="tooltip" :style="(getFontSize(0.8))">{{$store.state.cards.dataCards[id]['tooltip']}}</div>
     </div>
 </template>
 
@@ -12,6 +13,7 @@ export default {
 
     data: function(){
         return {
+
         }
     },
 
@@ -21,7 +23,11 @@ export default {
         getFontSize(multiplier = 1) {
             return 'font-size: ' + (this.$store.state.baseFontSize) * multiplier + 'px;'
         },
-    }
+
+    },
+
+    mounted() {
+    },
 }
 
 </script>
@@ -31,25 +37,13 @@ export default {
     height: 100%;
     background-color: #182552;
     background-image: url("../../../assets/img/cards/Bord_R2.png");
-    background-size: contain;
+    background-size: 100% 101%;
+    background-position: bottom;
     color: #fff;
     border-radius: 10px;
     border: 2px solid #000;
     position: absolute;
     cursor: pointer;
-    &:hover {
-        z-index: 2;
-        width: 12.2%;
-        height: 106%;
-        .type {
-            height: 6%;
-        }
-    }
-    &.selected {
-        z-index: 2;
-        width: 15.5%;
-        height: 136%;
-    }
 
     .cost {
         position: absolute;
@@ -64,27 +58,38 @@ export default {
 
     .name {
         position: absolute;
-        top: 4%;
-        left: 24%;
+        top: 6.5%;
+        left: 17.5%;
         color: black;
-        // font-family: 'futura';
+        font-family: 'futura';
+        text-transform: capitalize;
     }
 
     .type {
         position: absolute;
         width: 21%;
         height: 5%;
-        top: 7%;
+        top: 6.7%;
         right: 11%;
         font-family: 'futura condensed';
-        color: #000;
+        color: #fff;
         text-transform: uppercase;
-        background-color: #fff;
         display: flex;
         justify-content: center;
         align-items: center;
 
         /* Font size du texte doit être en fonction de la longueur de son conteneur, ici, type */
+    }
+
+    .tooltip {
+        position: absolute;
+        top: 59%;
+        left: 10%;
+        width: 83%;
+        height: 36%;
+        padding: 1%;
+        font-family: 'gill sans';
+        color: #000;
     }
 }
 </style>

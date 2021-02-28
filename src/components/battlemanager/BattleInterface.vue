@@ -8,7 +8,13 @@
             <div class="number text">{{drawPile.length}}</div>
         </div>
         <div class="player-hand" :style="getFontSize()">
-            <Card v-for="(card, index) in playerHand" :key="index" :style="displayCardsInHand(index)" :id="card.id" :class="getCardClass(index)" v-on:click="selectCard(index)"/>
+            <Card 
+                v-for="(card, index) in playerHand" :key="index"
+                :style="displayCardsInHand(index)" :id="card.id"
+                v-on:click="selectCard(index)"
+                v-on:mouseover="hoverOnCard(index)"
+                v-on:mouseleave="leaveHover()"
+            />
         </div>
         <div class="discardPile" :style="getFontSize()">
             <div class="number text">{{discardPile.length}}</div>
@@ -33,7 +39,8 @@ export default {
         'cardClickedInterface',
         'cardClickedPokemon',
         'cardPlayed',
-        'turnStarted'
+        'turnStarted',
+        'rightClicked'
     ],
 
     watch: {
@@ -44,7 +51,7 @@ export default {
                 //Si la carte a besoin d'une cible spécifique
                 if(selectedCardData['target']) {
                     //On la déselectionne
-                    this.$store.dispatch('changeCardSelection', null)
+                    this.unSelectCard()
                 }
 
                 else {
@@ -67,7 +74,7 @@ export default {
         cardPlayed: function(newVal) {
             if(!newVal) {
                 this.discard(this.playerHand.splice(this.selectedCard, 1)[0])
-                this.$store.dispatch('changeCardSelection', null)
+                this.unSelectCard()
             }
         },
 
@@ -76,27 +83,40 @@ export default {
                 this.drawCards(5)
                 this.$store.dispatch('changeCurrentEnergy', this.$store.state.battle.maxEnergy)
             }
+        },
+
+        rightClicked: function(newVal) {
+            if(newVal) {
+                this.unSelectCard()
+                this.$store.dispatch('changerightClicked', false)
+            }
         }
     },
 
     data: function() {
         return {
             drawPile: [
+                
+                
+            ],
+            
+            playerHand: [
                 {id: '001'},
                 {id: '005'},
                 {id: '001'},
                 {id: '002'},
                 {id: '003'},
                 {id: '004'},
-                
-            ],
-            
-            playerHand: [
+                {id: '001'},
+                {id: '002'},
+                {id: '003'},
+                {id: '004'},
             ],
 
             discardPile: [],
 
             selectedCard: null,
+            hoverCard: null,
             maxHandSize: 10
         }
     },
@@ -114,11 +134,10 @@ export default {
             // var baseBottom = 0
 
             //L'endroit où la première carte se positionne
-            var baseLeft = 45 - (handSize * 1.5)
-            // var baseLeft = 30 - (handSize * 1.5)
+            var baseLeft = 30 - (handSize * 1.5)
 
             //L'écart horizontal entre deux cartes
-            var leftShift = 4
+            var leftShift = 7
             // var leftShift = 6
 
             //Détermine le milieu
@@ -147,7 +166,7 @@ export default {
             finalRotate *= -1
 
             //L'écart vertical entre deux cartes
-            var bottomShift = 1.5 * Math.abs(difference)
+            var bottomShift = 3 * Math.abs(difference)
 
             var finalBottom = baseBottom - (bottomShift * Math.abs(difference))
 
@@ -159,10 +178,13 @@ export default {
             // finalRotate *= -1
             var finalLeft = baseLeft + index * leftShift
 
-            return 'transform : rotate(' + finalRotate + 'deg); left : ' + finalLeft + '%; bottom: ' + finalBottom + '%;'
-            
-            // if(this.selectedCard && this.selectedCard == index) return 'transform : rotate(0deg); left : ' + finalLeft + '%; bottom: ' + finalBottom + '%;'
-            // else return 'transform : rotate(' + finalRotate + 'deg); left : ' + finalLeft + '%; bottom: ' + finalBottom + '%;'
+            if(this.hoverCard != index && this.selectedCard != index) {
+                return 'transform : rotate(' + finalRotate + 'deg); left : ' + finalLeft + '%; bottom: ' + finalBottom + '%;'
+            }
+
+            else if(this.hoverCard == index && this.selectedCard != index) return 'transform : rotate(' + finalRotate + 'deg) scale(1.2); left : ' + finalLeft + '%; bottom: ' + finalBottom + '%; z-index: 2;'
+
+            else return 'transform : rotate(0deg) scale(1.6); left : ' + finalLeft + '%; bottom: 53%; z-index: 2;'
 
         },
 
@@ -171,8 +193,17 @@ export default {
             this.selectedCard = clickedIndex
         },
 
-        getCardClass(index) {
-            if(this.selectedCard == index && this.$store.state.battle.selectedCard != null) return 'selected' 
+        unSelectCard() {
+            this.selectedCard = null
+            this.$store.dispatch('changeCardSelection', null)
+        },
+
+        hoverOnCard(index) {
+            this.hoverCard = index
+        },
+
+        leaveHover() {
+            this.hoverCard = null
         },
 
         drawCards(amount) {
@@ -185,15 +216,17 @@ export default {
             for(var i = 0; i < amount; i++) {
 
                 if(this.drawPile.length == 0) {
-                    this.drawPile = this.discardPile.splice(0, this.discardPile.length)
+                    this.discardPile.forEach(() => {
+                        this.moveCard(this.discardPile, this.drawPile)
+                    })
                 }
 
                 
                 if (this.playerHand.length < this.maxHandSize) {
-                    this.playerHand.push(this.drawPile.shift())
+                    this.moveCard(this.drawPile, this.playerHand)
                 }
 
-                else this.discard(this.drawPile.shift())
+                else this.moveCard(this.drawPile, this.discardPile)
             }
             
         },
@@ -202,24 +235,28 @@ export default {
             this.discardPile.push(card)
         },
 
+        moveCard(from, to) {
+            to.push(from.shift())
+        },
+
         playCard() {
             var selectedCardData = this.$store.state.cards.dataCards[this.$store.state.battle.selectedCard]
-            var currentEnergy = this.$store.state.battle.currentEnergy
-            if(currentEnergy >= selectedCardData['cost']) {
+            
+            if(this.$store.state.battle.currentEnergy >= selectedCardData['cost']) {
+
                 if(selectedCardData['draw'] > 0) this.drawCards(selectedCardData['draw'])
-                if(selectedCardData['energy'] > 0) currentEnergy += selectedCardData['energy']
+                if(selectedCardData['energy'] > 0) this.gainEnergy(selectedCardData['energy'])
                 this.$store.dispatch('changecardPlayed', true)
-                currentEnergy -= selectedCardData['cost']
-                this.$store.dispatch('changeCurrentEnergy', currentEnergy)
+
+                this.loseEnergy(selectedCardData['cost'])
             }
 
             else this.$store.dispatch('changeCardSelection', null)
         },
 
         endTurn() {
-            this.playerHand.forEach((card) => {
-                this.discard(card)
-                this.playerHand = []
+            this.playerHand.forEach(() => {
+                this.moveCard(this.playerHand, this.discardPile)
             })
             this.$store.dispatch('changePlayerTurn', false)
         },
@@ -227,6 +264,17 @@ export default {
         getFontSize(multiplier = 1) {
             return 'font-size: ' + (this.$store.state.baseFontSize) * multiplier + 'px;'
         },
+
+        gainEnergy(amount) {
+            var currentEnergy = this.$store.state.battle.currentEnergy
+            this.$store.dispatch('changeCurrentEnergy', currentEnergy += amount)
+        },
+
+        loseEnergy(amount) {
+            var currentEnergy = this.$store.state.battle.currentEnergy
+            this.$store.dispatch('changeCurrentEnergy', currentEnergy -= amount)
+        }
+
     },
 
     mounted: function() {

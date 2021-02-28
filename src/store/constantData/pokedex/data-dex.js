@@ -111,18 +111,18 @@ export default {
         },
         "pattern": [
             {
-                'damage': 5,
-                'block': 5,
+                'damage': 2,
+                'block': 2,
                 'type': 'normal'
             },
             {
-                'damage': 7,
+                'damage': 4,
                 'block': 0,
                 'type': 'water'
             },
             {
                 'damage': 0,
-                'block': 7,
+                'block': 4,
                 'type': 'normal'
             }
         ]
@@ -228,18 +228,18 @@ export default {
         },
         "pattern": [
             {
-                'damage': 5,
-                'block': 5,
+                'damage': 1,
+                'block': 1,
                 'type': 'normal'
             },
             {
-                'damage': 7,
+                'damage': 3,
                 'block': 0,
                 'type': 'water'
             },
             {
                 'damage': 0,
-                'block': 7,
+                'block': 3,
                 'type': 'normal'
             }
         ]
@@ -1293,18 +1293,18 @@ export default {
         },
         "pattern": [
             {
-                'damage': 5,
-                'block': 5,
+                'damage': 1,
+                'block': 2,
                 'type': 'normal'
             },
             {
-                'damage': 7,
+                'damage': 3,
                 'block': 0,
                 'type': 'water'
             },
             {
                 'damage': 0,
-                'block': 7,
+                'block': 3,
                 'type': 'normal'
             }
         ]

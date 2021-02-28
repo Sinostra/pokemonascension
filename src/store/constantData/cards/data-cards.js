@@ -11,6 +11,7 @@ export default {
         "block": 0,
         "ignoreBlock": false,
         "energy": 0,
+        "tooltip": 'lorem ipsum',
     },
 
 
@@ -26,6 +27,7 @@ export default {
         "block": 0,
         "ignoreBlock": false,
         "energy": 0,
+        "tooltip": 'lorem ipsum',
     },
 
     "003": {
@@ -40,6 +42,7 @@ export default {
         "block": 0,
         "ignoreBlock": false,
         "energy": 0,
+        "tooltip": 'lorem ipsum',
     },
 
     "004": {
@@ -54,6 +57,7 @@ export default {
         "block": 5,
         "ignoreBlock": false,
         "energy": 0,
+        "tooltip": 'lorem ipsum',
     },
 
     "005": {
@@ -68,5 +72,6 @@ export default {
         "block": 0,
         "ignoreBlock": false,
         "energy": 2,
+        "tooltip": 'lorem ipsum',
     },
 }

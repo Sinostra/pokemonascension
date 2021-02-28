@@ -8,6 +8,8 @@ export default {
         interfaceClicked: false,
         pokemonClicked: false,
 
+        rightClicked: false,
+
         cardPlayed: false,
 
         currentEnergy: 3,
@@ -28,6 +30,11 @@ export default {
         changeinterfaceClicked(state, value) {
             state.interfaceClicked = value
         },
+
+        changerightClicked(state, value) {
+            state.rightClicked = value
+        },
+
         changepokemonClicked(state, value) {
             state.pokemonClicked = value
         },
@@ -61,6 +68,9 @@ export default {
         },
         changepokemonClicked(context, value) {
             context.commit('changepokemonClicked', value)
+        },
+        changerightClicked(context, value) {
+            context.commit('changerightClicked', value)
         },
         changecardPlayed(context, value) {
             context.commit('changecardPlayed', value)

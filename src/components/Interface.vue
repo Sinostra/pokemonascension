@@ -1,5 +1,5 @@
 <template>
-    <div class="interface-wrapper" @click="onClick()">
+    <div class="interface-wrapper" v-on:click.left="onLeftClick()" v-on:click.right="onRightClick($event)">
         <GameInterface/>
     </div>
 </template>
@@ -20,10 +20,15 @@ export default {
     },
 
     methods: {
-        onClick: function() {
+        onLeftClick: function() {
             if(this.$store.state.battle.selectedCard != null) {
                 this.$store.dispatch('changeinterfaceClicked', true)
             }
+        },
+
+        onRightClick(e) {
+            e.preventDefault()
+            this.$store.dispatch('changerightClicked', true)
         }
     }
 }

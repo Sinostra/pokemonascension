@@ -9,6 +9,7 @@
             :cardClickedPokemon="$store.state.battle.pokemonClicked" 
             :cardPlayed="$store.state.battle.cardPlayed"
             :turnStarted="$store.state.battle.playerTurn"
+            :rightClicked="$store.state.battle.rightClicked"
         />
     </div>
 </template>
