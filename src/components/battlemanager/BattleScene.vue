@@ -200,7 +200,7 @@ export default {
 
         playAttackAnim(pokemon) {
             pokemon['attackAnim'] = true
-            setTimeout(() => {pokemon['attackAnim'] = false}, 1000)
+            setTimeout(() => {pokemon['attackAnim'] = false}, 350)
         }
     }
 }

@@ -6,7 +6,10 @@
                 <div class="currentHealth" :class="getHealthBarClass()" :style="{'width': getHealthBarPercent() + '%'}"></div>
             </div>
             <div class="infos">
-                <div v-if="!isPlayer" class="intent text" :style="getFontSize(1.2)">{{intent['damage']}}</div>
+                <div v-if="!isPlayer" class="intent text" :style="getFontSize(1.2)">
+                    <img v-if="intent['block'] > 0" :src="getShield()">
+                    <div v-if="intent['damage'] > 0">{{intent['damage']}}</div>
+                </div>
                 <div class="healthAmount text" :style="getTextStrokeWidth()">{{pv}}/{{maxPv}}</div>
                 <div class="type-picto"></div>
             </div>
@@ -94,7 +97,11 @@ export default {
 
         getTextStrokeWidth() {
             return '-webkit-text-stroke-width: ' + (this.$store.state.baseFontSize) / 12 + 'px;'
-        }
+        },
+
+        getShield() {
+            return require('../../../assets/img/interface/shield.png')
+        },
 
     },
 
@@ -117,7 +124,8 @@ export default {
 
             &.attackAnim {
                 animation-name: attack;
-                animation-duration: 1s;
+                animation-duration: .35s;
+                animation-timing-function: linear;
             }
         }
 
@@ -135,7 +143,8 @@ export default {
 
         img.attackAnim {
             animation-name: foe-attack;
-            animation-duration: 1s;
+            animation-duration: .35s;
+            animation-timing-function: linear;
         }
 
         &.cardSelected {
@@ -235,13 +244,24 @@ export default {
 
     .intent {
         position: absolute;
-        top: -90%;
+        top: -110%;
         left: 25%;
         font-family: 'Open Sans', sans-serif;
         font-weight: 800;
         font-style: italic;
         color: #fff;
         -webkit-text-stroke-color: black;
+        width: 13%;
+        height: 95%;
+
+        img {
+            position: absolute;
+            top: 5%;
+            left: -50%;
+            width: 200%;
+            height: 90%;
+            z-index: -1;
+        }
     }
 }
 

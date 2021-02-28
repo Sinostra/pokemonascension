@@ -172,9 +172,9 @@ export default {
         height: 5%;
         top: 49%;
         left: 30%;
-        // background-image: url("../../../assets/img/cards/Attack_R1.png");
         background-size: 100% 100%;
         background-repeat: no-repeat;
+        color: #000;
         text-align: center;
         text-transform: capitalize;
         font-family: 'futura';
