@@ -1,11 +1,12 @@
 <template>
-    <div class="pokemon-wrapper" :class="getWrapperClass()" :style="getFontSize(1.2)">
+    <div class="pokemon-wrapper" :class="getWrapperClass()" :style="getTextStrokeWidth()">
         <img :src="getSprite()" :style="{'width': $store.state.pokedex.constantDex[number]['size'] + '%'}">
         <div class="healthBar-infos-wrapper" :style="getHeathBarPosition()">
             <div class="heathBar">
                 <div class="currentHealth" :class="getHealthBarClass()" :style="{'width': getHealthBarPercent() + '%'}"></div>
             </div>
             <div class="infos">
+                <div v-if="!isPlayer" class="intent text" :style="getFontSize(1.2)">{{intent['damage']}}</div>
                 <div class="healthAmount text" :style="getTextStrokeWidth()">{{pv}}/{{maxPv}}</div>
                 <div class="type-picto"></div>
             </div>
@@ -33,12 +34,25 @@ export default {
         }
     },
 
-    props: ['number', 'pv', 'block','isPlayer'],
+    props: [
+        'number',
+        'pv',
+        'block',
+        'isPlayer',
+        'intent'
+    ],
 
     watch: {
         pv: function(newVal) {
             if(newVal == 0) this.fainted = true
-        }
+        },
+
+        // pattern: function(newVal){
+        //     if(this.isPlayer) return
+        //     else {
+
+        //     }
+        // }
     },
 
     methods: {
@@ -207,6 +221,17 @@ export default {
             left: -35%;
             padding: 10%;
         }
+    }
+
+    .intent {
+        position: absolute;
+        top: -90%;
+        left: 25%;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 800;
+        font-style: italic;
+        color: #fff;
+        -webkit-text-stroke-color: black;
     }
 }
 

@@ -2,6 +2,8 @@ export default {
     "001": {
         "name": "thundershock",
         "type": "electric",
+        "category": "attack",
+        "rarity": "common",
         "cost": 1,
         "target": true,
         "draw": 0,
@@ -18,6 +20,8 @@ export default {
     "002": {
         "name": "discharge",
         "type": "electric",
+        "category": "attack",
+        "rarity": "medium",
         "cost": 1,
         "target": false,
         "draw": 0,
@@ -33,6 +37,8 @@ export default {
     "003": {
         "name": "agility",
         "type": "psychic",
+        "category": "ability",
+        "rarity": "medium",
         "cost": 0,
         "target": false,
         "draw": 3,
@@ -48,6 +54,8 @@ export default {
     "004": {
         "name": "protect",
         "type": "normal",
+        "category": "ability",
+        "rarity": "common",
         "cost": 1,
         "target": false,
         "draw": 0,
@@ -63,6 +71,8 @@ export default {
     "005": {
         "name": "focus energy",
         "type": "normal",
+        "category": "ability",
+        "rarity": "rare",
         "cost": 1,
         "target": false,
         "draw": 0,

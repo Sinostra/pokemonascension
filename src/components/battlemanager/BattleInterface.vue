@@ -96,11 +96,6 @@ export default {
     data: function() {
         return {
             drawPile: [
-                
-                
-            ],
-            
-            playerHand: [
                 {id: '001'},
                 {id: '005'},
                 {id: '001'},
@@ -110,7 +105,11 @@ export default {
                 {id: '001'},
                 {id: '002'},
                 {id: '003'},
-                {id: '004'},
+                {id: '004'}, 
+            ],
+            
+            playerHand: [
+                
             ],
 
             discardPile: [],
@@ -131,14 +130,12 @@ export default {
 
             //L'endroit où la carte du milieu se positionne
             var baseBottom = -3
-            // var baseBottom = 0
 
             //L'endroit où la première carte se positionne
-            var baseLeft = 30 - (handSize * 1.5)
+            var baseLeft = 45 - (handSize * 3)
 
             //L'écart horizontal entre deux cartes
             var leftShift = 7
-            // var leftShift = 6
 
             //Détermine le milieu
             var lastIndexToRotate = (Math.floor(handSize / 2))

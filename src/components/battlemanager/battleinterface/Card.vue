@@ -1,8 +1,9 @@
 <template>
-    <div class="card">
+    <div class="card" :style="{'background-image':'url(' + getBackground() + ')'}" :class="$store.state.cards.dataCards[id]['type']">
         <div class="cost" :style="(getFontSize())">{{$store.state.cards.dataCards[id]['cost']}}</div>
         <div class="name" :style="(getFontSize(0.6))">{{$store.state.cards.dataCards[id]['name']}}</div>
         <div class="type" :style="(getFontSize(0.6))">{{$store.state.cards.dataCards[id]['type']}}</div>
+        <div class="category" :style="(getCategoryStyle(0.6))">{{$store.state.cards.dataCards[id]['category']}}</div>
         <div class="tooltip" :style="(getFontSize(0.8))">{{$store.state.cards.dataCards[id]['tooltip']}}</div>
     </div>
 </template>
@@ -20,9 +21,26 @@ export default {
     props:['id'],
 
     methods: {
+
+        getBackground() {
+            var card = this.$store.state.cards.dataCards[this.id]
+            return require('../../../assets/img/cards/bord_' + card['rarity'] + '.png')
+        },
+
+        getCategoryBackground() {
+            var card = this.$store.state.cards.dataCards[this.id]
+            return require('../../../assets/img/cards/' + card['category'] + '_' + card['rarity'] + '.png')
+        },
+
         getFontSize(multiplier = 1) {
             return 'font-size: ' + (this.$store.state.baseFontSize) * multiplier + 'px;'
         },
+
+        getCategoryStyle(multiplier = 1) {
+            var fontSize = 'font-size: ' + (this.$store.state.baseFontSize) * multiplier + 'px;'
+            var background = 'background-image :url(' + this.getCategoryBackground() + ');'
+            return fontSize + background
+        }
 
     },
 
@@ -35,15 +53,84 @@ export default {
 .card {
     width: 10.2%;
     height: 100%;
-    background-color: #182552;
-    background-image: url("../../../assets/img/cards/Bord_R2.png");
     background-size: 100% 101%;
     background-position: bottom;
     color: #fff;
     border-radius: 10px;
-    border: 2px solid #000;
     position: absolute;
     cursor: pointer;
+
+    &.normal {
+        background-color: #909aa0;
+    }
+
+    &.electric {
+        background-color: #f4d23c;
+    }
+
+    &.psychic {
+        background-color: #fa7179;
+    }
+
+    &.normal {
+        background-color: #909aa0;
+    }
+
+    &.normal {
+        background-color: #909aa0;
+    }
+
+    &.normal {
+        background-color: #909aa0;
+    }
+
+    &.normal {
+        background-color: #909aa0;
+    }
+
+    &.normal {
+        background-color: #909aa0;
+    }
+
+    &.normal {
+        background-color: #909aa0;
+    }
+
+    &.normal {
+        background-color: #909aa0;
+    }
+
+    &.normal {
+        background-color: #909aa0;
+    }
+
+    &.normal {
+        background-color: #909aa0;
+    }
+
+    &.normal {
+        background-color: #909aa0;
+    }
+
+    &.normal {
+        background-color: #909aa0;
+    }
+
+    &.normal {
+        background-color: #909aa0;
+    }
+
+    &.normal {
+        background-color: #909aa0;
+    }
+
+    &.normal {
+        background-color: #909aa0;
+    }
+
+    &.normal {
+        background-color: #909aa0;
+    }
 
     .cost {
         position: absolute;
@@ -77,8 +164,20 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
+    }
 
-        /* Font size du texte doit être en fonction de la longueur de son conteneur, ici, type */
+    .category {
+        position: absolute;
+        width: 40%;
+        height: 5%;
+        top: 49%;
+        left: 30%;
+        // background-image: url("../../../assets/img/cards/Attack_R1.png");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        text-align: center;
+        text-transform: capitalize;
+        font-family: 'futura';
     }
 
     .tooltip {
