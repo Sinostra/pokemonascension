@@ -1,6 +1,6 @@
 <template>
     <div class="pokemon-wrapper" :class="getWrapperClass()" :style="getTextStrokeWidth()">
-        <img :src="getSprite()" :style="{'width': $store.state.pokedex.constantDex[number]['size'] + '%'}">
+        <img :class="attackAnim()" :src="getSprite()" :style="{'width': $store.state.pokedex.constantDex[number]['size'] + '%'}">
         <div class="healthBar-infos-wrapper" :style="getHeathBarPosition()">
             <div class="heathBar">
                 <div class="currentHealth" :class="getHealthBarClass()" :style="{'width': getHealthBarPercent() + '%'}"></div>
@@ -39,23 +39,23 @@ export default {
         'pv',
         'block',
         'isPlayer',
-        'intent'
+        'intent',
+        'playAttackAnim',
     ],
 
     watch: {
         pv: function(newVal) {
             if(newVal == 0) this.fainted = true
         },
-
-        // pattern: function(newVal){
-        //     if(this.isPlayer) return
-        //     else {
-
-        //     }
-        // }
     },
 
     methods: {
+        attackAnim() {
+            return {
+                attackAnim: this.playAttackAnim
+            }
+        },
+
         getSprite() {
             return require('../../../assets/img/sprites/' + this.number + this.$store.state.settings.pokemonSpritesExtension)
         },
@@ -114,6 +114,11 @@ export default {
     &.player {
         img {
             transform: scaleX(-1);
+
+            &.attackAnim {
+                animation-name: attack;
+                animation-duration: 1s;
+            }
         }
 
         .healthBar-infos-wrapper .types-wrapper {
@@ -127,6 +132,11 @@ export default {
     }
 
     &.foe {
+
+        img.attackAnim {
+            animation-name: foe-attack;
+            animation-duration: 1s;
+        }
 
         &.cardSelected {
             cursor: pointer;
@@ -232,6 +242,34 @@ export default {
         font-style: italic;
         color: #fff;
         -webkit-text-stroke-color: black;
+    }
+}
+
+@keyframes attack {
+    0% {
+        transform: translate(0) scaleX(-1);
+    }
+
+    50% {
+        transform: translate(50%) scaleX(-1);
+    }
+
+    100% {
+        transform: translate(0) scaleX(-1);
+    }
+}
+
+@keyframes foe-attack {
+    0% {
+        transform: translate(0);
+    }
+
+    50% {
+        transform: translate(-50%);
+    }
+
+    100% {
+        transform: translate(0);
     }
 }
 

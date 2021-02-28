@@ -7,6 +7,7 @@
                 :block="pokemonInBattle['player']['block']"
                 :isPlayer="true" class="player"
                 :style="getWrapperPosition(true)"
+                :playAttackAnim="pokemonInBattle['player']['attackAnim']"
             />
         </div>
         <div class="foe-pokemon">
@@ -18,6 +19,7 @@
                 :isPlayer="false" class="foe"
                 :style="getWrapperPosition(false, index)"
                 :intent="pokemonInBattle['foes'][index]['pattern'][0]"
+                :playAttackAnim="pokemonInBattle['foes'][index]['attackAnim']"
                 @click="clickOnPokemon(index)"
             />
         </div>
@@ -52,6 +54,8 @@ export default {
                     else {
                         this.dealDamage(selectedCardData['damage'] * selectedCardData['damageTimes'], selectedCardData['ignoreBlock'], this.lastClickedPokemon)
                     }
+
+                    this.playAttackAnim(this.pokemonInBattle['player'])
                 }
 
                 if(selectedCardData['block'] > 0) {
@@ -79,11 +83,39 @@ export default {
         return {
             battle: false,
             pokemonInBattle: {
-                player: {id: '025', pv: 45, block: 0, fainted: false},
+                player: {
+                    id: '025',
+                    pv: 45,
+                    block: 0,
+                    attackAnim: false,
+                    fainted: false
+                },
                 foes: [
-                    {id: '009', pv: 45, block: 0, pattern: this.$store.state.pokedex.constantDex['009']['pattern'], fainted: false},
-                    {id: '104', pv: 45, block: 0, pattern: this.$store.state.pokedex.constantDex['104']['pattern'], fainted: false},
-                    {id: '017', pv: 45, block: 0, pattern: this.$store.state.pokedex.constantDex['017']['pattern'], fainted: false}
+                    {
+                        id: '009',
+                        pv: 45,
+                        block: 0,
+                        pattern: this.$store.state.pokedex.constantDex['009']['pattern'],
+                        attackAnim: false,
+                        fainted: false
+                    },
+
+                    {
+                        id: '104',
+                        pv: 45,
+                        block: 0,
+                        pattern: this.$store.state.pokedex.constantDex['104']['pattern'],
+                        attackAnim: false,
+                        fainted: false
+                    },
+
+                    {
+                        id: '017',
+                        pv: 45, block: 0,
+                        pattern: this.$store.state.pokedex.constantDex['017']['pattern'],
+                        attackAnim: false,
+                        fainted: false
+                    }
                 ]
             },
 
@@ -150,15 +182,25 @@ export default {
 
         playEnnemyTurn() {
             this.pokemonInBattle['foes'].forEach(pokemon => {
+
                 var moveThisTurn = pokemon['pattern'].shift()
+
                 if(moveThisTurn['damage'] > 0) {
                     this.dealDamage(moveThisTurn['damage'], false)
+                    this.playAttackAnim(pokemon)
                 }
+
                 if(moveThisTurn['block'] > 0) {
                     pokemon['block'] += moveThisTurn['block']
                 }
+
                 pokemon['pattern'].push(moveThisTurn)
             });
+        },
+
+        playAttackAnim(pokemon) {
+            pokemon['attackAnim'] = true
+            setTimeout(() => {pokemon['attackAnim'] = false}, 1000)
         }
     }
 }
