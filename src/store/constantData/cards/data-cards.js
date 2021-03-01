@@ -13,7 +13,7 @@ export default {
         "block": 0,
         "ignoreBlock": false,
         "energy": 0,
-        "tooltip": 'lorem ipsum',
+        "tooltip": 'Deal 6 damage to an ennemy',
     },
 
 
@@ -31,7 +31,7 @@ export default {
         "block": 0,
         "ignoreBlock": false,
         "energy": 0,
-        "tooltip": 'lorem ipsum',
+        "tooltip": 'Deal 3 damage to all ennemies',
     },
 
     "003": {
@@ -48,7 +48,7 @@ export default {
         "block": 0,
         "ignoreBlock": false,
         "energy": 0,
-        "tooltip": 'lorem ipsum',
+        "tooltip": 'Draw 2 cards',
     },
 
     "004": {
@@ -65,7 +65,7 @@ export default {
         "block": 5,
         "ignoreBlock": false,
         "energy": 0,
-        "tooltip": 'lorem ipsum',
+        "tooltip": 'Gain 5 block',
     },
 
     "005": {
@@ -82,6 +82,6 @@ export default {
         "block": 0,
         "ignoreBlock": false,
         "energy": 2,
-        "tooltip": 'lorem ipsum',
+        "tooltip": 'Gain 2 energy',
     },
 }

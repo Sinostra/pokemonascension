@@ -10,6 +10,9 @@
 
         <div class="name" :style="(getFontSize(0.6))">{{$store.state.cards.dataCards[id]['name']}}</div>
         <div class="type" :style="(getFontSize(0.6))">{{$store.state.cards.dataCards[id]['type']}}</div>
+
+        <div class="illustration" :style="{'background-image':'url(' + getIllustrationBackground() + ')'}"></div>
+
         <div class="category" :style="(getCategoryStyle(0.6))">{{$store.state.cards.dataCards[id]['category']}}</div>
         <div class="tooltip" :style="(getFontSize(0.8))">{{$store.state.cards.dataCards[id]['tooltip']}}</div>
     </div>
@@ -44,7 +47,9 @@ export default {
             return require('../../../assets/img/cards/bords/' + card['rarity'] + '_round.png')
         },
 
-
+        getIllustrationBackground() {
+            return require('../../../assets/img/cards/illustrations/' + this.id + '.jpg')
+        },
 
         getCategoryBackground() {
             var card = this.$store.state.cards.dataCards[this.id]
@@ -194,6 +199,16 @@ export default {
         align-items: center;
     }
 
+    .illustration {
+        position: absolute;
+        top: 13.5%;
+        left: 10%;
+        width: 80%;
+        height: 37%;
+        border-radius: 1px;
+        background-size: contain;
+    }
+
     .category {
         position: absolute;
         width: 40%;
@@ -211,10 +226,10 @@ export default {
     .tooltip {
         position: absolute;
         top: 59%;
-        left: 10%;
-        width: 83%;
+        left: 7%;
+        width: 86%;
         height: 36%;
-        padding: 1%;
+        padding: 2%;
         font-family: 'gill sans';
         color: #000;
     }
