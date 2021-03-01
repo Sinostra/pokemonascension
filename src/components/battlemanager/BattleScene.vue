@@ -72,9 +72,10 @@ export default {
                 this.pokemonInBattle['foes'].forEach(pokemon => {
                     pokemon['block'] = 0
                 });
-                this.playEnnemyTurn()
-                this.pokemonInBattle['player']['block'] = 0
-                this.$store.dispatch('changePlayerTurn', true)
+                this.playEnnemyTurn().then(() => {
+                    this.pokemonInBattle['player']['block'] = 0
+                    this.$store.dispatch('changePlayerTurn', true)
+                })
             }
         }
     },
@@ -119,7 +120,8 @@ export default {
                 ]
             },
 
-            lastClickedPokemon: null
+            lastClickedPokemon: null,
+            timeBeforeAttack: 1000
         }
     },
 
@@ -181,21 +183,52 @@ export default {
         },
 
         playEnnemyTurn() {
-            this.pokemonInBattle['foes'].forEach(pokemon => {
+            return new Promise((resolve) => {
+                var counter = this.pokemonInBattle.foes.filter((foe) => !foe.fainted).length
+                var pokemon = this.pokemonInBattle['foes'][counter -1]
 
-                var moveThisTurn = pokemon['pattern'].shift()
+                this.playFoeAttack(pokemon).then(() => {
+                    if(counter - 1 == 0) resolve()
+                    else {
+                        counter--
+                        pokemon = this.pokemonInBattle['foes'][counter -1]
+                        this.playFoeAttack(pokemon).then(() => {
+                            if(counter - 1 == 0) resolve()
+                            else {
+                                counter--
+                                pokemon = this.pokemonInBattle['foes'][counter -1]
+                                this.playFoeAttack(pokemon).then(() => {resolve()})
+                            }
+                        })
+                    }
+                })
+                
+                
+            })
+        },
 
-                if(moveThisTurn['damage'] > 0) {
-                    this.dealDamage(moveThisTurn['damage'], false)
-                    this.playAttackAnim(pokemon)
-                }
+        playFoeAttack(pokemon) {
 
-                if(moveThisTurn['block'] > 0) {
-                    pokemon['block'] += moveThisTurn['block']
-                }
+            return new Promise((resolve) => {
 
-                pokemon['pattern'].push(moveThisTurn)
-            });
+                setTimeout(() => {
+    
+                    var moveThisTurn = pokemon['pattern'].shift()
+                    if(moveThisTurn['damage'] > 0) {
+                        this.dealDamage(moveThisTurn['damage'], false)
+                        this.playAttackAnim(pokemon)
+                    }
+        
+                    if(moveThisTurn['block'] > 0) {
+                        pokemon['block'] += moveThisTurn['block']
+                    }
+        
+                    pokemon['pattern'].push(moveThisTurn)
+                    resolve()
+                }, this.timeBeforeAttack)
+            })
+
+
         },
 
         playAttackAnim(pokemon) {

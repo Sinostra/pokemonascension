@@ -1,6 +1,5 @@
 <template>
 <div class="battle-interface">
-    <!-- <div class="btn" @click="drawCards(1)">click here to draw 1</div> -->
     <div class="top-wrapper"></div>
     <div class="bottom-wrapper">
         <div class="energy-wrapper text" :style="getFontSize()">{{$store.state.battle.currentEnergy}}/{{$store.state.battle.maxEnergy}}</div>
@@ -252,10 +251,12 @@ export default {
         },
 
         endTurn() {
-            this.playerHand.forEach(() => {
-                this.moveCard(this.playerHand, this.discardPile)
-            })
-            this.$store.dispatch('changePlayerTurn', false)
+            if(this.$store.state.battle.playerTurn) {
+                console.log('turn ended')
+                this.discardPile = this.discardPile.concat(this.playerHand)
+                this.playerHand = []
+                this.$store.dispatch('changePlayerTurn', false)
+            }
         },
 
         getFontSize(multiplier = 1) {
