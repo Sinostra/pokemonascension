@@ -204,7 +204,7 @@ export default {
         top: 13.5%;
         left: 10%;
         width: 80%;
-        height: 37%;
+        height: 37.1%;
         border-radius: 1px;
         background-size: contain;
     }
@@ -218,7 +218,9 @@ export default {
         background-size: 100% 100%;
         background-repeat: no-repeat;
         color: #000;
-        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         text-transform: capitalize;
         font-family: 'futura';
     }
