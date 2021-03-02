@@ -7,13 +7,20 @@
             <div class="number text">{{drawPile.length}}</div>
         </div>
         <div class="player-hand" :style="getFontSize()">
-            <Card 
-                v-for="(card, index) in playerHand" :key="index"
-                :style="displayCardsInHand(index)" :id="card.id"
-                v-on:click="selectCard(index)"
-                v-on:mouseover="hoverOnCard(index)"
-                v-on:mouseleave="leaveHover()"
-            />
+            <transition-group
+                name="fade"
+                v-on:enter="cardEnter"
+                v-on:after-enter="afterEnter"
+                :css="true"
+            >
+                <Card 
+                    v-for="(card, index) in playerHand" :key="index"
+                    :style="displayCardsInHand(index)" :id="card.id"
+                    v-on:click="selectCard(index)"
+                    v-on:mouseover="hoverOnCard(index)"
+                    v-on:mouseleave="leaveHover()"
+                />
+            </transition-group>
         </div>
         <div class="discardPile" :style="getFontSize()">
             <div class="number text">{{discardPile.length}}</div>
@@ -182,6 +189,21 @@ export default {
 
             else return 'transform : rotate(0deg) scale(1.6); left : ' + finalLeft + '%; bottom: 53%; z-index: 2;'
 
+        },
+
+        cardEnter(el, done) {
+            // el.style.animationName = 'cardDraw'
+            // el.style.animationDuration = '10s'
+            el.style.transform = 'translate(100px)'
+            // el.style.left = '2%'
+            console.log('card enter')
+            // el.style = 'null'
+            setTimeout(() => {done()}, 3000)
+        },
+
+        afterEnter: function (el) {
+            console.log('after enter')
+            el.style = 'null'
         },
 
         selectCard(clickedIndex) {
@@ -377,5 +399,30 @@ export default {
     cursor: pointer;
     border: 2px #fff solid;
     border-radius: 5px;
+}
+
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 3s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-to {
+    transform: translate(0px);
+}
+
+
+@keyframes cardDraw {
+    0% {
+        transform: translate(-100%);
+    }
+
+    100% {
+        transform: translate(0);
+    }
 }
 </style>

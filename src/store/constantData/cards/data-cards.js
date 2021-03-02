@@ -41,7 +41,7 @@ export default {
         "rarity": "medium",
         "cost": 0,
         "target": false,
-        "draw": 3,
+        "draw": 2,
         "damage": 0,
         "damageTimes": 0,
         "damageAOE": false,

@@ -207,6 +207,7 @@ export default {
         height: 37.1%;
         border-radius: 1px;
         background-size: contain;
+        background-repeat: no-repeat;
     }
 
     .category {
