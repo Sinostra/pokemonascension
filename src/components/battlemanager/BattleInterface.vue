@@ -8,14 +8,13 @@
         </div>
         <div class="player-hand" :style="getFontSize()">
             <transition-group
-                name="fade"
-                v-on:enter="cardEnter"
-                v-on:after-enter="afterEnter"
-                :css="true"
+
             >
                 <Card 
-                    v-for="(card, index) in playerHand" :key="index"
-                    :style="displayCardsInHand(index)" :id="card.id"
+                    v-for="(card, index) in playerHand"
+                    :key="index"
+                    :style="displayCardsInHand(index)"
+                    :id="card.id"
                     v-on:click="selectCard(index)"
                     v-on:mouseover="hoverOnCard(index)"
                     v-on:mouseleave="leaveHover()"
@@ -118,6 +117,8 @@ export default {
                 
             ],
 
+            cardDrawAnimation: [],
+
             discardPile: [],
 
             selectedCard: null,
@@ -178,32 +179,29 @@ export default {
                 // finalRotate -= baseRotate
             }
 
-            // finalRotate *= -1
             var finalLeft = baseLeft + index * leftShift
 
-            if(this.hoverCard != index && this.selectedCard != index) {
-                return 'transform : rotate(' + finalRotate + 'deg); left : ' + finalLeft + '%; bottom: ' + finalBottom + '%;'
+            // console.log(this.cardDrawAnimation.includes(index.toString()))
+
+            if(this.cardDrawAnimation.includes(index.toString())) {
+                return 'left: 2%; transform: scale(0.1)'
             }
 
-            else if(this.hoverCard == index && this.selectedCard != index) return 'transform : rotate(' + finalRotate + 'deg) scale(1.2); left : ' + finalLeft + '%; bottom: ' + finalBottom + '%; z-index: 2;'
+            else {
 
-            else return 'transform : rotate(0deg) scale(1.6); left : ' + finalLeft + '%; bottom: 53%; z-index: 2;'
+                if(this.hoverCard != index && this.selectedCard != index) {
+                    return 'transform : rotate(' + finalRotate + 'deg); left : ' + finalLeft + '%; bottom: ' + finalBottom + '%;'
+                }
+    
+                else if(this.hoverCard == index && this.selectedCard != index) {
+                    return 'transform : rotate(' + finalRotate + 'deg) scale(1.2); left : ' + finalLeft + '%; bottom: ' + finalBottom + '%; z-index: 2;'
+                }
+    
+                else return 'transform : rotate(0deg) scale(1.6); left : ' + finalLeft + '%; bottom: 53%; z-index: 2;'
+            }
 
-        },
 
-        cardEnter(el, done) {
-            // el.style.animationName = 'cardDraw'
-            // el.style.animationDuration = '10s'
-            el.style.transform = 'translate(100px)'
-            // el.style.left = '2%'
-            console.log('card enter')
-            // el.style = 'null'
-            setTimeout(() => {done()}, 3000)
-        },
 
-        afterEnter: function (el) {
-            console.log('after enter')
-            el.style = 'null'
         },
 
         selectCard(clickedIndex) {
@@ -245,6 +243,22 @@ export default {
                 }
 
                 else this.moveCard(this.drawPile, this.discardPile)
+
+                var drawnCardIndex = this.playerHand.length - 1
+                // console.log(drawnCardIndex)
+                this.cardDrawAnimation.push(drawnCardIndex.toString())
+                // console.log(this.cardDrawAnimation)
+                // this.cardDrawAnimation.splice(this.cardDrawAnimation.indexOf(drawnCardIndex.toString()), 1)
+                console.log(this.cardDrawAnimation)
+
+                setTimeout(() => {
+                    this.cardDrawAnimation.splice(this.cardDrawAnimation.indexOf(drawnCardIndex.toString()), 1)
+                    this.displayCardsInHand(drawnCardIndex)
+                    
+                    // for(var i = 0; i < this.playerHand.length; i++) {
+                    //     this.displayCardsInHand(i)
+                    // }
+                },10)
             }
             
         },
@@ -408,7 +422,7 @@ export default {
 }
 .fade-enter-from,
 .fade-leave-to {
-  opacity: 0;
+  opacity: 1;
 }
 
 .fade-enter-to {

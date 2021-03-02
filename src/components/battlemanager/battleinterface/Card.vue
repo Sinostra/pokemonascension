@@ -81,6 +81,7 @@ export default {
     position: absolute;
     cursor: pointer;
     z-index: 1;
+    transition: linear all .2s;
 
         &.normal {
             background-color: #909aa0;
