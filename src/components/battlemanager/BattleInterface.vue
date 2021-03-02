@@ -7,19 +7,15 @@
             <div class="number text">{{drawPile.length}}</div>
         </div>
         <div class="player-hand" :style="getFontSize()">
-            <transition-group
-
-            >
-                <Card 
-                    v-for="(card, index) in playerHand"
-                    :key="index"
-                    :style="displayCardsInHand(index)"
-                    :id="card.id"
-                    v-on:click="selectCard(index)"
-                    v-on:mouseover="hoverOnCard(index)"
-                    v-on:mouseleave="leaveHover()"
-                />
-            </transition-group>
+            <Card 
+                v-for="(card, index) in playerHand"
+                :key="index"
+                :style="displayCardsInHand(index)"
+                :id="card.id"
+                v-on:click="selectCard(index)"
+                v-on:mouseover="hoverOnCard(index)"
+                v-on:mouseleave="leaveHover()"
+            />
         </div>
         <div class="discardPile" :style="getFontSize()">
             <div class="number text">{{discardPile.length}}</div>
@@ -240,25 +236,22 @@ export default {
                 
                 if (this.playerHand.length < this.maxHandSize) {
                     this.moveCard(this.drawPile, this.playerHand)
+
+                    var drawnCardIndex = this.playerHand.length - 1
+                    this.cardDrawAnimation.push(drawnCardIndex.toString())
+                    
+
+                    setTimeout(() => {
+                        this.cardDrawAnimation.splice(this.cardDrawAnimation.indexOf(drawnCardIndex.toString()), 1)
+                        this.$nextTick(() => {
+                            this.$forceUpdate()
+                        })
+                        
+                        console.log(this.playerHand)
+                    },10)
                 }
 
                 else this.moveCard(this.drawPile, this.discardPile)
-
-                var drawnCardIndex = this.playerHand.length - 1
-                // console.log(drawnCardIndex)
-                this.cardDrawAnimation.push(drawnCardIndex.toString())
-                // console.log(this.cardDrawAnimation)
-                // this.cardDrawAnimation.splice(this.cardDrawAnimation.indexOf(drawnCardIndex.toString()), 1)
-                console.log(this.cardDrawAnimation)
-
-                setTimeout(() => {
-                    this.cardDrawAnimation.splice(this.cardDrawAnimation.indexOf(drawnCardIndex.toString()), 1)
-                    this.displayCardsInHand(drawnCardIndex)
-                    
-                    // for(var i = 0; i < this.playerHand.length; i++) {
-                    //     this.displayCardsInHand(i)
-                    // }
-                },10)
             }
             
         },
@@ -415,28 +408,4 @@ export default {
     border-radius: 5px;
 }
 
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 3s ease;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 1;
-}
-
-.fade-enter-to {
-    transform: translate(0px);
-}
-
-
-@keyframes cardDraw {
-    0% {
-        transform: translate(-100%);
-    }
-
-    100% {
-        transform: translate(0);
-    }
-}
 </style>
