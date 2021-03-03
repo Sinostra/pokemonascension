@@ -74,7 +74,7 @@ export default {
         //Sert à repérer quand BattleScene a fini de jouer sa carte, pour la déselectionner et la défausser à ce moment-là
         cardPlayed: function(newVal) {
             if(!newVal) {
-                this.discard(this.playerHand.splice(this.selectedCard, 1)[0])
+                this.discard(this.selectedCard)
                 this.unSelectCard()
             }
         },
@@ -114,6 +114,7 @@ export default {
             ],
 
             cardDrawAnimation: [],
+            cardDiscardAnimation: [],
 
             discardPile: [],
 
@@ -179,8 +180,12 @@ export default {
 
             // console.log(this.cardDrawAnimation.includes(index.toString()))
 
-            if(this.cardDrawAnimation.includes(index.toString())) {
+            if(this.cardDrawAnimation.includes(index)) {
                 return 'left: 2%; transform: scale(0.1)'
+            }
+
+            else if(this.cardDiscardAnimation.includes(index)) {
+                return 'left: 98%; transform: scale(0.1)'
             }
 
             else {
@@ -200,6 +205,8 @@ export default {
 
         },
 
+        // Gestion sélection et hover
+
         selectCard(clickedIndex) {
             this.$store.dispatch('changeCardSelection', this.playerHand[clickedIndex]['id'])
             this.selectedCard = clickedIndex
@@ -218,37 +225,29 @@ export default {
             this.hoverCard = null
         },
 
+
+        // Gestion pioche et défausse
+
+
         drawCards(amount) {
 
+            //Si il y a en tout moins de cartes que ce qui ddoit être pioché (pioche et défausse), on ne pioche que ce que l'on peut
             if(amount > this.drawPile.length + this.discardPile.length) {
                 var difference = amount - (this.drawPile.length + this.discardPile.length)
                 amount -= difference
             }
 
+            //Si il y a moins de cartes dans la pioche que ce que l'on doit piocher
+            if (amount > this.drawPile.length) {
+                this.dumpInto(this.discardPile, this.drawPile)
+            }
+
             for(var i = 0; i < amount; i++) {
 
-                if(this.drawPile.length == 0) {
-                    this.discardPile.forEach(() => {
-                        this.moveCard(this.discardPile, this.drawPile)
-                    })
-                }
-
-                
+                //On vérifie que la main n'est pas pleine
                 if (this.playerHand.length < this.maxHandSize) {
                     this.moveCard(this.drawPile, this.playerHand)
-
-                    var drawnCardIndex = this.playerHand.length - 1
-                    this.cardDrawAnimation.push(drawnCardIndex.toString())
-                    
-
-                    setTimeout(() => {
-                        this.cardDrawAnimation.splice(this.cardDrawAnimation.indexOf(drawnCardIndex.toString()), 1)
-                        this.$nextTick(() => {
-                            this.$forceUpdate()
-                        })
-                        
-                        console.log(this.playerHand)
-                    },10)
+                    this.playDrawAnimation(this.playerHand.length - 1)
                 }
 
                 else this.moveCard(this.drawPile, this.discardPile)
@@ -256,13 +255,46 @@ export default {
             
         },
 
-        discard(card) {
-            this.discardPile.push(card)
+        //Utilisé exclusivement pour défausser depuis la main du joueur
+        discard(index) {
+            this.playDiscardAnimation(index).then(() => {
+                this.discardPile.push(this.playerHand.splice(index, 1)[0])
+            })
         },
 
+        //Utilisé pour piocher
         moveCard(from, to) {
             to.push(from.shift())
         },
+
+        //Appel en boucle de movecard pour passer tout un tableau dans un autre
+        dumpInto(from, to) {
+            for(var i = from.length - 1; i >= 0; i--) {
+                this.moveCard(from, to)
+            }
+        },
+
+        // Gestion animations de pioche et de défausse
+
+        playDrawAnimation(index) {
+            this.cardDrawAnimation.push(index)
+            setTimeout(() => {
+                this.cardDrawAnimation.splice(this.cardDrawAnimation.indexOf(index), 1)
+            }, 10)
+        },
+
+        playDiscardAnimation(index) {
+            return new Promise((resolve) => {
+                this.cardDiscardAnimation.push(index)
+                setTimeout(() => {
+                    this.cardDiscardAnimation.splice(this.cardDiscardAnimation.indexOf(index), 1)
+                    resolve()
+                }, 300)
+            })
+        },
+
+
+        // Gestion interactions
 
         playCard() {
             var selectedCardData = this.$store.state.cards.dataCards[this.$store.state.battle.selectedCard]
@@ -281,16 +313,18 @@ export default {
 
         endTurn() {
             if(this.$store.state.battle.playerTurn) {
-                console.log('turn ended')
-                this.discardPile = this.discardPile.concat(this.playerHand)
-                this.playerHand = []
+
+                //Ici utilisation de discard plutôt que dumpInto pour pouvoir avoir l'animation de défausse des cartes
+                for(var i = this.playerHand.length - 1; i >= 0; i--) {
+                    this.discard(i)
+                }
+                
                 this.$store.dispatch('changePlayerTurn', false)
             }
         },
 
-        getFontSize(multiplier = 1) {
-            return 'font-size: ' + (this.$store.state.baseFontSize) * multiplier + 'px;'
-        },
+
+        // Gestion Energie
 
         gainEnergy(amount) {
             var currentEnergy = this.$store.state.battle.currentEnergy
@@ -300,7 +334,15 @@ export default {
         loseEnergy(amount) {
             var currentEnergy = this.$store.state.battle.currentEnergy
             this.$store.dispatch('changeCurrentEnergy', currentEnergy -= amount)
-        }
+        },
+
+
+        // Gestion tailles de police
+
+
+        getFontSize(multiplier = 1) {
+            return 'font-size: ' + (this.$store.state.baseFontSize) * multiplier + 'px;'
+        },
 
     },
 
