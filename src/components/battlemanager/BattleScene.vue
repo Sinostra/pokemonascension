@@ -19,6 +19,7 @@
                 :isPlayer="false" class="foe"
                 :style="getWrapperPosition(false, index)"
                 :intent="pokemonInBattle['foes'][index]['pattern'][0]"
+                :turnPlayed="pokemonInBattle['foes'][index]['turnPlayed']"
                 :playAttackAnim="pokemonInBattle['foes'][index]['attackAnim']"
                 @click="clickOnPokemon(index)"
             />
@@ -74,6 +75,10 @@ export default {
                 });
                 this.playEnnemyTurn().then(() => {
                     this.pokemonInBattle['player']['block'] = 0
+                    this.pokemonInBattle['foes'].forEach(pokemon => {
+                        pokemon['turnPlayed'] = false
+                    })
+
                     this.$store.dispatch('changePlayerTurn', true)
                 })
             }
@@ -98,6 +103,7 @@ export default {
                         block: 0,
                         pattern: this.$store.state.pokedex.constantDex['009']['pattern'],
                         attackAnim: false,
+                        turnPlayed: false,
                         fainted: false
                     },
 
@@ -107,6 +113,7 @@ export default {
                         block: 0,
                         pattern: this.$store.state.pokedex.constantDex['104']['pattern'],
                         attackAnim: false,
+                        turnPlayed: false,
                         fainted: false
                     },
 
@@ -115,6 +122,7 @@ export default {
                         pv: 45, block: 0,
                         pattern: this.$store.state.pokedex.constantDex['017']['pattern'],
                         attackAnim: false,
+                        turnPlayed: false,
                         fainted: false
                     }
                 ]
@@ -233,7 +241,10 @@ export default {
 
         playAttackAnim(pokemon) {
             pokemon['attackAnim'] = true
-            setTimeout(() => {pokemon['attackAnim'] = false}, 350)
+            pokemon['turnPlayed'] = true
+            setTimeout(() => {
+                pokemon['attackAnim'] = false
+            }, 350)
         }
     }
 }

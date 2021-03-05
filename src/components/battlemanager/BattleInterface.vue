@@ -19,6 +19,12 @@
         </div>
         <div class="discardPile" :style="getFontSize()">
             <div class="number text">{{discardPile.length}}</div>
+            <Card 
+                v-for="(card, index) in discardPile"
+                :key="index"
+                :id="card.id"
+                :style="displayCardsInDiscard(index)"
+            />
         </div>
         <div class="end-turn-btn text" :style="getFontSize()" @click="endTurn()">
             End Turn
@@ -184,9 +190,9 @@ export default {
                 return 'left: 2%; transform: scale(0.1)'
             }
 
-            else if(this.cardDiscardAnimation.includes(index)) {
-                return 'left: 98%; transform: scale(0.1)'
-            }
+            // else if(this.cardDiscardAnimation.includes(index)) {
+            //     return 'left: 98%; transform: scale(0.1)'
+            // }
 
             else {
 
@@ -203,6 +209,23 @@ export default {
 
 
 
+        },
+
+        displayCardsInDiscard(index) {
+            var width = '139%;'
+            var height = '285%;'
+            var bottom = '-86%;'
+            var right = '-25%;'
+            var transformInHand = 'scale(1) translate(-440%);'
+            var transformInDiscard = 'scale(0) translate(0);'
+
+            if(this.cardDiscardAnimation.includes(index)) {
+                return 'width:' + width + 'height:' + height + 'bottom:' + bottom + 'right:' + right + 'transform:' + transformInHand
+            }
+
+            else {
+                return 'width:' + width + 'height:' + height + 'bottom:' + bottom + 'right:' + right + 'transform:' + transformInDiscard
+            }
         },
 
         // Gestion sélection et hover
@@ -257,9 +280,8 @@ export default {
 
         //Utilisé exclusivement pour défausser depuis la main du joueur
         discard(index) {
-            this.playDiscardAnimation(index).then(() => {
-                this.discardPile.push(this.playerHand.splice(index, 1)[0])
-            })
+            this.discardPile.push(this.playerHand.splice(index, 1)[0])
+            this.playDiscardAnimation(this.discardPile.length - 1)
         },
 
         //Utilisé pour piocher
@@ -284,13 +306,10 @@ export default {
         },
 
         playDiscardAnimation(index) {
-            return new Promise((resolve) => {
-                this.cardDiscardAnimation.push(index)
-                setTimeout(() => {
-                    this.cardDiscardAnimation.splice(this.cardDiscardAnimation.indexOf(index), 1)
-                    resolve()
-                }, 300)
-            })
+            this.cardDiscardAnimation.push(index)
+            setTimeout(() => {
+                this.cardDiscardAnimation.splice(this.cardDiscardAnimation.indexOf(index), 1)
+            }, 10)
         },
 
 

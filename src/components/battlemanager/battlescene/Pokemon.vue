@@ -6,7 +6,7 @@
                 <div class="currentHealth" :class="getHealthBarClass()" :style="{'width': getHealthBarPercent() + '%'}"></div>
             </div>
             <div class="infos">
-                <div v-if="!isPlayer" class="intent text" :style="getFontSize(1.2)">
+                <div v-if="!isPlayer && !turnPlayed" class="intent text" :style="getFontSize(1.2)">
                     <img v-if="intent['block'] > 0" :src="getShield()">
                     <div v-if="intent['damage'] > 0">{{intent['damage']}}</div>
                 </div>
@@ -44,6 +44,7 @@ export default {
         'isPlayer',
         'intent',
         'playAttackAnim',
+        'turnPlayed'
     ],
 
     watch: {
