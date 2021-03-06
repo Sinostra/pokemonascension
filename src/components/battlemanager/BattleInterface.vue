@@ -122,7 +122,9 @@ export default {
             cardDrawAnimation: [],
             cardDiscardAnimation: [],
 
-            discardPile: [],
+            discardPile: [
+                
+            ],
 
             selectedCard: null,
             hoverCard: null,

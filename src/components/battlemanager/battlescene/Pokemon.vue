@@ -32,8 +32,8 @@ export default {
 
     data: function() {
         return {
-            maxPv: 1,
-            fainted: false,
+            maxPv: 0,
+            fainted: false
         }
     },
 
@@ -44,7 +44,7 @@ export default {
         'isPlayer',
         'intent',
         'playAttackAnim',
-        'turnPlayed'
+        'turnPlayed',
     ],
 
     watch: {
@@ -71,6 +71,7 @@ export default {
         getWrapperClass() {
             return {
                 cardSelected: this.$store.state.battle.selectedCard != null,
+                fainted: this.fainted
             }
         },
 
@@ -264,6 +265,27 @@ export default {
             z-index: -1;
         }
     }
+
+    &.fainted {
+
+        img {
+            animation-name: return;
+            animation-duration: 1s;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
+        }
+
+        .healthBar-infos-wrapper {
+            display: none;
+        }
+
+        &.foe.cardSelected {
+            cursor: default;
+            &:hover {
+                filter: none;
+            }
+        }
+    }
 }
 
 @keyframes attack {
@@ -291,6 +313,28 @@ export default {
 
     100% {
         transform: translate(0);
+    }
+}
+
+@keyframes return {
+    0% {
+        filter: none;
+    }
+
+    1% {
+        filter: brightness(10)
+    }
+
+    10% {
+        filter: brightness(10) brightness(0.5) sepia(1) hue-rotate(311deg) saturate(10) brightness(3);
+    }
+
+    20% {
+        filter: brightness(10) brightness(0.5) sepia(1) hue-rotate(311deg) saturate(10) brightness(1.8)
+    }
+
+    100% {
+        filter: brightness(10) brightness(0.5) sepia(1) hue-rotate(311deg) saturate(10) brightness(1.8)
     }
 }
 

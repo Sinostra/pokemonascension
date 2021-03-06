@@ -47,9 +47,9 @@ export default {
                 var selectedCardData = this.$store.state.cards.dataCards[this.$store.state.battle.selectedCard]
                 if(selectedCardData['damage'] > 0) {
                     if(selectedCardData['damageAOE']) {
-                        for(var i = 0; i < this.pokemonInBattle['foes'].length; i++) {
-                            this.dealDamage(selectedCardData['damage'] * selectedCardData['damageTimes'], selectedCardData['ignoreBlock'], i)
-                        }
+                        this.getFoes().forEach((pokemon, index) => {
+                            this.dealDamage(selectedCardData['damage'] * selectedCardData['damageTimes'], selectedCardData['ignoreBlock'], index)
+                        })
                     }
     
                     else {
@@ -70,16 +70,19 @@ export default {
 
         turnEnded: function(newVal) {
             if(!newVal) {
-                this.pokemonInBattle['foes'].forEach(pokemon => {
+                this.getFoes().forEach(pokemon => {
                     pokemon['block'] = 0
-                });
+                })
                 this.playEnnemyTurn().then(() => {
-                    this.pokemonInBattle['player']['block'] = 0
-                    this.pokemonInBattle['foes'].forEach(pokemon => {
-                        pokemon['turnPlayed'] = false
-                    })
 
-                    this.$store.dispatch('changePlayerTurn', true)
+                    setTimeout(() => {
+                        this.pokemonInBattle['player']['block'] = 0
+                        this.getFoes().forEach(pokemon => {
+                            pokemon['turnPlayed'] = false
+                        })
+    
+                        this.$store.dispatch('changePlayerTurn', true)
+                    }, 1000)
                 })
             }
         }
@@ -119,7 +122,8 @@ export default {
 
                     {
                         id: '017',
-                        pv: 45, block: 0,
+                        pv: 45,
+                        block: 0,
                         pattern: this.$store.state.pokedex.constantDex['017']['pattern'],
                         attackAnim: false,
                         turnPlayed: false,
@@ -156,7 +160,6 @@ export default {
                 if(amount >= pokemon['pv']) {
                     pokemon['pv'] = 0
                     pokemon['fainted'] = true
-                    // this.pokemonInBattle['foes'].splice(index, 1)
                 } 
                 else pokemon['pv'] -= amount
             }
@@ -184,7 +187,7 @@ export default {
         },
 
         clickOnPokemon(index) {
-            if(this.$store.state.battle.selectedCard != null) {
+            if(this.$store.state.battle.selectedCard != null && !this.pokemonInBattle['foes'][index]['fainted']) {
                 this.lastClickedPokemon = index
                 this.$store.dispatch('changepokemonClicked', true)
             }
@@ -192,26 +195,30 @@ export default {
 
         playEnnemyTurn() {
             return new Promise((resolve) => {
-                var counter = this.pokemonInBattle.foes.filter((foe) => !foe.fainted).length
-                var pokemon = this.pokemonInBattle['foes'][counter -1]
+                var counter = this.getFoes().length
+
+                if(counter == 0){
+                    resolve()
+                    return
+                }  
+
+                var pokemon = this.getFoes()[counter -1]
 
                 this.playFoeAttack(pokemon).then(() => {
                     if(counter - 1 == 0) resolve()
                     else {
                         counter--
-                        pokemon = this.pokemonInBattle['foes'][counter -1]
+                        pokemon = this.getFoes()[counter -1]
                         this.playFoeAttack(pokemon).then(() => {
                             if(counter - 1 == 0) resolve()
                             else {
                                 counter--
-                                pokemon = this.pokemonInBattle['foes'][counter -1]
+                                pokemon = this.getFoes()[counter -1]
                                 this.playFoeAttack(pokemon).then(() => {resolve()})
                             }
                         })
                     }
                 })
-                
-                
             })
         },
 
@@ -232,6 +239,7 @@ export default {
                     }
         
                     pokemon['pattern'].push(moveThisTurn)
+                    pokemon['turnPlayed'] = true
                     resolve()
                 }, this.timeBeforeAttack)
             })
@@ -241,10 +249,13 @@ export default {
 
         playAttackAnim(pokemon) {
             pokemon['attackAnim'] = true
-            pokemon['turnPlayed'] = true
             setTimeout(() => {
                 pokemon['attackAnim'] = false
             }, 350)
+        },
+
+        getFoes() {
+            return this.pokemonInBattle.foes.filter((foe) => !foe.fainted)
         }
     }
 }
