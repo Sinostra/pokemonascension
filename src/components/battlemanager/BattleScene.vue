@@ -228,21 +228,26 @@ export default {
         },
 
         checkFaintedPokemon() {
-            if(this.pokemonInBattle['player']['fainted']) {
-                setTimeout(() => {this.$store.dispatch('changeisBattleOnGoing', false)}, 2000)
+            if(this.pokemonInBattle['player']['fainted'] || this.getFoes().length == 0) {
+                if(this.getFoes().length == 0) {
+                    this.$store.dispatch('setVictory', true)
+                } 
+                setTimeout(() => {
+                    this.$store.dispatch('changeisBattleOnGoing', false)
+                    this.$store.dispatch('changePlayerTurn', false)
+                    this.$store.dispatch('changeActivePokemonHealth', this.pokemonInBattle['player']['pv'])
+                }, 2000)
                 
-            }
-
-            if(this.getFoes().length == 0) {
-                this.$store.dispatch('setVictory', true)
-                setTimeout(() => {this.$store.dispatch('changeisBattleOnGoing', false)}, 2000)
             }
         },
 
         resetBattleScene() {
             this.$store.dispatch('setVictory', false)
+            this.pokemonInBattle = {}
+
             //Instancier le player
             var playerPokemon = this.$store.state.playerTeam.team['active']
+            if(playerPokemon['pv'] == 0) playerPokemon['pv'] = this.$store.state.pokedex.constantDex[playerPokemon['id']]['hp']
             var player = {
                 id: playerPokemon['id'],
                 pv: playerPokemon['pv'],
@@ -250,7 +255,6 @@ export default {
                 attackAnim: false,
                 fainted: false
             }
-            if(playerPokemon['pv'] == 0) playerPokemon['pv'] = this.$store.state.pokedex.constantDexplayerPokemon['id']['hp']
             this.pokemonInBattle['player'] = player
 
 
@@ -262,7 +266,7 @@ export default {
                     id: pokemonId,
                     pv: this.$store.state.pokedex.constantDex[pokemonId]['hp'],
                     block: 0,
-                    pattern: this.$store.state.pokedex.constantDex[pokemonId]['pattern'],
+                    pattern: this.$store.state.pokedex.constantDex[pokemonId]['pattern'].map(x => x),
                     attackAnim: false,
                     turnPlayed: false,
                     fainted: false

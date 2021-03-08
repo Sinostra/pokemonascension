@@ -103,16 +103,16 @@ export default {
     data: function() {
         return {
             drawPile: [
-                {id: '001'},
-                {id: '005'},
-                {id: '001'},
-                {id: '002'},
-                {id: '003'},
-                {id: '004'},
-                {id: '001'},
-                {id: '002'},
-                {id: '003'},
-                {id: '004'}, 
+                // {id: '001'},
+                // {id: '005'},
+                // {id: '001'},
+                // {id: '002'},
+                // {id: '003'},
+                // {id: '004'},
+                // {id: '001'},
+                // {id: '002'},
+                // {id: '003'},
+                // {id: '004'}, 
             ],
             
             playerHand: [
@@ -365,10 +365,17 @@ export default {
             return 'font-size: ' + (this.$store.state.baseFontSize) * multiplier + 'px;'
         },
 
+        resetBattleInterface() {
+            this.drawPile = []
+
+            this.drawPile = this.$store.state.playerTeam.team['active']['deck'].map(x => x)
+            this.$store.dispatch('changePlayerTurn', true)
+        },
+
     },
 
     mounted: function() {
-        this.$store.dispatch('changePlayerTurn', true)
+        this.resetBattleInterface()
     }
 } 
 </script>
