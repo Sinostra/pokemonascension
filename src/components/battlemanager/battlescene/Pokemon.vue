@@ -1,5 +1,5 @@
 <template>
-    <div class="pokemon-wrapper" :class="getWrapperClass()" :style="getTextStrokeWidth()">
+    <div class="pokemon-wrapper" :class="getWrapperClass()">
         <img :class="attackAnim()" :src="getSprite()" :style="{'width': $store.state.pokedex.constantDex[number]['size'] + '%'}">
         <div class="healthBar-infos-wrapper" :style="getHeathBarPosition()">
             <div class="heathBar">
@@ -10,7 +10,7 @@
                     <img v-if="intent['block'] > 0" :src="getShield()">
                     <div v-if="intent['damage'] > 0">{{intent['damage']}}</div>
                 </div>
-                <div class="healthAmount text" :style="getTextStrokeWidth()">{{pv}}/{{maxPv}}</div>
+                <div class="healthAmount text" :style="getHealthAmountFontSize(0.9)">{{pv}}/{{maxPv}}</div>
                 <div class="type-picto"></div>
             </div>
             <div class="block-wrapper">
@@ -97,8 +97,12 @@ export default {
             return 'font-size: ' + (this.$store.state.baseFontSize) * multiplier + 'px;'
         },
 
+        getHealthAmountFontSize(multiplier = 1) {
+            return 'font-size: ' + (this.$store.state.baseFontSize) * multiplier + 'px;' + this.getTextStrokeWidth()
+        },
+
         getTextStrokeWidth() {
-            return '-webkit-text-stroke-width: ' + (this.$store.state.baseFontSize) / 12 + 'px;'
+            // return '-webkit-text-stroke-width: ' + (this.$store.state.baseFontSize) / 12 + 'px;'
         },
 
         getShield() {
@@ -122,7 +126,8 @@ export default {
 
     &.player {
         img {
-            transform: scaleX(-1);
+            transform: scaleX(-1.3) scaleY(1.3);
+            bottom: 7%;
 
             &.attackAnim {
                 animation-name: attack;
@@ -206,11 +211,12 @@ export default {
         }
 
         .healthAmount {
-            font-family: 'Open Sans', sans-serif;
-            font-weight: 800;
-            font-style: italic;
+            font-family: 'ERASDEMI';
+            // font-weight: 800;
+            // font-style: italic;
             color: #fff;
-            -webkit-text-stroke-color: black;
+            // -webkit-text-stroke-color: black;
+            filter: drop-shadow(1px 1px 1px black);
         }
 
         .types-wrapper {
@@ -248,13 +254,15 @@ export default {
         position: absolute;
         top: -110%;
         left: 25%;
-        font-family: 'Open Sans', sans-serif;
+        font-family: "ERASDEMI";
         font-weight: 800;
-        font-style: italic;
+        // font-style: italic;
         color: #fff;
         -webkit-text-stroke-color: black;
         width: 13%;
         height: 95%;
+        display: flex;
+        align-items: center;
 
         img {
             position: absolute;
@@ -263,6 +271,10 @@ export default {
             width: 200%;
             height: 90%;
             z-index: -1;
+        }
+
+        > div {
+            margin-bottom: 35%;
         }
     }
 
@@ -290,15 +302,15 @@ export default {
 
 @keyframes attack {
     0% {
-        transform: translate(0) scaleX(-1);
+        transform: translate(0) scaleX(-1.3) scaleY(1.3);
     }
 
     50% {
-        transform: translate(50%) scaleX(-1);
+        transform: translate(50%) scaleX(-1.3) scaleY(1.3);
     }
 
     100% {
-        transform: translate(0) scaleX(-1);
+        transform: translate(0) scaleX(-1.3) scaleY(1.3);
     }
 }
 
@@ -330,11 +342,32 @@ export default {
     }
 
     20% {
-        filter: brightness(10) brightness(0.5) sepia(1) hue-rotate(311deg) saturate(10) brightness(1.8)
+        filter: brightness(10) brightness(0.5) sepia(1) hue-rotate(311deg) saturate(10) brightness(1.8);
+    }
+
+    30% {
+        opacity: 0.8;
+    }
+
+    40% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+
+    60% {
+        opacity: 0.2;
+    }
+
+    90% {
+        opacity: 0;
     }
 
     100% {
-        filter: brightness(10) brightness(0.5) sepia(1) hue-rotate(311deg) saturate(10) brightness(1.8)
+        filter: brightness(10) brightness(0.5) sepia(1) hue-rotate(311deg) saturate(10) brightness(1.8);
+        opacity: 0;
     }
 }
 

@@ -421,10 +421,10 @@ export default {
 
 .drawPile, .discardPile {
     position: absolute;
-    bottom: 2%;
+    bottom: 0%;
     z-index: 5;
     cursor: pointer;
-    width: 7%;
+    width: 6%;
     height: 9%;
     background-size: contain;
     background-repeat: no-repeat;
@@ -442,7 +442,7 @@ export default {
 }
 
 .drawPile {
-    left: 2%;
+    left: 1%;
     background-image: url('../../assets/img/interface/pioche.png');
     .number {
         right: 5%;
@@ -450,7 +450,7 @@ export default {
 }
 
 .discardPile {
-    right: 2%;
+    right: 1%;
     background-image: url('../../assets/img/interface/defausse.png');
     .number {
         left: 3%;

@@ -2,6 +2,9 @@ export default {
     state: {
         backgroundUsed: 'forest',
 
+        isBattleOnGoing: true,
+        victory: false,
+
         playerTurn: false,
 
         selectedCard: null,
@@ -19,6 +22,15 @@ export default {
         changebackgroundUsed(state, value) {
             state.backgroundUsed = value
         },
+
+
+        changeisBattleOnGoing(state, value) {
+            state.isBattleOnGoing = value
+        },
+        setVictory(state, value) {
+            state.victory = value
+        },
+
 
         changePlayerTurn(state, value) {
             state.playerTurn = value
@@ -54,6 +66,15 @@ export default {
         changebackgroundUsed(context, value) {
             context.commit('changebackgroundUsed', value)
         },
+
+
+        changeisBattleOnGoing(context, value) {
+            context.commit('changeisBattleOnGoing', value)
+        },
+        setVictory(context, value) {
+            context.commit('setVictory', value)
+        },
+
 
         changePlayerTurn(context, value) {
             context.commit('changePlayerTurn', value)

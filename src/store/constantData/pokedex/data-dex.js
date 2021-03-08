@@ -1286,10 +1286,10 @@ export default {
         
         "type": ["ground"],
         "hp": 45,
-        "size": 60,
+        "size": 65,
         "hpBar" : {
-            "left" : 11,
-            "top" : 11
+            "left" : 16,
+            "top" : 5
         },
         "pattern": [
             {

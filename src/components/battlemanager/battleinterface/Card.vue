@@ -13,8 +13,8 @@
 
         <div class="illustration" :style="{'background-image':'url(' + getIllustrationBackground() + ')'}"></div>
 
-        <div class="category" :style="(getCategoryStyle(0.6))">{{$store.state.cards.dataCards[id]['category']}}</div>
-        <div class="tooltip" :style="(getFontSize(0.8))">{{$store.state.cards.dataCards[id]['tooltip']}}</div>
+        <div class="category" :style="(getCategoryStyle(0.75))">{{$store.state.cards.dataCards[id]['category']}}</div>
+        <div class="tooltip" :style="(getFontSize(0.7))">{{$store.state.cards.dataCards[id]['tooltip']}}</div>
     </div>
 </template>
 
@@ -165,7 +165,7 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-        font-family: 'gill sans bold';
+        font-family: 'gill extra bold';
 
         img {
             display: block;
@@ -203,20 +203,20 @@ export default {
     .illustration {
         position: absolute;
         top: 13.5%;
-        left: 10%;
+        left: 9.9%;
         width: 80%;
         height: 37.1%;
         border-radius: 1px;
-        background-size: contain;
+        background-size: 100% 100%;
         background-repeat: no-repeat;
     }
 
     .category {
         position: absolute;
-        width: 40%;
-        height: 5%;
-        top: 48%;
-        left: 30%;
+        width: 47%;
+        height: 8%;
+        top: 47%;
+        left: 25%;
         background-size: 100% 100%;
         background-repeat: no-repeat;
         color: #000;
@@ -225,6 +225,7 @@ export default {
         align-items: center;
         text-transform: capitalize;
         font-family: 'futura';
+        filter: drop-shadow(1px 1px 1px black);
     }
 
     .tooltip {
@@ -234,7 +235,7 @@ export default {
         width: 86%;
         height: 36%;
         padding: 2%;
-        font-family: 'gill sans';
+        font-family: 'gill sans bold';
         color: #000;
     }
 }

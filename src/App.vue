@@ -2,7 +2,7 @@
   <div class="global-wrapper" :class="getAppClass()">
     <Background/>
     <Interface/>
-    <BattleManager/>
+    <BattleManager v-if="$store.state.battle.isBattleOnGoing"/>
   </div>
 </template>
 
@@ -61,7 +61,7 @@ export default {
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,600;0,700;0,800;1,600;1,700;1,800&display=swap');
 @font-face {
-  font-family: 'gill sans bold';
+  font-family: 'gill extra bold';
   src: url("./assets/fonts/Gill_Sans_MT_Extra_Bold.ttf");
 }
 @font-face {
@@ -69,12 +69,24 @@ export default {
   src: url("./assets/fonts/Gill_Sans.ttf");
 }
 @font-face {
+  font-family: 'gill sans bold';
+  src: url("./assets/fonts/Gill_Sans_Bold.TTF");
+}
+@font-face {
   font-family: 'futura condensed';
   src: url("./assets/fonts/Futura_LT_Condensed_Medium.ttf");
 }
+// @font-face {
+//   font-family: 'futura';
+//   src: url("./assets/fonts/Futura LT Condensed Extra Bold.ttf");
+// }
 @font-face {
   font-family: 'futura';
-  src: url("./assets/fonts/Futura LT Condensed Extra Bold.ttf");
+  src: url("./assets/fonts/Futura_LT_Bold.ttf");
+}
+@font-face {
+  font-family: 'ERASDEMI';
+  src: url("./assets/fonts/ERASDEMI.ttf");
 }
 
 * {
