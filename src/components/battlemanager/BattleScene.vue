@@ -229,48 +229,53 @@ export default {
 
         checkFaintedPokemon() {
             if(this.pokemonInBattle['player']['fainted']) {
-                setTimeout(() => {this.$store.dispatch('isBattleOnGoing', false)}, 2000)
+                setTimeout(() => {this.$store.dispatch('changeisBattleOnGoing', false)}, 2000)
                 
             }
 
             if(this.getFoes().length == 0) {
                 this.$store.dispatch('setVictory', true)
-                setTimeout(() => {this.$store.dispatch('isBattleOnGoing', false)}, 2000)
+                setTimeout(() => {this.$store.dispatch('changeisBattleOnGoing', false)}, 2000)
             }
         },
+
+        resetBattleScene() {
+            this.$store.dispatch('setVictory', false)
+            //Instancier le player
+            var playerPokemon = this.$store.state.playerTeam.team['active']
+            var player = {
+                id: playerPokemon['id'],
+                pv: playerPokemon['pv'],
+                block: 0,
+                attackAnim: false,
+                fainted: false
+            }
+            if(playerPokemon['pv'] == 0) playerPokemon['pv'] = this.$store.state.pokedex.constantDexplayerPokemon['id']['hp']
+            this.pokemonInBattle['player'] = player
+
+
+            //Instancier les ennemis
+            var foesPokemon = this.$store.state.foes.foeTeam
+            var foes = []
+            foesPokemon.forEach((pokemonId) => {
+                var pokemon = {
+                    id: pokemonId,
+                    pv: this.$store.state.pokedex.constantDex[pokemonId]['hp'],
+                    block: 0,
+                    pattern: this.$store.state.pokedex.constantDex[pokemonId]['pattern'],
+                    attackAnim: false,
+                    turnPlayed: false,
+                    fainted: false
+                }
+
+                foes.push(pokemon)
+            })
+            this.pokemonInBattle['foes'] = foes
+        }
     },
 
     mounted: function() {
-        this.$store.dispatch('setVictory', false)
-        //Instancier le player
-        var playerPokemon = this.$store.state.playerTeam.team['active']
-        var player = {
-            id: playerPokemon['id'],
-            pv: playerPokemon['pv'],
-            block: 0,
-            attackAnim: false,
-            fainted: false
-        }
-        this.pokemonInBattle['player'] = player
-
-
-        //Instancier les ennemis
-        var foesPokemon = this.$store.state.foes.foeTeam
-        var foes = []
-        foesPokemon.forEach((pokemonId) => {
-            var pokemon = {
-                id: pokemonId,
-                pv: this.$store.state.pokedex.constantDex[pokemonId]['hp'],
-                block: 0,
-                pattern: this.$store.state.pokedex.constantDex[pokemonId]['pattern'],
-                attackAnim: false,
-                turnPlayed: false,
-                fainted: false
-            }
-
-            foes.push(pokemon)
-        })
-        this.pokemonInBattle['foes'] = foes
+        this.resetBattleScene()
     }
 }
 </script>
