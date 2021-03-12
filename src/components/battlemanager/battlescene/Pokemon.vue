@@ -275,6 +275,7 @@ export default {
 
         > div {
             margin-bottom: 35%;
+            filter: drop-shadow(1px 1px 1px black);
         }
     }
 

@@ -19,7 +19,7 @@
                 :block="pokemonInBattle['foes'][index]['block']"
                 :isPlayer="false" class="foe"
                 :style="getWrapperPosition(false, index)"
-                :intent="pokemonInBattle['foes'][index]['pattern'][0]"
+                :intent="getFoeIntent(pokemon)"
                 :turnPlayed="pokemonInBattle['foes'][index]['turnPlayed']"
                 :playAttackAnim="pokemonInBattle['foes'][index]['attackAnim']"
                 @click="clickOnPokemon(index)"
@@ -73,10 +73,12 @@ export default {
             if(!newVal) {
                 this.getFoes().forEach(pokemon => {
                     pokemon['block'] = 0
+                    this.setFoePattern(pokemon)
                 })
                 this.playEnnemyTurn().then(() => {
 
                     setTimeout(() => {
+                        this.$store.dispatch('addTurnToCounter')
                         this.pokemonInBattle['player']['block'] = 0
                         this.getFoes().forEach(pokemon => {
                             pokemon['turnPlayed'] = false
@@ -115,6 +117,9 @@ export default {
             }
         },
 
+
+
+
         dealDamage(amount, ignoresBlock, index = 'player') {
             if(index == 'player') var pokemon = this.pokemonInBattle['player']
             else var pokemon = this.pokemonInBattle['foes'][index]
@@ -150,12 +155,59 @@ export default {
             else pokemon['pv'] += amount
         },
 
+
+
+
         clickOnPokemon(index) {
             if(this.$store.state.battle.selectedCard != null && !this.pokemonInBattle['foes'][index]['fainted']) {
                 this.lastClickedPokemon = index
                 this.$store.dispatch('changepokemonClicked', true)
             }
         },
+
+
+
+
+        setFoePattern(pokemon) {
+            var currentTurn = this.$store.state.battle.turnCounter
+            var pattern = this.$store.state.pokedex.constantDex[pokemon['id']]['pattern'].map(x => x)
+
+            if(currentTurn == 0 || (currentTurn > pattern.length && currentTurn % pattern.length == 1)) {
+
+                var patternRandomOrder = []
+                if(this.$store.state.pokedex.constantDex[pokemon['id']]['patternRandomOrder']) {
+                    patternRandomOrder = this.$store.state.pokedex.constantDex[pokemon['id']]['patternRandomOrder']
+                }
+    
+                pattern.forEach((move, index) => {
+                    if(Array.isArray(move)) {
+                        move = this.suffleArray(move).shift()
+                        pattern[index] = move
+                    }
+                })
+    
+                pattern = this.suffleArray(pattern, patternRandomOrder)
+
+                return pattern
+            }
+
+
+            
+        },
+
+        getFoeIntent(pokemon) {
+            var currentTurn = this.$store.state.battle.turnCounter
+
+            console.log(pokemon)
+
+            var pattern = pokemon['pattern'].map(x => x)
+            var currentMove = pattern[currentTurn % pattern.length]
+
+            return currentMove
+        },
+
+
+
 
         playEnnemyTurn() {
             return new Promise((resolve) => {
@@ -197,7 +249,8 @@ export default {
 
                 setTimeout(() => {
     
-                    var moveThisTurn = pokemon['pattern'].shift()
+                    // var moveThisTurn = pokemon['pattern'].shift()
+                    var moveThisTurn = this.getFoeIntent(pokemon)
                     if(moveThisTurn['damage'] > 0) {
                         this.dealDamage(moveThisTurn['damage'], false)
                         this.playAttackAnim(pokemon)
@@ -207,7 +260,7 @@ export default {
                         pokemon['block'] += moveThisTurn['block']
                     }
         
-                    pokemon['pattern'].push(moveThisTurn)
+                    // pokemon['pattern'].push(moveThisTurn)
                     pokemon['turnPlayed'] = true
                     resolve()
                 }, this.timeBeforeAttack)
@@ -223,9 +276,15 @@ export default {
             }, 350)
         },
 
+
+
+
         getFoes() {
             return this.pokemonInBattle.foes.filter((foe) => !foe.fainted)
         },
+
+
+
 
         checkFaintedPokemon() {
             if(this.pokemonInBattle['player']['fainted'] || this.getFoes().length == 0) {
@@ -241,8 +300,12 @@ export default {
             }
         },
 
+
+
+
         resetBattleScene() {
             this.$store.dispatch('setVictory', false)
+            this.$store.dispatch('resetTurnCounter')
             this.pokemonInBattle = {}
 
             //Instancier le player
@@ -266,16 +329,37 @@ export default {
                     id: pokemonId,
                     pv: this.$store.state.pokedex.constantDex[pokemonId]['hp'],
                     block: 0,
-                    pattern: this.$store.state.pokedex.constantDex[pokemonId]['pattern'].map(x => x),
+                    // pattern: this.$store.state.pokedex.constantDex[pokemonId]['pattern'],
                     attackAnim: false,
                     turnPlayed: false,
                     fainted: false
                 }
-
+                pokemon['pattern'] = this.setFoePattern(pokemon)
                 foes.push(pokemon)
             })
             this.pokemonInBattle['foes'] = foes
-        }
+        },
+
+        //Source : https://codereview.stackexchange.com/questions/196493/shuffling-an-array-keeping-some-elements-fixed
+        //peg doit être un array correspondant aux index de array qui ne doivent pas être randomisés
+        //s'il n'y en a pas, tout array sera randomisé
+        suffleArray(array, peg = array.map((e) => {return array.indexOf(e)})) {
+            var currentIndex = array.length, temporaryValue, randomIndex;
+
+            // While there remain elements to shuffle...
+            while (0 !== currentIndex) {
+
+                // Pick a remaining element...
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+                if(!peg.includes(currentIndex) || !peg.includes(randomIndex)) continue;
+                // And swap it with the current element.
+                temporaryValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temporaryValue;
+            }
+            return array;
+        },
     },
 
     mounted: function() {

@@ -3,6 +3,7 @@ export default {
         backgroundUsed: 'forest',
 
         isBattleOnGoing: true,
+        turnCounter: 0,
         victory: false,
 
         playerTurn: false,
@@ -26,6 +27,12 @@ export default {
 
         changeisBattleOnGoing(state, value) {
             state.isBattleOnGoing = value
+        },
+        addTurnToCounter(state) {
+            state.turnCounter ++
+        },
+        resetTurnCounter(state) {
+            state.turnCounter = 0
         },
         setVictory(state, value) {
             state.victory = value
@@ -70,6 +77,12 @@ export default {
 
         changeisBattleOnGoing(context, value) {
             context.commit('changeisBattleOnGoing', value)
+        },
+        addTurnToCounter(context) {
+            context.commit('addTurnToCounter')
+        },
+        resetTurnCounter(context) {
+            context.commit('resetTurnCounter')
         },
         setVictory(context, value) {
             context.commit('setVictory', value)

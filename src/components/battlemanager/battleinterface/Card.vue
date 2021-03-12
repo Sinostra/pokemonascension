@@ -9,7 +9,7 @@
         </div>
 
         <div class="name" :style="(getFontSize(0.6))">{{$store.state.cards.dataCards[id]['name']}}</div>
-        <div class="type" :style="(getFontSize(0.6))">{{$store.state.cards.dataCards[id]['type']}}</div>
+        <!-- <div class="type" :style="(getFontSize(0.6))">{{$store.state.cards.dataCards[id]['type']}}</div> -->
 
         <div class="illustration" :style="{'background-image':'url(' + getIllustrationBackground() + ')'}"></div>
 
@@ -34,7 +34,7 @@ export default {
 
         getBackground() {
             var card = this.$store.state.cards.dataCards[this.id]
-            return require('../../../assets/img/cards/bords/' + card['rarity'] + '.png')
+            return require('../../../assets/img/cards/bords/' + card['rarity'] + '2.png')
         },
 
         getFontSize(multiplier = 1) {

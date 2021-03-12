@@ -111,8 +111,8 @@ export default {
         },
         "pattern": [
             {
-                'damage': 2,
-                'block': 2,
+                'damage': 0,
+                'block': 4,
                 'type': 'normal'
             },
             {
@@ -120,12 +120,21 @@ export default {
                 'block': 0,
                 'type': 'water'
             },
-            {
-                'damage': 0,
-                'block': 4,
-                'type': 'normal'
-            }
-        ]
+            [
+                {
+                    'damage': 3,
+                    'block': 0,
+                    'type': 'normal'
+                },
+                {
+                    'damage': 2,
+                    'block': 2,
+                    'type': 'normal'
+                }
+            ],
+            
+        ],
+        "patternRandomOrder": [0,1]
     },
 
     "010": {
