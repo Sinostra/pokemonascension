@@ -4,4 +4,10 @@ export default {
     state: {
         constantDex: dataDex
     },
+
+    getters: {
+        getDex: state => {
+            return state.constantDex
+        }
+    }
 }

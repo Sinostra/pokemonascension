@@ -73,17 +73,18 @@ export default {
             if(!newVal) {
                 this.getFoes().forEach(pokemon => {
                     pokemon['block'] = 0
-                    this.setFoePattern(pokemon)
                 })
                 this.playEnnemyTurn().then(() => {
 
                     setTimeout(() => {
-                        this.$store.dispatch('addTurnToCounter')
                         this.pokemonInBattle['player']['block'] = 0
+                        this.$store.dispatch('addTurnToCounter')
                         this.getFoes().forEach(pokemon => {
+                            if(this.turn != 0 && this.turn % pokemon['pattern'].length == 0) pokemon['pattern'] = this.setFoePattern(pokemon)
                             pokemon['turnPlayed'] = false
                         })
     
+                        
                         this.$store.dispatch('changePlayerTurn', true)
                     }, 1000)
                 })
@@ -169,36 +170,29 @@ export default {
 
 
         setFoePattern(pokemon) {
-            var currentTurn = this.$store.state.battle.turnCounter
-            var pattern = this.$store.state.pokedex.constantDex[pokemon['id']]['pattern'].map(x => x)
+            var pattern = this.dex[pokemon['id']]['pattern'].map(x => x)
 
-            if(currentTurn == 0 || (currentTurn > pattern.length && currentTurn % pattern.length == 1)) {
-
-                var patternRandomOrder = []
-                if(this.$store.state.pokedex.constantDex[pokemon['id']]['patternRandomOrder']) {
-                    patternRandomOrder = this.$store.state.pokedex.constantDex[pokemon['id']]['patternRandomOrder']
-                }
-    
-                pattern.forEach((move, index) => {
-                    if(Array.isArray(move)) {
-                        move = this.suffleArray(move).shift()
-                        pattern[index] = move
-                    }
-                })
-    
-                pattern = this.suffleArray(pattern, patternRandomOrder)
-
-                return pattern
+            var patternRandomOrder = []
+            if(this.$store.state.pokedex.constantDex[pokemon['id']]['patternRandomOrder']) {
+                patternRandomOrder = this.$store.state.pokedex.constantDex[pokemon['id']]['patternRandomOrder']
             }
 
+            pattern.forEach((move, index) => {
+                if(Array.isArray(move)) {
+                    var lArray = move.map(x => x)
+                    lArray = this.suffleArray(lArray).shift()
+                    pattern[index] = lArray
+                }
+            })
 
-            
+            pattern = this.suffleArray(pattern, patternRandomOrder)
+
+            return pattern
+
         },
 
         getFoeIntent(pokemon) {
             var currentTurn = this.$store.state.battle.turnCounter
-
-            console.log(pokemon)
 
             var pattern = pokemon['pattern'].map(x => x)
             var currentMove = pattern[currentTurn % pattern.length]
@@ -329,11 +323,11 @@ export default {
                     id: pokemonId,
                     pv: this.$store.state.pokedex.constantDex[pokemonId]['hp'],
                     block: 0,
-                    // pattern: this.$store.state.pokedex.constantDex[pokemonId]['pattern'],
                     attackAnim: false,
                     turnPlayed: false,
                     fainted: false
                 }
+                
                 pokemon['pattern'] = this.setFoePattern(pokemon)
                 foes.push(pokemon)
             })
@@ -360,6 +354,16 @@ export default {
             }
             return array;
         },
+    },
+
+    computed: {
+        dex() {
+            return this.$store.getters.getDex
+        },
+
+        turn() {
+            return this.$store.getters.getTurn
+        }
     },
 
     mounted: function() {

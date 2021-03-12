@@ -118,4 +118,9 @@ export default {
             context.commit('changeMaxEnergy', value)
         }
     },
+    getters: {
+        getTurn: state => {
+            return state.turnCounter
+        }
+    }
 }
