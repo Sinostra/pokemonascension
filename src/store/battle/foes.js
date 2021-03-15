@@ -1,7 +1,6 @@
 export default {
     state: {
-        // foeTeam: ['009', '104', '017']
-        foeTeam: ['009']
+        foeTeam: ['009', '104', '017']
     },
 
     mutations: {

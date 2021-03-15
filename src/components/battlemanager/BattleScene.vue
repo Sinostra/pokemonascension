@@ -49,12 +49,12 @@ export default {
                 if(selectedCardData['damage'] > 0) {
                     if(selectedCardData['damageAOE']) {
                         this.getFoes().forEach((pokemon, index) => {
-                            this.dealDamage(selectedCardData['damage'] * selectedCardData['damageTimes'], selectedCardData['ignoreBlock'], index)
+                            this.dealDamage(selectedCardData['damage'] * selectedCardData['damageTimes'], selectedCardData['ignoreBlock'], selectedCardData['type'], index)
                         })
                     }
     
                     else {
-                        this.dealDamage(selectedCardData['damage'] * selectedCardData['damageTimes'], selectedCardData['ignoreBlock'], this.lastClickedPokemon)
+                        this.dealDamage(selectedCardData['damage'] * selectedCardData['damageTimes'], selectedCardData['ignoreBlock'], selectedCardData['type'], this.lastClickedPokemon)
                     }
 
                     this.playAttackAnim(this.pokemonInBattle['player'])
@@ -121,9 +121,12 @@ export default {
 
 
 
-        dealDamage(amount, ignoresBlock, index = 'player') {
+        dealDamage(amount, ignoresBlock, type, index = 'player') {
             if(index == 'player') var pokemon = this.pokemonInBattle['player']
             else var pokemon = this.pokemonInBattle['foes'][index]
+
+            amount = Math.round(amount *= this.getTypeMatchup(type, pokemon))
+            console.log(amount)
 
             if(ignoresBlock || pokemon['block'] == 0) {
                 if(amount >= pokemon['pv']) {
@@ -246,7 +249,7 @@ export default {
                     // var moveThisTurn = pokemon['pattern'].shift()
                     var moveThisTurn = this.getFoeIntent(pokemon)
                     if(moveThisTurn['damage'] > 0) {
-                        this.dealDamage(moveThisTurn['damage'], false)
+                        this.dealDamage(moveThisTurn['damage'], false, moveThisTurn['type'])
                         this.playAttackAnim(pokemon)
                     }
         
@@ -292,6 +295,20 @@ export default {
                 }, 2000)
                 
             }
+        },
+
+
+
+        getTypeMatchup(attackingType, targetPokemon) {
+            var attackMachups = this.types[attackingType]
+            var defenderType = this.dex[targetPokemon['id']]['type']
+            var multiplier = 1
+
+            defenderType.forEach((type) => {
+                multiplier *= attackMachups[type]
+            })
+
+            return multiplier
         },
 
 
@@ -359,6 +376,9 @@ export default {
     computed: {
         dex() {
             return this.$store.getters.getDex
+        },
+        types() {
+            return this.$store.getters.getTypes
         },
 
         turn() {
