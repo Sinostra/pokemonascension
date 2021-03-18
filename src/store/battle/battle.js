@@ -8,6 +8,9 @@ export default {
 
         playerTurn: false,
 
+        switchClicked: false,
+        switchAllowed: true,
+
         selectedCard: null,
         interfaceClicked: false,
         pokemonClicked: false,
@@ -42,6 +45,15 @@ export default {
         changePlayerTurn(state, value) {
             state.playerTurn = value
         },
+
+
+        changeSwitchClicked(state, value) {
+            state.switchClicked = value
+        },
+        changeSwitchAllowed(state, value) {
+            state.switchAllowed = value
+        },
+
 
         changeCardSelection(state, value) {
             state.selectedCard = value
@@ -94,6 +106,14 @@ export default {
         },
 
 
+        changeSwitchClicked(context, value) {
+            context.commit('changeSwitchClicked', value)
+        },
+        changeSwitchAllowed(context, value) {
+            context.commit('changeSwitchAllowed', value)
+        },
+
+
         changeCardSelection(context, value) {
             context.commit('changeCardSelection', value)
         },
@@ -121,6 +141,10 @@ export default {
     getters: {
         getTurn: state => {
             return state.turnCounter
+        },
+
+        getSwitchAllowed: state => {
+            return state.switchAllowed
         }
     }
 }

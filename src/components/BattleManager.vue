@@ -3,6 +3,7 @@
         <BattleScene 
             :cardPlayed="$store.state.battle.cardPlayed"
             :turnEnded="$store.state.battle.playerTurn"
+            :switchClicked="$store.state.battle.switchClicked"
         />
         <BattleInterface 
             :cardClickedInterface="$store.state.battle.interfaceClicked" 
@@ -10,6 +11,7 @@
             :cardPlayed="$store.state.battle.cardPlayed"
             :turnStarted="$store.state.battle.playerTurn"
             :rightClicked="$store.state.battle.rightClicked"
+            :switchClicked="$store.state.battle.switchClicked"
         />
     </div>
 </template>

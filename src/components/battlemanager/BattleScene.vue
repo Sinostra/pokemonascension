@@ -39,7 +39,8 @@ export default {
 
     props: [
         'cardPlayed',
-        'turnEnded'
+        'turnEnded',
+        'switchClicked'
     ],
 
     watch: {
@@ -89,7 +90,16 @@ export default {
                     }, 1000)
                 })
             }
-        }
+        },
+
+        switchClicked: function(newVal) {
+            if(newVal) {
+                this.$store.dispatch('changeActivePokemonHealth', this.pokemonInBattle['player']['pv'])
+                this.$store.dispatch('switchActivePokemon')
+                this.resetPlayerPokemon()
+                this.$store.dispatch('changeSwitchClicked', false)
+            }
+        },
     },
 
     data: function(){
@@ -126,7 +136,6 @@ export default {
             else var pokemon = this.pokemonInBattle['foes'][index]
 
             amount = Math.round(amount *= this.getTypeMatchup(type, pokemon))
-            console.log(amount)
 
             if(ignoresBlock || pokemon['block'] == 0) {
                 if(amount >= pokemon['pv']) {
@@ -312,15 +321,9 @@ export default {
         },
 
 
-
-
-        resetBattleScene() {
-            this.$store.dispatch('setVictory', false)
-            this.$store.dispatch('resetTurnCounter')
-            this.pokemonInBattle = {}
-
+        resetPlayerPokemon() {
             //Instancier le player
-            var playerPokemon = this.$store.state.playerTeam.team['active']
+            var playerPokemon = this.$store.state.playerTeam.team[this.activeIndex]
             if(playerPokemon['pv'] == 0) playerPokemon['pv'] = this.$store.state.pokedex.constantDex[playerPokemon['id']]['hp']
             var player = {
                 id: playerPokemon['id'],
@@ -330,6 +333,14 @@ export default {
                 fainted: false
             }
             this.pokemonInBattle['player'] = player
+        },
+
+        resetBattleScene() {
+            this.$store.dispatch('setVictory', false)
+            this.$store.dispatch('resetTurnCounter')
+            this.pokemonInBattle = {}
+
+            this.resetPlayerPokemon()
 
 
             //Instancier les ennemis
@@ -383,6 +394,10 @@ export default {
 
         turn() {
             return this.$store.getters.getTurn
+        },
+
+        activeIndex() {
+            return this.$store.getters.getActiveIndex
         }
     },
 

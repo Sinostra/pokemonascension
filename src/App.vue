@@ -144,5 +144,6 @@ body {
   cursor: pointer;
   z-index: 200;
   max-width: 300px;
+  position: relative;
 }
 </style>

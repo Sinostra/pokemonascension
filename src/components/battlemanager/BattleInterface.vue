@@ -1,6 +1,8 @@
 <template>
 <div class="battle-interface">
-    <div class="top-wrapper"></div>
+    <div class="top-wrapper">
+        <div class="btn" @click="clickSwitch()">Switch</div>
+    </div>
     <div class="bottom-wrapper">
         <div class="energy-wrapper text" :style="getFontSize()">{{$store.state.battle.currentEnergy}}/{{$store.state.battle.maxEnergy}}</div>
         <div class="drawPile" :style="getFontSize()">
@@ -47,7 +49,8 @@ export default {
         'cardClickedPokemon',
         'cardPlayed',
         'turnStarted',
-        'rightClicked'
+        'rightClicked',
+        'switchClicked'
     ],
 
     watch: {
@@ -89,6 +92,7 @@ export default {
             if(newVal) {
                 this.drawCards(5)
                 this.$store.dispatch('changeCurrentEnergy', this.$store.state.battle.maxEnergy)
+                this.$store.dispatch('changeSwitchAllowed', true)
             }
         },
 
@@ -97,34 +101,25 @@ export default {
                 this.unSelectCard()
                 this.$store.dispatch('changerightClicked', false)
             }
+        },
+
+        switchClicked: function(newVal) {
+            if(!newVal) {
+                this.resetBattleInterface()
+            }
         }
     },
 
     data: function() {
         return {
-            drawPile: [
-                // {id: '001'},
-                // {id: '005'},
-                // {id: '001'},
-                // {id: '002'},
-                // {id: '003'},
-                // {id: '004'},
-                // {id: '001'},
-                // {id: '002'},
-                // {id: '003'},
-                // {id: '004'}, 
-            ],
+            drawPile: [],
             
-            playerHand: [
-                
-            ],
+            playerHand: [],
 
             cardDrawAnimation: [],
             cardDiscardAnimation: [],
 
-            discardPile: [
-                
-            ],
+            discardPile: [],
 
             selectedCard: null,
             hoverCard: null,
@@ -358,6 +353,14 @@ export default {
         },
 
 
+        clickSwitch() {
+            if(this.switchAllowed) {
+                this.$store.dispatch('changeSwitchClicked', true)
+                this.$store.dispatch('changeSwitchAllowed', false)
+            }
+        },
+
+
         // Gestion tailles de police
 
 
@@ -367,11 +370,23 @@ export default {
 
         resetBattleInterface() {
             this.drawPile = []
+            this.discardPile = []
+            this.playerHand = []
 
-            this.drawPile = this.$store.state.playerTeam.team['active']['deck'].map(x => x)
+            this.drawPile = this.$store.state.playerTeam.team[this.activeIndex]['deck'].map(x => x)
             this.$store.dispatch('changePlayerTurn', true)
         },
 
+    },
+
+    computed: {
+        activeIndex() {
+            return this.$store.getters.getActiveIndex
+        },
+
+        switchAllowed() {
+            return this.$store.getters.getSwitchAllowed
+        }
     },
 
     mounted: function() {
