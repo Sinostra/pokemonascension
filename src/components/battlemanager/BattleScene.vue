@@ -29,6 +29,9 @@
 </template>
 
 <script>
+
+import suffleArray from './../../engine/Shuffle.ts'
+
 import Pokemon from './battlescene/Pokemon.vue'
 export default {
     name: "BattleScene",
@@ -115,6 +118,7 @@ export default {
 
     methods: {
 
+        //Je place les pokémons à l'écran
         getWrapperPosition(player, index = 0) {
             var backgroundUsed = this.$store.state.battle.backgroundUsed
             if(player) {
@@ -130,7 +134,7 @@ export default {
 
 
 
-
+        //J'inflige les dégats
         dealDamage(amount, ignoresBlock, type, index = 'player') {
             if(index == 'player') var pokemon = this.pokemonInBattle['player']
             else var pokemon = this.pokemonInBattle['foes'][index]
@@ -159,6 +163,7 @@ export default {
             }
         },
 
+        //Je soigne
         heal(amount, index = 'player') {
             if(index == 'player') var pokemon = this.pokemonInBattle['player']
             else var pokemon = this.pokemonInBattle['foes'][index]
@@ -170,7 +175,7 @@ export default {
 
 
 
-
+        //Je clique sur un pokémon ennemi
         clickOnPokemon(index) {
             if(this.$store.state.battle.selectedCard != null && !this.pokemonInBattle['foes'][index]['fainted']) {
                 this.lastClickedPokemon = index
@@ -180,7 +185,7 @@ export default {
 
 
 
-
+        //Je met un pattern pour un pokémon ennemi donné
         setFoePattern(pokemon) {
             var pattern = this.dex[pokemon['id']]['pattern'].map(x => x)
 
@@ -192,17 +197,18 @@ export default {
             pattern.forEach((move, index) => {
                 if(Array.isArray(move)) {
                     var lArray = move.map(x => x)
-                    lArray = this.suffleArray(lArray).shift()
+                    lArray = suffleArray(lArray).shift()
                     pattern[index] = lArray
                 }
             })
 
-            pattern = this.suffleArray(pattern, patternRandomOrder)
+            pattern = suffleArray(pattern, patternRandomOrder)
 
             return pattern
 
         },
 
+        //Je récupère l'intention du pokémon ennemi pour ce tour
         getFoeIntent(pokemon) {
             var currentTurn = this.$store.state.battle.turnCounter
 
@@ -214,7 +220,7 @@ export default {
 
 
 
-
+        //Je joue les actions de tous les ennemis => à refaire en fonction récursive
         playEnnemyTurn() {
             return new Promise((resolve) => {
                 var counter = this.getFoes().length
@@ -244,6 +250,7 @@ export default {
             })
         },
 
+        //Je joue l'attaque d'un ennemi
         playFoeAttack(pokemon) {
 
             return new Promise((resolve) => {
@@ -254,8 +261,7 @@ export default {
                 }
 
                 setTimeout(() => {
-    
-                    // var moveThisTurn = pokemon['pattern'].shift()
+
                     var moveThisTurn = this.getFoeIntent(pokemon)
                     if(moveThisTurn['damage'] > 0) {
                         this.dealDamage(moveThisTurn['damage'], false, moveThisTurn['type'])
@@ -266,7 +272,6 @@ export default {
                         pokemon['block'] += moveThisTurn['block']
                     }
         
-                    // pokemon['pattern'].push(moveThisTurn)
                     pokemon['turnPlayed'] = true
                     resolve()
                 }, this.timeBeforeAttack)
@@ -275,6 +280,7 @@ export default {
 
         },
 
+        //Anim attaque d'un pokémon
         playAttackAnim(pokemon) {
             pokemon['attackAnim'] = true
             setTimeout(() => {
@@ -284,14 +290,14 @@ export default {
 
 
 
-
+        //Retourne les ennemis pas encore ko
         getFoes() {
-            return this.pokemonInBattle.foes.filter((foe) => !foe.fainted)
+            return this.pokemonInBattle.foes.filter(foe => !foe.fainted)
         },
 
 
 
-
+        //Check victoire ou défaite
         checkFaintedPokemon() {
             if(this.pokemonInBattle['player']['fainted'] || this.getFoes().length == 0) {
                 if(this.getFoes().length == 0) {
@@ -307,7 +313,7 @@ export default {
         },
 
 
-
+        //Renvoie le multiplicateur des faiblesse et résistances
         getTypeMatchup(attackingType, targetPokemon) {
             var attackMachups = this.types[attackingType]
             var defenderType = this.dex[targetPokemon['id']]['type']
@@ -321,8 +327,9 @@ export default {
         },
 
 
+        //Instancier le player
         resetPlayerPokemon() {
-            //Instancier le player
+            
             var playerPokemon = this.$store.state.playerTeam.team[this.activeIndex]
             if(playerPokemon['pv'] == 0) playerPokemon['pv'] = this.$store.state.pokedex.constantDex[playerPokemon['id']]['hp']
             var player = {
@@ -335,6 +342,7 @@ export default {
             this.pokemonInBattle['player'] = player
         },
 
+        //Reset la scène de combat
         resetBattleScene() {
             this.$store.dispatch('setVictory', false)
             this.$store.dispatch('resetTurnCounter')
@@ -361,27 +369,6 @@ export default {
             })
             this.pokemonInBattle['foes'] = foes
         },
-
-        //Source : https://codereview.stackexchange.com/questions/196493/shuffling-an-array-keeping-some-elements-fixed
-        //peg doit être un array correspondant aux index de array qui ne doivent pas être randomisés
-        //s'il n'y en a pas, tout array sera randomisé
-        suffleArray(array, peg = array.map((e) => {return array.indexOf(e)})) {
-            var currentIndex = array.length, temporaryValue, randomIndex;
-
-            // While there remain elements to shuffle...
-            while (0 !== currentIndex) {
-
-                // Pick a remaining element...
-                randomIndex = Math.floor(Math.random() * currentIndex);
-                currentIndex -= 1;
-                if(!peg.includes(currentIndex) || !peg.includes(randomIndex)) continue;
-                // And swap it with the current element.
-                temporaryValue = array[currentIndex];
-                array[currentIndex] = array[randomIndex];
-                array[randomIndex] = temporaryValue;
-            }
-            return array;
-        },
     },
 
     computed: {
@@ -403,6 +390,11 @@ export default {
 
     mounted: function() {
         this.resetBattleScene()
+
+        this.$store.subscribe((changeCardSelection, state) => {
+            // console.log(changeCardSelection.type)
+            console.log(changeCardSelection.payload)
+        })
     }
 }
 </script>
