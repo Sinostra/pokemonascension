@@ -393,7 +393,7 @@ export default {
 
         this.$store.subscribe((changeCardSelection, state) => {
             // console.log(changeCardSelection.type)
-            console.log(changeCardSelection.payload)
+            // console.log(changeCardSelection.payload)
         })
     }
 }

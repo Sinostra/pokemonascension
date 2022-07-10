@@ -7,11 +7,18 @@
 </template>
 
 <script lang="ts">
-import { Vue } from 'vue-class-component';
+import { Options, Vue } from 'vue-class-component';
+
+@Options({
+  props: {
+    id: Number,
+  }
+})
 
 export default class Pokemon extends Vue {
   // Class properties will be component data
-  count = 0
+  count: number = 0;
+  id!: number
 
   // Methods will be component methods
   increment() {
@@ -20,6 +27,10 @@ export default class Pokemon extends Vue {
 
   decrement() {
     this.count--
+  }
+
+  mounted() {
+    console.log(this.id)
   }
 }
 
