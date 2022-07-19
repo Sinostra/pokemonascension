@@ -1,8 +1,6 @@
 <template>
     <div>
-    <button v-on:click="decrement">-</button>
-    {{ count }}
-    <button v-on:click="increment">+</button>
+      <img :src="spritePath">
   </div>
 </template>
 
@@ -11,26 +9,19 @@ import { Options, Vue } from 'vue-class-component';
 
 @Options({
   props: {
-    id: Number,
+    id: String,
   }
 })
 
 export default class Pokemon extends Vue {
-  // Class properties will be component data
-  count: number = 0;
-  id!: number
+  id!: string
 
-  // Methods will be component methods
-  increment() {
-    this.count++
-  }
-
-  decrement() {
-    this.count--
+  get spritePath() {
+    return require(`./../../assets/img/sprites/${this.$store.state.settings.pokemonSpritesExtension}/${this.id}.${this.$store.state.settings.pokemonSpritesExtension}`)
   }
 
   mounted() {
-    console.log(this.id)
+    console.log(this.$store.state.settings.pokemonSpritesExtension)
   }
 }
 

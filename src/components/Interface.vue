@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Pokemon :id="2"/>
+        <Pokemon :id="'002'"/>
     </div>
     <!-- <div class="interface-wrapper" v-on:click.left="onLeftClick()" v-on:click.right="onRightClick($event)">
         <GameInterface/>
