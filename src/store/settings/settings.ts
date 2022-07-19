@@ -1,6 +1,6 @@
 export default {
     state: {
-        pokemonSpritesExtension: 'png',
+        pokemonSpritesExtension: 'gif',
         backgroundExtension: '.gif'
     },
 }

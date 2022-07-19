@@ -1,6 +1,6 @@
 <template>
     <div class="battle-wrapper">
-        <div class="player-pokemon">
+        <!-- <div class="player-pokemon">
             <Pokemon
                 v-if="pokemonInBattle['player']"
                 :number="pokemonInBattle['player']['id']"
@@ -24,7 +24,7 @@
                 :playAttackAnim="pokemonInBattle['foes'][index]['attackAnim']"
                 @click="clickOnPokemon(index)"
             />
-        </div>
+        </div> -->
     </div>
 </template>
 

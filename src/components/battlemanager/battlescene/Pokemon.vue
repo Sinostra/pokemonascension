@@ -61,7 +61,7 @@ export default {
         },
 
         getSprite() {
-            return require('../../../assets/img/sprites/' + this.number + this.$store.state.settings.pokemonSpritesExtension)
+            return require(`../../../assets/img/sprites/${this.$store.state.settings.pokemonSpritesExtension}/${this.number}.${this.$store.state.settings.pokemonSpritesExtension}`)
         },
 
         getPokemonTpyeIcon(type) {

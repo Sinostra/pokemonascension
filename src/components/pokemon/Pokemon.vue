@@ -1,6 +1,6 @@
 <template>
     <div>
-      <img :src="spritePath">
+      <img :src="spritePath" :style="{'width': $store.state.pokedex.constantDex[this.id]['size'] + '%'}">
   </div>
 </template>
 
@@ -20,9 +20,6 @@ export default class Pokemon extends Vue {
     return require(`./../../assets/img/sprites/${this.$store.state.settings.pokemonSpritesExtension}/${this.id}.${this.$store.state.settings.pokemonSpritesExtension}`)
   }
 
-  mounted() {
-    console.log(this.$store.state.settings.pokemonSpritesExtension)
-  }
 }
 
 
