@@ -1,5 +1,6 @@
 <template>
     <div class="battle-wrapper">
+        <Pokemon :id="'025'"></Pokemon>
         <!-- <div class="player-pokemon">
             <Pokemon
                 v-if="pokemonInBattle['player']"
@@ -32,7 +33,7 @@
 
 import suffleArray from './../../engine/Shuffle.ts'
 
-import Pokemon from './battlescene/Pokemon.vue'
+import Pokemon from './../pokemon/Pokemon.vue'
 export default {
     name: "BattleScene",
 

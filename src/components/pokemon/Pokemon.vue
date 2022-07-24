@@ -1,8 +1,9 @@
 <template>
-    <div>
+    <div class="pokemon-wrapper">
       <img :src="spritePath" :style="{'width': $store.state.pokedex.constantDex[id]['size'] + '%'}" :class="animClass">
-      <button @click="playAttackAnim()">Attack</button>
-      <button @click="playReturnAnim()">Return</button>
+      <div>Max health : {{maxHealth}}</div>
+      <!-- <button @click="playAttackAnim()">Attack</button>
+      <button @click="playReturnAnim()">Return</button> -->
   </div>
 </template>
 
@@ -16,9 +17,11 @@ import { Options, Vue } from 'vue-class-component';
 })
 
 export default class Pokemon extends Vue {
-  id!: string
-  isPlayingAttackAnim: boolean = false
-  isPlayingReturnAnim: boolean = false
+  private id!: string
+  private isPlayingAttackAnim: boolean = false
+  private isPlayingReturnAnim: boolean = false
+
+
 
   get spritePath() {
     return require(`./../../assets/img/sprites/${this.$store.state.settings.pokemonSpritesExtension}/${this.id}.${this.$store.state.settings.pokemonSpritesExtension}`)
@@ -29,6 +32,10 @@ export default class Pokemon extends Vue {
     if(this.isPlayingReturnAnim) animClass = 'return'
     else if (this.isPlayingAttackAnim) animClass = 'attack' 
     return animClass
+  }
+
+  get maxHealth(): number {
+    return this.$store.state.pokedex.constantDex[this.id].hp
   }
 
   private playAttackAnim(): void {
@@ -48,6 +55,20 @@ export default class Pokemon extends Vue {
 </script>
 
 <style lang="scss" scoped>
+
+.pokemon-wrapper {
+  position: absolute;
+  z-index: 3;
+  width: 14%;
+  height: 20%;
+  left: 13%;
+  bottom: 17%
+}
+
+img {
+  transform: scaleX(-1.3) scaleY(1.3);
+  bottom: 7%;
+}
 
 .attack {
   animation: attack .35s linear;
