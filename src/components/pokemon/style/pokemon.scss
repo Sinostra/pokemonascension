@@ -1,0 +1,90 @@
+.pokemon-wrapper {
+    position: absolute;
+    z-index: 3;
+    width: 14%;
+    height: 20%;
+    left: 13%;
+    bottom: 12%
+}
+
+img {
+    position: absolute;
+    bottom: 0;
+}
+
+.healthBar-infos-wrapper {
+    position: absolute;
+    width: 50%;
+    height: 20%;
+    bottom: -25%;
+    left: 6%;
+}
+
+.healthBar {
+    width: 75%;
+    height: 30%;
+    border: 1px solid #000;
+}
+
+.attack {
+    animation: attack .35s linear;
+}
+
+.return {
+    animation: return 1s linear forwards;
+}
+
+@keyframes attack {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(100px);
+    }
+    0% {
+      transform: translateX(0);
+    }
+}
+
+@keyframes return {
+    0% {
+      filter: none;
+    }
+
+    1% {
+      filter: brightness(10)
+    }
+
+    10% {
+      filter: brightness(10) brightness(0.5) sepia(1) hue-rotate(311deg) saturate(10) brightness(3);
+    }
+
+    20% {
+      filter: brightness(10) brightness(0.5) sepia(1) hue-rotate(311deg) saturate(10) brightness(1.8);
+    }
+
+    30% {
+      opacity: 0.8;
+    }
+
+    40% {
+      opacity: 0.6;
+    }
+
+    50% {
+      opacity: 0.4;
+    }
+
+    60% {
+      opacity: 0.2;
+    }
+
+    90% {
+      opacity: 0;
+    }
+
+    100% {
+      filter: brightness(10) brightness(0.5) sepia(1) hue-rotate(311deg) saturate(10) brightness(1.8);
+      opacity: 0;
+    }
+}
