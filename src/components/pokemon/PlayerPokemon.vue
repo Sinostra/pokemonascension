@@ -27,7 +27,4 @@ export default class PlayerPokemon extends Pokemon {
 <style lang="scss" scoped>
 @import './style/pokemon.scss';
 @import './style/playerPokemon.scss';
-img {
-  transform: scaleX(-1);
-}
 </style>

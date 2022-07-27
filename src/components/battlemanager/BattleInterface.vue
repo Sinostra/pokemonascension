@@ -8,7 +8,10 @@
         <div class="drawPile" :style="getFontSize()">
             <div class="number text">{{drawPile.length}}</div>
         </div>
-        <div class="player-hand" :style="getFontSize()">
+        <div>
+            <Hand></Hand>
+        </div>
+        <!-- <div class="player-hand" :style="getFontSize()">
             <Card 
                 v-for="(card, index) in playerHand"
                 :key="index"
@@ -18,7 +21,7 @@
                 v-on:mouseover="hoverOnCard(index)"
                 v-on:mouseleave="leaveHover()"
             />
-        </div>
+        </div> -->
         <div class="discardPile" :style="getFontSize()">
             <div class="number text">{{discardPile.length}}</div>
             <Card 
@@ -37,11 +40,13 @@
 
 <script>
 import Card from './battleinterface/Card.vue'
+import Hand from '../interface/Hand.vue'
 export default {
     name: 'BattleInterface',
 
     components: {
         Card,
+        Hand
     },
 
     props: [

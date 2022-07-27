@@ -1,6 +1,5 @@
 <template>
-<div class="game-interface" :style="{'background-image':'url(' + getBackground() + ')'}">
-    
+    <div class="game-interface" :style="{'background-image':'url(' + getBackground() + ')'}">
 </div>
 </template>
 
