@@ -19,6 +19,7 @@ import { Options } from "vue-class-component";
 import Pokemon from "./Pokemon";
 
 @Options({
+  name: "FoePokemon",
   props: {
     index: Number,
   }

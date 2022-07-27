@@ -12,9 +12,11 @@
     left: auto;
     top: auto;
     border: 2px solid #000;
+    transition: all .3s ease-out;
 
     &:hover {
         z-index: 2;
+        scale: 1.1;
     }
 }
 

@@ -4,6 +4,7 @@
             :key="index"
             :id="card"
             :style="getCardPosition(index)"
+            @cardClicked="selectCard(index)"
         >
         </Card>
     </div>
@@ -14,6 +15,7 @@ import { Options, Vue } from 'vue-class-component'
 import Card from '../card/Card.vue'
 
 @Options({
+    name: "Hand",
     components: {
         Card
     }
@@ -23,11 +25,17 @@ export default class Hand extends Vue {
 
     private getCardPosition(index: number): string {
 
+        const selectedCardStyle = 'transform : rotate(0deg) scale(1.2); left: 20%; bottom: 153%;'
+
+        if(index === this.$store.state.board.selectedCard) {
+            return selectedCardStyle
+        }
+
         const handSize = this.cardsInHand.length
         const evenHand = handSize % 2 == 0
 
         //Une rotation de carte
-        const baseRotate =  5
+        const baseRotate =  2
 
         //L'endroit où la carte du milieu se positionne
         const baseBottom = -3
@@ -64,7 +72,7 @@ export default class Hand extends Vue {
         finalRotate *= -1
 
         //L'écart vertical entre deux cartes
-        const bottomShift = 3 * Math.abs(difference)
+        const bottomShift = 1.5 * Math.abs(difference)
 
         const finalBottom = baseBottom - (bottomShift * Math.abs(difference))
 
@@ -75,20 +83,25 @@ export default class Hand extends Vue {
 
         const finalLeft = baseLeft + index * leftShift
 
-        return 'transform : rotate(' + finalRotate + 'deg); left : ' + finalLeft + '%; bottom: ' + finalBottom + '%;'
+        return `transform : rotate(${finalRotate}deg); left: ${finalLeft}%; bottom: ${finalBottom}%;`
+    }
+
+    private selectCard(index) {
+        this.$store.dispatch("selectCard", index)
     }
 
     public mounted() {
-        const drawCard = () => {
-            if(this.cardsInHand.length < 10)
-            setTimeout(() => {
-                this.cardsInHand.push("001")
-                drawCard()
-            }, 500)
+        this.cardsInHand = this.$store.state.board.hand
+        // const drawCard = () => {
+        //     if(this.cardsInHand.length < 10)
+        //     setTimeout(() => {
+        //         this.cardsInHand.push("001")
+        //         drawCard()
+        //     }, 500)
             
-        }
+        // }
 
-        drawCard()
+        // drawCard()
     }
 }
 

@@ -13,7 +13,12 @@
 </template>
 
 <script lang="ts">
+import { Options } from "vue-class-component";
 import Pokemon from "./Pokemon";
+
+@Options({
+  name: "PlayerPokemon",
+})
 
 export default class PlayerPokemon extends Pokemon {
   get playerPosition(): string {

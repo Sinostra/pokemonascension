@@ -1,5 +1,5 @@
 <template>
-  <div class="global-wrapper" :class="getAppClass()">
+  <div class="global-wrapper" :class="getAppClass()" @click.right.prevent="onRightClick()">
     <Background/>
     <Interface/>
     <BattleManager v-if="$store.state.battle.isBattleOnGoing"/>
@@ -38,6 +38,10 @@ export default {
     updateMouseCoordinates(event) {
       this.$store.dispatch('updateMousePositionX', event['x'])
       this.$store.dispatch('updateMousePositionY', event['y'])
+    },
+
+    onRightClick() {
+      this.$store.dispatch("selectCard", null)
     }
   },
 

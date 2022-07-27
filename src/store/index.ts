@@ -5,6 +5,7 @@ import backgrounds from './constantData/background/background'
 import cards from './constantData/cards/cards'
 import battle from './battle/battle'
 import playerTeam from './battle/playerTeam'
+import board from './battle/board'
 import foes from './battle/foes'
 import settings from './settings/settings'
 
@@ -47,6 +48,7 @@ export default createStore({
     battle,
     playerTeam,
     foes,
+    board,
     settings,
     cards,
     types
