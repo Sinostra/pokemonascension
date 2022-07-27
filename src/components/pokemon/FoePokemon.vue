@@ -8,7 +8,7 @@
               <div class="healthAmount" :style="getFontSize()">{{currentHealth}} / {{maxHealth}} </div>
             </div>
           </div>
-          <img :src="spritePath" :class="animClass">
+          <img :src="spritePath" :class="animClass" @click="onClick()">
         </div>
       </div>
   </div>
@@ -30,6 +30,10 @@ export default class FoePokemon extends Pokemon {
   get foePosition(): string {
     const currentBackground: string = this.$store.state.battle.backgroundUsed
     return `left: ${this.$store.state.backgrounds.slots[currentBackground]['foes'][this.index]['left']}%; bottom: ${this.$store.state.backgrounds.slots[currentBackground]['foes'][this.index]['bottom']}%;`
+  }
+
+  private onClick(): void {
+    console.log(`${this.$store.state.pokedex.constantDex[this.id].name.french} cliqué à l'index ${this.index}`)
   }
 }
 
