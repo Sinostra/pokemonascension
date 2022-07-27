@@ -1,0 +1,15 @@
+.size-wrapper {
+  position: relative;
+  height: 100%;
+
+  .healthBar-infos-wrapper {
+    top: -30%;
+    left: 0%;
+  }
+
+  img {
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}

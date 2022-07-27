@@ -8,7 +8,7 @@ import { Options, Vue } from 'vue-class-component';
 
 export default class Pokemon extends Vue {
   protected id!: string
-  protected currentHealth!: number;
+  protected currentHealth: number = 0;
   protected isPlayingAttackAnim: boolean = false
   protected isPlayingReturnAnim: boolean = false
 
@@ -28,13 +28,9 @@ export default class Pokemon extends Vue {
     return this.$store.state.pokedex.constantDex[this.id].hp
   }
 
-  get healthBarPercent(): number {
-    return (this.currentHealth  / this.maxHealth) * 100;
-  }
-
   get healthBarClass(): string {
-    if(this.healthBarPercent > 67) return 'green'
-    else if(this.healthBarPercent > 33 && this.healthBarPercent <= 67) return 'orange'
+    if(this.getHealthBarPercent() > 67) return 'green'
+    else if(this.getHealthBarPercent() > 33 && this.getHealthBarPercent() <= 67) return 'orange'
     else return 'red'
   }
 
@@ -42,14 +38,22 @@ export default class Pokemon extends Vue {
     this.currentHealth = this.maxHealth
   }
 
-  private playAttackAnim(): void {
+  protected getHealthBarPercent(): number {
+    return (this.currentHealth  / this.maxHealth) * 100;
+  }
+
+  protected getFontSize(multiplier = 1): string {
+    return 'font-size: ' + (this.$store.state.settings.baseFontSize) * multiplier + 'px;'
+  }
+
+  protected playAttackAnim(): void {
     if(!this.isPlayingAttackAnim) {
       this.isPlayingAttackAnim = true
       setTimeout(() => { this.isPlayingAttackAnim = false }, 350 )
     }
   }
 
-  private playReturnAnim(): void {
+  protected playReturnAnim(): void {
     if(!this.isPlayingReturnAnim) {
       this.isPlayingReturnAnim = true
     }

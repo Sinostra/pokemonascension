@@ -1,7 +1,7 @@
 <template>
     <div class="battle-wrapper">
         <PlayerPokemon :id="'025'"></PlayerPokemon>
-        <!-- <FoePokemon :id="'009'"></FoePokemon> -->
+        <FoePokemon :id="'009'"></FoePokemon>
         <!-- <div class="player-pokemon">
             <Pokemon
                 v-if="pokemonInBattle['player']"

@@ -25,7 +25,7 @@ export default {
         "foes": [
             {
                 "left": 68,
-                "bottom": 23
+                "bottom": 33
             },
             {
                 "left": 57,

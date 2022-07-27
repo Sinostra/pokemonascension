@@ -3,8 +3,14 @@ import { Store } from 'vuex'
 declare module '@vue/runtime-core' {
   // declare your own store states
   interface State {
-    settings: any
-    pokedex: any
+    pokedex: any,
+    backgrounds: any,
+    battle: any,
+    playerTeam: any,
+    foes: any,
+    settings: any,
+    cards: any,
+    types: any
   }
 
   // provide typings for `this.$store`
