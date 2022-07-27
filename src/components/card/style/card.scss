@@ -1,5 +1,70 @@
 .card {
-    width: 50px;
-    height: 80px;
+    position: absolute;
+    width: 10.2%;
+    height: 89%;
+    background-size: contain;
+    background-position: top;
+    background-repeat: no-repeat;
     background-color: #fff;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 1;
+    left: auto;
+    top: auto;
 }
+
+.draw {
+    animation: draw 1s linear;
+}
+
+@keyframes draw {
+    0% {
+      left: -1%;
+      top: 17%;
+      transform: scale(0.1);
+    }
+    10% {
+        left: -1%;
+        top: -23%;
+        transform: scale(0.1);
+    }
+    20% {
+        left: 10%;
+        top: -73%;
+        transform: scale(0.5);
+    }
+    30% {
+        left: 20%;
+        top: -123%;
+        transform: scale(1);
+    }
+    50% {
+        left: 30%;
+        top: -153%;
+    }
+    60% {
+        left: 40%;
+        top: -123%;
+    }
+    70% {
+        left: 45%;
+        top: -93%;
+    }
+    80% {
+        left: 45%;
+        top: -63%;
+    }
+    90% {
+        left: 45%;
+        top: -33%;
+    }
+    99% {
+        left: 45%;
+        top: 0%;
+    }
+    100% {
+        left: auto;
+        top: auto;
+    }
+  }

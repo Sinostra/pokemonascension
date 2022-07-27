@@ -1,105 +1,93 @@
 .pokemon-wrapper {
+  position: absolute;
+  z-index: 3;
+  width: 14%;
+  height: 20%;
+  
+  .healthBar-infos-wrapper {
     position: absolute;
-    z-index: 3;
-    width: 14%;
+    width: 100%;
     height: 20%;
-    
-    .healthBar-infos-wrapper {
-      position: absolute;
+  
+    .healthBar {
       width: 100%;
-      height: 20%;
+      height: 2vh;
+      background-color: #363636;
+      border: 2px solid #000;
+      position: relative;
     
-      .healthBar {
-        width: 100%;
-        height: 2vh;
-        background-color: #363636;
-        border: 2px solid #000;
-        position: relative;
+      .currentHealth {
+        height: calc(100% + 1px);
       
-        .currentHealth {
-          height: calc(100% + 1px);
-        
-          &.green {
-            background: #45c43a;
-          }
-        
-          &.orange {
-            background: #e5bf37;
-          }
-        
-          &.red {
-            background: #ef3131;
-          }
+        &.green {
+          background: #45c43a;
         }
-
-        .healthAmount {
-          font-family: 'ERASDEMI';
-          color: #fff;
-          filter: drop-shadow(1px 1px 1px black);
+      
+        &.orange {
+          background: #e5bf37;
+        }
+      
+        &.red {
+          background: #ef3131;
         }
       }
+
+      .healthAmount {
+        font-family: 'ERASDEMI';
+        color: #fff;
+        filter: drop-shadow(1px 1px 1px black);
+      }
     }
+  }
 }
 
 .attack {
-    animation: attack .35s linear;
+  animation: attack .35s linear;
 }
 
 .return {
-    animation: return 1s linear forwards;
-}
-
-@keyframes attack {
-    0% {
-      transform: translateX(0);
-    }
-    50% {
-      transform: translateX(100px);
-    }
-    0% {
-      transform: translateX(0);
-    }
+  animation: return 1s linear forwards;
 }
 
 @keyframes return {
-    0% {
-      filter: none;
-    }
+  0% {
+    filter: none;
+  }
 
-    1% {
-      filter: brightness(10)
-    }
+  1% {
+    filter: brightness(10)
+  }
 
-    10% {
-      filter: brightness(10) brightness(0.5) sepia(1) hue-rotate(311deg) saturate(10) brightness(3);
-    }
+  10% {
+    filter: brightness(10) brightness(0.5) sepia(1) hue-rotate(311deg) saturate(10) brightness(3);
+  }
 
-    20% {
-      filter: brightness(10) brightness(0.5) sepia(1) hue-rotate(311deg) saturate(10) brightness(1.8);
-    }
+  20% {
+    filter: brightness(10) brightness(0.5) sepia(1) hue-rotate(311deg) saturate(10) brightness(1.8);
+  }
 
-    30% {
-      opacity: 0.8;
-    }
+  30% {
+    opacity: 0.8;
+  }
 
-    40% {
-      opacity: 0.6;
-    }
+  40% {
+    opacity: 0.6;
+  }
 
-    50% {
-      opacity: 0.4;
-    }
+  50% {
+    opacity: 0.4;
+  }
 
-    60% {
-      opacity: 0.2;
-    }
+  60% {
+    opacity: 0.2;
+  }
 
-    90% {
-      opacity: 0;
-    }
+  90% {
+    opacity: 0;
+  }
 
-    100% {
-      filter: brightness(10) brightness(0.5) sepia(1) hue-rotate(311deg) saturate(10) brightness(1.8);
-      opacity: 0;
-    }
+  100% {
+    filter: brightness(10) brightness(0.5) sepia(1) hue-rotate(311deg) saturate(10) brightness(1.8);
+    opacity: 0;
+  }
 }
