@@ -1,5 +1,8 @@
 <template>
-  <div class="global-wrapper" :class="getAppClass()" @click.right.prevent="onRightClick()">
+  <div class="global-wrapper"
+  :class="getAppClass()"
+  @click="onLeftClick()"
+  @click.right.prevent="onRightClick()">
     <Background/>
     <Interface/>
     <BattleManager v-if="$store.state.battle.isBattleOnGoing"/>
@@ -42,6 +45,10 @@ export default {
 
     onRightClick() {
       this.$store.dispatch("selectCard", null)
+    },
+
+    onLeftClick() {
+      console.log("clicked")
     }
   },
 
