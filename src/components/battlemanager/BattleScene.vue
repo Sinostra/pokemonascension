@@ -1,7 +1,13 @@
 <template>
     <div class="battle-wrapper">
         <PlayerPokemon :id="'025'"></PlayerPokemon>
-        <FoePokemon :id="'009'"></FoePokemon>
+        <FoePokemon
+            v-for="(pokemon, index) in pokemonInBattle['foes']"
+            :key="index"
+            :id="pokemonInBattle['foes'][index]['id']"
+            :index="index"
+        >
+        </FoePokemon>
         <!-- <div class="player-pokemon">
             <Pokemon
                 v-if="pokemonInBattle['player']"

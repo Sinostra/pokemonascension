@@ -25,15 +25,15 @@ export default {
         "foes": [
             {
                 "left": 68,
-                "bottom": 33
+                "bottom": 23
             },
             {
                 "left": 57,
-                "bottom": 25
+                "bottom": 21
             },
             {
                 "left": 44,
-                "bottom": 25
+                "bottom": 21
             }
         ]
     }
