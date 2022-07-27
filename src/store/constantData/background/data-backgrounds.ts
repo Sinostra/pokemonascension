@@ -9,15 +9,15 @@ export default {
         "foes": [
             {
                 "left": 44,
-                "bottom": 21
+                "bottom": 23
             },
             {
                 "left": 58,
-                "bottom": 22
+                "bottom": 24
             },
             {
                 "left": 72,
-                "bottom": 23
+                "bottom": 25
             }
         ]
     }

@@ -230,7 +230,7 @@ export default {
         
         "type": ["normal", "flying"],
         "hp": 45,
-        "size": 100,
+        "size": 80,
         "hpBar" : {
             "left" : 25,
             "top" : -36
@@ -1295,7 +1295,7 @@ export default {
         
         "type": ["ground"],
         "hp": 45,
-        "size": 65,
+        "size": 45,
         "hpBar" : {
             "left" : 16,
             "top" : 5

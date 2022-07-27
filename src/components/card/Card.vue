@@ -1,13 +1,20 @@
 <template>
-    <div class="card draw"></div>
+    <div class="card draw">{{id}}</div>
 </template>
 
 <script lang="ts">
-import { Vue } from "vue-class-component";
+import { Options, Vue } from "vue-class-component";
+
+@Options({
+  props: {
+    id: String,
+  }
+})
 
 export default class Card extends Vue {
+    private id!: string
     public mounted() {
-        console.log('card mounted')
+        console.log('card mounted' + this.id)
     }
 }
 </script>
