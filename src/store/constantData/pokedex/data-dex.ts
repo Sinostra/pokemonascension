@@ -104,7 +104,7 @@ export default {
         
         "type": ["water"],
         "hp": 45,
-        "size": 120,
+        "size": 90,
         "hpBar" : {
             "left" : 42,
             "top" : -69
