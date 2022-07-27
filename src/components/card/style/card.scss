@@ -12,6 +12,7 @@
     z-index: 1;
     left: auto;
     top: auto;
+    transition: all 1s linear;
 }
 
 .draw {
@@ -25,34 +26,40 @@
       transform: scale(0.1);
     }
     10% {
-        left: -1%;
+        left: 5%;
         top: -23%;
-        transform: scale(0.1);
+        transform: scale(0.2);
     }
     20% {
         left: 10%;
         top: -73%;
-        transform: scale(0.5);
+        transform: scale(0.2);
     }
     30% {
-        left: 20%;
+        left: 15%;
         top: -123%;
-        transform: scale(1);
+        transform: scale(0.6);
+    }
+    40% {
+        left: 20%;
+        top: -153%;
+        transform: scale(0.8);
     }
     50% {
-        left: 30%;
+        left: 25%;
         top: -153%;
+        transform: scale(1);
     }
     60% {
-        left: 40%;
+        left: 30%;
         top: -123%;
     }
     70% {
-        left: 45%;
+        left: 35%;
         top: -93%;
     }
     80% {
-        left: 45%;
+        left: 40%;
         top: -63%;
     }
     90% {
