@@ -19,7 +19,7 @@ import Card from '../card/Card.vue'
     }
 })
 export default class Hand extends Vue {
-    private cardsInHand: string[] = ["001", "001", "001", "001", "001", "001", "001", "001", "001", "001"]
+    private cardsInHand: string[] = []
 
     private getCardPosition(index: number): string {
 
@@ -76,6 +76,19 @@ export default class Hand extends Vue {
         const finalLeft = baseLeft + index * leftShift
 
         return 'transform : rotate(' + finalRotate + 'deg); left : ' + finalLeft + '%; bottom: ' + finalBottom + '%;'
+    }
+
+    public mounted() {
+        const drawCard = () => {
+            if(this.cardsInHand.length < 10)
+            setTimeout(() => {
+                this.cardsInHand.push("001")
+                drawCard()
+            }, 500)
+            
+        }
+
+        drawCard()
     }
 }
 
