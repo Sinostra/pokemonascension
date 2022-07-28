@@ -1,5 +1,17 @@
 <template>
-    <div class="card draw" @click="$emit('cardClicked')">{{id}}</div>
+  <div class="card" :class="cardClass" @click.stop="$emit('cardClicked')">
+    <div class="cost" :style="(getFontSize())">
+      <img :src="costBackground">
+      {{ $store.state.cards.dataCards[id]['cost'] }}
+    </div>
+    <div class="name" :style="(getFontSize(0.6))">{{$store.state.cards.dataCards[id]['name']}}</div>
+
+    <div class="illustration" :style="{'background-image':'url(' + illustrationBackground + ')'}"></div>
+
+    <div class="category" :style="(getCategoryStyle(0.75))">{{$store.state.cards.dataCards[id]['category']}}</div>
+    
+    <div class="tooltip" :style="(getFontSize(0.7))">{{$store.state.cards.dataCards[id]['tooltip']}}</div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -14,6 +26,40 @@ import { Options, Vue } from "vue-class-component";
 
 export default class Card extends Vue {
   private id!: string
+  private drawAnimationDone: boolean = false
+
+  public mounted() {
+    setTimeout(() => {this.drawAnimationDone = true}, 1000)
+  }
+
+  get cardClass(): string {
+    const type: string = this.$store.state.cards.dataCards[this.id]['type']
+    return this.drawAnimationDone ? type : `${type} draw`
+  }
+
+  get costBackground() {
+    const rarity: string = this.$store.state.cards.dataCards[this.id]['rarity']
+    return require(`../../assets/img/cards/bords/${rarity}_round.png`)
+  }
+
+  get illustrationBackground(): string {
+    return require('../../assets/img/cards/illustrations/' + this.id + '.jpg')
+  }
+
+  get categoryBackground() {
+    const card = this.$store.state.cards.dataCards[this.id]
+    return require('../../assets/img/cards/' + card['category'] + '_' + card['rarity'] + '.png')
+  }
+
+  getFontSize(multiplier = 1): string {
+    return `font-size: ${(this.$store.state.settings.baseFontSize) * multiplier}px;`
+  }
+
+  getCategoryStyle(multiplier = 1) {
+    const fontSize = 'font-size: ' + (this.$store.state.settings.baseFontSize) * multiplier + 'px;'
+    const background = 'background-image :url(' + this.categoryBackground + ');'
+    return fontSize + background
+  }
 }
 </script>
 

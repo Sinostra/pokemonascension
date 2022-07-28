@@ -1,14 +1,14 @@
 <template>
     <div class="pokemon-wrapper" :style="foePosition">
       <div class="size-wrapper" :style="{'width': $store.state.pokedex.constantDex[id]['size'] + '%'}">
-        <div class="bottom-wrapper">
+        <div class="bottom-wrapper" @click.stop="onClick()">
           <div class="healthBar-infos-wrapper">
             <div class="healthBar">
               <div class="currentHealth" :class="healthBarClass" :style="{'width': getHealthBarPercent() + '%'}"></div>
               <div class="healthAmount" :style="getFontSize()">{{currentHealth}} / {{maxHealth}} </div>
             </div>
           </div>
-          <img :src="spritePath" :class="animClass" @click="onClick()">
+          <img :src="spritePath" :class="animClass">
         </div>
       </div>
   </div>
@@ -34,7 +34,7 @@ export default class FoePokemon extends Pokemon {
   }
 
   private onClick(): void {
-    console.log(`${this.$store.state.pokedex.constantDex[this.id].name.french} cliqué à l'index ${this.index}`)
+    // console.log(`${this.$store.state.pokedex.constantDex[this.id].name.french} cliqué à l'index ${this.index}`)
   }
 }
 

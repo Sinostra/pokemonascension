@@ -1,9 +1,10 @@
 <template>
     <div class="hand">
-        <Card v-for="(card, index) in cardsInHand"
+        <Card v-for="(card, index) in $store.state.board.hand"
             :key="index"
             :id="card"
             :style="getCardPosition(index)"
+            :class="isBeingDiscarded(index)"
             @cardClicked="selectCard(index)"
         >
         </Card>
@@ -21,8 +22,6 @@ import Card from '../card/Card.vue'
     }
 })
 export default class Hand extends Vue {
-    private cardsInHand: string[] = []
-
     private getCardPosition(index: number): string {
 
         const selectedCardStyle = 'transform : rotate(0deg) scale(1.2); left: 20%; bottom: 153%;'
@@ -31,7 +30,7 @@ export default class Hand extends Vue {
             return selectedCardStyle
         }
 
-        const handSize = this.cardsInHand.length
+        const handSize = this.$store.state.board.hand.length
         const evenHand = handSize % 2 == 0
 
         //Une rotation de carte
@@ -86,22 +85,26 @@ export default class Hand extends Vue {
         return `transform : rotate(${finalRotate}deg); left: ${finalLeft}%; bottom: ${finalBottom}%;`
     }
 
-    private selectCard(index) {
+    private selectCard(index): void {
         this.$store.dispatch("selectCard", index)
     }
 
-    public mounted() {
-        this.cardsInHand = this.$store.state.board.hand
-        // const drawCard = () => {
-        //     if(this.cardsInHand.length < 10)
-        //     setTimeout(() => {
-        //         this.cardsInHand.push("001")
-        //         drawCard()
-        //     }, 500)
-            
-        // }
+    private isBeingDiscarded(index): string {
+        if(index === this.$store.state.board.cardBeingDiscarded) return 'discard'
+        else return ''
+    }
 
-        // drawCard()
+    public mounted() {
+        const drawCard = () => {
+            if(this.$store.state.board.hand.length < this.$store.state.board.maxCardsInHand && this.$store.state.board.drawPile.length) {
+                setTimeout(() => {
+                    this.$store.dispatch("draw")
+                    drawCard()
+                }, 500)
+            }
+        }
+
+        drawCard()
     }
 }
 

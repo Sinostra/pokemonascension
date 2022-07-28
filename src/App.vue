@@ -48,7 +48,7 @@ export default {
     },
 
     onLeftClick() {
-      console.log("clicked")
+      this.$store.dispatch("discard")
     }
   },
 

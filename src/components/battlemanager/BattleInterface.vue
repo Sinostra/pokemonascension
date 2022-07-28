@@ -186,15 +186,11 @@ export default {
 
             var finalLeft = baseLeft + index * leftShift
 
-            // console.log(this.cardDrawAnimation.includes(index.toString()))
 
             if(this.cardDrawAnimation.includes(index)) {
                 return 'left: 2%; transform: scale(0.1)'
             }
 
-            // else if(this.cardDiscardAnimation.includes(index)) {
-            //     return 'left: 98%; transform: scale(0.1)'
-            // }
 
             else {
 

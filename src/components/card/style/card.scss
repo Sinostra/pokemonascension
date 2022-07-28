@@ -14,14 +14,174 @@
     border: 2px solid #000;
     transition: all .3s ease-out;
 
+    &.normal {
+        background-color: #909aa0;
+    }
+
+    &.electric {
+        background-color: #f4d23c;
+    }
+
+    &.psychic {
+        background-color: #fa7179;
+    }
+
+    &.grass {
+        background-color: #909aa0;
+    }
+
+    &.water {
+        background-color: #909aa0;
+    }
+
+    &.fire {
+        background-color: #909aa0;
+    }
+
+    &.rock {
+        background-color: #909aa0;
+    }
+
+    &.ground {
+        background-color: #909aa0;
+    }
+
+    &.bug {
+        background-color: #909aa0;
+    }
+
+    &.flying {
+        background-color: #909aa0;
+    }
+
+    &.ghost {
+        background-color: #909aa0;
+    }
+
+    &.dark {
+        background-color: #909aa0;
+    }
+
+    &.ice {
+        background-color: #909aa0;
+    }
+
+    &.fairy {
+        background-color: #909aa0;
+    }
+
+    &.dragon {
+        background-color: #909aa0;
+    }
+
+    &.fighting {
+        background-color: #909aa0;
+    }
+
+    &.poison {
+        background-color: #909aa0;
+    }
+
+    &.steel {
+        background-color: #909aa0;
+    }
+
     &:hover {
         z-index: 2;
         scale: 1.1;
+    }
+
+    .cost {
+        position: absolute;
+        width: 16%;
+        height: 11%;
+        top: -2%;
+        left: -2%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'gill extra bold';
+        color: #fff;
+
+        img {
+            display: block;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+    }
+
+    .name {
+        position: absolute;
+        top: 5%;
+        left: 14.5%;
+        color: black;
+        font-family: 'futura';
+        text-transform: capitalize;
+    }
+
+    .type {
+        position: absolute;
+        width: 21%;
+        height: 5%;
+        top: 5.5%;
+        right: 11%;
+        font-family: 'futura condensed';
+        color: #fff;
+        text-transform: uppercase;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .illustration {
+        position: absolute;
+        top: 13.5%;
+        left: 9.9%;
+        width: 80%;
+        height: 37.1%;
+        border-radius: 1px;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+
+    .category {
+        position: absolute;
+        width: 47%;
+        height: 8%;
+        top: 47%;
+        left: 25%;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-transform: capitalize;
+        font-family: 'futura';
+        filter: drop-shadow(1px 1px 1px black);
+    }
+
+    .tooltip {
+        position: absolute;
+        top: 59%;
+        left: 7%;
+        width: 86%;
+        height: 36%;
+        padding: 2%;
+        font-family: 'gill sans bold';
+        color: #000;
     }
 }
 
 .draw {
     animation: draw 1s linear;
+}
+
+.discard {
+    animation: discard .5s linear
 }
 
 @keyframes draw {
@@ -79,4 +239,17 @@
         left: auto;
         top: auto;
     }
-  }
+}
+
+@keyframes discard {
+    0% {
+        left: 20%;
+        bottom: 153%;
+        transform: scale(1.2);
+    }
+    100% {
+        left: 91%;
+        bottom: -17%;
+        transform: scale(0.1);
+    }
+}
