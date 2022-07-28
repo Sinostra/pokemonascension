@@ -3,6 +3,7 @@ export default {
         drawPile: ["001", "002", "003", "004", "005", "001"],
         hand: [],
         discardPile: [],
+        exhaustPile: [],
         selectedCard: null,
         cardBeingDiscarded: null,
         maxCardsInHand: 10
@@ -20,12 +21,12 @@ export default {
         },
 
         discard(state) {
-            if(state.selectedCard !== null) {
-                state.cardBeingDiscarded = state.selectedCard 
+            if(state.selectedCard !== null && state.cardBeingDiscarded === null) {
+                state.cardBeingDiscarded = state.selectedCard
+                state.selectedCard = null
                 setTimeout(() => {
+                    state.discardPile.push(state.hand.splice(state.cardBeingDiscarded, 1)[0])
                     state.cardBeingDiscarded = null
-                    state.discardPile.push(state.hand.splice(state.selectedCard, 1)[0])
-                    state.selectedCard = null
                 }, 500)
             }
         }

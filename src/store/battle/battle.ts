@@ -21,6 +21,8 @@ export default {
 
         currentEnergy: 3,
         maxEnergy: 3,
+
+        foePokemon: [42, 45, 15]
     },
     mutations: {
         changebackgroundUsed(state, value) {
@@ -79,7 +81,11 @@ export default {
         },
         changeMaxEnergy(state, value) {
             state.maxEnergy = value
-        }
+        },
+
+        // clickPlayer(state) {
+        //     state.maxEnergy = 3
+        // }
     },
     actions: {
         changebackgroundUsed(context, value) {
@@ -136,6 +142,10 @@ export default {
         },
         changeMaxEnergy(context, value) {
             context.commit('changeMaxEnergy', value)
+        },
+
+        clickPlayer(context) {
+            // context.commit('clickPlayer')
         }
     },
     getters: {

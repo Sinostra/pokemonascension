@@ -27,13 +27,13 @@ export default {
     methods: {
         onLeftClick: function() {
             if(this.$store.state.battle.selectedCard != null) {
-                this.$store.dispatch('changeinterfaceClicked', true)
+                // this.$store.dispatch('changeinterfaceClicked', true)
             }
         },
 
         onRightClick(e) {
-            e.preventDefault()
-            this.$store.dispatch('changerightClicked', true)
+            // e.preventDefault()
+            // this.$store.dispatch('changerightClicked', true)
         }
     }
 }

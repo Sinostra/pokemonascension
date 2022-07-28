@@ -35,12 +35,12 @@ export default {
     },
 
     setBaseFontSize: function() {
-      this.$store.dispatch('changebaseFontSize', document.querySelector('.global-wrapper').offsetWidth / 100)
+      // this.$store.dispatch('changebaseFontSize', document.querySelector('.global-wrapper').offsetWidth / 100)
     },
 
     updateMouseCoordinates(event) {
-      this.$store.dispatch('updateMousePositionX', event['x'])
-      this.$store.dispatch('updateMousePositionY', event['y'])
+      // this.$store.dispatch('updateMousePositionX', event['x'])
+      // this.$store.dispatch('updateMousePositionY', event['y'])
     },
 
     onRightClick() {

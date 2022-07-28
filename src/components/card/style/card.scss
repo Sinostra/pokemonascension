@@ -2,10 +2,9 @@
     position: absolute;
     width: 10.2%;
     height: 89%;
-    background-size: contain;
+    background-size: cover;
     background-position: top;
     background-repeat: no-repeat;
-    background-color: #fff;
     border-radius: 10px;
     cursor: pointer;
     z-index: 1;
@@ -13,6 +12,11 @@
     top: auto;
     border: 2px solid #000;
     transition: all .3s ease-out;
+    transform-style: preserve-3d;
+
+    &.locked {
+        pointer-events: none;
+    }
 
     &.normal {
         background-color: #909aa0;
@@ -178,10 +182,12 @@
 
 .draw {
     animation: draw 1s linear;
+    pointer-events: none;
 }
 
 .discard {
-    animation: discard .5s linear
+    animation: discard .5s linear;
+    pointer-events: none;
 }
 
 @keyframes draw {

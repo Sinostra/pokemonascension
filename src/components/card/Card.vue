@@ -1,16 +1,16 @@
 <template>
-  <div class="card" :class="cardClass" @click.stop="$emit('cardClicked')">
-    <div class="cost" :style="(getFontSize())">
+  <div class="card" :class="cardClass" @click.stop="$emit('cardClicked')" :style="{'background-image':'url(' + background + ')'}">
+    <div class="cost" :style="(getFontSize(0.6))">
       <img :src="costBackground">
       {{ $store.state.cards.dataCards[id]['cost'] }}
     </div>
-    <div class="name" :style="(getFontSize(0.6))">{{$store.state.cards.dataCards[id]['name']}}</div>
+    <div class="name" :style="(getFontSize(0.5))">{{$store.state.cards.dataCards[id]['name']}}</div>
 
     <div class="illustration" :style="{'background-image':'url(' + illustrationBackground + ')'}"></div>
 
-    <div class="category" :style="(getCategoryStyle(0.75))">{{$store.state.cards.dataCards[id]['category']}}</div>
+    <div class="category" :style="(getCategoryStyle(0.4))">{{$store.state.cards.dataCards[id]['category']}}</div>
     
-    <div class="tooltip" :style="(getFontSize(0.7))">{{$store.state.cards.dataCards[id]['tooltip']}}</div>
+    <div class="tooltip" :style="(getFontSize(0.6))">{{$store.state.cards.dataCards[id]['tooltip']}}</div>
   </div>
 </template>
 
@@ -34,7 +34,14 @@ export default class Card extends Vue {
 
   get cardClass(): string {
     const type: string = this.$store.state.cards.dataCards[this.id]['type']
-    return this.drawAnimationDone ? type : `${type} draw`
+    const locked = this.$store.state.board.cardBeingDiscarded !== null ? 'locked' : ''
+    const draw = this.drawAnimationDone ? '' : 'draw'
+    return `${type} ${draw} ${locked}`
+  }
+
+  get background() {
+    const card = this.$store.state.cards.dataCards[this.id]
+    return require('../../assets/img/cards/bords/' + card['rarity'] + '2.png')
   }
 
   get costBackground() {

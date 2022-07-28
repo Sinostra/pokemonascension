@@ -25,6 +25,22 @@ export default class PlayerPokemon extends Pokemon {
     const currentBackground: string = this.$store.state.battle.backgroundUsed
     return `left: ${this.$store.state.backgrounds.slots[currentBackground]['player']['left']}%; bottom: ${this.$store.state.backgrounds.slots[currentBackground]['player']['bottom']}%;`
   }
+
+  private inflictDamage() {
+    this.currentHealth--
+  }
+
+  public mounted() {
+    // setTimeout(() => {this.playReturnAnim()}, 1000)
+    this.$store.subscribeAction((action, state) => {
+      // console.log(action.type)
+      if(action.type === "clickPlayer") {
+        console.log(action.type)
+        this.inflictDamage()
+      }
+      // console.log(action.payload)
+    })
+  }
 }
 
 </script>
