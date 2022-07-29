@@ -1,7 +1,6 @@
 <template>
   <div class="global-wrapper"
   :class="getAppClass()"
-  @click="onLeftClick()"
   @click.right.prevent="onRightClick()">
     <Background/>
     <Interface/>

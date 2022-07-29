@@ -8,7 +8,8 @@ export default {
     },
     actions: {
         clickPlayer() {},
-        leftClick() {},
+        playCurrentlySelectedCard() {},
+        discardCurrentlySelectedCard() {},
         rightClick() {}
     },
     getters: {

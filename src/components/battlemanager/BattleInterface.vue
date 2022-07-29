@@ -1,8 +1,8 @@
 <template>
 <div class="battle-interface">
-    <div class="top-wrapper">
+    <!-- <div class="top-wrapper">
         <div class="btn" @click="clickSwitch()">Switch</div>
-    </div>
+    </div> -->
     <div class="bottom-wrapper">
         <div class="energy-wrapper text" :style="getFontSize()">{{$store.state.battle.currentEnergy}}/{{$store.state.battle.maxEnergy}}</div>
         <div class="drawPile" :style="getFontSize()">

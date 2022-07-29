@@ -111,7 +111,7 @@ export default class Hand extends Vue {
     public mounted() {
 
         this.$store.subscribeAction((action) => {
-            if(action.type === "leftClick") {
+            if(action.type === "discardCurrentlySelectedCard") {
                 if(this.selectedCard !== null) {
                     this.addToDiscard(this.selectedCard)
                     this.selectCard(null)

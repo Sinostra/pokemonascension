@@ -39,7 +39,7 @@ export default class FoePokemon extends Pokemon {
   }
 
   private onClick(): void {
-    this.$store.dispatch("clickPlayer")
+    this.$store.dispatch("playCurrentlySelectedCard", this.index)
     // console.log(`${this.$store.state.pokedex.constantDex[this.id].name.french} cliqué à l'index ${this.index}`)
   }
 }

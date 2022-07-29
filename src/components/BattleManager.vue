@@ -1,41 +1,38 @@
 <template>
     <div class="battlemanager">
-        <BattleScene 
-            :cardPlayed="$store.state.battle.cardPlayed"
-            :turnEnded="$store.state.battle.playerTurn"
-            :switchClicked="$store.state.battle.switchClicked"
-        />
-        <BattleInterface 
-            :cardClickedInterface="$store.state.battle.interfaceClicked" 
-            :cardClickedPokemon="$store.state.battle.pokemonClicked" 
-            :cardPlayed="$store.state.battle.cardPlayed"
-            :turnStarted="$store.state.battle.playerTurn"
-            :rightClicked="$store.state.battle.rightClicked"
-            :switchClicked="$store.state.battle.switchClicked"
-        />
+        <BattleScene/>
+        <BattleInterface/>
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import BattleScene from './battlemanager/BattleScene.vue'
 import BattleInterface from './battlemanager/BattleInterface.vue'
-export default {
-    name: "BattleManager",
+import { Options, Vue } from 'vue-class-component'
 
+@Options({
+    name: "BattleManager",
     components: {
         BattleScene,
         BattleInterface
-    },
-
-    data: function() {
-        return {
-            detectedCardPlayed: false
-        }
-    },
-
-    methods: {
-        
     }
+})
+
+export default class BattleManager extends Vue {
+
+    private playCard(cardId: string, index: number | null) {
+        console.log(cardId, index)
+
+    }
+
+    public mounted() {
+        this.$store.subscribeAction((action) => {
+            if(action.type === "playCurrentlySelectedCard") {
+                this.playCard(this.$store.state.board.selectedCard, action.payload)
+            }
+        })
+    }
+
 }
 </script>
 
