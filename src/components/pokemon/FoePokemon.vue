@@ -44,4 +44,6 @@ export default class FoePokemon extends Pokemon {
 <style lang="scss" scoped>
 @import './style/pokemon.scss';
 @import './style/foePokemon.scss';
+@import '../animations/pokemon/pokemon.scss';
+@import '../animations/pokemon/foePokemon.scss';
 </style>

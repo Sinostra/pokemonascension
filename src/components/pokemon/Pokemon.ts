@@ -9,6 +9,7 @@ import { Options, Vue } from 'vue-class-component';
 export default class Pokemon extends Vue {
   protected id!: string
   protected currentHealth: number = 0;
+  protected block: number = 0;
   protected isPlayingAttackAnim: boolean = false
   protected isPlayingReturnAnim: boolean = false
 
@@ -36,6 +37,40 @@ export default class Pokemon extends Vue {
 
   public mounted() {
     this.currentHealth = this.maxHealth
+  }
+
+  protected takeDamage(amount: number, ignoreBlock: boolean = false): void {
+    let damageDealt: number = 0
+
+    if(!ignoreBlock && this.block > 0) {
+      if(this.block >= amount) {
+        this.block -= amount
+      }
+
+      else {
+        damageDealt = amount - this.block
+        this.block = 0
+      }
+    }
+
+    else {
+      damageDealt = amount
+    }
+
+    if(this.currentHealth > damageDealt) {
+      this.currentHealth -= damageDealt
+    }
+
+    else {
+      this.currentHealth = 0
+      this.playReturnAnim()
+    }
+  }
+
+  protected heal(amount: number) {
+    const projectedHealthAmount = this.currentHealth + amount
+    if(projectedHealthAmount > this.maxHealth) this.currentHealth = this.maxHealth
+    else this.currentHealth = projectedHealthAmount
   }
 
   protected getHealthBarPercent(): number {

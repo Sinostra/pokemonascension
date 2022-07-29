@@ -1,7 +1,7 @@
 <template>
-    <div class="pokemon-wrapper" :style="playerPosition">
+    <div class="pokemon-wrapper" :style="playerPosition" :class="animClass">
       <div class="size-wrapper" :style="{'width': $store.state.pokedex.constantDex[id]['size'] + '%'}">
-        <img :src="spritePath" :class="animClass">
+        <img :src="spritePath">
         <div class="healthBar-infos-wrapper">
           <div class="healthBar">
             <div class="currentHealth" :class="healthBarClass" :style="{'width': getHealthBarPercent() + '%'}"></div>
@@ -26,9 +26,6 @@ export default class PlayerPokemon extends Pokemon {
     return `left: ${this.$store.state.backgrounds.slots[currentBackground]['player']['left']}%; bottom: ${this.$store.state.backgrounds.slots[currentBackground]['player']['bottom']}%;`
   }
 
-  private inflictDamage() {
-    this.currentHealth--
-  }
 
   public mounted() {
     // setTimeout(() => {this.playReturnAnim()}, 1000)
@@ -36,7 +33,7 @@ export default class PlayerPokemon extends Pokemon {
       // console.log(action.type)
       if(action.type === "clickPlayer") {
         console.log(action.type)
-        this.inflictDamage()
+        this.takeDamage(10)
       }
       // console.log(action.payload)
     })
@@ -48,4 +45,6 @@ export default class PlayerPokemon extends Pokemon {
 <style lang="scss" scoped>
 @import './style/pokemon.scss';
 @import './style/playerPokemon.scss';
+@import '../animations/pokemon/pokemon.scss';
+@import '../animations/pokemon/playerPokemon.scss';
 </style>

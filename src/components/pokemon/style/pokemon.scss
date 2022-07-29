@@ -3,6 +3,22 @@
   z-index: 3;
   width: 14%;
   height: 20%;
+
+  &.return {
+    img {
+      animation: return 1s linear forwards;
+    }
+
+    .healthBar-infos-wrapper {
+      display: none;
+    }
+  }
+
+  &.attack {
+    img {
+      animation: attack .35s linear;
+    }
+  }
   
   .healthBar-infos-wrapper {
     position: absolute;
@@ -38,56 +54,5 @@
         filter: drop-shadow(1px 1px 1px black);
       }
     }
-  }
-}
-
-.attack {
-  animation: attack .35s linear;
-}
-
-.return {
-  animation: return 1s linear forwards;
-}
-
-@keyframes return {
-  0% {
-    filter: none;
-  }
-
-  1% {
-    filter: brightness(10)
-  }
-
-  10% {
-    filter: brightness(10) brightness(0.5) sepia(1) hue-rotate(311deg) saturate(10) brightness(3);
-  }
-
-  20% {
-    filter: brightness(10) brightness(0.5) sepia(1) hue-rotate(311deg) saturate(10) brightness(1.8);
-  }
-
-  30% {
-    opacity: 0.8;
-  }
-
-  40% {
-    opacity: 0.6;
-  }
-
-  50% {
-    opacity: 0.4;
-  }
-
-  60% {
-    opacity: 0.2;
-  }
-
-  90% {
-    opacity: 0;
-  }
-
-  100% {
-    filter: brightness(10) brightness(0.5) sepia(1) hue-rotate(311deg) saturate(10) brightness(1.8);
-    opacity: 0;
   }
 }

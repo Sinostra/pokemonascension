@@ -14,15 +14,3 @@
     transform: scaleX(-1);
   }
 }
-
-@keyframes attack {
-  0% {
-    transform: translateX(0) scaleX(-1);
-  }
-  50% {
-    transform: translateX(100px) scaleX(-1);
-  }
-  0% {
-    transform: translateX(0) scaleX(-1);
-  }
-}
