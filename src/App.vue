@@ -5,7 +5,7 @@
   @click.right.prevent="onRightClick()">
     <Background/>
     <Interface/>
-    <BattleManager v-if="$store.state.battle.isBattleOnGoing"/>
+    <BattleManager/>
   </div>
 </template>
 

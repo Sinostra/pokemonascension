@@ -21,7 +21,8 @@ export default {
 
         discard(state, index) {
             state.discardPile.push(state.hand.splice(index, 1)[0])
-        }
+        },
+
     },
 
     actions: {
@@ -35,6 +36,7 @@ export default {
 
         discard(context, index) {
             context.commit("discard", index)
-        }
+        },
+        
     }
 }

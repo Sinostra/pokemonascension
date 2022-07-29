@@ -1,21 +1,16 @@
 <template>
     <div class="interface-wrapper" v-on:click.left="onLeftClick()" v-on:click.right="onRightClick($event)">
         <GameInterface/>
-        <ChoiceInterface v-if="!$store.state.battle.isBattleOnGoing"/>
     </div>
 </template>
 
 <script>
 import GameInterface from './interface/GameInterface.vue'
-import ChoiceInterface from './interface/ChoiceInterface.vue'
-import Pokemon from './pokemon/Pokemon'
 export default {
     name: "Interface",
 
     components: {
         GameInterface,
-        ChoiceInterface,
-        Pokemon,
     },
 
     data: function() {
