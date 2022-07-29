@@ -144,9 +144,8 @@ export default {
             context.commit('changeMaxEnergy', value)
         },
 
-        clickPlayer(context) {
-            // context.commit('clickPlayer')
-        }
+        clickPlayer() {},
+        leftClick() {}
     },
     getters: {
         getTurn: state => {

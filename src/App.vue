@@ -48,7 +48,7 @@ export default {
     },
 
     onLeftClick() {
-      this.$store.dispatch("discard")
+      this.$store.dispatch("leftClick")
     }
   },
 

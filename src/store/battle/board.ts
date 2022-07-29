@@ -5,7 +5,6 @@ export default {
         discardPile: [],
         exhaustPile: [],
         selectedCard: null,
-        cardBeingDiscarded: null,
         maxCardsInHand: 10
     },
 
@@ -20,15 +19,8 @@ export default {
             }
         },
 
-        discard(state) {
-            if(state.selectedCard !== null && state.cardBeingDiscarded === null) {
-                state.cardBeingDiscarded = state.selectedCard
-                state.selectedCard = null
-                setTimeout(() => {
-                    state.discardPile.push(state.hand.splice(state.cardBeingDiscarded, 1)[0])
-                    state.cardBeingDiscarded = null
-                }, 500)
-            }
+        discard(state, index) {
+            state.discardPile.push(state.hand.splice(index, 1)[0])
         }
     },
 
@@ -41,8 +33,8 @@ export default {
             context.commit("draw")
         },
 
-        discard(context) {
-            context.commit("discard")
+        discard(context, index) {
+            context.commit("discard", index)
         }
     }
 }

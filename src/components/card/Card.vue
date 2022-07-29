@@ -16,17 +16,29 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import { Watch } from 'vue-property-decorator'
 
 @Options({
   name: "Card",
   props: {
     id: String,
+    state: String
   }
 })
 
 export default class Card extends Vue {
   private id!: string
+  private state!: string
   private isPlayingDrawAnim: boolean = false
+  private isPlayingDiscardFromSelectAnim: boolean = false
+  private isPlayingDiscardFromHand: boolean = false
+
+  @Watch('state')
+  onStateChanged(newVal: string) {
+    if(newVal === 'discarded') {
+      this.playDiscardFromSelectAnim()
+    }
+  }
 
   public mounted() {
     this.playDrawAnim()
@@ -34,9 +46,11 @@ export default class Card extends Vue {
 
   get cardClass(): string {
     const type: string = this.$store.state.cards.dataCards[this.id]['type']
-    const locked = this.$store.state.board.cardBeingDiscarded !== null ? 'locked' : ''
+    // const locked = this.$store.state.board.cardBeingDiscarded !== null ? 'locked' : ''
     const draw = this.isPlayingDrawAnim ? 'draw' : ''
-    return `${type} ${draw} ${locked}`
+    const discardFromSelect = this.isPlayingDiscardFromSelectAnim ? 'discardFromSelect' : ''
+    const discardFromHand = this.isPlayingDiscardFromHand ? 'dicardFromHand' : ''
+    return `${type} ${draw} ${discardFromSelect} ${discardFromHand}`
   }
 
   get background() {
@@ -72,6 +86,26 @@ export default class Card extends Vue {
     if(!this.isPlayingDrawAnim) {
       this.isPlayingDrawAnim = true
       setTimeout(() => { this.isPlayingDrawAnim = false }, 1000 )
+    }
+  }
+
+  playDiscardFromSelectAnim() {
+    if(!this.isPlayingDiscardFromSelectAnim) {
+      this.isPlayingDiscardFromSelectAnim = true
+      setTimeout(() => {
+        this.isPlayingDiscardFromSelectAnim = false
+        this.$emit('discardAnimEnded')
+      }, 500 )
+    }
+  }
+
+  playDiscardFromHandAnim() {
+    if(!this.isPlayingDiscardFromHand) {
+      this.isPlayingDiscardFromHand = true
+      setTimeout(() => {
+        this.isPlayingDiscardFromHand = false
+        this.$emit('discardAnimEnded')
+      }, 500 )
     }
   }
 }

@@ -3,9 +3,10 @@
         <Card v-for="(card, index) in $store.state.board.hand"
             :key="index"
             :id="card"
+            :state="getState(index)"
             :style="getCardPosition(index)"
-            :class="isBeingDiscarded(index)"
             @cardClicked="selectCard(index)"
+            @discardAnimEnded="discard()"
         >
         </Card>
     </div>
@@ -22,7 +23,8 @@ import Card from '../card/Card.vue'
     }
 })
 export default class Hand extends Vue {
-    private discardAll: boolean = false;
+    private cardsBeingDiscarded: number[] = []
+
     private getCardPosition(index: number): string {
 
         const selectedCardStyle = 'transform : rotate(0deg) scale(1.2); left: 20%; bottom: 153%;'
@@ -86,19 +88,33 @@ export default class Hand extends Vue {
         return `transform : rotate(${finalRotate}deg); left: ${finalLeft}%; bottom: ${finalBottom}%;`
     }
 
+    getState(index): string {
+        return this.cardsBeingDiscarded.includes(index) ? 'discarded' : ''
+    }
+
     private selectCard(index): void {
         this.$store.dispatch("selectCard", index)
     }
 
-    private isBeingDiscarded(index): string {
-        if(index === this.$store.state.board.cardBeingDiscarded) return 'discard'
-        if(this.discardAll) {
-            return 'dicardFromHand'
-        }
-        else return ''
+    private addToDiscard(index): void {
+        this.cardsBeingDiscarded.push(index)
+    }
+
+    private discard(): void {
+        this.$store.dispatch("discard", this.cardsBeingDiscarded.shift())
     }
 
     public mounted() {
+
+        this.$store.subscribeAction((action) => {
+            if(action.type === "leftClick") {
+                if(this.$store.state.board.selectedCard !== null) {
+                    this.addToDiscard(this.$store.state.board.selectedCard)
+                    this.$store.dispatch("selectCard", null)
+                }
+            }
+        })
+
         const drawCard = () => {
             if(this.$store.state.board.hand.length < this.$store.state.board.maxCardsInHand && this.$store.state.board.drawPile.length) {
                 setTimeout(() => {
