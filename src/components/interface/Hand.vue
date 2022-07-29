@@ -107,11 +107,11 @@ export default class Hand extends Vue {
                 }, 500)
             }
 
-            else {
-                setTimeout(() => {
-                    this.discardAll = true
-                }, 2000)
-            }
+            // else {
+            //     setTimeout(() => {
+            //         this.discardAll = true
+            //     }, 2000)
+            // }
         }
 
         drawCard()

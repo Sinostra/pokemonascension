@@ -26,16 +26,16 @@ import { Options, Vue } from "vue-class-component";
 
 export default class Card extends Vue {
   private id!: string
-  private drawAnimationDone: boolean = false
+  private isPlayingDrawAnim: boolean = false
 
   public mounted() {
-    setTimeout(() => {this.drawAnimationDone = true}, 1000)
+    this.playDrawAnim()
   }
 
   get cardClass(): string {
     const type: string = this.$store.state.cards.dataCards[this.id]['type']
     const locked = this.$store.state.board.cardBeingDiscarded !== null ? 'locked' : ''
-    const draw = this.drawAnimationDone ? '' : 'draw'
+    const draw = this.isPlayingDrawAnim ? 'draw' : ''
     return `${type} ${draw} ${locked}`
   }
 
@@ -66,6 +66,13 @@ export default class Card extends Vue {
     const fontSize = 'font-size: ' + (this.$store.state.settings.baseFontSize) * multiplier + 'px;'
     const background = 'background-image :url(' + this.categoryBackground + ');'
     return fontSize + background
+  }
+
+  playDrawAnim() {
+    if(!this.isPlayingDrawAnim) {
+      this.isPlayingDrawAnim = true
+      setTimeout(() => { this.isPlayingDrawAnim = false }, 1000 )
+    }
   }
 }
 </script>
