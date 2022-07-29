@@ -94,9 +94,18 @@ export default class Hand extends Vue {
     }
 
     private selectCard(index): void {
-        this.selectedCard = index
-        if(index !== null ) this.$store.dispatch("selectCard", this.$store.state.board.hand[index])
-        else this.$store.dispatch("selectCard", null)
+        
+        if(index !== null){
+            const clickedCardCost = this.$store.state.cards.dataCards[this.$store.state.board.hand[index]]['cost']
+            if(clickedCardCost <= this.$store.state.battle.currentEnergy) {
+                this.selectedCard = index
+                this.$store.dispatch("selectCard", this.$store.state.board.hand[index])
+            }
+        } 
+        else {
+            this.selectedCard = null
+            this.$store.dispatch("selectCard", null)
+        } 
         
     }
 

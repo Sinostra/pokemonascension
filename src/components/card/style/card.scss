@@ -14,8 +14,8 @@
     transition: left .3s, bottom .3s ease-out;
     transform-style: preserve-3d;
 
-    &.locked {
-        pointer-events: none;
+    &.playable {
+        filter: drop-shadow(0 0 0.75rem green);
     }
 
     &.normal {
@@ -143,8 +143,8 @@
     .illustration {
         position: absolute;
         top: 13.5%;
-        left: 9.9%;
-        width: 80%;
+        left: 5.9%;
+        width: 88%;
         height: 37.1%;
         border-radius: 1px;
         background-size: 100% 100%;

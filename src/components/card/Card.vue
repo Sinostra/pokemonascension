@@ -46,10 +46,13 @@ export default class Card extends Vue {
 
   get cardClass(): string {
     const type: string = this.$store.state.cards.dataCards[this.id]['type']
-    // const locked = this.$store.state.board.cardBeingDiscarded !== null ? 'locked' : ''
     const draw = this.isPlayingDrawAnim ? 'draw' : ''
+    const playable = this.$store.state.cards.dataCards[this.id]['cost'] <= this.$store.state.battle.currentEnergy ? 'playable' : ''
     const discardFromSelect = this.isPlayingDiscardFromSelectAnim ? 'discardFromSelect' : ''
     const discardFromHand = this.isPlayingDiscardFromHand ? 'dicardFromHand' : ''
+    if(!draw  && !discardFromSelect && !discardFromHand && playable) {
+      return `${type} ${playable}`
+    }
     return `${type} ${draw} ${discardFromSelect} ${discardFromHand}`
   }
 

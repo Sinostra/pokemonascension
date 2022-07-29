@@ -5,20 +5,27 @@ export default {
         maxEnergy: 3,
     },
     mutations: {
-    },
-    actions: {
-        clickPlayer() {},
-        playCurrentlySelectedCard() {},
-        discardCurrentlySelectedCard() {},
-        rightClick() {}
-    },
-    getters: {
-        getTurn: state => {
-            return state.turnCounter
+        getEnergy(state, amount: number) {
+            state.currentEnergy += amount
         },
 
-        getSwitchAllowed: state => {
-            return state.switchAllowed
+        spendEnergy(state, amount: number) {
+            state.currentEnergy -= amount
         }
-    }
+    },
+    actions: {
+
+        getEnergy(context, amount: number) {
+            context.commit("getEnergy", amount)
+        },
+
+        spendEnergy(context, amount: number) {
+            context.commit("spendEnergy", amount)
+        },
+
+        playCurrentlySelectedCard() {},
+        discardCurrentlySelectedCard() {},
+        rightClick() {},
+    },
+    getters: {}
 }

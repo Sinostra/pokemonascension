@@ -21,7 +21,9 @@ import { Options, Vue } from 'vue-class-component'
 export default class BattleManager extends Vue {
 
     private playCard(cardId: string, index: number | null) {
-        console.log(cardId, index)
+        const clickedCardCost = this.$store.state.cards.dataCards[cardId]['cost']
+        this.$store.dispatch("spendEnergy", clickedCardCost)
+        this.$store.dispatch("discardCurrentlySelectedCard")
 
     }
 
