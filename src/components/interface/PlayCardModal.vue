@@ -2,7 +2,7 @@
     <div class="modal-wrapper">
         <div v-if="!$store.state.cards.dataCards[$store.state.board.selectedCard]['target']">
             <div>Jouer cette carte ?</div>
-            <div class="modal-btn" @click="onClick()">Oui</div>
+            <div class="modal-btn">Oui</div>
             <div class="modal-btn" @click="onClickCancel()">Non</div>
         </div>
         <div v-else>

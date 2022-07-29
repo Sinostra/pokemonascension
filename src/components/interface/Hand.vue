@@ -112,9 +112,9 @@ export default class Hand extends Vue {
 
         this.$store.subscribeAction((action) => {
             if(action.type === "leftClick") {
-                if(this.$store.state.board.selectedCard !== null) {
-                    this.addToDiscard(this.$store.state.board.selectedCard)
-                    this.$store.dispatch("selectCard", null)
+                if(this.selectedCard !== null) {
+                    this.addToDiscard(this.selectedCard)
+                    this.selectCard(null)
                 }
             }
         })
