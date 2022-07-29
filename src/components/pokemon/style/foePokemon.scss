@@ -16,6 +16,11 @@
     img {
       top: 0;
       width: 100%;
+
+      &.target {
+        filter: drop-shadow(0 0 0.75rem crimson);
+        cursor: pointer;
+      }
     }
   }
 }
