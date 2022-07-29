@@ -72,4 +72,6 @@ export default class Card extends Vue {
 
 <style lang="scss" scoped>
 @import './style/card.scss';
+@import '../animations/cards/draw.scss';
+@import '../animations/cards/discard.scss';
 </style>

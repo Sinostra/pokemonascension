@@ -22,6 +22,7 @@ import Card from '../card/Card.vue'
     }
 })
 export default class Hand extends Vue {
+    private discardAll: boolean = false;
     private getCardPosition(index: number): string {
 
         const selectedCardStyle = 'transform : rotate(0deg) scale(1.2); left: 20%; bottom: 153%;'
@@ -91,6 +92,9 @@ export default class Hand extends Vue {
 
     private isBeingDiscarded(index): string {
         if(index === this.$store.state.board.cardBeingDiscarded) return 'discard'
+        if(this.discardAll) {
+            return 'dicardFromHand'
+        }
         else return ''
     }
 
@@ -101,6 +105,12 @@ export default class Hand extends Vue {
                     this.$store.dispatch("draw")
                     drawCard()
                 }, 500)
+            }
+
+            else {
+                setTimeout(() => {
+                    this.discardAll = true
+                }, 2000)
             }
         }
 

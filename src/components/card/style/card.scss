@@ -186,76 +186,11 @@
 }
 
 .discard {
-    animation: discard .5s linear;
+    animation: discardFromSelection .5s linear;
     pointer-events: none;
 }
 
-@keyframes draw {
-    0% {
-      left: -1%;
-      top: 17%;
-      transform: scale(0.1);
-    }
-    10% {
-        left: 5%;
-        top: -23%;
-        transform: scale(0.2);
-    }
-    20% {
-        left: 10%;
-        top: -73%;
-        transform: scale(0.2);
-    }
-    30% {
-        left: 15%;
-        top: -123%;
-        transform: scale(0.6);
-    }
-    40% {
-        left: 20%;
-        top: -153%;
-        transform: scale(0.8);
-    }
-    50% {
-        left: 25%;
-        top: -153%;
-        transform: scale(1);
-    }
-    60% {
-        left: 30%;
-        top: -123%;
-    }
-    70% {
-        left: 35%;
-        top: -93%;
-    }
-    80% {
-        left: 40%;
-        top: -63%;
-    }
-    90% {
-        left: 45%;
-        top: -33%;
-    }
-    99% {
-        left: 45%;
-        top: 0%;
-    }
-    100% {
-        left: auto;
-        top: auto;
-    }
-}
-
-@keyframes discard {
-    0% {
-        left: 20%;
-        bottom: 153%;
-        transform: scale(1.2);
-    }
-    100% {
-        left: 91%;
-        bottom: -17%;
-        transform: scale(0.1);
-    }
+.dicardFromHand {
+    animation: discardFromHand .5s linear;
+    pointer-events: none;
 }
