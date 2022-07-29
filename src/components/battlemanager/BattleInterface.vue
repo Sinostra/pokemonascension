@@ -8,9 +8,8 @@
         <div class="drawPile" :style="getFontSize()">
             <div class="number text">{{$store.state.board.drawPile.length}}</div>
         </div>
-        <div>
-            <Hand></Hand>
-        </div>
+        <Hand></Hand>
+        <PlayCardModal v-if="$store.state.board.selectedCard !== null"></PlayCardModal>
         <div class="discardPile" :style="getFontSize()">
             <div class="number text">{{$store.state.board.discardPile.length}}</div>
         </div>
@@ -23,11 +22,13 @@
 
 <script>
 import Hand from '../interface/Hand.vue'
+import PlayCardModal from '../interface/PlayCardModal.vue'
 export default {
     name: 'BattleInterface',
 
     components: {
-        Hand
+        Hand,
+        PlayCardModal
     },
 
 

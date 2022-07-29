@@ -8,7 +8,8 @@ export default {
     },
     actions: {
         clickPlayer() {},
-        leftClick() {}
+        leftClick() {},
+        rightClick() {}
     },
     getters: {
         getTurn: state => {

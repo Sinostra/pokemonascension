@@ -44,7 +44,7 @@ export default {
     },
 
     onRightClick() {
-      this.$store.dispatch("selectCard", null)
+      this.$store.dispatch("rightClick")
     },
 
     onLeftClick() {

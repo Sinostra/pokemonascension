@@ -24,12 +24,13 @@ import Card from '../card/Card.vue'
 })
 export default class Hand extends Vue {
     private cardsBeingDiscarded: number[] = []
+    private selectedCard: number | null = null
 
     private getCardPosition(index: number): string {
 
         const selectedCardStyle = 'transform : rotate(0deg) scale(1.2); left: 20%; bottom: 153%;'
 
-        if(index === this.$store.state.board.selectedCard) {
+        if(index === this.selectedCard) {
             return selectedCardStyle
         }
 
@@ -93,7 +94,10 @@ export default class Hand extends Vue {
     }
 
     private selectCard(index): void {
-        this.$store.dispatch("selectCard", index)
+        this.selectedCard = index
+        if(index !== null ) this.$store.dispatch("selectCard", this.$store.state.board.hand[index])
+        else this.$store.dispatch("selectCard", null)
+        
     }
 
     private addToDiscard(index): void {
@@ -112,6 +116,12 @@ export default class Hand extends Vue {
                     this.addToDiscard(this.$store.state.board.selectedCard)
                     this.$store.dispatch("selectCard", null)
                 }
+            }
+        })
+
+        this.$store.subscribeAction((action) => {
+            if(action.type === "rightClick") {
+                this.selectCard(null)
             }
         })
 
