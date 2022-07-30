@@ -2,7 +2,7 @@ export default {
     state: {
         drawPile: [],
         hand: [],
-        discardPile: ["002", "003"],
+        discardPile: ["002", "003", "002", "002",],
         exhaustPile: [],
         selectedCard: null,
         maxCardsInHand: 10
@@ -48,7 +48,7 @@ export default {
         },
 
         removeCardFromHand(context, index) {
-            context.commit("removeCardFromHand", index)
+            context.commit("removeCardFromHand", index.index)
         },
 
         addCardToDiscardPile(context, id) {

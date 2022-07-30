@@ -22,7 +22,7 @@ export default class BattleManager extends Vue {
 
     private playCard(cardId: string, targetIndex: number | null) {
         this.$store.dispatch("discardCurrentlySelectedCard")
-        console.log(this.$store.state.board.hand)
+        // console.log(this.$store.state.board.hand)
         const cardBeingPlayed = this.$store.state.cards.dataCards[cardId]
         this.$store.dispatch("spendEnergy", cardBeingPlayed['cost'])
         

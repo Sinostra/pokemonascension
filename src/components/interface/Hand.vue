@@ -140,7 +140,7 @@ export default class Hand extends Vue {
             }
         })
 
-        this.draw(6)
+        this.draw(2)
 
     }
 }
