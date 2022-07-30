@@ -21,8 +21,24 @@ import { Options, Vue } from 'vue-class-component'
 export default class BattleManager extends Vue {
 
     private playCard(cardId: string, index: number | null) {
-        const clickedCardCost = this.$store.state.cards.dataCards[cardId]['cost']
-        this.$store.dispatch("spendEnergy", clickedCardCost)
+        const cardBeingPlayed = this.$store.state.cards.dataCards[cardId]
+        this.$store.dispatch("spendEnergy", cardBeingPlayed['cost'])
+
+        if(cardBeingPlayed['draw']) {
+            this.$store.dispatch("cardToBeDrawn", cardBeingPlayed['draw'])
+        }
+
+        if(cardBeingPlayed['damage']) {
+
+        }
+
+        if(cardBeingPlayed['block']) {
+
+        }
+
+        if(cardBeingPlayed['energy']) {
+            this.$store.dispatch("getEnergy", cardBeingPlayed['energy'])
+        }
         this.$store.dispatch("discardCurrentlySelectedCard")
 
     }
@@ -32,7 +48,12 @@ export default class BattleManager extends Vue {
             if(action.type === "playCurrentlySelectedCard") {
                 this.playCard(this.$store.state.board.selectedCard, action.payload)
             }
+
+            if(action.type === "foePokemonHasBeenClicked" && this.$store.state.cards.dataCards[this.$store.state.board.selectedCard]['target']) {
+                this.playCard(this.$store.state.board.selectedCard, action.payload)
+            }
         })
+
     }
 
 }

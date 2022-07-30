@@ -109,6 +109,18 @@ export default class Hand extends Vue {
         
     }
 
+    private draw(amount): void {
+        if(this.$store.state.board.hand.length < this.$store.state.board.maxCardsInHand) {
+            if(amount > 0) {
+                this.$store.dispatch("draw")
+                amount --
+                setTimeout(() => {
+                    this.draw(amount)
+                }, 500)
+            }
+        }
+    }
+
     private addToDiscard(index): void {
         this.cardsBeingDiscarded.push(index)
     }
@@ -126,30 +138,18 @@ export default class Hand extends Vue {
                     this.selectCard(null)
                 }
             }
-        })
 
-        this.$store.subscribeAction((action) => {
             if(action.type === "rightClick") {
                 this.selectCard(null)
             }
+
+            if(action.type === "cardToBeDrawn") {
+                this.draw(action.payload)
+            }
         })
 
-        const drawCard = () => {
-            if(this.$store.state.board.hand.length < this.$store.state.board.maxCardsInHand && this.$store.state.board.drawPile.length) {
-                setTimeout(() => {
-                    this.$store.dispatch("draw")
-                    drawCard()
-                }, 500)
-            }
+        this.draw(6)
 
-            // else {
-            //     setTimeout(() => {
-            //         this.discardAll = true
-            //     }, 2000)
-            // }
-        }
-
-        drawCard()
     }
 }
 

@@ -23,9 +23,12 @@ export default {
             context.commit("spendEnergy", amount)
         },
 
+        foePokemonHasBeenClicked() {},
         playCurrentlySelectedCard() {},
         discardCurrentlySelectedCard() {},
         rightClick() {},
+
+        cardToBeDrawn() {},
     },
     getters: {}
 }

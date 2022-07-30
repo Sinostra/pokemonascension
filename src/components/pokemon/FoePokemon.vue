@@ -39,7 +39,9 @@ export default class FoePokemon extends Pokemon {
   }
 
   private onClick(): void {
-    this.$store.dispatch("playCurrentlySelectedCard", this.index)
+    if(this.$store.state.board.selectedCard) {
+      this.$store.dispatch("foePokemonHasBeenClicked", this.index)
+    }
   }
 }
 

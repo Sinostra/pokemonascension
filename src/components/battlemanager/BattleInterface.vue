@@ -89,6 +89,10 @@ export default {
         },
 
 
+        endTurn() {
+            this.$store.dispatch("dumpDiscardIntoDraw")
+        }
+
     },
 
 } 
