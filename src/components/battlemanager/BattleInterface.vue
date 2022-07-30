@@ -10,6 +10,7 @@
         </div>
         <Hand></Hand>
         <PlayCardModal v-if="$store.state.board.selectedCard !== null"></PlayCardModal>
+        <DiscardManager></DiscardManager>
         <div class="discardPile" :style="getFontSize()">
             <div class="number text">{{$store.state.board.discardPile.length}}</div>
         </div>
@@ -23,12 +24,14 @@
 <script>
 import Hand from '../interface/Hand.vue'
 import PlayCardModal from '../interface/PlayCardModal.vue'
+import DiscardManager from '../interface/DiscardManager.vue'
 export default {
     name: 'BattleInterface',
 
     components: {
         Hand,
-        PlayCardModal
+        PlayCardModal,
+        DiscardManager
     },
 
 
@@ -40,57 +43,13 @@ export default {
 
     methods: {
 
-        drawCards(amount) {
-
-            //Si il y a en tout moins de cartes que ce qui ddoit être pioché (pioche et défausse), on ne pioche que ce que l'on peut
-            if(amount > this.drawPile.length + this.discardPile.length) {
-                var difference = amount - (this.drawPile.length + this.discardPile.length)
-                amount -= difference
-            }
-
-            //Si il y a moins de cartes dans la pioche que ce que l'on doit piocher
-            if (amount > this.drawPile.length) {
-                this.dumpInto(this.discardPile, this.drawPile)
-            }
-
-            for(var i = 0; i < amount; i++) {
-
-                //On vérifie que la main n'est pas pleine
-                if (this.playerHand.length < this.maxHandSize) {
-                    this.moveCard(this.drawPile, this.playerHand)
-                    this.playDrawAnimation(this.playerHand.length - 1)
-                }
-
-                else this.moveCard(this.drawPile, this.discardPile)
-            }
-            
-        },
-
-        //Utilisé exclusivement pour défausser depuis la main du joueur
-        discard(index) {
-            this.discardPile.push(this.playerHand.splice(index, 1)[0])
-            this.playDiscardAnimation(this.discardPile.length - 1)
-        },
-
-        //Utilisé pour piocher
-        moveCard(from, to) {
-            to.push(from.shift())
-        },
-
-        //Appel en boucle de movecard pour passer tout un tableau dans un autre
-        dumpInto(from, to) {
-            for(var i = from.length - 1; i >= 0; i--) {
-                this.moveCard(from, to)
-            }
-        },
-
         getFontSize(multiplier = 1) {
             return 'font-size: ' + (this.$store.state.baseFontSize) * multiplier + 'px;'
         },
 
 
         endTurn() {
-            this.$store.dispatch("dumpDiscardIntoDraw")
+            
         }
 
     },

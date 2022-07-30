@@ -2,7 +2,7 @@ export default {
     state: {
         drawPile: [],
         hand: [],
-        discardPile: ["002", "003", ],
+        discardPile: ["002", "003"],
         exhaustPile: [],
         selectedCard: null,
         maxCardsInHand: 10
@@ -28,14 +28,12 @@ export default {
             }
         },
 
-        discard(state, index) {
-            state.discardPile.push(state.hand.splice(index, 1)[0])
+        removeCardFromHand(state, index) {
+            state.hand.splice(index, 1)[0]
         },
 
-        dumpDiscardIntoDraw(state) {
-            for (let i = state.discardPile.length; i > 0; i--) {
-                state.drawPile.push(state.discardPile.shift())
-            }
+        addCardToDiscardPile(state, id) {
+            state.discardPile.push(id)
         }
 
     },
@@ -49,13 +47,13 @@ export default {
             context.commit("draw")
         },
 
-        discard(context, index) {
-            context.commit("discard", index)
+        removeCardFromHand(context, index) {
+            context.commit("removeCardFromHand", index)
         },
 
-        dumpDiscardIntoDraw(context) {
-            context.commit("dumpDiscardIntoDraw")
-        },
+        addCardToDiscardPile(context, id) {
+            context.commit("addCardToDiscardPile", id)
+        }
         
     }
 }

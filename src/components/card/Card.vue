@@ -16,7 +16,6 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { Watch } from 'vue-property-decorator'
 
 @Options({
   name: "Card",
@@ -33,16 +32,14 @@ export default class Card extends Vue {
   private isPlayingDiscardFromSelectAnim: boolean = false
   private isPlayingDiscardFromHand: boolean = false
 
-  @Watch('state')
-  onStateChanged(newVal: string) {
-    if(newVal === 'discarded') {
-      this.playDiscardFromSelectAnim()
-    }
-  }
-
   public mounted() {
-    this.playDrawAnim()
-    console.log('mounted')
+    
+    if(this.state === 'drawn') {
+      console.log('mounted')
+      this.playDrawAnim()
+    }
+    
+    else if(this.state === 'discardedFromSelect') this.playDiscardFromSelectAnim()
   }
 
   get cardClass(): string {

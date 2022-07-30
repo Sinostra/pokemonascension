@@ -3,10 +3,9 @@
         <Card v-for="(card, index) in $store.state.board.hand"
             :key="index"
             :id="card"
-            :state="getState(index)"
+            :state="'drawn'"
             :style="getCardPosition(index)"
             @cardClicked="selectCard(index)"
-            @discardAnimEnded="discard()"
         >
         </Card>
     </div>
@@ -23,7 +22,6 @@ import Card from '../card/Card.vue'
     }
 })
 export default class Hand extends Vue {
-    private cardsBeingDiscarded: number[] = []
     private selectedCard: number | null = null
 
     private getCardPosition(index: number): string {
@@ -89,9 +87,6 @@ export default class Hand extends Vue {
         return `transform : rotate(${finalRotate}deg); left: ${finalLeft}%; bottom: ${finalBottom}%;`
     }
 
-    getState(index): string {
-        return this.cardsBeingDiscarded.includes(index) ? 'discarded' : ''
-    }
 
     private selectCard(index): void {
         
@@ -121,12 +116,8 @@ export default class Hand extends Vue {
         }
     }
 
-    private addToDiscard(index): void {
-        this.cardsBeingDiscarded.push(index)
-    }
-
-    private discard(): void {
-        this.$store.dispatch("discard", this.cardsBeingDiscarded.shift())
+    private discard(index): void {
+        this.$store.dispatch("removeCardFromHand", {index, id: this.$store.state.board.hand[index]})
     }
 
     public mounted() {
@@ -134,7 +125,7 @@ export default class Hand extends Vue {
         this.$store.subscribeAction((action) => {
             if(action.type === "discardCurrentlySelectedCard") {
                 if(this.selectedCard !== null) {
-                    this.addToDiscard(this.selectedCard)
+                    this.discard(this.selectedCard)
                     this.selectCard(null)
                 }
             }

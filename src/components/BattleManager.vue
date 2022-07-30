@@ -40,7 +40,7 @@ export default class BattleManager extends Vue {
             this.$store.dispatch("getEnergy", cardBeingPlayed['energy'])
         }
 
-        this.$store.dispatch("discardCurrentlySelectedCard")
+        setTimeout(() => {this.$store.dispatch("discardCurrentlySelectedCard")}, 1)
 
 
     }
