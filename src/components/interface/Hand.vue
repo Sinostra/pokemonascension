@@ -117,6 +117,8 @@ export default class Hand extends Vue {
     }
 
     private discard(index): void {
+        this.selectCard(null)
+        console.log(this.selectedCard)
         this.$store.dispatch("removeCardFromHand", {index, id: this.$store.state.board.hand[index]})
     }
 
@@ -126,7 +128,6 @@ export default class Hand extends Vue {
             if(action.type === "discardCurrentlySelectedCard") {
                 if(this.selectedCard !== null) {
                     this.discard(this.selectedCard)
-                    this.selectCard(null)
                 }
             }
 

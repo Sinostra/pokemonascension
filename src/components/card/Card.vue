@@ -35,10 +35,10 @@ export default class Card extends Vue {
   public mounted() {
     
     if(this.state === 'drawn') {
-      console.log('mounted')
+      // console.log('mounted')
       this.playDrawAnim()
     }
-    
+
     else if(this.state === 'discardedFromSelect') this.playDiscardFromSelectAnim()
   }
 

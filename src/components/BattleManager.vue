@@ -20,9 +20,10 @@ import { Options, Vue } from 'vue-class-component'
 
 export default class BattleManager extends Vue {
 
-    private playCard(cardId: string, index: number | null) {
+    private playCard(cardId: string, targetIndex: number | null) {
         const cardBeingPlayed = this.$store.state.cards.dataCards[cardId]
         this.$store.dispatch("spendEnergy", cardBeingPlayed['cost'])
+        this.$store.dispatch("discardCurrentlySelectedCard")
 
         if(cardBeingPlayed['draw']) {
             this.$store.dispatch("cardToBeDrawn", cardBeingPlayed['draw'])
@@ -39,10 +40,6 @@ export default class BattleManager extends Vue {
         if(cardBeingPlayed['energy']) {
             this.$store.dispatch("getEnergy", cardBeingPlayed['energy'])
         }
-
-        setTimeout(() => {this.$store.dispatch("discardCurrentlySelectedCard")}, 1)
-
-
     }
 
     public mounted() {
