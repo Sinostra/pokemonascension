@@ -42,6 +42,7 @@ export default class Card extends Vue {
 
   public mounted() {
     this.playDrawAnim()
+    console.log('mounted')
   }
 
   get cardClass(): string {
@@ -50,6 +51,7 @@ export default class Card extends Vue {
     const playable = this.$store.state.cards.dataCards[this.id]['cost'] <= this.$store.state.battle.currentEnergy ? 'playable' : ''
     const discardFromSelect = this.isPlayingDiscardFromSelectAnim ? 'discardFromSelect' : ''
     const discardFromHand = this.isPlayingDiscardFromHand ? 'dicardFromHand' : ''
+    
     if(!draw  && !discardFromSelect && !discardFromHand && playable) {
       return `${type} ${playable}`
     }

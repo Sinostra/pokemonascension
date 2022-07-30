@@ -2,7 +2,7 @@ export default {
     state: {
         drawPile: [],
         hand: [],
-        discardPile: ["001", "002", "003", "004", "005", "001"],
+        discardPile: ["002", "003", ],
         exhaustPile: [],
         selectedCard: null,
         maxCardsInHand: 10
@@ -23,7 +23,7 @@ export default {
                 for (let i = state.discardPile.length; i > 0; i--) {
                     state.drawPile.push(state.discardPile.shift())
                 }
-                
+
                 state.hand.push(state.drawPile.shift())
             }
         },

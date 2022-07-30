@@ -39,7 +39,9 @@ export default class BattleManager extends Vue {
         if(cardBeingPlayed['energy']) {
             this.$store.dispatch("getEnergy", cardBeingPlayed['energy'])
         }
+
         this.$store.dispatch("discardCurrentlySelectedCard")
+
 
     }
 
