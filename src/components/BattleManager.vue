@@ -9,6 +9,7 @@
 import BattleScene from './battlemanager/BattleScene.vue'
 import BattleInterface from './battlemanager/BattleInterface.vue'
 import { Options, Vue } from 'vue-class-component'
+import { Watch } from 'vue-property-decorator'
 
 @Options({
     name: "BattleManager",
@@ -19,28 +20,51 @@ import { Options, Vue } from 'vue-class-component'
 })
 
 export default class BattleManager extends Vue {
+    private cardsAreBeingDrawn: boolean = false
+    private cardIsBeingPlayed: boolean = false
+    private cardBeingPlayed = {}
+
+    @Watch('cardsAreBeingDrawn')
+    onStateChanged(newVal: boolean) {
+        if(!newVal && this.cardIsBeingPlayed) {
+            this.$store.dispatch("cardDonePlayed")
+            this.cardIsBeingPlayed = false
+            this.cardBeingPlayed = {}
+        }
+    }
 
     private playCard(cardId: string, targetIndex: number | null) {
+        this.cardIsBeingPlayed = true
+        this.cardBeingPlayed = this.$store.state.cards.dataCards[cardId]
         this.$store.dispatch("discardCurrentlySelectedCard")
         // console.log(this.$store.state.board.hand)
-        const cardBeingPlayed = this.$store.state.cards.dataCards[cardId]
-        this.$store.dispatch("spendEnergy", cardBeingPlayed['cost'])
+        
         
 
-        if(cardBeingPlayed['draw']) {
-            this.$store.dispatch("cardToBeDrawn", cardBeingPlayed['draw'])
-        }
+    }
 
-        if(cardBeingPlayed['damage']) {
+    private playCardEffects() {
 
-        }
 
-        if(cardBeingPlayed['block']) {
+        if(this.cardBeingPlayed !== {}) {
+            this.$store.dispatch("spendEnergy", this.cardBeingPlayed['cost'])
+            
+            if(this.cardBeingPlayed['draw']) {
+                this.$store.dispatch("cardToBeDrawn", this.cardBeingPlayed['draw'])
+            }
+    
+            if(this.cardBeingPlayed['damage']) {
+    
+            }
+    
+            if(this.cardBeingPlayed['block']) {
+    
+            }
+    
+            if(this.cardBeingPlayed['energy']) {
+                this.$store.dispatch("getEnergy", this.cardBeingPlayed['energy'])
+            }
 
-        }
-
-        if(cardBeingPlayed['energy']) {
-            this.$store.dispatch("getEnergy", cardBeingPlayed['energy'])
         }
     }
 
@@ -52,6 +76,20 @@ export default class BattleManager extends Vue {
 
             if(action.type === "foePokemonHasBeenClicked" && this.$store.state.cards.dataCards[this.$store.state.board.selectedCard]['target']) {
                 this.playCard(this.$store.state.board.selectedCard, action.payload)
+            }
+
+            if(action.type === "draw") {
+                this.cardsAreBeingDrawn = true
+            }
+
+            if(action.type === "drawIsDone") {
+                this.cardsAreBeingDrawn = false
+            }
+
+            if(action.type === "removeCardFromHand") {
+                if(this.cardIsBeingPlayed) {
+                    this.playCardEffects()
+                }
             }
         })
 

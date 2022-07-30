@@ -29,6 +29,8 @@ export default {
         rightClick() {},
 
         cardToBeDrawn() {},
+        drawIsDone() {},
+        cardDonePlayed() {},
     },
     getters: {}
 }

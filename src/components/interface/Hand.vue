@@ -109,6 +109,7 @@ export default class Hand extends Vue {
             if(amount > 0) {
                 this.$store.dispatch("draw")
                 amount --
+                if(amount == 0) this.$store.dispatch("drawIsDone")
                 setTimeout(() => {
                     this.draw(amount)
                 }, 500)
@@ -118,7 +119,6 @@ export default class Hand extends Vue {
 
     private discard(index): void {
         this.selectCard(null)
-        // console.log(this.selectedCard)
         this.$store.dispatch("removeCardFromHand", {index, id: this.$store.state.board.hand[index]})
     }
 

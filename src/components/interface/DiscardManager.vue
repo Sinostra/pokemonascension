@@ -23,14 +23,20 @@ import Card from '../card/Card.vue'
 export default class DiscardManager extends Vue {
     private cardsBeingDiscardedFromSelect: string[] = []
 
-    private endAnim() {
-        this.$store.dispatch("addCardToDiscardPile", this.cardsBeingDiscardedFromSelect.shift())
-    }
+    // private endAnim() {
+    //     this.$store.dispatch("addCardToDiscardPile", this.cardsBeingDiscardedFromSelect.shift())
+    // }
 
     public mounted() {
         this.$store.subscribeAction((action) => {
             if(action.type === "removeCardFromHand") {
                 this.cardsBeingDiscardedFromSelect.push(action.payload.id)
+            }
+
+            if(action.type === "cardDonePlayed") {
+                for (let i = this.cardsBeingDiscardedFromSelect.length; i > 0; i--) {
+                    this.$store.dispatch("addCardToDiscardPile", this.cardsBeingDiscardedFromSelect.shift())
+                }
             }
         })
     }
