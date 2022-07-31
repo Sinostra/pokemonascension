@@ -1,6 +1,6 @@
 <template>
     <div class="being-discarded">
-        <Card v-for="(card, index) in cardsBeingDiscardedFromSelect"
+        <Card v-for="(card, index) in content"
             :key="index"
             :id="card"
             :state="'discardedFromSelect'"
@@ -18,10 +18,14 @@ import Card from '../card/Card.vue'
     name: "DiscardManager",
     components: {
         Card
+    },
+    props: {
+        content: Array,
     }
 })
 export default class DiscardManager extends Vue {
-    private cardsBeingDiscardedFromSelect: string[] = []
+
+    private content!: string[]
 
     // private endAnim() {
     //     this.$store.dispatch("addCardToDiscardPile", this.cardsBeingDiscardedFromSelect.shift())
@@ -29,13 +33,9 @@ export default class DiscardManager extends Vue {
 
     public mounted() {
         this.$store.subscribeAction((action) => {
-            if(action.type === "removeCardFromHand") {
-                this.cardsBeingDiscardedFromSelect.push(action.payload.id)
-            }
-
             if(action.type === "cardDonePlayed") {
-                for (let i = this.cardsBeingDiscardedFromSelect.length; i > 0; i--) {
-                    this.$store.dispatch("addCardToDiscardPile", this.cardsBeingDiscardedFromSelect.shift())
+                for (let i = this.content.length; i > 0; i--) {
+                    this.$store.dispatch("addCardToDiscardPile", this.content.shift())
                 }
             }
         })

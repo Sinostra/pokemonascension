@@ -5,7 +5,7 @@
             :id="card"
             :state="'drawn'"
             :style="getCardPosition(index)"
-            @cardClicked="selectCard(index)"
+            @cardClicked="onClick(index)"
         >
         </Card>
     </div>
@@ -21,13 +21,18 @@ import Card from '../card/Card.vue'
         Card
     },
     props: {
-        content: [],
+        content: Array,
+        selectedCardIndex: Number
     }
 })
 export default class Hand extends Vue {
 
     private content!: string[]
-    private selectedCardIndex: number | null = null
+    private selectedCardIndex!: number | null
+
+    private onClick(cardIndex) {
+        this.$emit("onCardClicked", cardIndex)
+    }
 
     private getCardPosition(index: number): string {
 
@@ -37,7 +42,7 @@ export default class Hand extends Vue {
             return selectedCardStyle
         }
 
-        const handSize = this.$store.state.board.hand.length
+        const handSize = this.content.length
         const evenHand = handSize % 2 == 0
 
         //Une rotation de carte
@@ -93,39 +98,14 @@ export default class Hand extends Vue {
     }
 
 
-    private selectCard(index): void {
-        if(index !== null){
-            const clickedCardCost = this.$store.state.cards.dataCards[this.content[index]]['cost']
-            if(clickedCardCost <= this.$store.state.battle.currentEnergy) {
-                this.$store.dispatch("selectCard", this.content[index])
-                this.selectedCardIndex = index  
-            }
-        } 
-        else {
-            this.selectedCardIndex = null
-            this.$store.dispatch("selectCard", null)
-        } 
-        
-    }
-
-    private discard(index): void {
-        this.selectCard(null)
-        this.$store.dispatch("removeCardFromHand", {index, id: this.content[index]})
-    }
-
     public mounted() {
 
         this.$store.subscribeAction((action) => {
-            if(action.type === "discardCurrentlySelectedCard") {
-                if(this.selectedCardIndex !== null) {
-                    this.discard(this.selectedCardIndex)
-                }
-            }
-
-            if(action.type === "rightClick") {
-                this.selectCard(null)
-            }
-            
+            // if(action.type === "discardCurrentlySelectedCard") {
+            //     if(this.selectedCardIndex !== null) {
+            //         this.discard(this.selectedCardIndex)
+            //     }
+            // }
         })
 
     }

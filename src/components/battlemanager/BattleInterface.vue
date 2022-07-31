@@ -14,11 +14,15 @@
 
         <Hand
             :content="hand"
+            :selectedCardIndex="selectedCardIndex"
+            @onCardClicked="selectCard"
         ></Hand>
 
         <PlayCardModal v-if="$store.getters.selectedCard !== null"></PlayCardModal>
 
-        <DiscardManager></DiscardManager>
+        <DiscardManager
+            :content="discardManagerContent"
+        ></DiscardManager>
 
         <div class="discardPile" :style="getFontSize()">
             <div class="number text">{{discardPile.length}}</div>
@@ -50,10 +54,27 @@ export default class BattleInterface extends Vue {
 
     private readonly maxCardsInHand: number = 10
 
+    private selectedCardIndex: number | null = null
+
     private drawPile: string[] = ["001", "002"]
     private hand: string[] = []
     private discardPile: string[] = []
     private exhaustPile: string[] = []
+
+    private discardManagerContent: string[] = []
+
+    private selectCard(cardIndex): void {
+        if(cardIndex !== null){
+            this.selectedCardIndex = cardIndex
+            this.$store.dispatch("selectCard", this.hand[cardIndex])
+            
+        } 
+        else {
+            this.selectedCardIndex = null
+            this.$store.dispatch("selectCard", null)
+        } 
+        
+    }
 
     private draw(amount): void {
         if(this.hand.length < this.maxCardsInHand) {
@@ -82,8 +103,7 @@ export default class BattleInterface extends Vue {
     }
 
     private discard(index): void {
-        this.hand.splice(index, 1)[0]
-        this.$store.dispatch("removeCardFromHand", {index, id: this.hand[index]})
+        this.discardManagerContent.push(this.hand.splice(index, 1)[0])
     }
 
     private getFontSize(multiplier = 1) {
@@ -94,6 +114,16 @@ export default class BattleInterface extends Vue {
         this.$store.subscribeAction((action) => {
             if(action.type === "cardToBeDrawn") {
                 this.draw(action.payload)
+            }
+
+            if(action.type === "rightClick") {
+                this.selectCard(null)
+            }
+
+            if(action.type === "discardCurrentlySelectedCard") {
+                const cardBeingDiscarded = this.selectedCardIndex
+                this.selectCard(null)
+                this.discard(cardBeingDiscarded)
             }
         })
 

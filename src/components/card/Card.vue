@@ -1,5 +1,5 @@
 <template>
-  <div class="card" :class="cardClass" @click.stop="$emit('cardClicked')" :style="{'background-image':'url(' + background + ')'}">
+  <div class="card" :class="cardClass" @click.stop="onClick()" :style="{'background-image':'url(' + background + ')'}">
     <div class="cost" :style="(getFontSize(0.6))">
       <img :src="costBackground">
       {{ $store.state.cards.dataCards[id]['cost'] }}
@@ -83,14 +83,20 @@ export default class Card extends Vue {
     return fontSize + background
   }
 
-  playDrawAnim() {
+  private onClick() {
+    if(this.$store.state.cards.dataCards[this.id]['cost'] <= this.$store.state.battle.currentEnergy) {
+      this.$emit('cardClicked')
+    }
+  }
+
+  private playDrawAnim() {
     if(!this.isPlayingDrawAnim) {
       this.isPlayingDrawAnim = true
       setTimeout(() => { this.isPlayingDrawAnim = false }, 1000 )
     }
   }
 
-  playDiscardFromSelectAnim() {
+  private playDiscardFromSelectAnim() {
     if(!this.isPlayingDiscardFromSelectAnim) {
       this.isPlayingDiscardFromSelectAnim = true
       setTimeout(() => {
@@ -100,7 +106,7 @@ export default class Card extends Vue {
     }
   }
 
-  playDiscardFromHandAnim() {
+  private playDiscardFromHandAnim() {
     if(!this.isPlayingDiscardFromHand) {
       this.isPlayingDiscardFromHand = true
       setTimeout(() => {

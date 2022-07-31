@@ -8,9 +8,6 @@ export default {
 
     mutations: {
 
-        removeCardFromHand(state, index) {
-            state.hand.splice(index, 1)[0]
-        },
 
         addCardToDiscardPile(state, id) {
             state.discardPile.push(id)
@@ -20,9 +17,6 @@ export default {
 
     actions: {
 
-        removeCardFromHand(context, index) {
-            context.commit("removeCardFromHand", index.index)
-        },
 
         addCardToDiscardPile(context, id) {
             context.commit("addCardToDiscardPile", id)

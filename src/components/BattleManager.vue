@@ -20,9 +20,11 @@ import { Watch } from 'vue-property-decorator'
 })
 
 export default class BattleManager extends Vue {
+    private cardBeingPlayed = {}
+    private targetIndex: number | null = null
     // private cardsAreBeingDrawn: boolean = false
     // private cardIsBeingPlayed: boolean = false
-    // private cardBeingPlayed = {}
+    
 
     // @Watch('cardsAreBeingDrawn')
     // onStateChanged(newVal: boolean) {
@@ -34,10 +36,10 @@ export default class BattleManager extends Vue {
     // }
 
     private playCard(cardId: string, targetIndex: number | null) {
-        console.log("une carte doit être jouée")
+        this.cardBeingPlayed = this.$store.state.cards.dataCards[cardId]
+        this.targetIndex = targetIndex
+        this.$store.dispatch("discardCurrentlySelectedCard")
         // this.cardIsBeingPlayed = true
-        // this.cardBeingPlayed = this.$store.state.cards.dataCards[cardId]
-        // this.$store.dispatch("discardCurrentlySelectedCard")
 
     }
 
@@ -83,11 +85,6 @@ export default class BattleManager extends Vue {
             //     this.cardsAreBeingDrawn = false
             // }
 
-            // if(action.type === "removeCardFromHand") {
-            //     if(this.cardIsBeingPlayed) {
-            //         this.playCardEffects()
-            //     }
-            // }
         })
 
     }
