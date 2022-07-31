@@ -50,9 +50,9 @@ export default class BattleInterface extends Vue {
 
     private readonly maxCardsInHand: number = 10
 
-    private drawPile: string[] = []
+    private drawPile: string[] = ["001", "002"]
     private hand: string[] = []
-    private discardPile: string[] = ["001"]
+    private discardPile: string[] = []
     private exhaustPile: string[] = []
 
     private draw(amount): void {
