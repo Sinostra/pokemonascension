@@ -5,7 +5,6 @@
             :id="card"
             :state="'discardedFromSelect'"
             :style="'transform : scale(0)'"
-            @discardAnimEnded="endAnim()"
         >
         </Card>
     </div>
@@ -28,19 +27,6 @@ export default class DiscardManager extends Vue {
 
     private content!: string[]
 
-    private endAnim() {
-        
-    }
-
-    public mounted() {
-        this.$store.subscribeAction((action) => {
-            if(action.type === "cardDonePlayed") {
-                for (let i = this.content.length; i > 0; i--) {
-                    this.$store.dispatch("addCardToDiscardPile", this.content.shift())
-                }
-            }
-        })
-    }
 }
 </script>
 <style lang='scss' scoped>

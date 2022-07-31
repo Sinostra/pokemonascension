@@ -53,12 +53,13 @@ import { Options, Vue } from 'vue-class-component'
 export default class BattleInterface extends Vue {
 
     private readonly maxCardsInHand: number = 10
+    private readonly delayBetweenDraws: number = 500
 
     private selectedCardIndex: number | null = null
 
-    private drawPile: string[] = ["001", "002"]
+    private drawPile: string[] = []
     private hand: string[] = []
-    private discardPile: string[] = []
+    private discardPile: string[] = ["001", "003"]
     private exhaustPile: string[] = []
 
     private discardManagerContent: string[] = []
@@ -86,10 +87,7 @@ export default class BattleInterface extends Vue {
 
                 else if(this.discardPile.length) {
 
-                    for (let i = this.discardPile.length; i > 0; i--) {
-                        this.drawPile.push(this.discardPile.shift() as string)
-                    }
-
+                    this.dumpInto(this.discardPile, this.drawPile)
                     this.hand.push(this.drawPile.shift() as string)
                 }
 
@@ -97,13 +95,20 @@ export default class BattleInterface extends Vue {
                 if(amount == 0) this.$store.dispatch("drawIsDone")
                 setTimeout(() => {
                     this.draw(amount)
-                }, 500)
+                }, this.delayBetweenDraws)
             }
         }
     }
 
     private discard(index): void {
-        this.discardManagerContent.push(this.hand.splice(index, 1)[0])
+        const cardPlayed = this.hand.splice(index, 1)[0]
+        this.discardManagerContent.push(cardPlayed)
+    }
+
+    private dumpInto(from, to) {
+        for (let i = from.length; i > 0; i--) {
+            to.push(from.shift() as string)
+        }
     }
 
     private getFontSize(multiplier = 1) {
@@ -124,6 +129,10 @@ export default class BattleInterface extends Vue {
                 const cardBeingDiscarded = this.selectedCardIndex
                 this.selectCard(null)
                 this.discard(cardBeingDiscarded)
+            }
+
+            if(action.type === "cardDonePlayed") {
+                this.dumpInto(this.discardManagerContent, this.discardPile)
             }
         })
 

@@ -105,6 +105,10 @@ export default class Hand extends Vue {
             if(action.type === "cardIsPlaying") {
                 this.isCardBeingPlayed = true
             }
+
+            if(action.type === "cardDonePlayed") {
+                this.isCardBeingPlayed = false
+            }
         })
 
     }

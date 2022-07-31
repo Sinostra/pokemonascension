@@ -20,7 +20,7 @@ import { Watch } from 'vue-property-decorator'
 })
 
 export default class BattleManager extends Vue {
-    private cardBeingPlayed = {}
+    private cardBeingPlayed: any = null
     private targetIndex: number | null = null
     // private cardsAreBeingDrawn: boolean = false
     // private cardIsBeingPlayed: boolean = false
@@ -45,12 +45,8 @@ export default class BattleManager extends Vue {
 
     private playCardEffects() {
     
-        if(this.cardBeingPlayed !== {}) {
+        if(this.cardBeingPlayed !== null) {
             this.$store.dispatch("spendEnergy", this.cardBeingPlayed['cost'])
-            
-            if(this.cardBeingPlayed['draw']) {
-                this.$store.dispatch("cardToBeDrawn", this.cardBeingPlayed['draw'])
-            }
     
             if(this.cardBeingPlayed['damage']) {
     
@@ -63,6 +59,15 @@ export default class BattleManager extends Vue {
             if(this.cardBeingPlayed['energy']) {
                 this.$store.dispatch("getEnergy", this.cardBeingPlayed['energy'])
             }
+
+            if(this.cardBeingPlayed['draw']) {
+                this.$store.dispatch("cardToBeDrawn", this.cardBeingPlayed['draw'])
+            }
+
+            else {
+                setTimeout(() => {this.$store.dispatch("cardDonePlayed")}, 500)
+            }
+
 
         }
     }
@@ -77,13 +82,13 @@ export default class BattleManager extends Vue {
                 this.playCard(this.$store.getters.selectedCard, action.payload)
             }
 
-            // if(action.type === "draw") {
-            //     this.cardsAreBeingDrawn = true
-            // }
-
-            // if(action.type === "drawIsDone") {
-            //     this.cardsAreBeingDrawn = false
-            // }
+            if(action.type === "drawIsDone") {
+                if(this.cardBeingPlayed !== null) {
+                    this.cardBeingPlayed = null
+                    this.targetIndex = null
+                    this.$store.dispatch("cardDonePlayed")
+                }
+            }
 
         })
 
