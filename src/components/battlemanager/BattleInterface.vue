@@ -59,7 +59,7 @@ export default class BattleInterface extends Vue {
 
     private drawPile: string[] = []
     private hand: string[] = []
-    private discardPile: string[] = ["001", "003"]
+    private discardPile: string[] = ["001", "002", "003"]
     private exhaustPile: string[] = []
 
     private discardManagerContent: string[] = []

@@ -43,6 +43,20 @@ export default class FoePokemon extends Pokemon {
       this.$store.dispatch("foePokemonHasBeenClicked", this.index)
     }
   }
+
+  public mounted() {
+    this.$store.subscribeAction((action) => {
+      if(action.type === "damageFoe") {
+        if(action.payload.target === this.index) {
+          this.takeDamage(action.payload.damage, action.payload.ignoreBlock)
+        } 
+      }
+
+      if(action.type === "damageAllFoes") {
+        this.takeDamage(action.payload.damage, action.payload.ignoreBlock)
+      }
+    })
+  }
 }
 
 </script>

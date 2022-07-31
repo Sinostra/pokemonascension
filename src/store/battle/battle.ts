@@ -41,6 +41,9 @@ export default {
         drawIsDone() {},
         cardIsPlaying() {},
         cardDonePlayed() {},
+
+        damageAllFoes() {},
+        damageFoe() {},
     },
     getters: {
         selectedCard: state => {

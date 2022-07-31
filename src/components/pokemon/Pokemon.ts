@@ -13,6 +13,8 @@ export default class Pokemon extends Vue {
   protected isPlayingAttackAnim: boolean = false
   protected isPlayingReturnAnim: boolean = false
 
+  protected fainted: boolean = false
+
 
   get spritePath() {
     return require(`./../../assets/img/sprites/${this.$store.state.settings.pokemonSpritesExtension}/${this.id}.${this.$store.state.settings.pokemonSpritesExtension}`)
@@ -63,6 +65,7 @@ export default class Pokemon extends Vue {
 
     else {
       this.currentHealth = 0
+      this.fainted = true
       this.playReturnAnim()
     }
   }

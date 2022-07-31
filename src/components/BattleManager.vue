@@ -27,7 +27,7 @@ export default class BattleManager extends Vue {
         this.targetIndex = targetIndex
         this.$store.dispatch("cardIsPlaying")
         this.$store.dispatch("discardCurrentlySelectedCard")
-        setTimeout(() => {this.playCardEffects()}, 500)
+        setTimeout(() => {this.playCardEffects()}, 0)
     }
 
     private playCardEffects() {
@@ -36,7 +36,18 @@ export default class BattleManager extends Vue {
             this.$store.dispatch("spendEnergy", this.cardBeingPlayed['cost'])
     
             if(this.cardBeingPlayed['damage']) {
-    
+                if(this.cardBeingPlayed['damageAOE']) {
+                    this.$store.dispatch("damageAllFoes", {
+                        damage: this.cardBeingPlayed['damage'],
+                        ignoreBlock: this.cardBeingPlayed['ignoreBlock'],
+                    })
+                }
+
+                else this.$store.dispatch("damageFoe", {
+                    damage: this.cardBeingPlayed['damage'],
+                    ignoreBlock: this.cardBeingPlayed['ignoreBlock'],
+                    target :this.targetIndex
+                })
             }
     
             if(this.cardBeingPlayed['block']) {
