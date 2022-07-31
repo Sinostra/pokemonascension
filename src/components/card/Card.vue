@@ -35,7 +35,6 @@ export default class Card extends Vue {
   public mounted() {
     
     if(this.state === 'drawn') {
-      // console.log('mounted')
       this.playDrawAnim()
     }
 

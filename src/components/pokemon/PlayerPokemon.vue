@@ -28,14 +28,10 @@ export default class PlayerPokemon extends Pokemon {
 
 
   public mounted() {
-    // setTimeout(() => {this.playReturnAnim()}, 1000)
     this.$store.subscribeAction((action) => {
-      // console.log(action.type)
       if(action.type === "clickPlayer") {
-        // console.log(action.type)
         this.takeDamage(10)
       }
-      // console.log(action.payload)
     })
   }
 }

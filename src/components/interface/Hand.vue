@@ -1,6 +1,6 @@
 <template>
     <div class="hand">
-        <Card v-for="(card, index) in $store.state.board.hand"
+        <Card v-for="(card, index) in content"
             :key="index"
             :id="card"
             :state="'drawn'"
@@ -19,10 +19,14 @@ import Card from '../card/Card.vue'
     name: "Hand",
     components: {
         Card
+    },
+    props: {
+        content: [],
     }
 })
 export default class Hand extends Vue {
     private selectedCard: number | null = null
+    private content!: string[]
 
     private getCardPosition(index: number): string {
 
@@ -89,12 +93,11 @@ export default class Hand extends Vue {
 
 
     private selectCard(index): void {
-        
         if(index !== null){
-            const clickedCardCost = this.$store.state.cards.dataCards[this.$store.state.board.hand[index]]['cost']
+            const clickedCardCost = this.$store.state.cards.dataCards[this.content[index]]['cost']
             if(clickedCardCost <= this.$store.state.battle.currentEnergy) {
-                this.selectedCard = index
                 this.$store.dispatch("selectCard", this.$store.state.board.hand[index])
+                this.selectedCard = index  
             }
         } 
         else {
@@ -102,19 +105,6 @@ export default class Hand extends Vue {
             this.$store.dispatch("selectCard", null)
         } 
         
-    }
-
-    private draw(amount): void {
-        if(this.$store.state.board.hand.length < this.$store.state.board.maxCardsInHand) {
-            if(amount > 0) {
-                this.$store.dispatch("draw")
-                amount --
-                if(amount == 0) this.$store.dispatch("drawIsDone")
-                setTimeout(() => {
-                    this.draw(amount)
-                }, 500)
-            }
-        }
     }
 
     private discard(index): void {
@@ -134,13 +124,8 @@ export default class Hand extends Vue {
             if(action.type === "rightClick") {
                 this.selectCard(null)
             }
-
-            if(action.type === "cardToBeDrawn") {
-                this.draw(action.payload)
-            }
+            
         })
-
-        this.draw(2)
 
     }
 }

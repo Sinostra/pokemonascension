@@ -28,7 +28,7 @@ export default {
     },
 
     data: function(){
-
+        return {}
     },
 
     methods: {
@@ -48,17 +48,9 @@ export default {
 
     },
 
-    computed: {
 
-    },
 
-    mounted: function() {
 
-        this.$store.subscribe((changeCardSelection, state) => {
-            // console.log(changeCardSelection.type)
-            // console.log(changeCardSelection.payload)
-        })
-    }
 }
 </script>
 

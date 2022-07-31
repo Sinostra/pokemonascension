@@ -1,5 +1,5 @@
 <template>
-    <div class="interface-wrapper" v-on:click.left="onLeftClick()" v-on:click.right="onRightClick($event)">
+    <div class="interface-wrapper">
         <GameInterface/>
     </div>
 </template>

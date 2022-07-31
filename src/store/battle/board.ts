@@ -13,20 +13,6 @@ export default {
             state.selectedCard = value
         },
 
-        draw(state) {
-            if(state.drawPile.length) {
-                state.hand.push(state.drawPile.shift())
-            }
-
-            else if(state.discardPile.length) {
-
-                for (let i = state.discardPile.length; i > 0; i--) {
-                    state.drawPile.push(state.discardPile.shift())
-                }
-
-                state.hand.push(state.drawPile.shift())
-            }
-        },
 
         removeCardFromHand(state, index) {
             state.hand.splice(index, 1)[0]
@@ -41,10 +27,6 @@ export default {
     actions: {
         selectCard(context, value) {
             context.commit("selectCard", value)
-        },
-
-        draw(context) {
-            context.commit("draw")
         },
 
         removeCardFromHand(context, index) {
