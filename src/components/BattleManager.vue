@@ -9,7 +9,6 @@
 import BattleScene from './battlemanager/BattleScene.vue'
 import BattleInterface from './battlemanager/BattleInterface.vue'
 import { Options, Vue } from 'vue-class-component'
-import { Watch } from 'vue-property-decorator'
 
 @Options({
     name: "BattleManager",
@@ -22,18 +21,6 @@ import { Watch } from 'vue-property-decorator'
 export default class BattleManager extends Vue {
     private cardBeingPlayed: any = null
     private targetIndex: number | null = null
-    // private cardsAreBeingDrawn: boolean = false
-    // private cardIsBeingPlayed: boolean = false
-    
-
-    // @Watch('cardsAreBeingDrawn')
-    // onStateChanged(newVal: boolean) {
-    //     if(!newVal && this.cardIsBeingPlayed) {
-    //         this.$store.dispatch("cardDonePlayed")
-    //         this.cardIsBeingPlayed = false
-    //         this.cardBeingPlayed = {}
-    //     }
-    // }
 
     private playCard(cardId: string, targetIndex: number | null) {
         this.cardBeingPlayed = this.$store.state.cards.dataCards[cardId]
