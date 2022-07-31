@@ -34,12 +34,12 @@ export default class FoePokemon extends Pokemon {
   }
 
   get spriteClass(): string {
-    if(this.$store.state.board.selectedCard === null) return ''
-    return this.$store.state.cards.dataCards[this.$store.state.board.selectedCard]['target'] ? 'target' : ''
+    if(this.$store.getters.selectedCard === null) return ''
+    return this.$store.state.cards.dataCards[this.$store.getters.selectedCard]['target'] ? 'target' : ''
   }
 
   private onClick(): void {
-    if(this.$store.state.board.selectedCard) {
+    if(this.$store.getters.selectedCard) {
       this.$store.dispatch("foePokemonHasBeenClicked", this.index)
     }
   }

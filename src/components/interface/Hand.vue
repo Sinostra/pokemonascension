@@ -25,14 +25,15 @@ import Card from '../card/Card.vue'
     }
 })
 export default class Hand extends Vue {
-    private selectedCard: number | null = null
+
     private content!: string[]
+    private selectedCardIndex: number | null = null
 
     private getCardPosition(index: number): string {
 
         const selectedCardStyle = 'transform : rotate(0deg) scale(1.2); left: 20%; bottom: 153%;'
 
-        if(index === this.selectedCard) {
+        if(index === this.selectedCardIndex) {
             return selectedCardStyle
         }
 
@@ -96,12 +97,12 @@ export default class Hand extends Vue {
         if(index !== null){
             const clickedCardCost = this.$store.state.cards.dataCards[this.content[index]]['cost']
             if(clickedCardCost <= this.$store.state.battle.currentEnergy) {
-                this.$store.dispatch("selectCard", this.$store.state.board.hand[index])
-                this.selectedCard = index  
+                this.$store.dispatch("selectCard", this.content[index])
+                this.selectedCardIndex = index  
             }
         } 
         else {
-            this.selectedCard = null
+            this.selectedCardIndex = null
             this.$store.dispatch("selectCard", null)
         } 
         
@@ -109,15 +110,15 @@ export default class Hand extends Vue {
 
     private discard(index): void {
         this.selectCard(null)
-        this.$store.dispatch("removeCardFromHand", {index, id: this.$store.state.board.hand[index]})
+        this.$store.dispatch("removeCardFromHand", {index, id: this.content[index]})
     }
 
     public mounted() {
 
         this.$store.subscribeAction((action) => {
             if(action.type === "discardCurrentlySelectedCard") {
-                if(this.selectedCard !== null) {
-                    this.discard(this.selectedCard)
+                if(this.selectedCardIndex !== null) {
+                    this.discard(this.selectedCardIndex)
                 }
             }
 

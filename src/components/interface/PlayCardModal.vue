@@ -1,6 +1,6 @@
 <template>
     <div class="modal-wrapper">
-        <div v-if="!$store.state.cards.dataCards[$store.state.board.selectedCard]['target']">
+        <div v-if="!$store.state.cards.dataCards[$store.getters.selectedCard]['target']">
             <div>Jouer cette carte ?</div>
             <div class="modal-btn" @click="onClickPlay()">Oui</div>
             <div class="modal-btn" @click="onClickCancel()">Non</div>

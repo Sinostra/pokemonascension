@@ -16,7 +16,7 @@
             :content="hand"
         ></Hand>
 
-        <PlayCardModal v-if="$store.state.board.selectedCard !== null"></PlayCardModal>
+        <PlayCardModal v-if="$store.getters.selectedCard !== null"></PlayCardModal>
 
         <DiscardManager></DiscardManager>
 

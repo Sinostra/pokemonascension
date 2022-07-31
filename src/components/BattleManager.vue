@@ -67,11 +67,11 @@ export default class BattleManager extends Vue {
     public mounted() {
         this.$store.subscribeAction((action) => {
             if(action.type === "playCurrentlySelectedCard") {
-                this.playCard(this.$store.state.board.selectedCard, action.payload)
+                this.playCard(this.$store.getters.selectedCard, action.payload)
             }
 
-            if(action.type === "foePokemonHasBeenClicked" && this.$store.state.cards.dataCards[this.$store.state.board.selectedCard]['target']) {
-                this.playCard(this.$store.state.board.selectedCard, action.payload)
+            if(action.type === "foePokemonHasBeenClicked" && this.$store.state.cards.dataCards[this.$store.getters.selectedCard]['target']) {
+                this.playCard(this.$store.getters.selectedCard, action.payload)
             }
 
             if(action.type === "draw") {

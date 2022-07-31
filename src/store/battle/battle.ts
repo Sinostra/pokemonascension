@@ -3,6 +3,7 @@ export default {
         backgroundUsed: 'forest',
         currentEnergy: 3,
         maxEnergy: 3,
+        selectedCard: null,
     },
     mutations: {
         getEnergy(state, amount: number) {
@@ -11,7 +12,11 @@ export default {
 
         spendEnergy(state, amount: number) {
             state.currentEnergy -= amount
-        }
+        },
+
+        selectCard(state, value) {
+            state.selectedCard = value
+        },
     },
     actions: {
 
@@ -23,6 +28,10 @@ export default {
             context.commit("spendEnergy", amount)
         },
 
+        selectCard(context, value) {
+            context.commit("selectCard", value)
+        },
+
         foePokemonHasBeenClicked() {},
         playCurrentlySelectedCard() {},
         discardCurrentlySelectedCard() {},
@@ -32,5 +41,9 @@ export default {
         drawIsDone() {},
         cardDonePlayed() {},
     },
-    getters: {}
+    getters: {
+        selectedCard: state => {
+            return state.selectedCard
+        }
+    }
 }
