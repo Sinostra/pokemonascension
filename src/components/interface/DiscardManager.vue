@@ -4,6 +4,7 @@
             :key="index"
             :id="card"
             :state="'discardedFromSelect'"
+            :style="'transform : scale(0)'"
             @discardAnimEnded="endAnim()"
         >
         </Card>
@@ -27,9 +28,9 @@ export default class DiscardManager extends Vue {
 
     private content!: string[]
 
-    // private endAnim() {
-    //     this.$store.dispatch("addCardToDiscardPile", this.cardsBeingDiscardedFromSelect.shift())
-    // }
+    private endAnim() {
+        
+    }
 
     public mounted() {
         this.$store.subscribeAction((action) => {

@@ -39,6 +39,7 @@ export default {
 
         cardToBeDrawn() {},
         drawIsDone() {},
+        cardIsPlaying() {},
         cardDonePlayed() {},
     },
     getters: {

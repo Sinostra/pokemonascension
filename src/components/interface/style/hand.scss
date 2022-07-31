@@ -8,4 +8,12 @@
     height: 30%;
     z-index: 4;
     bottom: -3%;
+
+    &.lockedHand {
+        pointer-events: none;
+
+        .card {
+            transition: none;
+        }
+    }
 }

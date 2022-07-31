@@ -38,34 +38,34 @@ export default class BattleManager extends Vue {
     private playCard(cardId: string, targetIndex: number | null) {
         this.cardBeingPlayed = this.$store.state.cards.dataCards[cardId]
         this.targetIndex = targetIndex
+        this.$store.dispatch("cardIsPlaying")
         this.$store.dispatch("discardCurrentlySelectedCard")
-        // this.cardIsBeingPlayed = true
-
+        this.playCardEffects()
     }
 
-    // private playCardEffects() {
+    private playCardEffects() {
     
-    //     if(this.cardBeingPlayed !== {}) {
-    //         this.$store.dispatch("spendEnergy", this.cardBeingPlayed['cost'])
+        if(this.cardBeingPlayed !== {}) {
+            this.$store.dispatch("spendEnergy", this.cardBeingPlayed['cost'])
             
-    //         if(this.cardBeingPlayed['draw']) {
-    //             this.$store.dispatch("cardToBeDrawn", this.cardBeingPlayed['draw'])
-    //         }
+            if(this.cardBeingPlayed['draw']) {
+                this.$store.dispatch("cardToBeDrawn", this.cardBeingPlayed['draw'])
+            }
     
-    //         if(this.cardBeingPlayed['damage']) {
+            if(this.cardBeingPlayed['damage']) {
     
-    //         }
+            }
     
-    //         if(this.cardBeingPlayed['block']) {
+            if(this.cardBeingPlayed['block']) {
     
-    //         }
+            }
     
-    //         if(this.cardBeingPlayed['energy']) {
-    //             this.$store.dispatch("getEnergy", this.cardBeingPlayed['energy'])
-    //         }
+            if(this.cardBeingPlayed['energy']) {
+                this.$store.dispatch("getEnergy", this.cardBeingPlayed['energy'])
+            }
 
-    //     }
-    // }
+        }
+    }
 
     public mounted() {
         this.$store.subscribeAction((action) => {

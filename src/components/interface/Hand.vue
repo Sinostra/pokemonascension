@@ -1,5 +1,5 @@
 <template>
-    <div class="hand">
+    <div class="hand" :class="isCardBeingPlayed ? 'lockedHand' : ''">
         <Card v-for="(card, index) in content"
             :key="index"
             :id="card"
@@ -29,6 +29,8 @@ export default class Hand extends Vue {
 
     private content!: string[]
     private selectedCardIndex!: number | null
+
+    private isCardBeingPlayed: boolean = false
 
     private onClick(cardIndex) {
         this.$emit("onCardClicked", cardIndex)
@@ -97,15 +99,12 @@ export default class Hand extends Vue {
         return `transform : rotate(${finalRotate}deg); left: ${finalLeft}%; bottom: ${finalBottom}%;`
     }
 
-
     public mounted() {
 
         this.$store.subscribeAction((action) => {
-            // if(action.type === "discardCurrentlySelectedCard") {
-            //     if(this.selectedCardIndex !== null) {
-            //         this.discard(this.selectedCardIndex)
-            //     }
-            // }
+            if(action.type === "cardIsPlaying") {
+                this.isCardBeingPlayed = true
+            }
         })
 
     }
