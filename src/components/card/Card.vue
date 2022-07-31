@@ -33,8 +33,6 @@ export default class Card extends Vue {
   private isPlayingDiscardFromHand: boolean = false
 
   public mounted() {
-
-    console.log('card mounted')
     
     if(this.state === 'drawn') {
       this.playDrawAnim()
@@ -92,7 +90,6 @@ export default class Card extends Vue {
   }
 
   private playDrawAnim() {
-    console.log('drawAnim')
     if(!this.isPlayingDrawAnim) {
       this.isPlayingDrawAnim = true
       setTimeout(() => { this.isPlayingDrawAnim = false }, 1000 )

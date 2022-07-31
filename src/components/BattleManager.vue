@@ -40,7 +40,7 @@ export default class BattleManager extends Vue {
         this.targetIndex = targetIndex
         this.$store.dispatch("cardIsPlaying")
         this.$store.dispatch("discardCurrentlySelectedCard")
-        this.playCardEffects()
+        setTimeout(() => {this.playCardEffects()}, 500)
     }
 
     private playCardEffects() {
@@ -65,7 +65,7 @@ export default class BattleManager extends Vue {
             }
 
             else {
-                setTimeout(() => {this.$store.dispatch("cardDonePlayed")}, 500)
+                this.$store.dispatch("cardDonePlayed")
             }
 
 
