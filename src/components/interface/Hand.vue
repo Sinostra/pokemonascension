@@ -38,7 +38,7 @@ export default class Hand extends Vue {
 
     private getCardPosition(index: number): string {
 
-        const selectedCardStyle = 'transform : rotate(0deg) scale(1.2); left: 20%; bottom: 153%;'
+        const selectedCardStyle = 'transform : rotate(0deg) scale(1.2); left: 20%; bottom: 153%; filter: none;'
 
         if(index === this.selectedCardIndex) {
             return selectedCardStyle

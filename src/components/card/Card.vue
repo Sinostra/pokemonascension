@@ -10,8 +10,8 @@
 
     <div class="category" :style="(getCategoryStyle(0.4))">{{$store.state.cards.dataCards[id]['category']}}</div>
     
-    <!-- <div class="tooltip" :style="(getFontSize(0.6))">{{$store.state.cards.dataCards[id]['tooltip']}}</div> -->
-    <div class="tooltip" :style="(getFontSize(0.6))">{{dynamicToolTip}}</div>
+    <div v-if="$store.state.cards.dataCards[id]['damage']" class="tooltip" :style="(getFontSize(0.6))">{{dynamicToolTip}}</div>
+    <div v-else class="tooltip" :style="(getFontSize(0.6))">{{$store.state.cards.dataCards[id]['tooltip']}}</div>
   </div>
 </template>
 
@@ -69,10 +69,10 @@ export default class Card extends Vue {
 
   get dynamicToolTip() {
     const currentCard = this.$store.state.cards.dataCards[this.id]
-    if(!this.typesHover) return currentCard['tooltip'].replace('§', currentCard['damage'])
-    else {
 
-      const defenderTypes = this.typesHover
+    if(!this.typesHover) return currentCard['tooltip'].replace('§', currentCard['damage'])
+
+    else {
       const attackMachups = this.$store.state.types.dataTypes[currentCard['type']]
       let multiplier = 1
       this.typesHover.forEach((type) => {
@@ -139,7 +139,9 @@ export default class Card extends Vue {
 
     if(this.$store.state.cards.dataCards[this.id]['damage'] && !this.$store.state.cards.dataCards[this.id]['damageAOE']) {
       this.$store.subscribeAction((action) => {
-        this.typesHover = action.payload
+        if(action.type === "mouseOver") {
+          this.typesHover = action.payload
+        }
       })
     }
   }
