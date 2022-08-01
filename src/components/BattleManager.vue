@@ -39,19 +39,21 @@ export default class BattleManager extends Vue {
                 if(this.cardBeingPlayed['damageAOE']) {
                     this.$store.dispatch("damageAllFoes", {
                         damage: this.cardBeingPlayed['damage'],
+                        type: this.cardBeingPlayed['type'],
                         ignoreBlock: this.cardBeingPlayed['ignoreBlock'],
                     })
                 }
 
                 else this.$store.dispatch("damageFoe", {
                     damage: this.cardBeingPlayed['damage'],
+                    type: this.cardBeingPlayed['type'],
                     ignoreBlock: this.cardBeingPlayed['ignoreBlock'],
                     target :this.targetIndex
                 })
             }
     
             if(this.cardBeingPlayed['block']) {
-    
+                this.$store.dispatch("playerGetBlock", this.cardBeingPlayed['block'])
             }
     
             if(this.cardBeingPlayed['energy']) {
@@ -63,7 +65,7 @@ export default class BattleManager extends Vue {
             }
 
             else {
-                this.$store.dispatch("cardDonePlayed")
+                setTimeout(() => {this.$store.dispatch("cardDonePlayed")}, 500)
             }
 
 

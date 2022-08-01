@@ -54,5 +54,14 @@
         filter: drop-shadow(1px 1px 1px black);
       }
     }
+
+    .block-wrapper {
+      position: absolute;
+      background: #e0e0e0;
+      color: black;
+      top: -14%;
+      left: -30%;
+      padding: 10%;
+    }
   }
 }

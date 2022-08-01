@@ -31,26 +31,6 @@ export default {
         return {}
     },
 
-    methods: {
-
-        //Renvoie le multiplicateur des faiblesse et résistances
-        getTypeMatchup(attackingType, targetPokemon) {
-            var attackMachups = this.types[attackingType]
-            var defenderType = this.dex[targetPokemon['id']]['type']
-            var multiplier = 1
-
-            defenderType.forEach((type) => {
-                multiplier *= attackMachups[type]
-            })
-
-            return multiplier
-        },
-
-    },
-
-
-
-
 }
 </script>
 

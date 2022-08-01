@@ -59,7 +59,7 @@ export default class BattleInterface extends Vue {
 
     private drawPile: string[] = []
     private hand: string[] = []
-    private discardPile: string[] = ["001", "002", "003"]
+    private discardPile: string[] = ["001", "002", "003", "004", "005"]
     private exhaustPile: string[] = []
 
     private discardManagerContent: string[] = []
@@ -136,7 +136,7 @@ export default class BattleInterface extends Vue {
             }
         })
 
-        this.draw(2)
+        this.draw(5)
     }
 
 } 

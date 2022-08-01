@@ -38,7 +38,9 @@ export default class Card extends Vue {
       this.playDrawAnim()
     }
 
-    else if(this.state === 'discardedFromSelect') this.playDiscardFromSelectAnim()
+    else if(this.state === 'discardedFromSelect') {
+      this.playDiscardFromSelectAnim()
+    } 
   }
 
   get cardClass(): string {

@@ -7,6 +7,9 @@
             <div class="currentHealth" :class="healthBarClass" :style="{'width': getHealthBarPercent() + '%'}"></div>
             <div class="healthAmount" :style="getFontSize()">{{currentHealth}} / {{maxHealth}} </div>
           </div>
+          <div class="block-wrapper">
+            {{block}}
+          </div>
         </div>
       </div>
   </div>
@@ -31,6 +34,10 @@ export default class PlayerPokemon extends Pokemon {
     this.$store.subscribeAction((action) => {
       if(action.type === "damageFoe" || action.type === "damageAllFoes") {
         this.playAttackAnim()
+      }
+
+      if(action.type === "playerGetBlock") {
+        this.block += action.payload
       }
     })
   }

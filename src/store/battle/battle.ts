@@ -44,6 +44,7 @@ export default {
 
         damageAllFoes() {},
         damageFoe() {},
+        playerGetBlock() {},
     },
     getters: {
         selectedCard: state => {
