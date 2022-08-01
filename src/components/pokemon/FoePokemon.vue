@@ -11,7 +11,7 @@
               {{block}}
             </div>
           </div>
-          <img :src="spritePath" :class="spriteClass">
+          <img :src="spritePath" :class="spriteClass" @mouseover="onHover()" @mouseleave="onHover(false)">
         </div>
       </div>
   </div>
@@ -45,6 +45,11 @@ export default class FoePokemon extends Pokemon {
     if(this.$store.getters.selectedCard) {
       this.$store.dispatch("foePokemonHasBeenClicked", this.index)
     }
+  }
+
+  private onHover(enter: boolean = true): void {
+    if(enter) this.$store.dispatch("mouseOver", this.$store.state.pokedex.constantDex[this.id]['type'])
+    else this.$store.dispatch("mouseOver", null)
   }
 
   public mounted() {

@@ -13,7 +13,7 @@ export default {
         "block": 0,
         "ignoreBlock": false,
         "energy": 0,
-        "tooltip": 'Deal 6 damage to an ennemy',
+        "tooltip": 'Deal § damage to an ennemy',
     },
 
 
@@ -31,7 +31,7 @@ export default {
         "block": 0,
         "ignoreBlock": false,
         "energy": 0,
-        "tooltip": 'Deal 3 damage to all ennemies',
+        "tooltip": 'Deal § damage to all ennemies',
     },
 
     "003": {

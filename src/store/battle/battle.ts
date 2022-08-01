@@ -45,6 +45,7 @@ export default {
         damageAllFoes() {},
         damageFoe() {},
         playerGetBlock() {},
+        mouseOver() {}
     },
     getters: {
         selectedCard: state => {

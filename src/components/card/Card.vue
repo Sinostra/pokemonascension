@@ -10,7 +10,8 @@
 
     <div class="category" :style="(getCategoryStyle(0.4))">{{$store.state.cards.dataCards[id]['category']}}</div>
     
-    <div class="tooltip" :style="(getFontSize(0.6))">{{$store.state.cards.dataCards[id]['tooltip']}}</div>
+    <!-- <div class="tooltip" :style="(getFontSize(0.6))">{{$store.state.cards.dataCards[id]['tooltip']}}</div> -->
+    <div class="tooltip" :style="(getFontSize(0.6))">{{dynamicToolTip}}</div>
   </div>
 </template>
 
@@ -32,16 +33,7 @@ export default class Card extends Vue {
   private isPlayingDiscardFromSelectAnim: boolean = false
   private isPlayingDiscardFromHand: boolean = false
 
-  public mounted() {
-    
-    if(this.state === 'drawn') {
-      this.playDrawAnim()
-    }
-
-    else if(this.state === 'discardedFromSelect') {
-      this.playDiscardFromSelectAnim()
-    } 
-  }
+  private typesHover: string[] | null = null
 
   get cardClass(): string {
     const type: string = this.$store.state.cards.dataCards[this.id]['type']
@@ -73,6 +65,23 @@ export default class Card extends Vue {
   get categoryBackground() {
     const card = this.$store.state.cards.dataCards[this.id]
     return require('../../assets/img/cards/' + card['category'] + '_' + card['rarity'] + '.png')
+  }
+
+  get dynamicToolTip() {
+    const currentCard = this.$store.state.cards.dataCards[this.id]
+    if(!this.typesHover) return currentCard['tooltip'].replace('§', currentCard['damage'])
+    else {
+
+      const defenderTypes = this.typesHover
+      const attackMachups = this.$store.state.types.dataTypes[currentCard['type']]
+      let multiplier = 1
+      this.typesHover.forEach((type) => {
+        multiplier *= attackMachups[type]
+      })
+      const finalDamage = Math.ceil(currentCard['damage'] * multiplier)
+
+      return currentCard['tooltip'].replace('§', finalDamage)
+    }
   }
 
   getFontSize(multiplier = 1): string {
@@ -115,6 +124,23 @@ export default class Card extends Vue {
         this.isPlayingDiscardFromHand = false
         this.$emit('discardAnimEnded')
       }, 500 )
+    }
+  }
+
+  public mounted() {
+    
+    if(this.state === 'drawn') {
+      this.playDrawAnim()
+    }
+
+    else if(this.state === 'discardedFromSelect') {
+      this.playDiscardFromSelectAnim()
+    }
+
+    if(this.$store.state.cards.dataCards[this.id]['damage'] && !this.$store.state.cards.dataCards[this.id]['damageAOE']) {
+      this.$store.subscribeAction((action) => {
+        this.typesHover = action.payload
+      })
     }
   }
 }
