@@ -158,7 +158,6 @@ export default class BattleInterface extends Vue {
             }
         })
 
-        this.$store.dispatch("cardToBeDrawn", 5)
     }
 
 } 

@@ -21,6 +21,11 @@ import { Options, Vue } from 'vue-class-component'
 export default class BattleManager extends Vue {
     private cardBeingPlayed: any = null
     private targetIndex: number | null = null
+    private cardsBeginningTurn: number = 5
+
+    private startPlayerTurn() {
+        this.$store.dispatch("cardToBeDrawn", this.cardsBeginningTurn)
+    }
 
     private playCard(cardId: string, targetIndex: number | null) {
         this.cardBeingPlayed = this.$store.state.cards.dataCards[cardId]
@@ -91,7 +96,7 @@ export default class BattleManager extends Vue {
             }
 
         })
-
+        this.startPlayerTurn()
     }
 
 }
