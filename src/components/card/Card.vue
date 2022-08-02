@@ -10,8 +10,8 @@
 
     <div class="category" :style="(getCategoryStyle(0.4))">{{dataCard['category']}}</div>
     
-    <!-- <div v-if="dataCard['damage']" class="tooltip" :style="(getFontSize(0.6))">{{dynamicToolTip}}</div>
-    <div v-else class="tooltip" :style="(getFontSize(0.6))">{{dataCard['tooltip']}}</div> -->
+    <div v-if="dataCard['damage']" class="tooltip" :style="(getFontSize(0.6))">{{dynamicToolTip}}</div>
+    <div v-else class="tooltip" :style="(getFontSize(0.6))">{{dataCard['tooltip']}}</div>
   </div>
 </template>
 
