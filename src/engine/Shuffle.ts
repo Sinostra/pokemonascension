@@ -1,6 +1,6 @@
 //Source : https://codereview.stackexchange.com/questions/196493/shuffling-an-array-keeping-some-elements-fixed
-//peg doit être un array correspondant aux index de array qui ne doivent pas être randomisés
-//s'il n'y en a pas, tout array sera randomisé
+//peg doit être un array correspondant aux index de array qui doivent être randomisés
+//par défaut, tous les index sont randomisés
 export default function suffleArray(array, peg = array.map((e) => {return array.indexOf(e)})) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 

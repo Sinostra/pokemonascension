@@ -6,7 +6,7 @@
             :key="index"
             :id="pokemon.id"
             :maxHealth="pokemon.maxHealth"
-            :pattern="pokemon.pattern"
+            :patternSettings="pokemon.patternSetting"
             :index="index"
         >
         </FoePokemon>

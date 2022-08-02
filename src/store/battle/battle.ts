@@ -4,6 +4,7 @@ export default {
         currentEnergy: 3,
         maxEnergy: 3,
         selectedCard: null,
+        turnCounter: 0
     },
     mutations: {
         getEnergy(state, amount: number) {
@@ -16,6 +17,10 @@ export default {
 
         selectCard(state, value) {
             state.selectedCard = value
+        },
+
+        startNewTurn(state) {
+            state.turnCounter++
         },
     },
     actions: {
@@ -30,6 +35,9 @@ export default {
 
         selectCard(context, value) {
             context.commit("selectCard", value)
+        },
+        startNewTurn(context) {
+            context.commit("startNewTurn")
         },
 
         foePokemonHasBeenClicked() {},

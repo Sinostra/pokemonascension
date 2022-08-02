@@ -128,6 +128,7 @@ export default class BattleInterface extends Vue {
             this.dumpInto(this.hand, this.discardFromHandManagerContent)
             setTimeout(() =>  {
                 this.dumpInto(this.discardFromHandManagerContent, this.discardPile)
+                this.$store.dispatch("startNewTurn")
             }, 500)
         }
     }
