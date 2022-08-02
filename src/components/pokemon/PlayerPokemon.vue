@@ -10,6 +10,11 @@
           <div class="block-wrapper">
             {{block}}
           </div>
+          <div class="types-wrapper">
+            <div class="type" v-for="(type, index) in $store.state.pokedex.constantDex[id]['type']" :key="index">
+              <img :src="getPokemonTpyeIcon($store.state.pokedex.constantDex[id]['type'][index])" class="type-img">
+            </div>
+          </div>
         </div>
       </div>
   </div>

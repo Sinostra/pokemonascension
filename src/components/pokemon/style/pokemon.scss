@@ -63,5 +63,24 @@
       left: -30%;
       padding: 10%;
     }
+
+    .types-wrapper {
+      position: absolute;
+      display: flex;
+      top: -2%;
+      left: 104%;
+      width: 6vw;
+      .type {
+        width: 20%;
+
+        &:first-child {
+          margin-right: 1%;
+        }
+        .type-img {
+          width: 100%;
+          position: static;
+        }
+      }
+    }
   }
 }

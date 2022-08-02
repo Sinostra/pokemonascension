@@ -92,6 +92,10 @@ export default class Pokemon extends Vue {
     else this.currentHealth = projectedHealthAmount
   }
 
+  protected getPokemonTpyeIcon(type) {
+    return require('../../assets/img/types/' + type + '.png')
+  }
+
   protected getHealthBarPercent(): number {
     return (this.currentHealth  / this.maxHealth) * 100;
   }
