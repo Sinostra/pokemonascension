@@ -30,11 +30,15 @@ import Pokemon from "./Pokemon";
   name: "FoePokemon",
   props: {
     index: Number,
+    maxHealth: Number,
+    pattern: Array,
   }
 })
 
 export default class FoePokemon extends Pokemon {
   private index!: number;
+  protected maxHealth: number = this.maxHealth
+  private pattern!: any[]
 
   get foePosition(): string {
     const currentBackground: string = this.$store.state.battle.backgroundUsed

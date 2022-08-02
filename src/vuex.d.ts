@@ -8,7 +8,6 @@ declare module '@vue/runtime-core' {
     battle: any,
     playerTeam: any,
     foes: any,
-    board: any,
     settings: any,
     cards: any,
     types: any

@@ -67,7 +67,7 @@ export default class BattleInterface extends Vue {
 
     private drawPile: string[] = []
     private hand: string[] = []
-    private discardPile: string[] = ["001"]
+    private discardPile: string[] = []
     private exhaustPile: string[] = []
 
     private discardFromHandManagerContent: string[] = []
@@ -136,6 +136,10 @@ export default class BattleInterface extends Vue {
         return 'font-size: ' + (this.$store.state.settings.baseFontSize) * multiplier + 'px;'
     }
 
+    private refillPlayerDeck() {
+        this.drawPile = this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex].deck
+    }
+
     public mounted() {
         this.$store.subscribeAction((action) => {
             if(action.type === "cardToBeDrawn") {
@@ -157,7 +161,7 @@ export default class BattleInterface extends Vue {
                 this.dumpInto(this.discardFromSelectManagerContent, this.discardPile)
             }
         })
-
+        this.refillPlayerDeck()
     }
 
 } 

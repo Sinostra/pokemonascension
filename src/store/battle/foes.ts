@@ -1,6 +1,22 @@
 export default {
     state: {
-        foeTeam: ['017', '104', '009']
+        foeTeam: [
+            {
+                id: '017',
+                maxHealth: 50,
+                pattern: []
+            },
+            {
+                id: '104',
+                maxHealth: 55,
+                pattern: []
+            },
+            {
+                id: '009',
+                maxHealth: 60,
+                pattern: []
+            }
+        ]
     },
 
     mutations: {

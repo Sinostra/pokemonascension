@@ -1,36 +1,36 @@
 <template>
     <div class="battle-wrapper">
-        <PlayerPokemon :id="'025'"></PlayerPokemon>
+        <PlayerPokemon :id="activePokemon"></PlayerPokemon>
         <FoePokemon
             v-for="(pokemon, index) in $store.state.foes.foeTeam"
             :key="index"
-            :id="$store.state.foes.foeTeam[index]"
+            :id="pokemon.id"
+            :maxHealth="pokemon.maxHealth"
+            :pattern="pokemon.pattern"
             :index="index"
         >
         </FoePokemon>
     </div>
 </template>
 
-<script>
+<script lang="ts">
 
 import PlayerPokemon from './../pokemon/PlayerPokemon.vue'
 import FoePokemon from './../pokemon/FoePokemon.vue'
-export default {
-    name: "BattleScene",
+import { Options, Vue } from 'vue-class-component'
 
+@Options({
+    name: "BattleScene",
     components: {
         PlayerPokemon,
         FoePokemon,
-    },
+    }
+})
 
-
-    watch: {
-    },
-
-    data: function(){
-        return {}
-    },
-
+export default class BattleScene extends Vue {
+    get activePokemon() {
+        return this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex].id
+    }
 }
 </script>
 
