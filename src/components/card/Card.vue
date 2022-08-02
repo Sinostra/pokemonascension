@@ -137,6 +137,10 @@ export default class Card extends Vue {
       this.playDiscardFromSelectAnim()
     }
 
+    else if(this.state === 'discardedFromHand') {
+      this.playDiscardFromHandAnim()
+    }
+
     if(this.$store.state.cards.dataCards[this.id]['damage'] && !this.$store.state.cards.dataCards[this.id]['damageAOE']) {
       this.$store.subscribeAction((action) => {
         if(action.type === "mouseOver") {

@@ -20,9 +20,13 @@
 
         <PlayCardModal v-if="$store.getters.selectedCard !== null"></PlayCardModal>
 
-        <DiscardManager
-            :content="discardManagerContent"
-        ></DiscardManager>
+        <DiscardFromSelectManager
+            :content="discardFromSelectManagerContent"
+        ></DiscardFromSelectManager>
+
+        <DiscardFromHandManager
+            :content="discardFromHandManagerContent"
+        ></DiscardFromHandManager>
 
         <div class="discardPile" :style="getFontSize()">
             <div class="number text">{{discardPile.length}}</div>
@@ -38,7 +42,8 @@
 <script lang="ts">
 import Hand from '../interface/Hand.vue'
 import PlayCardModal from '../interface/PlayCardModal.vue'
-import DiscardManager from '../interface/DiscardManager.vue'
+import DiscardFromSelectManager from '../interface/discard/DiscardFromSelectManager.vue'
+import DiscardFromHandManager from '../interface/discard/DiscardFromHandManager.vue'
 import { Options, Vue } from 'vue-class-component'
 
 @Options({
@@ -46,7 +51,8 @@ import { Options, Vue } from 'vue-class-component'
     components: {
         Hand,
         PlayCardModal,
-        DiscardManager
+        DiscardFromSelectManager,
+        DiscardFromHandManager
     }
 })
 
@@ -62,7 +68,8 @@ export default class BattleInterface extends Vue {
     private discardPile: string[] = ["001", "002", "003", "004", "005"]
     private exhaustPile: string[] = []
 
-    private discardManagerContent: string[] = []
+    private discardFromHandManagerContent: string[] = []
+    private discardFromSelectManagerContent: string[] = []
 
     private selectCard(cardIndex): void {
         if(cardIndex !== null){
@@ -100,15 +107,19 @@ export default class BattleInterface extends Vue {
         }
     }
 
-    private discard(index): void {
+    private discardFromSelect(index): void {
         const cardPlayed = this.hand.splice(index, 1)[0]
-        this.discardManagerContent.push(cardPlayed)
+        this.discardFromSelectManagerContent.push(cardPlayed)
     }
 
     private dumpInto(from, to) {
         for (let i = from.length; i > 0; i--) {
             to.push(from.shift() as string)
         }
+    }
+
+    private endTurn() {
+        this.dumpInto(this.hand, this.discardFromHandManagerContent)
     }
 
     private getFontSize(multiplier = 1) {
@@ -128,11 +139,11 @@ export default class BattleInterface extends Vue {
             if(action.type === "discardCurrentlySelectedCard") {
                 const cardBeingDiscarded = this.selectedCardIndex
                 this.selectCard(null)
-                this.discard(cardBeingDiscarded)
+                this.discardFromSelect(cardBeingDiscarded)
             }
 
             if(action.type === "cardDonePlayed") {
-                this.dumpInto(this.discardManagerContent, this.discardPile)
+                // this.dumpInto(this.discardFromSelectManagerContent, this.discardPile)
             }
         })
 

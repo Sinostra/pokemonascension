@@ -57,7 +57,6 @@ export default class Pokemon extends Vue {
 
     //Application des faiblesses et résistances avant l'attaque pour éviter que l'armure ne soit prise en compte
     amount = Math.ceil(amount * this.getTypeMatchup(type))
-    console.log(amount)
     let damageDealt: number = 0
 
     if(!ignoreBlock && this.block > 0) {

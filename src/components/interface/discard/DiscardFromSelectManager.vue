@@ -12,10 +12,10 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import Card from '../card/Card.vue'
+import Card from '../../card/Card.vue'
 
 @Options({
-    name: "DiscardManager",
+    name: "DiscardFromSelectManager",
     components: {
         Card
     },
@@ -23,7 +23,7 @@ import Card from '../card/Card.vue'
         content: Array,
     }
 })
-export default class DiscardManager extends Vue {
+export default class DiscardFromSelectManager extends Vue {
 
     private content!: string[]
 
