@@ -63,6 +63,8 @@ export default class BattleInterface extends Vue {
 
     private selectedCardIndex: number | null = null
 
+    private canEndTurn: boolean = false
+
     private drawPile: string[] = []
     private hand: string[] = []
     private discardPile: string[] = ["001", "002", "003", "004", "005"]
@@ -99,7 +101,10 @@ export default class BattleInterface extends Vue {
                 }
 
                 amount --
-                if(amount == 0) this.$store.dispatch("drawIsDone")
+                if(amount == 0) {
+                    this.$store.dispatch("drawIsDone")
+                    this.canEndTurn = true
+                }
                 setTimeout(() => {
                     this.draw(amount)
                 }, this.delayBetweenDraws)
@@ -119,7 +124,12 @@ export default class BattleInterface extends Vue {
     }
 
     private endTurn() {
-        this.dumpInto(this.hand, this.discardFromHandManagerContent)
+        if(this.canEndTurn) {
+            this.dumpInto(this.hand, this.discardFromHandManagerContent)
+            setTimeout(() =>  {
+                this.dumpInto(this.discardFromHandManagerContent, this.discardPile)
+            }, 500)
+        }
     }
 
     private getFontSize(multiplier = 1) {
@@ -130,6 +140,7 @@ export default class BattleInterface extends Vue {
         this.$store.subscribeAction((action) => {
             if(action.type === "cardToBeDrawn") {
                 this.draw(action.payload)
+                this.canEndTurn = false
             }
 
             if(action.type === "rightClick") {
@@ -143,11 +154,11 @@ export default class BattleInterface extends Vue {
             }
 
             if(action.type === "cardDonePlayed") {
-                // this.dumpInto(this.discardFromSelectManagerContent, this.discardPile)
+                this.dumpInto(this.discardFromSelectManagerContent, this.discardPile)
             }
         })
 
-        this.draw(5)
+        this.$store.dispatch("cardToBeDrawn", 5)
     }
 
 } 
