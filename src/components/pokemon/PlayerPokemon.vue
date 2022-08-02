@@ -1,6 +1,6 @@
 <template>
     <div class="pokemon-wrapper" :style="playerPosition" :class="animClass">
-      <div class="size-wrapper" :style="{'width': $store.state.pokedex.constantDex[id]['size'] + '%'}">
+      <div class="size-wrapper" :style="{'width': dataPokemon.size + '%'}">
         <img :src="spritePath">
         <div class="healthBar-infos-wrapper">
           <div class="healthBar">
@@ -11,8 +11,8 @@
             {{block}}
           </div>
           <div class="types-wrapper">
-            <div class="type" v-for="(type, index) in $store.state.pokedex.constantDex[id]['type']" :key="index">
-              <img :src="getPokemonTpyeIcon($store.state.pokedex.constantDex[id]['type'][index])" class="type-img">
+            <div class="type" v-for="(type, index) in dataPokemon.type" :key="index">
+              <img :src="getPokemonTpyeIcon(dataPokemon.type[index])" class="type-img">
             </div>
           </div>
         </div>

@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import dataCard from "../../store/constantData/cards/data-cards"
+import dataCard from "@/store/constantData/cards/data-cards"
 
 @Options({
   name: "Card",

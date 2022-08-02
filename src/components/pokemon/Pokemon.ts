@@ -1,4 +1,5 @@
 import { Options, Vue } from 'vue-class-component';
+import dataDex from "@/store/constantData/pokedex/data-dex"
 
 @Options({
   props: {
@@ -8,8 +9,12 @@ import { Options, Vue } from 'vue-class-component';
 
 export default class Pokemon extends Vue {
   protected id!: string
+  protected dataPokemon = dataDex[this.id]
+
   protected currentHealth: number = 0;
+  protected maxHealth: number = this.dataPokemon.hp
   protected block: number = 0;
+
   protected isPlayingAttackAnim: boolean = false
   protected isPlayingReturnAnim: boolean = false
 
@@ -17,7 +22,7 @@ export default class Pokemon extends Vue {
 
 
   get spritePath() {
-    return require(`./../../assets/img/sprites/${this.$store.state.settings.pokemonSpritesExtension}/${this.id}.${this.$store.state.settings.pokemonSpritesExtension}`)
+    return require(`@/assets/img/sprites/${this.$store.state.settings.pokemonSpritesExtension}/${this.id}.${this.$store.state.settings.pokemonSpritesExtension}`)
   }
 
   get animClass(): string {
@@ -27,10 +32,6 @@ export default class Pokemon extends Vue {
     return animClass
   }
 
-  get maxHealth(): number {
-    return this.$store.state.pokedex.constantDex[this.id].hp
-  }
-
   get healthBarClass(): string {
     if(this.getHealthBarPercent() > 67) return 'green'
     else if(this.getHealthBarPercent() > 33 && this.getHealthBarPercent() <= 67) return 'orange'
@@ -38,7 +39,7 @@ export default class Pokemon extends Vue {
   }
 
   getTypeMatchup(attackingType) {
-    const defenderTypes = this.$store.state.pokedex.constantDex[this.id]['type']
+    const defenderTypes = this.dataPokemon.type
     const attackMachups = this.$store.state.types.dataTypes[attackingType]
     let multiplier = 1
 
@@ -47,10 +48,6 @@ export default class Pokemon extends Vue {
     })
 
     return multiplier
-  }
-
-  public mounted() {
-    this.currentHealth = this.maxHealth
   }
 
   protected takeDamage(amount: number, type: string, ignoreBlock: boolean = false): void {
@@ -92,7 +89,7 @@ export default class Pokemon extends Vue {
   }
 
   protected getPokemonTpyeIcon(type) {
-    return require('../../assets/img/types/' + type + '.png')
+    return require(`@/assets/img/types/${type}.png`)
   }
 
   protected getHealthBarPercent(): number {
@@ -100,7 +97,7 @@ export default class Pokemon extends Vue {
   }
 
   protected getFontSize(multiplier = 1): string {
-    return 'font-size: ' + (this.$store.state.settings.baseFontSize) * multiplier + 'px;'
+    return `font-size: ${(this.$store.state.settings.baseFontSize) * multiplier}px;`
   }
 
   protected playAttackAnim(): void {
@@ -114,6 +111,10 @@ export default class Pokemon extends Vue {
     if(!this.isPlayingReturnAnim) {
       this.isPlayingReturnAnim = true
     }
+  }
+
+  public mounted() {
+    this.currentHealth = this.maxHealth
   }
 
 }

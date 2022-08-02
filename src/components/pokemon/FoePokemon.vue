@@ -1,6 +1,6 @@
 <template>
     <div class="pokemon-wrapper" :style="foePosition" :class="animClass">
-      <div class="size-wrapper" :style="{'width': $store.state.pokedex.constantDex[id]['size'] + '%'}">
+      <div class="size-wrapper" :style="{'width': dataPokemon.size + '%'}">
         <div class="bottom-wrapper" @click.stop="onClick()">
           <div class="healthBar-infos-wrapper">
             <div class="healthBar">
@@ -11,8 +11,8 @@
               {{block}}
             </div>
             <div class="types-wrapper">
-              <div class="type" v-for="(type, index) in $store.state.pokedex.constantDex[id]['type']" :key="index">
-                <img :src="getPokemonTpyeIcon($store.state.pokedex.constantDex[id]['type'][index])" class="type-img">
+              <div class="type" v-for="(type, index) in dataPokemon.type" :key="index">
+                <img :src="getPokemonTpyeIcon(dataPokemon.type[index])" class="type-img">
               </div>
             </div>
           </div>
@@ -53,7 +53,7 @@ export default class FoePokemon extends Pokemon {
   }
 
   private onHover(enter: boolean = true): void {
-    if(enter) this.$store.dispatch("mouseOver", this.$store.state.pokedex.constantDex[this.id]['type'])
+    if(enter) this.$store.dispatch("mouseOver", this.dataPokemon['type'])
     else this.$store.dispatch("mouseOver", null)
   }
 
