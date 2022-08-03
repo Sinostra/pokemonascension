@@ -3,7 +3,6 @@
       <div class="size-wrapper" :style="{'width': dataPokemon.size + '%'}">
         <div class="bottom-wrapper" @click.stop="onClick()">
           <div class="healthBar-infos-wrapper">
-            <div>{{nextMove}}</div>
             <div class="healthBar">
               <div class="currentHealth" :class="healthBarClass" :style="{'width': getHealthBarPercent() + '%'}"></div>
               <div class="healthAmount" :style="getFontSize()">{{currentHealth}} / {{maxHealth}} </div>
@@ -27,6 +26,7 @@
 import { Options } from "vue-class-component";
 import Pokemon from "./Pokemon";
 import suffleArray from "@/engine/Shuffle";
+import cloneDeep from "lodash.clonedeep"
 
 @Options({
   name: "FoePokemon",
@@ -54,11 +54,18 @@ export default class FoePokemon extends Pokemon {
   }
 
   get nextMove() {
-    if(this.$store.state.battle.turnCounter % this.patternSettings.pattern.length === 0) {
+    let nextMove = {}
+    if(this.$store.state.battle.turnCounter === 0) return nextMove
+
+    if(this.$store.state.battle.turnCounter % this.patternSettings.pattern.length === 1) {
       this.setPattern()
     }
-    console.log(this.pattern)
-    return this.pattern.shift()
+
+    let nextMoveIndex = (this.$store.state.battle.turnCounter % this.pattern.length) -1
+    if(nextMoveIndex < 0) {
+      nextMoveIndex = this.pattern.length -1
+    }
+    return this.pattern[nextMoveIndex]
   }
 
   private onClick(): void {
@@ -73,20 +80,22 @@ export default class FoePokemon extends Pokemon {
   }
 
   private setPattern() {
-    const pattern = this.patternSettings.pattern
+    const pattern = cloneDeep(this.patternSettings.pattern)
+
     pattern.forEach((move, index) => {
       if(Array.isArray(move)) {
-        pattern[index] = suffleArray(move).shift()
+        pattern[index] = suffleArray(move)[0]
       }
     })
+
     if(this.patternSettings.patternIndexToRandomise) {
       this.pattern = suffleArray(pattern, this.patternSettings.patternIndexToRandomise)
     }
-    else  this.pattern = suffleArray(pattern)
-    
+    else this.pattern = suffleArray(pattern)
   }
 
   public mounted() {
+
     this.$store.subscribeAction((action) => {
       if(action.type === "damageFoe") {
         if(action.payload.target === this.index) {
@@ -98,7 +107,6 @@ export default class FoePokemon extends Pokemon {
         this.takeDamage(action.payload.damage, action.payload.type, action.payload.ignoreBlock)
       }
     })
-    this.setPattern()
   }
 }
 
