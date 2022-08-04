@@ -3,6 +3,10 @@
       <div class="size-wrapper" :style="{'width': dataPokemon.size + '%'}">
         <div class="bottom-wrapper" @click.stop="onClick()">
           <div class="healthBar-infos-wrapper">
+            <div v-if="nextMove" class="intent" :style="getFontSize(1.2)">
+              <img v-if="nextMove['block'] > 0" :src="shieldSprite">
+              <div v-if="nextMove['damage'] > 0">{{nextMove['damage']}}</div>
+            </div>
             <div class="healthBar">
               <div class="currentHealth" :class="healthBarClass" :style="{'width': getHealthBarPercent() + '%'}"></div>
               <div class="healthAmount" :style="getFontSize()">{{currentHealth}} / {{maxHealth}} </div>
@@ -51,6 +55,10 @@ export default class FoePokemon extends Pokemon {
   get spriteClass(): string {
     if(this.$store.getters.selectedCard === null) return ''
     return this.$store.state.cards.dataCards[this.$store.getters.selectedCard]['target'] ? 'target' : ''
+  }
+
+  get shieldSprite() {
+    return require('@/assets/img/interface/shield.png')
   }
 
   get nextMove() {

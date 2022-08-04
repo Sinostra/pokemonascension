@@ -12,6 +12,33 @@
       top: -5vh;
       left: 0%;
     }
+
+    .intent {
+      position: absolute;
+      top: -35px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: "ERASDEMI";
+      font-weight: 800;
+      color: #fff;
+      -webkit-text-stroke-color: black;
+      width: 13%;
+      height: 95%;
+      display: flex;
+      align-items: center;
+
+        img {
+          position: absolute;
+          left: -50%;
+          width: 2vw;
+          z-index: -1;
+        }
+
+        > div {
+          margin-bottom: 35%;
+          filter: drop-shadow(1px 1px 1px black);
+        }
+    }
   
     img {
       top: 0;
