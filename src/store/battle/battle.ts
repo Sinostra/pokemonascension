@@ -51,8 +51,8 @@ export default {
         cardDonePlayed() {},
 
         damageAllFoes() {},
-        damageFoe() {},
-        playerGetBlock() {},
+        damage() {},
+        gainBlock() {},
         mouseOver() {}
     },
     getters: {

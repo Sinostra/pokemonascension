@@ -33,11 +33,11 @@ export default class BattleManager extends Vue {
         this.$store.dispatch("discardCurrentlySelectedCard")
         setTimeout(() => {
             this.$store.dispatch("spendEnergy", this.cardBeingPlayed['cost'])
-            this.playEffects(this.cardBeingPlayed, targetIndex)
+            this.playEffects(this.cardBeingPlayed, "player", targetIndex)
         }, 0)
     }
 
-    private playEffects(effects: any, target: number | string | null) {
+    private playEffects(effects: any, user: number | string, target: number | string | null) {
     
         if(effects['damage']) {
             if(effects['damageAOE']) {
@@ -48,7 +48,7 @@ export default class BattleManager extends Vue {
                 })
             }
 
-            else this.$store.dispatch("damageFoe", {
+            else this.$store.dispatch("damage", {
                 damage: effects['damage'],
                 type: effects['type'],
                 ignoreBlock: effects['ignoreBlock'],
@@ -57,7 +57,10 @@ export default class BattleManager extends Vue {
         }
 
         if(effects['block']) {
-            this.$store.dispatch("playerGetBlock", effects['block'])
+            this.$store.dispatch("gainBlock", {
+                user: user,
+                amount: effects['block']
+            })
         }
 
         if(effects['energy']) {

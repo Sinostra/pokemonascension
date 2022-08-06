@@ -88,6 +88,10 @@ export default class Pokemon extends Vue {
     else this.currentHealth = projectedHealthAmount
   }
 
+  protected gainBlock(amount: number) {
+    this.block += amount
+  }
+
   protected getPokemonTpyeIcon(type) {
     return require(`@/assets/img/types/${type}.png`)
   }
