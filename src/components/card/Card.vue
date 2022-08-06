@@ -2,16 +2,16 @@
   <div class="card" :class="cardClass" @click.stop="onClick()" :style="{'background-image':`url(${background})`}">
     <div class="cost" :style="(getFontSize(0.6))">
       <img :src="costBackground">
-      {{ dataCard['cost'] }}
+      {{ dataCurrentCard['cost'] }}
     </div>
-    <div class="name" :style="(getFontSize(0.5))">{{dataCard['name']}}</div>
+    <div class="name" :style="(getFontSize(0.5))">{{dataCurrentCard['name']}}</div>
 
     <div class="illustration" :style="{'background-image':'url(' + illustrationBackground + ')'}"></div>
 
-    <div class="category" :style="(getCategoryStyle(0.4))">{{dataCard['category']}}</div>
+    <div class="category" :style="(getCategoryStyle(0.4))">{{dataCurrentCard['category']}}</div>
     
-    <div v-if="dataCard['damage']" class="tooltip" :style="(getFontSize(0.6))">{{dynamicToolTip}}</div>
-    <div v-else class="tooltip" :style="(getFontSize(0.6))">{{dataCard['tooltip']}}</div>
+    <div v-if="dataCurrentCard['damage']" class="tooltip" :style="(getFontSize(0.6))">{{dynamicToolTip}}</div>
+    <div v-else class="tooltip" :style="(getFontSize(0.6))">{{dataCurrentCard['tooltip']}}</div>
   </div>
 </template>
 
@@ -31,7 +31,7 @@ export default class Card extends Vue {
   private id!: string
   private state!: string
 
-  private dataCard = dataCard[this.id]
+  private readonly dataCurrentCard = dataCard[this.id]
 
   private isPlayingDrawAnim: boolean = false
   private isPlayingDiscardFromSelectAnim: boolean = false
@@ -40,9 +40,9 @@ export default class Card extends Vue {
   private typesHover: string[] | null = null
 
   get cardClass(): string {
-    const type: string = this.dataCard['type']
+    const type: string = this.dataCurrentCard['type']
     const draw = this.isPlayingDrawAnim ? 'draw' : ''
-    const playable = this.dataCard['cost'] <= this.$store.state.battle.currentEnergy ? 'playable' : ''
+    const playable = this.dataCurrentCard['cost'] <= this.$store.state.battle.currentEnergy ? 'playable' : ''
     const discardFromSelect = this.isPlayingDiscardFromSelectAnim ? 'discardFromSelect' : ''
     const discardFromHand = this.isPlayingDiscardFromHand ? 'dicardFromHand' : ''
     
@@ -53,11 +53,11 @@ export default class Card extends Vue {
   }
 
   get background() {
-    return require(`@/assets/img/cards/bords/${this.dataCard['rarity']}2.png`)
+    return require(`@/assets/img/cards/bords/${this.dataCurrentCard['rarity']}2.png`)
   }
 
   get costBackground() {
-    return require(`@/assets/img/cards/bords/${this.dataCard['rarity']}_round.png`)
+    return require(`@/assets/img/cards/bords/${this.dataCurrentCard['rarity']}_round.png`)
   }
 
   get illustrationBackground(): string {
@@ -65,22 +65,22 @@ export default class Card extends Vue {
   }
 
   get categoryBackground() {
-    return require(`@/assets/img/cards/${this.dataCard['category']}_${this.dataCard['rarity']}.png`)
+    return require(`@/assets/img/cards/${this.dataCurrentCard['category']}_${this.dataCurrentCard['rarity']}.png`)
   }
 
   get dynamicToolTip() {
 
-    if(!this.typesHover) return this.dataCard['tooltip'].replace('§', this.dataCard['damage'])
+    if(!this.typesHover) return this.dataCurrentCard['tooltip'].replace('§', this.dataCurrentCard['damage'])
 
     else {
-      const attackMachups = this.$store.state.types.dataTypes[this.dataCard['type']]
+      const attackMachups = this.$store.state.types.dataTypes[this.dataCurrentCard['type']]
       let multiplier = 1
       this.typesHover.forEach((type) => {
         multiplier *= attackMachups[type]
       })
-      const finalDamage = Math.ceil(this.dataCard['damage'] * multiplier)
+      const finalDamage = Math.ceil(this.dataCurrentCard['damage'] * multiplier)
 
-      return this.dataCard['tooltip'].replace('§', finalDamage)
+      return this.dataCurrentCard['tooltip'].replace('§', finalDamage)
     }
   }
 
@@ -95,7 +95,8 @@ export default class Card extends Vue {
   }
 
   private onClick() {
-    if(this.dataCard['cost'] <= this.$store.state.battle.currentEnergy) {
+    console.log(dataCard[this.id])
+    if(this.dataCurrentCard['cost'] <= this.$store.state.battle.currentEnergy) {
       this.$emit('cardClicked')
     }
   }
@@ -141,7 +142,7 @@ export default class Card extends Vue {
       this.playDiscardFromHandAnim()
     }
 
-    if(this.dataCard['damage'] && !this.dataCard['damageAOE']) {
+    if(this.dataCurrentCard['damage'] && !this.dataCurrentCard['damageAOE']) {
       this.$store.subscribeAction((action) => {
         if(action.type === "mouseOver") {
           this.typesHover = action.payload

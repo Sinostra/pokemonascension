@@ -20,7 +20,6 @@ import { Options, Vue } from 'vue-class-component'
 
 export default class BattleManager extends Vue {
     private cardBeingPlayed: any = null
-    private targetIndex: number | null = null
     private cardsBeginningTurn: number = 5
 
     private startPlayerTurn() {
@@ -30,52 +29,52 @@ export default class BattleManager extends Vue {
 
     private playCard(cardId: string, targetIndex: number | null) {
         this.cardBeingPlayed = this.$store.state.cards.dataCards[cardId]
-        this.targetIndex = targetIndex
         this.$store.dispatch("cardIsPlaying")
         this.$store.dispatch("discardCurrentlySelectedCard")
-        setTimeout(() => {this.playCardEffects()}, 0)
+        setTimeout(() => {
+            this.$store.dispatch("spendEnergy", this.cardBeingPlayed['cost'])
+            this.playEffects(this.cardBeingPlayed, targetIndex)
+        }, 0)
     }
 
-    private playCardEffects() {
+    private playEffects(effects: any, target: number | string | null) {
     
-        if(this.cardBeingPlayed !== null) {
-            this.$store.dispatch("spendEnergy", this.cardBeingPlayed['cost'])
-    
-            if(this.cardBeingPlayed['damage']) {
-                if(this.cardBeingPlayed['damageAOE']) {
-                    this.$store.dispatch("damageAllFoes", {
-                        damage: this.cardBeingPlayed['damage'],
-                        type: this.cardBeingPlayed['type'],
-                        ignoreBlock: this.cardBeingPlayed['ignoreBlock'],
-                    })
-                }
-
-                else this.$store.dispatch("damageFoe", {
-                    damage: this.cardBeingPlayed['damage'],
-                    type: this.cardBeingPlayed['type'],
-                    ignoreBlock: this.cardBeingPlayed['ignoreBlock'],
-                    target :this.targetIndex
+        if(effects['damage']) {
+            if(effects['damageAOE']) {
+                this.$store.dispatch("damageAllFoes", {
+                    damage: effects['damage'],
+                    type: effects['type'],
+                    ignoreBlock: effects['ignoreBlock'],
                 })
             }
-    
-            if(this.cardBeingPlayed['block']) {
-                this.$store.dispatch("playerGetBlock", this.cardBeingPlayed['block'])
-            }
-    
-            if(this.cardBeingPlayed['energy']) {
-                this.$store.dispatch("getEnergy", this.cardBeingPlayed['energy'])
-            }
 
-            if(this.cardBeingPlayed['draw']) {
-                this.$store.dispatch("cardToBeDrawn", this.cardBeingPlayed['draw'])
-            }
-
-            else {
-                setTimeout(() => {this.$store.dispatch("cardDonePlayed")}, 500)
-            }
-
-
+            else this.$store.dispatch("damageFoe", {
+                damage: effects['damage'],
+                type: effects['type'],
+                ignoreBlock: effects['ignoreBlock'],
+                target
+            })
         }
+
+        if(effects['block']) {
+            this.$store.dispatch("playerGetBlock", effects['block'])
+        }
+
+        if(effects['energy']) {
+            this.$store.dispatch("getEnergy", effects['energy'])
+        }
+
+        if(effects['draw']) {
+            this.$store.dispatch("cardToBeDrawn", effects['draw'])
+        }
+
+        else {
+            setTimeout(() => {
+                this.cardBeingPlayed = null
+                this.$store.dispatch("cardDonePlayed")
+            }, 500)
+        }
+
     }
 
     public mounted() {
@@ -91,7 +90,6 @@ export default class BattleManager extends Vue {
             if(action.type === "drawIsDone") {
                 if(this.cardBeingPlayed !== null) {
                     this.cardBeingPlayed = null
-                    this.targetIndex = null
                     this.$store.dispatch("cardDonePlayed")
                 }
             }
