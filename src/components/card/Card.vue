@@ -96,6 +96,7 @@ export default class Card extends Vue {
 
   private onClick() {
     console.log(dataCard[this.id])
+    console.log(this.dataCurrentCard)
     if(this.dataCurrentCard['cost'] <= this.$store.state.battle.currentEnergy) {
       this.$emit('cardClicked')
     }

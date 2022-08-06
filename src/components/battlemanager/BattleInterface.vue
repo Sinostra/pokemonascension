@@ -113,8 +113,8 @@ export default class BattleInterface extends Vue {
     }
 
     private discardFromSelect(index): void {
-        const cardPlayed = this.hand.splice(index, 1)[0]
-        this.discardFromSelectManagerContent.push(cardPlayed)
+        const cardDiscarded = this.hand.splice(index, 1)[0]
+        this.discardFromSelectManagerContent.push(cardDiscarded)
     }
 
     private dumpInto(from, to) {
