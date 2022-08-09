@@ -97,6 +97,15 @@ export default class BattleManager extends Vue {
                 }
             }
 
+            if(action.type === "endPlayerTurn") {
+                this.$store.dispatch("foeTurn", 0)
+            }
+
+            if(action.type === "playFoeMove") {
+                console.log(action.payload)
+                this.playEffects(action.payload.effect, action.payload.user, "player")
+            }
+
         })
         this.startPlayerTurn()
     }

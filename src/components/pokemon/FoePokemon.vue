@@ -102,6 +102,14 @@ export default class FoePokemon extends Pokemon {
     else this.pattern = suffleArray(pattern)
   }
 
+  private playMove() {
+    this.playAttackAnim()
+    this.$store.dispatch("playFoeMove", {
+      user: this.index,
+      effect: this.nextMove
+    })
+  }
+
   public mounted() {
 
     this.$store.subscribeAction((action) => {
@@ -113,6 +121,14 @@ export default class FoePokemon extends Pokemon {
 
       if(action.type === "damageAllFoes") {
         this.takeDamage(action.payload.damage, action.payload.type, action.payload.ignoreBlock)
+      }
+
+      if(action.type === "gainBlock" && action.payload.user === this.index) {
+        this.gainBlock(action.payload.amount)
+      }
+
+      if(action.type === "foeTurn" && action.payload === this.index) {
+        this.playMove()
       }
     })
   }

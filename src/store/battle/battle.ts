@@ -40,6 +40,9 @@ export default {
             context.commit("startNewTurn")
         },
 
+        endPlayerTurn() {},
+        foeTurn() {},
+
         foePokemonHasBeenClicked() {},
         playCurrentlySelectedCard() {},
         discardCurrentlySelectedCard() {},
@@ -52,8 +55,9 @@ export default {
 
         damageAllFoes() {},
         damage() {},
+        playFoeMove() {},
         gainBlock() {},
-        mouseOver() {}
+        mouseOver() {},
     },
     getters: {
         selectedCard: state => {
