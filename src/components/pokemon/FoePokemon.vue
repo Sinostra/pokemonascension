@@ -115,6 +115,10 @@ export default class FoePokemon extends Pokemon {
   public mounted() {
 
     this.$store.subscribeAction((action) => {
+      if(action.type === "endPlayerTurn") {
+        this.setBlock(0)
+      }
+
       if(action.type === "damage") {
         if(action.payload.target === this.index) {
           this.takeDamage(action.payload.damage, action.payload.type, action.payload.ignoreBlock)

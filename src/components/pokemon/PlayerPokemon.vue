@@ -37,10 +37,13 @@ export default class PlayerPokemon extends Pokemon {
 
   public mounted() {
     this.$store.subscribeAction((action) => {
+      if(action.type === "startNewTurn") {
+        this.setBlock(0)
+      }
+
       if(action.type === "damageAllFoes") {
         this.playAttackAnim()
       }
-
 
       if(action.type === "damage") {
         if(action.payload.target !== "player" && action.payload.target !== null) {
