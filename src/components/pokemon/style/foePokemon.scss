@@ -15,29 +15,29 @@
 
     .intent {
       position: absolute;
-      top: -35px;
+      top: -65px;
       left: 50%;
+      width: 5vw;
+      height: 4vw;
       transform: translateX(-50%);
       font-family: "ERASDEMI";
       font-weight: 800;
       color: #fff;
       -webkit-text-stroke-color: black;
-      width: 13%;
-      height: 95%;
       display: flex;
       align-items: center;
 
-        img {
-          position: absolute;
-          left: -50%;
-          width: 2vw;
-          z-index: -1;
-        }
-
-        > div {
-          margin-bottom: 35%;
-          filter: drop-shadow(1px 1px 1px black);
-        }
+      .intent-category {
+        width: 50%;
+        height: 100%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        filter: drop-shadow(1px 1px 1px black);
+      }
     }
   
     img {

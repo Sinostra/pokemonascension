@@ -4,8 +4,8 @@
         <div class="bottom-wrapper" @click.stop="onClick()">
           <div class="healthBar-infos-wrapper">
             <div v-if="nextMove" class="intent" :style="getFontSize(1.2)">
-              <img v-if="nextMove['block'] > 0" :src="shieldSprite">
-              <div v-if="nextMove['damage'] > 0">{{nextMove['damage']}}</div>
+              <div v-if="nextMove['damage'] > 0" class="intent-category damage" :style="`background-image: url(${getPokemonTpyeIcon(nextMove['type'])})`">{{nextMove['damage']}}</div>
+              <div v-if="nextMove['block'] > 0" class="intent-category block" :style="`background-image: url(${shieldSprite})`">{{nextMove['block']}}</div>
             </div>
             <div class="healthBar">
               <div class="currentHealth" :class="healthBarClass" :style="{'width': getHealthBarPercent() + '%'}"></div>
