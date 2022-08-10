@@ -103,7 +103,9 @@ export default class FoePokemon extends Pokemon {
   }
 
   private playMove() {
-    this.playAttackAnim()
+    if(this.nextMove['damage']) {
+      this.playAttackAnim()
+    }
     this.$store.dispatch("playFoeMove", {
       user: this.index,
       effect: this.nextMove

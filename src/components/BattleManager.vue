@@ -80,6 +80,18 @@ export default class BattleManager extends Vue {
 
     }
 
+    private playAllFoesTurns(index) {
+        if(index < this.$store.state.foes.foeTeam.length) {
+            this.$store.dispatch("foeTurn", index)
+            index++
+            setTimeout(() => {this.playAllFoesTurns(index)}, 1000)
+        }
+
+        else {
+            this.startPlayerTurn()
+        }
+    }
+
     public mounted() {
         this.$store.subscribeAction((action) => {
             if(action.type === "playCurrentlySelectedCard") {
@@ -98,11 +110,10 @@ export default class BattleManager extends Vue {
             }
 
             if(action.type === "endPlayerTurn") {
-                this.$store.dispatch("foeTurn", 0)
+                this.playAllFoesTurns(0)
             }
 
             if(action.type === "playFoeMove") {
-                console.log(action.payload)
                 this.playEffects(action.payload.effect, action.payload.user, "player")
             }
 
