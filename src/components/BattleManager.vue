@@ -80,11 +80,9 @@ export default class BattleManager extends Vue {
 
     }
 
-    private playAllFoesTurns(index) {
+    private playFoeTurn(index) {
         if(index < this.$store.state.foes.foeTeam.length) {
             this.$store.dispatch("foeTurn", index)
-            index++
-            setTimeout(() => {this.playAllFoesTurns(index)}, 1000)
         }
 
         else {
@@ -110,11 +108,15 @@ export default class BattleManager extends Vue {
             }
 
             if(action.type === "endPlayerTurn") {
-                this.playAllFoesTurns(0)
+                setTimeout(() => {this.playFoeTurn(0)}, 1000)
             }
 
             if(action.type === "playFoeMove") {
                 this.playEffects(action.payload.effect, action.payload.user, "player")
+            }
+
+            if(action.type === "foeMovePlayed") {
+                setTimeout(() => {this.playFoeTurn(action.payload + 1)}, 1000)            
             }
 
         })

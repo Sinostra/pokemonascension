@@ -20,7 +20,7 @@
               </div>
             </div>
           </div>
-          <img :src="spritePath" :class="spriteClass" @mouseover="onHover()" @mouseleave="onHover(false)">
+          <img :src="spritePath" :class="spriteClass" @mouseover="onHover()" @mouseleave="onHover(false)" class="pokemon-sprite">
         </div>
       </div>
   </div>
@@ -103,13 +103,24 @@ export default class FoePokemon extends Pokemon {
   }
 
   private playMove() {
-    if(this.nextMove['damage']) {
-      this.playAttackAnim()
+    if(this.fainted) {
+      this.$store.dispatch("playFoeMove", {
+        user: this.index,
+        effect: {}
+      })
     }
-    this.$store.dispatch("playFoeMove", {
-      user: this.index,
-      effect: this.nextMove
-    })
+    else {
+      if(this.nextMove['damage']) {
+        this.playAttackAnim()
+      }
+      this.$store.dispatch("playFoeMove", {
+        user: this.index,
+        effect: this.nextMove
+      })
+    }
+
+    this.$store.dispatch("foeMovePlayed", this.index)
+    
   }
 
   public mounted() {

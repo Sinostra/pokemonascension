@@ -56,6 +56,7 @@ export default {
         damageAllFoes() {},
         damage() {},
         playFoeMove() {},
+        foeMovePlayed() {},
         gainBlock() {},
         mouseOver() {},
     },
