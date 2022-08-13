@@ -178,14 +178,15 @@
         font-family: 'gill sans bold';
         color: #000;
 
-        &.super-effective {
-            .damage {
+
+        &.super-effective:deep {
+            .damage-amount {
                 color: #ed3419;
             }
         }
 
-        &.not-very-effective {
-            .damage {
+        &.not-very-effective:deep {
+            .damage-amount {
                 color: #0096ff;
             }
         }
