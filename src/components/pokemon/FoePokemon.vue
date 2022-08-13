@@ -3,9 +3,12 @@
       <div class="size-wrapper" :style="{'width': dataPokemon.size + '%'}">
         <div class="bottom-wrapper" @click.stop="onClick()">
           <div class="healthBar-infos-wrapper">
-            <div v-if="nextMove" class="intent" :style="getFontSize(1.2)">
+            <div v-if="nextMove && canShowIntents" class="intent" :style="getFontSize(1.2)">
               <div v-if="nextMove['damage'] > 0" class="intent-category damage">
-                  <div class="text-wrapper">{{nextMove['damage']}}<span v-if="nextMove['damageTimes']">x{{nextMove['damageTimes']}}</span></div>
+                  <div class="text-wrapper">
+                    <span>{{Math.ceil(nextMove['damage'] * getTypeMatchup(nextMove['type'], playerPokemonTypes))}}</span>
+                    <span v-if="nextMove['damageTimes']">x{{nextMove['damageTimes']}}</span>
+                  </div>
                   <div class="img-wrapper">
                     <img :src="getTpyeIcon(nextMove['type'])">
                   </div>
@@ -56,6 +59,7 @@ export default class FoePokemon extends Pokemon {
   protected maxHealth: number = this.maxHealth
   private patternSettings!: any
   private pattern = []
+  private canShowIntents: boolean = true
 
   get foePosition(): string {
     const currentBackground: string = this.$store.state.battle.backgroundUsed
@@ -84,6 +88,10 @@ export default class FoePokemon extends Pokemon {
       nextMoveIndex = this.pattern.length -1
     }
     return this.pattern[nextMoveIndex]
+  }
+
+  get playerPokemonTypes() {
+    return this.$store.state.pokedex.constantDex[this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex]['id']]['type']
   }
 
   private onClick(): void {
@@ -121,9 +129,13 @@ export default class FoePokemon extends Pokemon {
       if(this.nextMove['damage']) {
         this.playAttackAnim()
       }
+      const effect = time === 1 ? this.nextMove : {
+        'damage': this.nextMove['damage'],
+        'type' : this.nextMove['type'],
+      }
       this.$store.dispatch("playFoeMove", {
         user: this.index,
-        effect: this.nextMove
+        effect,
       })
       if(this.nextMove['damageTimes'] && time < this.nextMove['damageTimes']) {
         time++
@@ -132,6 +144,7 @@ export default class FoePokemon extends Pokemon {
 
       else {
         this.$store.dispatch("foeMovePlayed", this.index)
+        this.canShowIntents = false
       }
     }
   }
@@ -141,6 +154,10 @@ export default class FoePokemon extends Pokemon {
     this.$store.subscribeAction((action) => {
       if(action.type === "endPlayerTurn") {
         this.setBlock(0)
+      }
+
+      if(action.type === "startNewTurn") {
+        this.canShowIntents = true
       }
 
       if(action.type === "damage") {

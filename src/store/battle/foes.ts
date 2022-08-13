@@ -9,19 +9,19 @@ export default {
                         {
                             'damage': 1,
                             'block': 2,
-                            'type': 'normal',
+                            'type': 'flying',
                             'damageTimes': 3,
                         },
                         {
                             'damage': 1,
                             'block': 2,
-                            'type': 'normal',
+                            'type': 'flying',
                             'damageTimes': 3,
                         },
                         {
                             'damage': 1,
                             'block': 2,
-                            'type': 'normal',
+                            'type': 'flying',
                             'damageTimes': 3,
                         }
                     ]

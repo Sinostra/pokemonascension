@@ -38,12 +38,11 @@ export default class Pokemon extends Vue {
     else return 'red'
   }
 
-  getTypeMatchup(attackingType) {
-    const defenderTypes = this.dataPokemon.type
+  getTypeMatchup(attackingType, defendingTypes) {
     const attackMachups = this.$store.state.types.dataTypes[attackingType]
     let multiplier = 1
 
-    defenderTypes.forEach((type) => {
+    defendingTypes.forEach((type) => {
       multiplier *= attackMachups[type]
     })
 
@@ -53,7 +52,7 @@ export default class Pokemon extends Vue {
   protected takeDamage(amount: number, type: string, ignoreBlock: boolean = false): void {
 
     //Application des faiblesses et résistances avant l'attaque pour éviter que l'armure ne soit prise en compte
-    amount = Math.ceil(amount * this.getTypeMatchup(type))
+    amount = Math.ceil(amount * this.getTypeMatchup(type, this.dataPokemon.type))
     let damageDealt: number = 0
 
     if(!ignoreBlock && this.block > 0) {
