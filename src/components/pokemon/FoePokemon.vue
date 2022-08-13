@@ -102,13 +102,11 @@ export default class FoePokemon extends Pokemon {
     else this.pattern = suffleArray(pattern)
   }
 
-  private playMove() {
+  private playMove(time: number = 1) {
     if(this.fainted) {
-      this.$store.dispatch("playFoeMove", {
-        user: this.index,
-        effect: {}
-      })
+      this.$store.dispatch("foeMovePlayed", this.index)
     }
+
     else {
       if(this.nextMove['damage']) {
         this.playAttackAnim()
@@ -117,9 +115,17 @@ export default class FoePokemon extends Pokemon {
         user: this.index,
         effect: this.nextMove
       })
+      if(this.nextMove['damageTimes'] && time < this.nextMove['damageTimes']) {
+        time++
+        setTimeout(() => {this.playMove(time)}, 500)
+      }
+
+      else {
+        this.$store.dispatch("foeMovePlayed", this.index)
+      }
     }
 
-    this.$store.dispatch("foeMovePlayed", this.index)
+    
     
   }
 
