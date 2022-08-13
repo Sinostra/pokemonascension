@@ -6,7 +6,7 @@
             <div v-if="nextMove && canShowIntents" class="intent" :style="getFontSize(1.2)">
               <div v-if="nextMove['damage'] > 0" class="intent-category damage">
                   <div class="text-wrapper">
-                    <span>{{Math.ceil(nextMove['damage'] * getTypeMatchup(nextMove['type'], playerPokemonTypes))}}</span>
+                    <span :class="damageMoveClass">{{Math.ceil(nextMove['damage'] * nextMoveDamageModifier)}}</span>
                     <span v-if="nextMove['damageTimes']">x{{nextMove['damageTimes']}}</span>
                   </div>
                   <div class="img-wrapper">
@@ -90,8 +90,16 @@ export default class FoePokemon extends Pokemon {
     return this.pattern[nextMoveIndex]
   }
 
-  get playerPokemonTypes() {
-    return this.$store.state.pokedex.constantDex[this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex]['id']]['type']
+  get nextMoveDamageModifier(): number {
+    const playerActivePokemonTypes = this.$store.state.pokedex.constantDex[this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex]['id']]['type']
+    return this.getTypeMatchup(this.nextMove['type'], playerActivePokemonTypes)
+  }
+
+  get damageMoveClass(): string {
+    let moveClass = ''
+    if(this.nextMoveDamageModifier > 1) moveClass = 'super-effective'
+    else if(this.nextMoveDamageModifier < 1) moveClass = 'not-very-effective'
+    return moveClass
   }
 
   private onClick(): void {

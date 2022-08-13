@@ -177,6 +177,18 @@
         padding: 2%;
         font-family: 'gill sans bold';
         color: #000;
+
+        &.super-effective {
+            .damage {
+                color: #ed3419;
+            }
+        }
+
+        &.not-very-effective {
+            .damage {
+                color: #0096ff;
+            }
+        }
     }
 }
 

@@ -10,7 +10,7 @@
 
     <div class="category" :style="(getCategoryStyle(0.4))">{{dataCard[id]['category']}}</div>
     
-    <div v-if="dataCard[id]['damage']" class="tooltip" :style="(getFontSize(0.6))">{{dynamicToolTip}}</div>
+    <div v-if="dataCard[id]['damage']" class="tooltip" :class="cardDamageTooltipClass" :style="(getFontSize(0.6))" v-html="dynamicToolTip"></div>
     <div v-else class="tooltip" :style="(getFontSize(0.6))">{{dataCard[id]['tooltip']}}</div>
   </div>
 </template>
@@ -18,7 +18,6 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import dataCard from "@/store/constantData/cards/data-cards"
-import cloneDeep from "lodash.clonedeep"
 
 @Options({
   name: "Card",
@@ -74,15 +73,21 @@ export default class Card extends Vue {
     if(!this.typesHover) return this.dataCard[this.id]['tooltip'].replace('§', this.dataCard[this.id]['damage'])
 
     else {
-      const attackMachups = this.$store.state.types.dataTypes[this.dataCard[this.id]['type']]
-      let multiplier = 1
-      this.typesHover.forEach((type) => {
-        multiplier *= attackMachups[type]
-      })
-      const finalDamage = Math.ceil(this.dataCard[this.id]['damage'] * multiplier)
-
+      const finalDamage = Math.ceil(this.dataCard[this.id]['damage'] * this.cardDamageTooltipModifier)
       return this.dataCard[this.id]['tooltip'].replace('§', finalDamage)
     }
+  }
+
+  get cardDamageTooltipModifier() {
+    if(!this.typesHover) return 1
+    return this.getTypeMatchup(this.dataCard[this.id]['type'], this.typesHover)
+  }
+
+  get cardDamageTooltipClass() {
+    let tooltipClass = ''
+    if(this.cardDamageTooltipModifier > 1) tooltipClass = 'super-effective'
+    else if(this.cardDamageTooltipModifier < 1) tooltipClass = 'not-very-effective'
+    return tooltipClass
   }
 
   getFontSize(multiplier = 1): string {
@@ -93,6 +98,17 @@ export default class Card extends Vue {
     const fontSize = this.getFontSize(multiplier)
     const background = `background-image :url(${this.categoryBackground});`
     return fontSize + background
+  }
+
+  getTypeMatchup(attackingType, defendingTypes) {
+    const attackMachups = this.$store.state.types.dataTypes[attackingType]
+    let multiplier = 1
+
+    defendingTypes.forEach((type) => {
+      multiplier *= attackMachups[type]
+    })
+
+    return multiplier
   }
 
   private onClick() {

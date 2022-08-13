@@ -35,17 +35,17 @@ export default {
                         {
                             'damage': 1,
                             'block': 2,
-                            'type': 'normal'
+                            'type': 'ground'
                         },
                         {
                             'damage': 3,
                             'block': 0,
-                            'type': 'water'
+                            'type': 'ground'
                         },
                         {
                             'damage': 0,
                             'block': 3,
-                            'type': 'normal'
+                            'type': 'ground'
                         }
                     ],
                 }

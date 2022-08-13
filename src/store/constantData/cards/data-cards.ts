@@ -13,7 +13,7 @@ export default {
         "block": 0,
         "ignoreBlock": false,
         "energy": 0,
-        "tooltip": 'Deal § damage to an ennemy',
+        "tooltip": 'Deal <span class="damage">§</span> damage to an ennemy',
     },
 
 

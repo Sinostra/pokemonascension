@@ -50,6 +50,14 @@
 
         .text-wrapper {
           margin-right: 2%;
+
+          .super-effective {
+            color: #ed3419;
+          }
+
+          .not-very-effective {
+            color: #0096ff;
+          }
         }
       }
     }
