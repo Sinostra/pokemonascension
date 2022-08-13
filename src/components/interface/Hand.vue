@@ -4,6 +4,7 @@
             :key="index"
             :id="card"
             :state="'drawn'"
+            :class="index === selectedCardIndex ? 'selected' : ''"
             :style="getCardPosition(index)"
             @cardClicked="onClick(index)"
         >

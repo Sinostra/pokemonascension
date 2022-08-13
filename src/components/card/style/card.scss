@@ -18,6 +18,10 @@
         filter: drop-shadow(0 0 0.75rem green);
     }
 
+    &.selected {
+        cursor: default;
+    }
+
     &.normal {
         background-color: #909aa0;
     }
@@ -31,66 +35,66 @@
     }
 
     &.grass {
-        background-color: #909aa0;
+        background-color: #55b774;
     }
 
     &.water {
-        background-color: #909aa0;
+        background-color: #5090d6;
     }
 
     &.fire {
-        background-color: #909aa0;
+        background-color: #f47932;
     }
 
     &.rock {
-        background-color: #909aa0;
+        background-color: #d0ad79;
     }
 
     &.ground {
-        background-color: #909aa0;
+        background-color: #ab8d8b;
     }
 
     &.bug {
-        background-color: #909aa0;
+        background-color: #9db854;
     }
 
     &.flying {
-        background-color: #909aa0;
+        background-color: #8fa9de;
     }
 
     &.ghost {
-        background-color: #909aa0;
+        background-color: #5269ad;
     }
 
     &.dark {
-        background-color: #909aa0;
+        background-color: #5a5465;
     }
 
     &.ice {
-        background-color: #909aa0;
+        background-color: #73cec0;
     }
 
     &.fairy {
-        background-color: #909aa0;
+        background-color: #e7a9cb;
     }
 
     &.dragon {
-        background-color: #909aa0;
+        background-color: #0b6dc3;
     }
 
     &.fighting {
-        background-color: #909aa0;
+        background-color: #ce416b;
     }
 
     &.poison {
-        background-color: #909aa0;
+        background-color: #aa6bc7;
     }
 
     &.steel {
-        background-color: #909aa0;
+        background-color: #5a8ea2;
     }
 
-    &:hover {
+    &:not(.selected):hover {
         z-index: 2;
         scale: 1.1;
     }
