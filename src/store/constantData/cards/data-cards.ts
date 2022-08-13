@@ -84,4 +84,21 @@ export default {
         "energy": 2,
         "tooltip": 'Gain 2 energy',
     },
+
+    "006": {
+        "name": "fury swipes",
+        "type": "normal",
+        "category": "attack",
+        "rarity": "medium",
+        "cost": 1,
+        "target": true,
+        "draw": 0,
+        "damage": 2,
+        "damageTimes": 3,
+        "damageAOE": false,
+        "block": 0,
+        "ignoreBlock": false,
+        "energy": 0,
+        "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy 3 times',
+    },
 }
