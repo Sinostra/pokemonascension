@@ -15,21 +15,19 @@
 
     .intent {
       position: absolute;
-      top: -65px;
+      bottom: 30px;
       left: 50%;
       width: 5vw;
-      height: 4vw;
       transform: translateX(-50%);
       font-family: "ERASDEMI";
       font-weight: 800;
       color: #fff;
       -webkit-text-stroke-color: black;
       display: flex;
+      flex-direction: column;
       align-items: center;
 
       .intent-category {
-        width: 50%;
-        height: 100%;
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
@@ -37,6 +35,22 @@
         justify-content: center;
         align-items: center;
         filter: drop-shadow(1px 1px 1px black);
+
+        &.damage {
+          .img-wrapper {
+            flex: 0.4;
+          }
+        }
+
+        &.block {
+          .img-wrapper {
+            flex: 0.3;
+          }
+        }
+
+        .text-wrapper {
+          margin-right: 2%;
+        }
       }
     }
   

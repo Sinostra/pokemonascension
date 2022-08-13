@@ -96,7 +96,7 @@ export default class Pokemon extends Vue {
     this.block = amount
   }
 
-  protected getPokemonTpyeIcon(type) {
+  protected getTpyeIcon(type) {
     return require(`@/assets/img/types/${type}.png`)
   }
 

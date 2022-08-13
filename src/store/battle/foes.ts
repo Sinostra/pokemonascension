@@ -8,19 +8,19 @@ export default {
                     pattern: [
                         {
                             'damage': 1,
-                            'block': 0,
+                            'block': 2,
                             'type': 'normal',
                             'damageTimes': 3,
                         },
                         {
                             'damage': 1,
-                            'block': 0,
+                            'block': 2,
                             'type': 'normal',
                             'damageTimes': 3,
                         },
                         {
                             'damage': 1,
-                            'block': 0,
+                            'block': 2,
                             'type': 'normal',
                             'damageTimes': 3,
                         }

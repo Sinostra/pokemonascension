@@ -12,7 +12,7 @@
           </div>
           <div class="types-wrapper">
             <div class="type" v-for="(type, index) in dataPokemon.type" :key="index">
-              <img :src="getPokemonTpyeIcon(dataPokemon.type[index])" class="type-img">
+              <img :src="getTpyeIcon(dataPokemon.type[index])" class="type-img">
             </div>
           </div>
         </div>

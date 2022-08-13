@@ -4,8 +4,18 @@
         <div class="bottom-wrapper" @click.stop="onClick()">
           <div class="healthBar-infos-wrapper">
             <div v-if="nextMove" class="intent" :style="getFontSize(1.2)">
-              <div v-if="nextMove['damage'] > 0" class="intent-category damage" :style="`background-image: url(${getPokemonTpyeIcon(nextMove['type'])})`">{{nextMove['damage']}}</div>
-              <div v-if="nextMove['block'] > 0" class="intent-category block" :style="`background-image: url(${shieldSprite})`">{{nextMove['block']}}</div>
+              <div v-if="nextMove['damage'] > 0" class="intent-category damage">
+                  <div class="text-wrapper">{{nextMove['damage']}}<span v-if="nextMove['damageTimes']">x{{nextMove['damageTimes']}}</span></div>
+                  <div class="img-wrapper">
+                    <img :src="getTpyeIcon(nextMove['type'])">
+                  </div>
+                </div>
+              <div v-if="nextMove['block'] > 0" class="intent-category block">
+                <div class="text-wrapper">{{nextMove['block']}}</div>
+                <div class="img-wrapper">
+                  <img :src="shieldSprite">
+                </div>
+              </div>
             </div>
             <div class="healthBar">
               <div class="currentHealth" :class="healthBarClass" :style="{'width': getHealthBarPercent() + '%'}"></div>
@@ -16,7 +26,7 @@
             </div>
             <div class="types-wrapper">
               <div class="type" v-for="(type, index) in dataPokemon.type" :key="index">
-                <img :src="getPokemonTpyeIcon(dataPokemon.type[index])" class="type-img">
+                <img :src="getTpyeIcon(dataPokemon.type[index])" class="type-img">
               </div>
             </div>
           </div>
@@ -124,9 +134,6 @@ export default class FoePokemon extends Pokemon {
         this.$store.dispatch("foeMovePlayed", this.index)
       }
     }
-
-    
-    
   }
 
   public mounted() {
