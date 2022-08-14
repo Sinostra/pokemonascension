@@ -55,7 +55,9 @@ export default class Pokemon extends Vue {
   protected takeDamage(amount: number, type: string, ignoreBlock: boolean = false): void {
 
     //Application des faiblesses et résistances avant l'attaque pour éviter que l'armure ne soit prise en compte
-    amount = Math.ceil(amount * this.getTypeMatchup(type, this.dataPokemon.type))
+    const typeMultiplier = this.getTypeMatchup(type, this.dataPokemon.type)
+    if(typeMultiplier < 1 ) amount = Math.floor(amount * typeMultiplier)
+    else amount = Math.ceil(amount * typeMultiplier)
     let damageDealt: number = 0
 
     if(!ignoreBlock && this.block > 0) {

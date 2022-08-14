@@ -73,7 +73,9 @@ export default class Card extends Vue {
     if(!this.typesHover) return this.dataCard[this.id]['tooltip'].replace('§', this.dataCard[this.id]['damage'])
 
     else {
-      const finalDamage = Math.ceil(this.dataCard[this.id]['damage'] * this.cardDamageTooltipModifier)
+      let finalDamage;
+      if(this.cardDamageTooltipModifier < 1) finalDamage = Math.floor(this.dataCard[this.id]['damage'] * this.cardDamageTooltipModifier)
+      else finalDamage = Math.ceil(this.dataCard[this.id]['damage'] * this.cardDamageTooltipModifier)
       return this.dataCard[this.id]['tooltip'].replace('§', finalDamage)
     }
   }
