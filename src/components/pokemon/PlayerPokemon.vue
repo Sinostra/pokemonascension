@@ -5,7 +5,12 @@
         <div class="healthBar-infos-wrapper">
           <div class="healthBar">
             <div class="currentHealth" :class="healthBarClass" :style="{'width': getHealthBarPercent() + '%'}"></div>
-            <div class="healthAmount" :style="getFontSize()">{{currentHealth}} / {{maxHealth}} </div>
+            <div class="bottom-infos">
+              <div class="healthAmount" :style="getFontSize()">{{currentHealth}} / {{maxHealth}}</div>
+              <div class="attack-wrapper">
+                {{attack}}
+              </div>
+            </div>
           </div>
           <div class="block-wrapper">
             {{block}}
@@ -36,6 +41,10 @@ export default class PlayerPokemon extends Pokemon {
 
 
   public mounted() {
+
+    this.attack = this.dataPokemon.baseStats.attack
+    this.defense = this.dataPokemon.baseStats.defense
+
     this.$store.subscribeAction((action) => {
       if(action.type === "startNewTurn") {
         this.setBlock(0)

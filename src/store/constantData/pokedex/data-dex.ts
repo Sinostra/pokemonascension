@@ -347,7 +347,11 @@ export default {
         
         "type": ["electric"],
         "hp": 45,
-        "size": 60
+        "size": 60,
+        "baseStats": {
+            "attack": 2,
+            "defense": 1
+        }
     },
 
     "026": {

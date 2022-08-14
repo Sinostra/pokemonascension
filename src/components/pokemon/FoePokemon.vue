@@ -22,7 +22,9 @@
             </div>
             <div class="healthBar">
               <div class="currentHealth" :class="healthBarClass" :style="{'width': getHealthBarPercent() + '%'}"></div>
-              <div class="healthAmount" :style="getFontSize()">{{currentHealth}} / {{maxHealth}} </div>
+              <div class="bottom-infos">
+                <div class="healthAmount" :style="getFontSize()">{{currentHealth}} / {{maxHealth}} </div>
+              </div>
             </div>
             <div class="block-wrapper">
               {{block}}

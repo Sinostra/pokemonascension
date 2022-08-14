@@ -15,6 +15,9 @@ export default class Pokemon extends Vue {
   protected maxHealth: number = this.dataPokemon.hp
   protected block: number = 0;
 
+  protected attack!: number
+  protected defense!: number
+
   protected isPlayingAttackAnim: boolean = false
   protected isPlayingReturnAnim: boolean = false
 
@@ -118,6 +121,10 @@ export default class Pokemon extends Vue {
     if(!this.isPlayingReturnAnim) {
       this.isPlayingReturnAnim = true
     }
+  }
+
+  get swordIcon() {
+    return require(`@/assets/img/interface/sword.png`)
   }
 
   public mounted() {
