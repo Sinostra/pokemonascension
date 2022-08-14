@@ -5,7 +5,9 @@
             v-for="(pokemon, index) in $store.state.foes.foeTeam"
             :key="index"
             :id="pokemon.id"
-            :maxHealth="pokemon.maxHealth"
+            :maxHealth="pokemon.baseStats.hp"
+            :attack="pokemon.baseStats.attack"
+            :defense="pokemon.baseStats.defense"
             :patternSettings="pokemon.patternSetting"
             :index="index"
         >

@@ -52,6 +52,8 @@ import cloneDeep from "lodash.clonedeep"
   props: {
     index: Number,
     maxHealth: Number,
+    attack: Number,
+    defense: Number,
     patternSettings: Object,
   }
 })
@@ -59,6 +61,9 @@ import cloneDeep from "lodash.clonedeep"
 export default class FoePokemon extends Pokemon {
   private index!: number;
   protected maxHealth: number = this.maxHealth
+  protected attack: number = this.attack
+  protected defense: number = this.defense
+
   private patternSettings!: any
   private pattern = []
   private canShowIntents: boolean = true
@@ -89,7 +94,18 @@ export default class FoePokemon extends Pokemon {
     if(nextMoveIndex < 0) {
       nextMoveIndex = this.pattern.length -1
     }
-    return this.pattern[nextMoveIndex]
+
+    nextMove = this.pattern[nextMoveIndex]
+
+    if(nextMove['damage']) {
+      nextMove['damage'] += this.attack
+    }
+
+    if(nextMove['block']) {
+      nextMove['block'] += this.defense
+    }
+
+    return nextMove
   }
 
   get nextMoveDamageModifier(): number {

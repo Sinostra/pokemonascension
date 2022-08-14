@@ -12,11 +12,11 @@ export default class Pokemon extends Vue {
   protected dataPokemon = dataDex[this.id]
 
   protected currentHealth: number = 0;
-  protected maxHealth: number = this.dataPokemon.hp
-  protected block: number = 0;
+  protected maxHealth: number = this.dataPokemon.baseStats.hp
+  protected attack: number = this.dataPokemon.baseStats.attack
+  protected defense: number = this.dataPokemon.baseStats.defense
 
-  protected attack!: number
-  protected defense!: number
+  protected block: number = 0;
 
   protected isPlayingAttackAnim: boolean = false
   protected isPlayingReturnAnim: boolean = false

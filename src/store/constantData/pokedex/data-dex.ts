@@ -105,36 +105,11 @@ export default {
         "type": ["water"],
         "hp": 45,
         "size": 90,
-        "hpBar" : {
-            "left" : 42,
-            "top" : -69
-        },
-        "pattern": [
-            {
-                'damage': 0,
-                'block': 4,
-                'type': 'normal'
-            },
-            {
-                'damage': 4,
-                'block': 0,
-                'type': 'water'
-            },
-            [
-                {
-                    'damage': 3,
-                    'block': 0,
-                    'type': 'normal'
-                },
-                {
-                    'damage': 2,
-                    'block': 2,
-                    'type': 'normal'
-                }
-            ],
-            
-        ],
-        "patternRandomOrder": [0,1]
+        "baseStats": {
+            "hp": 45,
+            "attack": 2,
+            "defense": 1
+        }
     },
 
     "010": {
@@ -231,27 +206,11 @@ export default {
         "type": ["normal", "flying"],
         "hp": 45,
         "size": 80,
-        "hpBar" : {
-            "left" : 25,
-            "top" : -36
-        },
-        "pattern": [
-            {
-                'damage': 1,
-                'block': 1,
-                'type': 'normal'
-            },
-            {
-                'damage': 3,
-                'block': 0,
-                'type': 'water'
-            },
-            {
-                'damage': 0,
-                'block': 3,
-                'type': 'normal'
-            }
-        ]
+        "baseStats": {
+            "hp": 45,
+            "attack": 2,
+            "defense": 1
+        }
     },
 
     "018": {
@@ -349,6 +308,7 @@ export default {
         "hp": 45,
         "size": 60,
         "baseStats": {
+            "hp": 45,
             "attack": 2,
             "defense": 1
         }
@@ -1300,27 +1260,11 @@ export default {
         "type": ["ground"],
         "hp": 45,
         "size": 45,
-        "hpBar" : {
-            "left" : 16,
-            "top" : 5
-        },
-        "pattern": [
-            {
-                'damage': 1,
-                'block': 2,
-                'type': 'normal'
-            },
-            {
-                'damage': 3,
-                'block': 0,
-                'type': 'water'
-            },
-            {
-                'damage': 0,
-                'block': 3,
-                'type': 'normal'
-            }
-        ]
+        "baseStats": {
+            "hp": 45,
+            "attack": 2,
+            "defense": 1
+        }
     },
 
     "105": {

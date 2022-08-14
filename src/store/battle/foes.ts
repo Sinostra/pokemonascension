@@ -3,7 +3,11 @@ export default {
         foeTeam: [
             {
                 id: '017',
-                maxHealth: 50,
+                baseStats: {
+                    hp: 50,
+                    attack: 1,
+                    defense: 2
+                },
                 patternSetting: {
                     pattern: [
                         {
@@ -29,7 +33,11 @@ export default {
             },
             {
                 id: '104',
-                maxHealth: 55,
+                baseStats: {
+                    hp: 55,
+                    attack: 1,
+                    defense: 2
+                },
                 patternSetting: {
                     pattern: [
                         {
@@ -52,7 +60,11 @@ export default {
             },
             {
                 id: '009',
-                maxHealth: 60,
+                baseStats: {
+                    hp: 60,
+                    attack: 1,
+                    defense: 2
+                },
                 patternSetting: {
                     pattern: [
                         {
