@@ -10,8 +10,7 @@
 
     <div class="category" :style="(getCategoryStyle(0.4))">{{dataCard[id]['category']}}</div>
     
-    <div v-if="dataCard[id]['damage']" class="tooltip" :class="cardDamageTooltipClass" :style="(getFontSize(0.6))" v-html="dynamicToolTip"></div>
-    <div v-else class="tooltip" :style="(getFontSize(0.6))">{{dataCard[id]['tooltip']}}</div>
+    <div class="tooltip" :class="cardDamageTooltipClass" :style="(getFontSize(0.6))" v-html="dynamicToolTip"></div>
   </div>
 </template>
 
@@ -70,14 +69,26 @@ export default class Card extends Vue {
 
   get dynamicToolTip() {
 
-    if(!this.typesHover) return this.dataCard[this.id]['tooltip'].replace('§', this.dataCard[this.id]['damage'])
+    if(!this.dataCard[this.id]['damage'] && !this.dataCard[this.id]['block']) {
+      return this.dataCard[this.id]['tooltip']
+    } 
 
-    else {
-      let finalDamage;
-      if(this.cardDamageTooltipModifier < 1) finalDamage = Math.floor(this.dataCard[this.id]['damage'] * this.cardDamageTooltipModifier)
-      else finalDamage = Math.ceil(this.dataCard[this.id]['damage'] * this.cardDamageTooltipModifier)
-      return this.dataCard[this.id]['tooltip'].replace('§', finalDamage)
+    let finalDamage = 0
+    let finalBlock = 0
+    if(this.dataCard[this.id]['damage']) {
+      finalDamage = this.dataCard[this.id]['damage'] + this.$store.state.battle.playerAttack;
+      if(this.typesHover) {
+        if(this.cardDamageTooltipModifier < 1) finalDamage = Math.floor(finalDamage * this.cardDamageTooltipModifier)
+        else finalDamage = Math.ceil(finalDamage * this.cardDamageTooltipModifier)
+      }
     }
+
+    if(this.dataCard[this.id]['block']) {
+      finalBlock = this.dataCard[this.id]['block'] + this.$store.state.battle.playerDefense;
+    }
+
+    return this.dataCard[this.id]['tooltip'].replace('§', finalDamage).replace('µ', finalBlock)
+
   }
 
   get cardDamageTooltipModifier() {

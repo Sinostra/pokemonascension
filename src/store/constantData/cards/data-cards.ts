@@ -65,7 +65,7 @@ export default {
         "block": 5,
         "ignoreBlock": false,
         "energy": 0,
-        "tooltip": 'Gain 5 block',
+        "tooltip": 'Gain µ block',
     },
 
     "005": {

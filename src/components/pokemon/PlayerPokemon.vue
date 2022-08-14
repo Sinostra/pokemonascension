@@ -42,6 +42,9 @@ export default class PlayerPokemon extends Pokemon {
 
   public mounted() {
 
+    this.$store.dispatch("setAttackBuff", this.attack)
+    this.$store.dispatch("setDefenseBuff", this.defense)
+
     this.$store.subscribeAction((action) => {
       if(action.type === "startNewTurn") {
         this.setBlock(0)

@@ -66,16 +66,17 @@ export default class BattleManager extends Vue {
     private playEffects(effects: any, user: number | string, target: number | string | null) {
     
         if(effects['damage']) {
+            let damage = user === "player" ? effects['damage'] + this.$store.state.battle.playerAttack : effects['damage']
             if(effects['damageAOE']) {
                 this.$store.dispatch("damageAllFoes", {
-                    damage: effects['damage'],
+                    damage,
                     type: effects['type'],
                     ignoreBlock: effects['ignoreBlock'],
                 })
             }
 
             else this.$store.dispatch("damage", {
-                damage: effects['damage'],
+                damage,
                 type: effects['type'],
                 ignoreBlock: effects['ignoreBlock'],
                 target
@@ -83,9 +84,10 @@ export default class BattleManager extends Vue {
         }
 
         if(effects['block']) {
+            let amount = user === "player" ? effects['block'] + this.$store.state.battle.playerDefense : effects['block']
             this.$store.dispatch("gainBlock", {
-                user: user,
-                amount: effects['block']
+                user,
+                amount
             })
         }
 

@@ -4,7 +4,9 @@ export default {
         currentEnergy: 3,
         maxEnergy: 3,
         selectedCard: null,
-        turnCounter: 0
+        turnCounter: 0,
+        playerAttack: 0,
+        playerDefense: 0
     },
     mutations: {
         getEnergy(state, amount: number) {
@@ -22,6 +24,14 @@ export default {
         startNewTurn(state) {
             state.turnCounter++
         },
+
+        setAttackBuff(state, amount) {
+            state.playerAttack = amount
+        },
+
+        setDefenseBuff(state, amount) {
+            state.playerDefense = amount
+        }
     },
     actions: {
 
@@ -38,6 +48,14 @@ export default {
         },
         startNewTurn(context) {
             context.commit("startNewTurn")
+        },
+
+        setAttackBuff(context, amount) {
+            context.commit("setAttackBuff", amount)
+        },
+
+        setDefenseBuff(context, amount) {
+            context.commit("setDefenseBuff", amount)
         },
 
         endPlayerTurn() {},
