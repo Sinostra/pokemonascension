@@ -8,7 +8,8 @@
             <div class="bottom-infos">
               <div class="healthAmount" :style="getFontSize()">{{currentHealth}} / {{maxHealth}}</div>
               <div class="attack-wrapper">
-                {{attack}}
+                {{$store.state.battle.playerAttack}}
+                {{$store.state.battle.playerDefense}}
               </div>
             </div>
           </div>
@@ -42,8 +43,8 @@ export default class PlayerPokemon extends Pokemon {
 
   public mounted() {
 
-    this.$store.dispatch("setAttackBuff", this.attack)
-    this.$store.dispatch("setDefenseBuff", this.defense)
+    this.$store.dispatch("setPlayerAttack", this.attack)
+    this.$store.dispatch("setPlayerDefense", this.defense)
 
     this.$store.subscribeAction((action) => {
       if(action.type === "startNewTurn") {

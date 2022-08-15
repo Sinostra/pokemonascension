@@ -91,6 +91,18 @@ export default class BattleManager extends Vue {
             })
         }
 
+        if(effects['buffSelfAttack']) {
+            console.log(effects['buffSelfAttack'])
+            if(user === "player") this.$store.dispatch("buffPlayerAttack", effects['buffSelfAttack'])
+            else this.$store.dispatch("buffFoeAttack", {user, amount: effects['buffSelfAttack']})
+        }
+
+        if(effects['buffSelfDefense']) {
+            console.log(effects['buffSelfDefense'])
+            if(user === "player") this.$store.dispatch("buffPlayerDefense", effects['buffSelfDefense'])
+            else this.$store.dispatch("buffFoeDefense", {user, amount: effects['buffSelfDefense']})
+        }
+
         if(effects['energy']) {
             this.$store.dispatch("getEnergy", effects['energy'])
         }

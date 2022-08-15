@@ -25,13 +25,21 @@ export default {
             state.turnCounter++
         },
 
-        setAttackBuff(state, amount) {
+        setPlayerAttack(state, amount) {
             state.playerAttack = amount
         },
 
-        setDefenseBuff(state, amount) {
+        setPlayerDefense(state, amount) {
             state.playerDefense = amount
-        }
+        },
+
+        buffPlayerAttack(state, amount) {
+            state.playerAttack += amount
+        },
+
+        buffPlayerDefense(state, amount) {
+            state.playerDefense += amount
+        },
     },
     actions: {
 
@@ -50,13 +58,24 @@ export default {
             context.commit("startNewTurn")
         },
 
-        setAttackBuff(context, amount) {
-            context.commit("setAttackBuff", amount)
+        setPlayerAttack(context, amount) {
+            context.commit("setPlayerAttack", amount)
         },
 
-        setDefenseBuff(context, amount) {
-            context.commit("setDefenseBuff", amount)
+        setPlayerDefense(context, amount) {
+            context.commit("setPlayerDefense", amount)
         },
+
+        buffPlayerAttack(context, amount) {
+            context.commit("buffPlayerAttack", amount)
+        },
+
+        buffPlayerDefense(context, amount) {
+            context.commit("buffPlayerDefense", amount)
+        },
+
+        buffFoeAttack() {},
+        buffFoeDefense() {},
 
         endPlayerTurn() {},
         foeTurn() {},

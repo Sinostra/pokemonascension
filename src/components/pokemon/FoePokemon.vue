@@ -52,8 +52,8 @@ import cloneDeep from "lodash.clonedeep"
   props: {
     index: Number,
     maxHealth: Number,
-    attack: Number,
-    defense: Number,
+    baseAttack: Number,
+    baseDefense: Number,
     patternSettings: Object,
   }
 })
@@ -61,8 +61,9 @@ import cloneDeep from "lodash.clonedeep"
 export default class FoePokemon extends Pokemon {
   private index!: number;
   protected maxHealth: number = this.maxHealth
-  protected attack: number = this.attack
-  protected defense: number = this.defense
+
+  private baseAttack!: number;
+  private baseDefense!: number;
 
   private patternSettings!: any
   private pattern = []
@@ -86,7 +87,9 @@ export default class FoePokemon extends Pokemon {
     let nextMove = {}
     if(this.$store.state.battle.turnCounter === 0) return nextMove
 
-    if(this.$store.state.battle.turnCounter % this.patternSettings.pattern.length === 1) {
+    if(this.pattern.length === 1) return this.pattern[0]
+
+    if(this.$store.state.battle.turnCounter % this.patternSettings.pattern.length === 1 || this.$store.state.battle.turnCounter === 1) {
       this.setPattern()
     }
 
@@ -183,6 +186,9 @@ export default class FoePokemon extends Pokemon {
 
   public mounted() {
 
+    this.attack = this.baseAttack;
+    this.defense = this.baseDefense;
+
     this.$store.subscribeAction((action) => {
       if(action.type === "endPlayerTurn") {
         this.setBlock(0)
@@ -192,10 +198,8 @@ export default class FoePokemon extends Pokemon {
         this.canShowIntents = true
       }
 
-      if(action.type === "damage") {
-        if(action.payload.target === this.index) {
-          this.takeDamage(action.payload.damage, action.payload.type, action.payload.ignoreBlock)
-        } 
+      if(action.type === "damage" && action.payload.target === this.index) {
+        this.takeDamage(action.payload.damage, action.payload.type, action.payload.ignoreBlock)
       }
 
       if(action.type === "damageAllFoes") {
@@ -204,6 +208,14 @@ export default class FoePokemon extends Pokemon {
 
       if(action.type === "gainBlock" && action.payload.user === this.index) {
         this.gainBlock(action.payload.amount)
+      }
+
+      if(action.type === "buffFoeAttack" && action.payload.user === this.index) {
+        this.attack += action.payload.amount
+      }
+
+      if(action.type === "buffFoeDefense" && action.payload.user === this.index) {
+        this.defense += action.payload.amount
       }
 
       if(action.type === "foeTurn" && action.payload === this.index) {

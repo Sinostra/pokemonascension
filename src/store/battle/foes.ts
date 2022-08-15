@@ -11,10 +11,12 @@ export default {
                 patternSetting: {
                     pattern: [
                         {
-                            'damage': 1,
-                            'block': 2,
+                            'buffSelfAttack': 1,
+                            'buffSelfDefense': 1,
+                            'damage': 0,
+                            'block': 0,
                             'type': 'flying',
-                            'damageTimes': 3,
+                            'damageTimes': 1,
                         },
                         {
                             'damage': 1,
@@ -22,12 +24,6 @@ export default {
                             'type': 'flying',
                             'damageTimes': 3,
                         },
-                        {
-                            'damage': 1,
-                            'block': 2,
-                            'type': 'flying',
-                            'damageTimes': 3,
-                        }
                     ]
                 }
             },

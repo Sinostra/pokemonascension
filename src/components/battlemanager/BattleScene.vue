@@ -6,8 +6,8 @@
             :key="index"
             :id="pokemon.id"
             :maxHealth="pokemon.baseStats.hp"
-            :attack="pokemon.baseStats.attack"
-            :defense="pokemon.baseStats.defense"
+            :baseAttack="pokemon.baseStats.attack"
+            :baseDefense="pokemon.baseStats.defense"
             :patternSettings="pokemon.patternSetting"
             :index="index"
         >
