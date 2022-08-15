@@ -53,7 +53,7 @@ export default class BattleManager extends Vue {
         setTimeout(() => {
             this.$store.dispatch("spendEnergy", this.cardBeingPlayed['cost'])
 
-            if(this.cardBeingPlayed['damageTimes'] <= 1) {
+            if(!this.cardBeingPlayed['damageTimes'] || this.cardBeingPlayed['damageTimes'] <= 1) {
                 this.playEffects(this.cardBeingPlayed, "player", targetIndex)
             }
 
@@ -111,7 +111,8 @@ export default class BattleManager extends Vue {
             this.$store.dispatch("cardToBeDrawn", effects['draw'])
         }
 
-        if(!effects['draw'] && effects['damageTimes'] <= 1) {
+        if(!effects['draw'] && (!effects['damageTimes'] || effects['damageTimes'] <= 1)) {
+            console.log("cardDonePlayed")
             setTimeout(() => {
                 this.$store.dispatch("cardDonePlayed")
             }, 500)
