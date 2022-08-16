@@ -8,6 +8,7 @@ export default {
         "target": true,
         "draw": 0,
         "damage": 6,
+        "selfDamage": 1,
         "damageTimes": 1,
         "damageAOE": false,
         "block": 0,

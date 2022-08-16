@@ -67,6 +67,7 @@ export default class BattleManager extends Vue {
     
         if(effects['damage']) {
             let damage = user === "player" ? effects['damage'] + this.$store.state.battle.playerAttack : effects['damage']
+            damage < 0 ? 0 : damage
             if(effects['damageAOE']) {
                 this.$store.dispatch("damageAllFoes", {
                     damage,
@@ -83,8 +84,18 @@ export default class BattleManager extends Vue {
             })
         }
 
+        if(effects['selfDamage']) {
+            this.$store.dispatch("damage", {
+                damage: effects['selfDamage'],
+                type: null,
+                ignoreBlock: true,
+                target: user
+            })
+        }
+
         if(effects['block']) {
             let amount = user === "player" ? effects['block'] + this.$store.state.battle.playerDefense : effects['block']
+            amount < 0 ? 0 : amount
             this.$store.dispatch("gainBlock", {
                 user,
                 amount
@@ -92,13 +103,11 @@ export default class BattleManager extends Vue {
         }
 
         if(effects['buffSelfAttack']) {
-            console.log(effects['buffSelfAttack'])
             if(user === "player") this.$store.dispatch("buffPlayerAttack", effects['buffSelfAttack'])
             else this.$store.dispatch("buffFoeAttack", {user, amount: effects['buffSelfAttack']})
         }
 
         if(effects['buffSelfDefense']) {
-            console.log(effects['buffSelfDefense'])
             if(user === "player") this.$store.dispatch("buffPlayerDefense", effects['buffSelfDefense'])
             else this.$store.dispatch("buffFoeDefense", {user, amount: effects['buffSelfDefense']})
         }
@@ -112,7 +121,6 @@ export default class BattleManager extends Vue {
         }
 
         if(!effects['draw'] && (!effects['damageTimes'] || effects['damageTimes'] <= 1)) {
-            console.log("cardDonePlayed")
             setTimeout(() => {
                 this.$store.dispatch("cardDonePlayed")
             }, 500)

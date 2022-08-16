@@ -52,10 +52,11 @@ export default class Pokemon extends Vue {
     return multiplier
   }
 
-  protected takeDamage(amount: number, type: string, ignoreBlock: boolean = false): void {
+  protected takeDamage(amount: number, type: string | null, ignoreBlock: boolean = false): void {
 
+    //Type de l'attaque null dans le cas de selfDamage
     //Application des faiblesses et résistances avant l'attaque pour éviter que l'armure ne soit prise en compte
-    const typeMultiplier = this.getTypeMatchup(type, this.dataPokemon.type)
+    const typeMultiplier = type ? this.getTypeMatchup(type, this.dataPokemon.type) : 1
     if(typeMultiplier < 1 ) amount = Math.floor(amount * typeMultiplier)
     else amount = Math.ceil(amount * typeMultiplier)
     let damageDealt: number = 0
