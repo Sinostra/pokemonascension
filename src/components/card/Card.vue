@@ -36,8 +36,6 @@ export default class Card extends Vue {
   private isPlayingDiscardFromSelectAnim: boolean = false
   private isPlayingDiscardFromHand: boolean = false
 
-  private typesHover: string[] | null = null
-
   get cardClass(): string {
     const type: string = this.dataCard[this.id]['type']
     const draw = this.isPlayingDrawAnim ? 'draw' : ''
@@ -77,7 +75,7 @@ export default class Card extends Vue {
     let finalBlock = 0
     if(this.dataCard[this.id]['damage']) {
       finalDamage = this.dataCard[this.id]['damage'] + this.$store.state.battle.playerAttack;
-      if(this.typesHover) {
+      if(this.$store.state.battle.typesHover) {
         if(this.cardDamageTooltipModifier < 1) finalDamage = Math.floor(finalDamage * this.cardDamageTooltipModifier)
         else finalDamage = Math.ceil(finalDamage * this.cardDamageTooltipModifier)
       }
@@ -92,8 +90,8 @@ export default class Card extends Vue {
   }
 
   get cardDamageTooltipModifier() {
-    if(!this.typesHover) return 1
-    return this.getTypeMatchup(this.dataCard[this.id]['type'], this.typesHover)
+    if(!this.$store.state.battle.typesHover) return 1
+    return this.getTypeMatchup(this.dataCard[this.id]['type'], this.$store.state.battle.typesHover)
   }
 
   get cardDamageTooltipClass() {
@@ -169,14 +167,6 @@ export default class Card extends Vue {
 
     else if(this.state === 'discardedFromHand') {
       this.playDiscardFromHandAnim()
-    }
-
-    if(this.dataCard[this.id]['damage'] && !this.dataCard[this.id]['damageAOE']) {
-      this.$store.subscribeAction((action) => {
-        if(action.type === "mouseOver") {
-          this.typesHover = action.payload
-        }
-      })
     }
   }
 }

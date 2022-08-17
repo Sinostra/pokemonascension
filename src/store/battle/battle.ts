@@ -6,7 +6,8 @@ export default {
         selectedCard: null,
         turnCounter: 0,
         playerAttack: 0,
-        playerDefense: 0
+        playerDefense: 0,
+        typesHover: null,
     },
     mutations: {
         getEnergy(state, amount: number) {
@@ -43,6 +44,10 @@ export default {
 
         buffPlayerDefense(state, amount) {
             state.playerDefense += amount
+        },
+
+        mouseOver(state, types) {
+            state.typesHover = types
         },
     },
     actions: {
@@ -82,6 +87,10 @@ export default {
             context.commit("buffPlayerDefense", amount)
         },
 
+        mouseOver(context, types) {
+            context.commit("mouseOver", types)
+        },
+
         buffFoeAttack() {},
         buffFoeDefense() {},
 
@@ -104,7 +113,6 @@ export default {
         playFoeMove() {},
         foeMovePlayed() {},
         gainBlock() {},
-        mouseOver() {},
     },
     getters: {
         selectedCard: state => {
