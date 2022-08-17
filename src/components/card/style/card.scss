@@ -183,16 +183,12 @@
         color: #000;
 
 
-        &.super-effective:deep {
-            .damage-amount {
-                color: #ed3419;
-            }
+        &.super-effective :deep(.damage-amount) {
+            color: #ed3419;
         }
 
-        &.not-very-effective:deep {
-            .damage-amount {
-                color: #0096ff;
-            }
+        &.not-very-effective :deep(.damage-amount) {
+            color: #0096ff;
         }
     }
 }

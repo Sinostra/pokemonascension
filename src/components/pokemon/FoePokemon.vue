@@ -6,7 +6,7 @@
             <div v-if="nextMove && canShowIntents" class="intent" :style="getFontSize(1.2)">
               <div v-if="nextMove['damage'] > 0" class="intent-category damage">
                   <div class="text-wrapper">
-                    <span :class="damageMoveClass">{{nextMoveDamageAmount}}</span>
+                    <span :class="damageMoveClass">{{nextMove['damage']}}</span>
                     <span v-if="nextMove['damageTimes']">x{{nextMove['damageTimes']}}</span>
                   </div>
                   <div class="img-wrapper">
@@ -54,6 +54,7 @@ import cloneDeep from "lodash.clonedeep"
     maxHealth: Number,
     baseAttack: Number,
     baseDefense: Number,
+    pattern: Array,
     patternSettings: Object,
   }
 })
@@ -67,6 +68,8 @@ export default class FoePokemon extends Pokemon {
 
   private patternSettings!: any
   private pattern = []
+
+  private resolvedPattern = []
   private canShowIntents: boolean = true
 
   get foePosition(): string {
@@ -87,25 +90,31 @@ export default class FoePokemon extends Pokemon {
     let nextMove = {}
     if(this.$store.state.battle.turnCounter === 0) return nextMove
 
-    if(this.pattern.length === 1) return this.pattern[0]
+    else if(this.$store.state.battle.turnCounter === 1) this.setResolvedPattern()
 
-    if(this.$store.state.battle.turnCounter % this.patternSettings.pattern.length === 1 || this.$store.state.battle.turnCounter === 1) {
-      this.setPattern()
+  
+    if(this.$store.state.battle.turnCounter % this.resolvedPattern.length === 1) {
+      this.setResolvedPattern()
     }
 
-    let nextMoveIndex = (this.$store.state.battle.turnCounter % this.pattern.length) -1
+    if(this.resolvedPattern.length === 1) return this.resolvedPattern[0]
+
+    let nextMoveIndex = (this.$store.state.battle.turnCounter % this.resolvedPattern.length) -1
     if(nextMoveIndex < 0) {
-      nextMoveIndex = this.pattern.length -1
+      nextMoveIndex = this.resolvedPattern.length -1
     }
 
-    nextMove = this.pattern[nextMoveIndex]
+    nextMove = this.resolvedPattern[nextMoveIndex]
 
-    if(nextMove['damage']) {
-      nextMove['damage'] += this.attack
-    }
+    const modifier = this.nextMoveDamageModifier
 
     if(nextMove['block']) {
       nextMove['block'] += this.defense
+    }
+
+    if(nextMove['damage']) {
+      if(modifier < 1 ) nextMove['damage'] = Math.floor((this.nextMove['damage'] + this.attack) * modifier)
+      else nextMove['damage'] = Math.ceil((this.nextMove['damage'] + this.attack) * modifier)
     }
 
     return nextMove
@@ -113,7 +122,11 @@ export default class FoePokemon extends Pokemon {
 
   get nextMoveDamageModifier(): number {
     const playerActivePokemonTypes = this.$store.state.pokedex.constantDex[this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex]['id']]['type']
-    return this.getTypeMatchup(this.nextMove['type'], playerActivePokemonTypes) 
+    if(this.nextMove['type']) {
+      return this.getTypeMatchup(this.nextMove['type'], playerActivePokemonTypes) 
+    }
+    else return 1
+    
   }
 
   get damageMoveClass(): string {
@@ -121,12 +134,6 @@ export default class FoePokemon extends Pokemon {
     if(this.nextMoveDamageModifier > 1) moveClass = 'super-effective'
     else if(this.nextMoveDamageModifier < 1) moveClass = 'not-very-effective'
     return moveClass
-  }
-
-  get nextMoveDamageAmount(): number {
-    const modifier = this.nextMoveDamageModifier
-    if(modifier < 1 ) return Math.floor(this.nextMove['damage'] * this.nextMoveDamageModifier)
-    return Math.ceil(this.nextMove['damage'] * this.nextMoveDamageModifier)
   }
 
   private onClick(): void {
@@ -140,8 +147,10 @@ export default class FoePokemon extends Pokemon {
     else this.$store.dispatch("mouseOver", null)
   }
 
-  private setPattern() {
-    const pattern = cloneDeep(this.patternSettings.pattern)
+  private setResolvedPattern() {
+
+    let pattern: any = this.pattern.map((x) => x)
+
 
     pattern.forEach((move, index) => {
       if(Array.isArray(move)) {
@@ -149,10 +158,12 @@ export default class FoePokemon extends Pokemon {
       }
     })
 
+
     if(this.patternSettings.patternIndexToRandomise) {
-      this.pattern = suffleArray(pattern, this.patternSettings.patternIndexToRandomise)
+      this.resolvedPattern = suffleArray(pattern, this.patternSettings.patternIndexToRandomise)
     }
-    else this.pattern = suffleArray(pattern)
+    else this.resolvedPattern = suffleArray(pattern)
+
   }
 
   private playMove(time: number = 1) {

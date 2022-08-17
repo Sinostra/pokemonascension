@@ -2,12 +2,13 @@
     <div class="battle-wrapper">
         <PlayerPokemon :id="activePokemon"></PlayerPokemon>
         <FoePokemon
-            v-for="(pokemon, index) in $store.state.foes.foeTeam"
+            v-for="(pokemon, index) in $store.getters.getFoeTeam"
             :key="index"
             :id="pokemon.id"
             :maxHealth="pokemon.baseStats.hp"
             :baseAttack="pokemon.baseStats.attack"
             :baseDefense="pokemon.baseStats.defense"
+            :pattern="$store.state.foes.patterns[index]"
             :patternSettings="pokemon.patternSetting"
             :index="index"
         >
@@ -30,6 +31,8 @@ import { Options, Vue } from 'vue-class-component'
 })
 
 export default class BattleScene extends Vue {
+
+
     get activePokemon() {
         return this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex].id
     }
