@@ -17,6 +17,10 @@ export default {
             state.currentEnergy -= amount
         },
 
+        setEnergy(state, amount: number) {
+            state.currentEnergy = amount
+        },
+
         selectCard(state, value) {
             state.selectedCard = value
         },
@@ -49,6 +53,10 @@ export default {
 
         spendEnergy(context, amount: number) {
             context.commit("spendEnergy", amount)
+        },
+
+        setEnergy(context, amount: number) {
+            context.commit("setEnergy", amount)
         },
 
         selectCard(context, value) {

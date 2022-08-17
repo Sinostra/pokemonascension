@@ -21,9 +21,11 @@ import { Options, Vue } from 'vue-class-component'
 export default class BattleManager extends Vue {
     private cardBeingPlayed: any = null
     private cardsBeginningTurn: number = 5
+    private energyPerTurn = 3
 
     private startPlayerTurn() {
         this.$store.dispatch("startNewTurn")
+        this.$store.dispatch("setEnergy", this.energyPerTurn)
         this.$store.dispatch("cardToBeDrawn", this.cardsBeginningTurn)
     }
 

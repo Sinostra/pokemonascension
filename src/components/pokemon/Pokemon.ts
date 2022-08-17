@@ -88,7 +88,7 @@ export default class Pokemon extends Vue {
   }
 
   protected heal(amount: number) {
-    const projectedHealthAmount = this.currentHealth + amount
+    const projectedHealthAmount = this.currentHealth + (this.maxHealth * (amount / 100))
     if(projectedHealthAmount > this.maxHealth) this.currentHealth = this.maxHealth
     else this.currentHealth = projectedHealthAmount
   }
