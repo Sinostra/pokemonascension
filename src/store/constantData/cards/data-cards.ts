@@ -16,6 +16,7 @@ export default {
         "energy": 0,
         "buffSelfAttack": -1,
         "buffSelfDefense": -1,
+        "debuffAttack": 2,
         "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy',
     },
 

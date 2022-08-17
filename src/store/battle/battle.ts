@@ -46,6 +46,14 @@ export default {
             state.playerDefense += amount
         },
 
+        deBuffPlayerAttack(state, amount) {
+            state.playerAttack -= amount
+        },
+
+        deBuffPlayerDefense(state, amount) {
+            state.playerDefense -= amount
+        },
+
         mouseOver(state, types) {
             state.typesHover = types
         },
@@ -87,12 +95,23 @@ export default {
             context.commit("buffPlayerDefense", amount)
         },
 
+        deBuffPlayerAttack(context, amount) {
+            context.commit("deBuffPlayerAttack", amount)
+        },
+
+        deBuffPlayerDefense(context, amount) {
+            context.commit("deBuffPlayerDefense", amount)
+        },
+
         mouseOver(context, types) {
             context.commit("mouseOver", types)
         },
 
         buffFoeAttack() {},
         buffFoeDefense() {},
+
+        deBuffFoeAttack() {},
+        deBuffFoeDefense() {},
 
         endPlayerTurn() {},
         foeTurn() {},

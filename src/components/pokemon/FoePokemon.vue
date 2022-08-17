@@ -222,6 +222,14 @@ export default class FoePokemon extends Pokemon {
         this.defense += action.payload.amount
       }
 
+      if(action.type === "deBuffFoeAttack" && action.payload.target === this.index) {
+        this.attack -= action.payload.amount
+      }
+
+      if(action.type === "deBuffFoeDefense" && action.payload.target === this.index) {
+        this.defense -= action.payload.amount
+      }
+
       if(action.type === "foeTurn" && action.payload === this.index) {
         this.playMove()
       }
