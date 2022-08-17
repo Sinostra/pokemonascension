@@ -116,4 +116,15 @@ export default {
         "buffSelfDefense": 1,
         "tooltip": 'Raises your attack and defense by one',
     },
+
+    "008": {
+        "name": "recover",
+        "type": "psychic",
+        "category": "ability",
+        "rarity": "medium",
+        "cost": 1,
+        "target": false,
+        "selfHeal": 50,
+        "tooltip": 'Heals 50% of your hp',
+    },
 }

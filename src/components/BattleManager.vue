@@ -95,6 +95,13 @@ export default class BattleManager extends Vue {
             })
         }
 
+        if(effects['selfHeal']) {
+            this.$store.dispatch("heal", {
+                amount: effects['selfHeal'],
+                user
+            })
+        }
+
         if(effects['block']) {
             let amount = user === "player" ? effects['block'] + this.$store.state.battle.playerDefense : effects['block']
             amount < 0 ? 0 : amount

@@ -100,6 +100,7 @@ export default {
 
         damageAllFoes() {},
         damage() {},
+        heal() {},
         playFoeMove() {},
         foeMovePlayed() {},
         gainBlock() {},

@@ -206,6 +206,10 @@ export default class FoePokemon extends Pokemon {
         this.takeDamage(action.payload.damage, action.payload.type, action.payload.ignoreBlock)
       }
 
+      if(action.type === "heal" && action.payload.user === this.index) {
+        this.heal(action.payload.amount)
+      }
+
       if(action.type === "gainBlock" && action.payload.user === this.index) {
         this.gainBlock(action.payload.amount)
       }

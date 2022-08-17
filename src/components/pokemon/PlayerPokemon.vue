@@ -64,6 +64,10 @@ export default class PlayerPokemon extends Pokemon {
         }
       }
 
+      if(action.type === "heal" && action.payload.user === "player") {
+        this.heal(action.payload.amount)
+      }
+
       if(action.type === "gainBlock" && action.payload.user === "player") {
         this.gainBlock(action.payload.amount)
       }
