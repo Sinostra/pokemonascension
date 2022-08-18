@@ -97,8 +97,6 @@ export default class FoePokemon extends Pokemon {
       this.setResolvedPattern()
     }
 
-    if(this.resolvedPattern.length === 1) return this.resolvedPattern[0]
-
     let nextMoveIndex = (this.$store.state.battle.turnCounter % this.resolvedPattern.length) -1
     if(nextMoveIndex < 0) {
       nextMoveIndex = this.resolvedPattern.length -1
@@ -106,16 +104,28 @@ export default class FoePokemon extends Pokemon {
 
     nextMove = this.resolvedPattern[nextMoveIndex]
 
-    const modifier = this.nextMoveDamageModifier
+    let nextMoveDamage = 0
 
     if(nextMove['block']) {
       nextMove['block'] += this.defense
     }
 
     if(nextMove['damage']) {
-      if(modifier < 1 ) nextMove['damage'] = Math.floor((this.nextMove['damage'] + this.attack) * modifier)
-      else nextMove['damage'] = Math.ceil((this.nextMove['damage'] + this.attack) * modifier)
-    }
+
+      let modifier = 1
+
+      if(this.playerPokemonTypes && nextMove['type']) {
+        modifier = this.getTypeMatchup(nextMove['type'], this.playerPokemonTypes)
+      }
+
+      nextMoveDamage = nextMove['damage']
+      if(modifier < 1 ) nextMoveDamage = Math.floor((nextMoveDamage + this.attack) * modifier)
+      else nextMoveDamage = Math.ceil((nextMoveDamage + this.attack) * modifier)
+
+      if(nextMoveDamage < 1) nextMoveDamage = 1
+
+      if(!isNaN(nextMoveDamage)) nextMove['damage'] = nextMoveDamage
+    } 
 
     return nextMove
   }
@@ -127,6 +137,10 @@ export default class FoePokemon extends Pokemon {
     }
     else return 1
     
+  }
+
+  get playerPokemonTypes() {
+    return this.$store.state.pokedex.constantDex[this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex]['id']]['type']
   }
 
   get damageMoveClass(): string {
