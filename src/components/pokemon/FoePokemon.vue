@@ -223,11 +223,7 @@ export default class FoePokemon extends Pokemon {
         this.canShowIntents = true
       }
 
-      if(action.type === "damage" && action.payload.target === this.index) {
-        this.takeDamage(action.payload.damage, action.payload.type, action.payload.ignoreBlock)
-      }
-
-      if(action.type === "damageAllFoes") {
+      if((action.type === "damage" && action.payload.target === this.index) || action.type === "damageAllFoes") {
         this.takeDamage(action.payload.damage, action.payload.type, action.payload.ignoreBlock)
       }
 
@@ -247,11 +243,11 @@ export default class FoePokemon extends Pokemon {
         this.defense += action.payload.amount
       }
 
-      if(action.type === "deBuffFoeAttack" && action.payload.target === this.index) {
+      if((action.type === "deBuffFoeAttack" && action.payload.target === this.index) || action.type === "deBuffAllFoesAttack") {
         this.attack -= action.payload.amount
       }
 
-      if(action.type === "deBuffFoeDefense" && action.payload.target === this.index) {
+      if((action.type === "deBuffFoeDefense" && action.payload.target === this.index) || action.type === "deBuffAllFoesDefense") {
         this.defense -= action.payload.amount
       }
 

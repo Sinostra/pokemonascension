@@ -9,6 +9,7 @@
 import BattleScene from './battlemanager/BattleScene.vue'
 import BattleInterface from './battlemanager/BattleInterface.vue'
 import { Options, Vue } from 'vue-class-component'
+import { Watch } from 'vue-property-decorator'
 
 @Options({
     name: "BattleManager",
@@ -22,6 +23,78 @@ export default class BattleManager extends Vue {
     private cardBeingPlayed: any = null
     private cardsBeginningTurn: number = 5
     private energyPerTurn = 3
+
+    private turnSteps = ["playerDraw", "startOfPlayerTurnEffects", "playerTurn", "endOfPlayerTurnEffects", "foesTurn", "endOfFoesTurnEffects"]
+    private currentTurnStepIndex = -1;
+
+    private effectsPlayed = 0
+
+    private startOfPlayerTurnEffects = []
+    private endOfPlayerTurnEffects = []
+    private endOfFoesTurnEffects = []
+
+    @Watch("currentTurnStepIndex")
+    onTurnStepChange(newValue) {
+        if(newValue >= this.turnSteps.length) {
+            this.currentTurnStepIndex = 0
+            return
+        }
+
+        let currentEffectsArray: any[] | null = null;
+
+        if(this.turnSteps[this.currentTurnStepIndex] === "playerDraw") {
+            this.startPlayerTurn()
+        }
+
+        else if(this.turnSteps[this.currentTurnStepIndex] === "foesTurn") {
+            this.playFoeTurn(0)
+        }
+
+        else if(this.turnSteps[this.currentTurnStepIndex] === "startOfPlayerTurnEffects") {
+            currentEffectsArray = this.startOfPlayerTurnEffects
+        }
+        else if(this.turnSteps[this.currentTurnStepIndex] === "endOfPlayerTurnEffects") {
+            currentEffectsArray = this.endOfPlayerTurnEffects
+        }
+        else if(this.turnSteps[this.currentTurnStepIndex] === "endOfFoesTurnEffects") {
+            currentEffectsArray = this.endOfFoesTurnEffects
+        }
+
+        if(!!currentEffectsArray) {
+            if(currentEffectsArray.length) {
+                this.playEffects(currentEffectsArray[this.effectsPlayed], null, null)
+            }
+            else {
+                this.currentTurnStepIndex++
+            }
+        }
+    }
+
+    @Watch("effectsPlayed")
+    onValueChange(newValue, oldValue) {
+        if(newValue > oldValue){
+            let currentEffectsArray: any[] | null = null;
+            if(this.turnSteps[this.currentTurnStepIndex] === "startOfPlayerTurnEffects") {
+                currentEffectsArray = this.startOfPlayerTurnEffects
+            }
+            else if(this.turnSteps[this.currentTurnStepIndex] === "endOfPlayerTurnEffects") {
+                currentEffectsArray = this.endOfPlayerTurnEffects
+            }
+            else if(this.turnSteps[this.currentTurnStepIndex] === "endOfFoesTurnEffects") {
+                currentEffectsArray = this.endOfFoesTurnEffects
+            }
+    
+            if(!!currentEffectsArray) {
+                if(newValue >= currentEffectsArray.length) {
+                    this.currentTurnStepIndex++
+                    this.effectsPlayed = 0
+                }
+                else this.playEffects(currentEffectsArray[this.effectsPlayed], null, null)
+            }
+        }
+    }
+
+    /* Séquence d'un tour : Début du tour => pioche du joueur => effets de début de tour => le joueur joue son tour => effets de fin de tour => tour des ennemis */
 
     private startPlayerTurn() {
         this.$store.dispatch("startNewTurn")
@@ -38,7 +111,8 @@ export default class BattleManager extends Vue {
             const effects = time === 1 ? this.cardBeingPlayed : {
                 damage: this.cardBeingPlayed['damage'],
                 type: this.cardBeingPlayed['type'],
-                ignoreBlock: this.cardBeingPlayed['ignoreBlock']
+                ignoreBlock: this.cardBeingPlayed['ignoreBlock'],
+                damageTimes: this.cardBeingPlayed['damageTimes']
             }
             this.playEffects(effects, "player", targetIndex)
 
@@ -48,7 +122,7 @@ export default class BattleManager extends Vue {
             }
 
             else {
-                this.$store.dispatch("cardDonePlayed")
+                this.effectEndCallBack()
             }
         }
 
@@ -65,7 +139,7 @@ export default class BattleManager extends Vue {
         }, 0)
     }
 
-    private playEffects(effects: any, user: number | string, target: number | string | null) {
+    private playEffects(effects: any, user: number | string | null, target: number | string | null) {
     
         if(effects['damage']) {
             let damage = user === "player" ? effects['damage'] + this.$store.state.battle.playerAttack : effects['damage']
@@ -141,10 +215,24 @@ export default class BattleManager extends Vue {
 
         if(!effects['draw'] && (!effects['damageTimes'] || effects['damageTimes'] <= 1)) {
             setTimeout(() => {
-                this.$store.dispatch("cardDonePlayed")
+                this.effectEndCallBack()
             }, 500)
         }
 
+    }
+
+    private effectEndCallBack() {
+        if(this.turnSteps[this.currentTurnStepIndex] === "playerTurn") {
+            this.$store.dispatch("cardDonePlayed")
+        }
+
+        else if(
+            this.turnSteps[this.currentTurnStepIndex] === "startOfPlayerTurnEffects" || 
+            this.turnSteps[this.currentTurnStepIndex] === "endOfPlayerTurnEffects" || 
+            this.turnSteps[this.currentTurnStepIndex] === "endOfFoesTurnEffects"
+            ) {
+            this.effectsPlayed++
+        }
     }
 
     private playFoeTurn(index) {
@@ -153,11 +241,13 @@ export default class BattleManager extends Vue {
         }
 
         else {
-            this.startPlayerTurn()
+            this.currentTurnStepIndex++
         }
     }
 
+
     public mounted() {
+
         this.$store.subscribeAction((action) => {
             if(action.type === "playCurrentlySelectedCard") {
                 this.playCard(this.$store.getters.selectedCard, action.payload)
@@ -168,13 +258,17 @@ export default class BattleManager extends Vue {
             }
 
             if(action.type === "drawIsDone") {
-                if(this.cardBeingPlayed !== null) {
-                    this.$store.dispatch("cardDonePlayed")
+                if(this.turnSteps[this.currentTurnStepIndex] === "playerDraw") {
+                    this.currentTurnStepIndex++
+                }
+
+                else {
+                    this.effectEndCallBack()
                 }
             }
 
             if(action.type === "endPlayerTurn") {
-                setTimeout(() => {this.playFoeTurn(0)}, 1000)
+                setTimeout(() => {this.currentTurnStepIndex++}, 1000)
             }
 
             if(action.type === "playFoeMove") {
@@ -186,7 +280,7 @@ export default class BattleManager extends Vue {
             }
 
         })
-        this.startPlayerTurn()
+        this.currentTurnStepIndex++
     }
 
 }
