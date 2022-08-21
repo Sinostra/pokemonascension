@@ -113,6 +113,7 @@ export default {
         deBuffFoeAttack() {},
         deBuffFoeDefense() {},
 
+        playerTurn() {},
         endPlayerTurn() {},
         foeTurn() {},
 

@@ -93,4 +93,8 @@
     cursor: pointer;
     border: 2px #fff solid;
     border-radius: 5px;
+
+    &.disabled {
+        background: #000;
+    }
 }

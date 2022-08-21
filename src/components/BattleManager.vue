@@ -29,7 +29,7 @@ export default class BattleManager extends Vue {
 
     private effectsPlayed = 0
 
-    private startOfPlayerTurnEffects = []
+    private startOfPlayerTurnEffects = [{draw: 1}]
     private endOfPlayerTurnEffects = []
     private endOfFoesTurnEffects = []
 
@@ -45,16 +45,17 @@ export default class BattleManager extends Vue {
         if(this.turnSteps[this.currentTurnStepIndex] === "playerDraw") {
             this.startPlayerTurn()
         }
-
-        else if(this.turnSteps[this.currentTurnStepIndex] === "foesTurn") {
-            this.playFoeTurn(0)
-        }
-
         else if(this.turnSteps[this.currentTurnStepIndex] === "startOfPlayerTurnEffects") {
             currentEffectsArray = this.startOfPlayerTurnEffects
         }
+        else if(this.turnSteps[this.currentTurnStepIndex] === "playerTurn") {
+            this.$store.dispatch("playerTurn")
+        }
         else if(this.turnSteps[this.currentTurnStepIndex] === "endOfPlayerTurnEffects") {
             currentEffectsArray = this.endOfPlayerTurnEffects
+        }
+        else if(this.turnSteps[this.currentTurnStepIndex] === "foesTurn") {
+            this.playFoeTurn(0)
         }
         else if(this.turnSteps[this.currentTurnStepIndex] === "endOfFoesTurnEffects") {
             currentEffectsArray = this.endOfFoesTurnEffects

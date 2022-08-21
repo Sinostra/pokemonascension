@@ -32,7 +32,7 @@
             <div class="number text">{{discardPile.length}}</div>
         </div>
 
-        <div class="end-turn-btn text" :style="getFontSize()" @click="endTurn()">
+        <div class="end-turn-btn text" :class="canEndTurn ? '' : 'disabled'" :style="getFontSize()" @click="endTurn()">
             End Turn
         </div>
     </div>
@@ -103,7 +103,6 @@ export default class BattleInterface extends Vue {
                 amount --
                 if(amount == 0) {
                     this.$store.dispatch("drawIsDone")
-                    this.canEndTurn = true
                 }
                 setTimeout(() => {
                     this.draw(amount)
@@ -125,6 +124,7 @@ export default class BattleInterface extends Vue {
 
     private endTurn() {
         if(this.canEndTurn) {
+            this.canEndTurn = false
             this.dumpInto(this.hand, this.discardFromHandManagerContent)
             setTimeout(() =>  {
                 this.dumpInto(this.discardFromHandManagerContent, this.discardPile)
@@ -145,7 +145,6 @@ export default class BattleInterface extends Vue {
         this.$store.subscribeAction((action) => {
             if(action.type === "cardToBeDrawn") {
                 this.draw(action.payload)
-                this.canEndTurn = false
             }
 
             if(action.type === "rightClick") {
@@ -159,7 +158,12 @@ export default class BattleInterface extends Vue {
             }
 
             if(action.type === "cardDonePlayed") {
+                //Au moment où les effets de la carte sont finis, on la met dans la pile de défausse
                 this.dumpInto(this.discardFromSelectManagerContent, this.discardPile)
+            }
+
+            if(action.type === "playerTurn") {
+                this.canEndTurn = true
             }
         })
         this.refillPlayerDeck()
