@@ -33,6 +33,7 @@ export default class BattleManager extends Vue {
     private endOfPlayerTurnEffects = []
     private endOfFoesTurnEffects = []
 
+    //Gère le déroulé du tour
     @Watch("currentTurnStepIndex")
     onTurnStepChange(newValue) {
         if(newValue >= this.turnSteps.length) {
@@ -71,6 +72,7 @@ export default class BattleManager extends Vue {
         }
     }
 
+    //Gère l'appel des effets de l'étape en cours
     @Watch("effectsPlayed")
     onValueChange(newValue, oldValue) {
         if(newValue > oldValue){

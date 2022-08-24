@@ -6,7 +6,8 @@
             <div v-if="nextMove && canShowIntents" class="intent" :style="getFontSize(1.2)">
               <div v-if="nextMove['damage'] > 0" class="intent-category damage">
                   <div class="text-wrapper">
-                    <span :class="damageMoveClass">{{nextMove['damage']}}</span>
+                    <span v-if="nextMoveDamageModifier < 1" :class="damageMoveClass">{{ Math.floor(nextMove['damage'] * nextMoveDamageModifier)}}</span>
+                    <span v-else :class="damageMoveClass">{{ Math.ceil(nextMove['damage'] * nextMoveDamageModifier)}}</span>
                     <span v-if="nextMove['damageTimes']">x{{nextMove['damageTimes']}}</span>
                   </div>
                   <div class="img-wrapper">
@@ -102,7 +103,7 @@ export default class FoePokemon extends Pokemon {
       nextMoveIndex = this.resolvedPattern.length -1
     }
 
-    nextMove = this.resolvedPattern[nextMoveIndex]
+    nextMove = cloneDeep(this.resolvedPattern[nextMoveIndex])
 
     let nextMoveDamage = 0
 
@@ -112,15 +113,7 @@ export default class FoePokemon extends Pokemon {
 
     if(nextMove['damage']) {
 
-      let modifier = 1
-
-      if(this.playerPokemonTypes && nextMove['type']) {
-        modifier = this.getTypeMatchup(nextMove['type'], this.playerPokemonTypes)
-      }
-
-      nextMoveDamage = nextMove['damage']
-      if(modifier < 1 ) nextMoveDamage = Math.floor((nextMoveDamage + this.attack) * modifier)
-      else nextMoveDamage = Math.ceil((nextMoveDamage + this.attack) * modifier)
+      nextMoveDamage = nextMove['damage'] + this.attack
 
       if(nextMoveDamage < 1) nextMoveDamage = 1
 
@@ -163,7 +156,7 @@ export default class FoePokemon extends Pokemon {
 
   private setResolvedPattern() {
 
-    let pattern: any = this.pattern.map((x) => x)
+    let pattern: any = cloneDeep(this.pattern)
 
 
     pattern.forEach((move, index) => {
@@ -189,10 +182,12 @@ export default class FoePokemon extends Pokemon {
       if(this.nextMove['damage']) {
         this.playAttackAnim()
       }
+
       const effect = time === 1 ? this.nextMove : {
         'damage': this.nextMove['damage'],
         'type' : this.nextMove['type'],
       }
+
       this.$store.dispatch("playFoeMove", {
         user: this.index,
         effect,
