@@ -111,11 +111,11 @@ export default class BattleManager extends Vue {
         this.$store.dispatch("discardCurrentlySelectedCard")
 
         const playMultipleAttacks = (time = 1) => {
-            const effects = time === 1 ? this.cardBeingPlayed : {
-                damage: this.cardBeingPlayed['damage'],
+            const effects = time === 1 ? this.cardBeingPlayed.effect : {
                 type: this.cardBeingPlayed['type'],
-                ignoreBlock: this.cardBeingPlayed['ignoreBlock'],
-                damageTimes: this.cardBeingPlayed['damageTimes']
+                damageTimes: this.cardBeingPlayed['damageTimes'],
+                damage: this.cardBeingPlayed.effect['damage'],
+                ignoreBlock: this.cardBeingPlayed.effect['ignoreBlock'],
             }
             this.playEffects(effects, "player", targetIndex)
 
@@ -133,7 +133,7 @@ export default class BattleManager extends Vue {
             this.$store.dispatch("spendEnergy", this.cardBeingPlayed['cost'])
 
             if(!this.cardBeingPlayed['damageTimes'] || this.cardBeingPlayed['damageTimes'] <= 1) {
-                this.playEffects(this.cardBeingPlayed, "player", targetIndex)
+                this.playEffects(this.cardBeingPlayed.effect, "player", targetIndex)
             }
 
             else {
