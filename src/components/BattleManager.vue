@@ -110,39 +110,15 @@ export default class BattleManager extends Vue {
         this.$store.dispatch("cardIsPlaying")
         this.$store.dispatch("discardCurrentlySelectedCard")
 
-        const playMultipleAttacks = (time = 1) => {
-            const effects = time === 1 ? this.cardBeingPlayed.effect : {
-                type: this.cardBeingPlayed['type'],
-                damageTimes: this.cardBeingPlayed['damageTimes'],
-                damage: this.cardBeingPlayed.effect['damage'],
-                ignoreBlock: this.cardBeingPlayed.effect['ignoreBlock'],
-            }
-            this.playEffects(effects, "player", targetIndex)
-
-            if(time < this.cardBeingPlayed['damageTimes']) {
-                time++
-                setTimeout(() => {playMultipleAttacks(time)}, 500)
-            }
-
-            else {
-                this.effectEndCallBack()
-            }
-        }
-
         setTimeout(() => {
             this.$store.dispatch("spendEnergy", this.cardBeingPlayed['cost'])
-
-            if(!this.cardBeingPlayed['damageTimes'] || this.cardBeingPlayed['damageTimes'] <= 1) {
-                this.playEffects(this.cardBeingPlayed.effect, "player", targetIndex)
-            }
-
-            else {
-                playMultipleAttacks()
-            }
+            this.playEffects(this.cardBeingPlayed.effect, "player", targetIndex)
         }, 0)
     }
 
-    private playEffects(effects: any, user: number | string | null, target: number | string | null) {
+    private playEffects(effects: any, user: number | string | null, target: number | string | null, inInterval: boolean = false) {
+
+        let damageTime = 1;
     
         if(effects['damage']) {
             let damage = user === "player" ? effects['damage'] + this.$store.state.battle.playerAttack : effects['damage']
@@ -159,6 +135,7 @@ export default class BattleManager extends Vue {
                 damage,
                 type: effects['type'],
                 ignoreBlock: effects['ignoreBlock'],
+                user,
                 target
             })
         }
@@ -216,17 +193,44 @@ export default class BattleManager extends Vue {
             this.$store.dispatch("cardToBeDrawn", effects['draw'])
         }
 
-        if(!effects['draw'] && (!effects['damageTimes'] || effects['damageTimes'] <= 1)) {
+
+        //Gestion de la fin de l'effet
+        if(!effects['draw'] && (!effects['damageTimes'] || effects['damageTimes'] <= 1) && !inInterval) {
             setTimeout(() => {
-                this.effectEndCallBack()
+                this.effectEndCallBack(user)
+            }, 500)
+        }
+        else if(effects['damageTimes']) {
+            const repeatedEffects = {
+                damage: effects['damage'],
+                type: effects['type'],
+                ignoreBlock: effects['ignoreBlock'],
+                selfDamage: effects['selfDamage'],
+            }
+            const attackInterval = setInterval(() => {
+                damageTime++
+                this.playEffects(repeatedEffects, user, target, true)
+                if(damageTime  >= effects['damageTimes']) {
+                    clearInterval(attackInterval)
+                    setTimeout(() => {
+                        this.effectEndCallBack(user)
+                    }, 500)
+                } 
             }, 500)
         }
 
     }
 
-    private effectEndCallBack() {
+    private effectEndCallBack(user?) {
         if(this.turnSteps[this.currentTurnStepIndex] === "playerTurn") {
             this.$store.dispatch("cardDonePlayed")
+        }
+
+        if(this.turnSteps[this.currentTurnStepIndex] === "foesTurn") {
+            const nextFoeToPlay = ++user
+            setTimeout(() => {
+                this.playFoeTurn(nextFoeToPlay)
+            }, 1000)
         }
 
         else if(

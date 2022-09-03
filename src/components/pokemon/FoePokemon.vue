@@ -179,28 +179,10 @@ export default class FoePokemon extends Pokemon {
     }
 
     else {
-      if(this.nextMove['damage']) {
-        this.playAttackAnim()
-      }
-
-      const effect = time === 1 ? this.nextMove : {
-        'damage': this.nextMove['damage'],
-        'type' : this.nextMove['type'],
-      }
-
       this.$store.dispatch("playFoeMove", {
         user: this.index,
-        effect,
+        effect: this.nextMove,
       })
-      if(this.nextMove['damageTimes'] && time < this.nextMove['damageTimes']) {
-        time++
-        setTimeout(() => {this.playMove(time)}, 500)
-      }
-
-      else {
-        this.$store.dispatch("foeMovePlayed", this.index)
-        this.canShowIntents = false
-      }
     }
   }
 
@@ -220,6 +202,10 @@ export default class FoePokemon extends Pokemon {
 
       if((action.type === "damage" && action.payload.target === this.index) || action.type === "damageAllFoes") {
         this.takeDamage(action.payload.damage, action.payload.type, action.payload.ignoreBlock)
+      }
+
+      if(action.type === "damage" && action.payload.user === this.index) {
+        this.playAttackAnim()
       }
 
       if(action.type === "heal" && action.payload.user === this.index) {

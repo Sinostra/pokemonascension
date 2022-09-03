@@ -1,15 +1,15 @@
 export default {
     "001": {
         "name": "thundershock",
-        "type": "electric",
         "category": "attack",
         "rarity": "common",
         "cost": 1,
         "target": true,
-        "damageTimes": 1,
         "effect": {
+            "type": "electric",
             "draw": 0,
             "damage": 6,
+            "damageTimes": 1,
             "selfDamage": 0,
             "damageAOE": false,
             "block": 0,
@@ -25,13 +25,13 @@ export default {
 
     "002": {
         "name": "discharge",
-        "type": "electric",
         "category": "attack",
         "rarity": "medium",
         "cost": 1,
         "target": false,
-        "damageTimes": 1,
         "effect": {
+            "type": "electric",
+            "damageTimes": 1,
             "draw": 0,
             "damage": 3,
             "damageAOE": true,
@@ -44,12 +44,12 @@ export default {
 
     "003": {
         "name": "agility",
-        "type": "psychic",
         "category": "ability",
         "rarity": "medium",
         "cost": 0,
         "target": false,
         "effect": {
+            "type": "psychic",
             "draw": 2,
             "damage": 0,
             "damageAOE": false,
@@ -62,12 +62,12 @@ export default {
 
     "004": {
         "name": "protect",
-        "type": "normal",
         "category": "ability",
         "rarity": "common",
         "cost": 1,
         "target": false,
         "effect": {
+            "type": "normal",
             "draw": 0,
             "damage": 0,
             "damageAOE": false,
@@ -80,12 +80,12 @@ export default {
 
     "005": {
         "name": "focus energy",
-        "type": "normal",
         "category": "ability",
         "rarity": "rare",
         "cost": 1,
         "target": false,
         "effect": {
+            "type": "normal",
             "draw": 0,
             "damage": 0,
             "damageAOE": false,
@@ -98,15 +98,15 @@ export default {
 
     "006": {
         "name": "fury swipes",
-        "type": "normal",
         "category": "attack",
         "rarity": "medium",
         "cost": 1,
         "target": true,
-        "damageTimes": 3,
         "effect": {
+            "type": "normal",
             "draw": 0,
             "damage": 2,
+            "damageTimes": 3,
             "damageAOE": false,
             "block": 0,
             "ignoreBlock": false,
@@ -117,12 +117,12 @@ export default {
 
     "007": {
         "name": "calm mind",
-        "type": "psychic",
         "category": "ability",
         "rarity": "medium",
         "cost": 1,
         "target": false,
         "effect": {
+            "type": "psychic",
             "buffSelfAttack": 1,
             "buffSelfDefense": 1,
         },
@@ -131,12 +131,12 @@ export default {
 
     "008": {
         "name": "recover",
-        "type": "psychic",
         "category": "ability",
         "rarity": "medium",
         "cost": 1,
         "target": false,
         "effect":{
+            "type": "psychic",
             "selfHeal": 50
         },
         "tooltip": 'Heals 50% of your hp',

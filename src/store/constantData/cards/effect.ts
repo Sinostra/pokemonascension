@@ -1,5 +1,7 @@
 interface effect {
+    type: string; //Type de l'zttzsue
     damage: number; //Dégats infligés à la cible
+    damageTimes: number; //Nombre de fois que l'attaque est répétée
     selfDamage: number; //Dégats infligés à soi-même
     damageAOE: boolean; //Dégatas infligés à tous les ennemis et pas juste la cible
     ignoreBlock: boolean; //Dégats ignorent l'armure ennemie

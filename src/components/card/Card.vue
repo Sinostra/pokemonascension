@@ -37,7 +37,7 @@ export default class Card extends Vue {
   private isPlayingDiscardFromHand: boolean = false
 
   get cardClass(): string {
-    const type: string = this.dataCard[this.id]['type']
+    const type: string = this.dataCard[this.id]['effect']['type']
     const draw = this.isPlayingDrawAnim ? 'draw' : ''
     const playable = this.dataCard[this.id]['cost'] <= this.$store.state.battle.currentEnergy ? 'playable' : ''
     const discardFromSelect = this.isPlayingDiscardFromSelectAnim ? 'discardFromSelect' : ''
@@ -91,7 +91,7 @@ export default class Card extends Vue {
 
   get cardDamageTooltipModifier() {
     if(!this.$store.state.battle.typesHover) return 1
-    return this.getTypeMatchup(this.dataCard[this.id]['type'], this.$store.state.battle.typesHover)
+    return this.getTypeMatchup(this.dataCard[this.id]['effect']['type'], this.$store.state.battle.typesHover)
   }
 
   get cardDamageTooltipClass() {

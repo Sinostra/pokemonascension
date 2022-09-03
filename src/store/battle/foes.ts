@@ -33,14 +33,14 @@ export default {
         ],
         patterns: [
             [
-                {
-                    buffSelfAttack: 1,
-                    buffSelfDefense: 1,
-                    damage: 0,
-                    block: 0,
-                    type: 'flying',
-                    damageTimes: 1,
-                },
+                // {
+                //     buffSelfAttack: 1,
+                //     buffSelfDefense: 1,
+                //     damage: 0,
+                //     block: 0,
+                //     type: 'flying',
+                //     damageTimes: 1,
+                // },
                 {
                     damage: 1,
                     block: 2,
