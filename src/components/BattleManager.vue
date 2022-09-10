@@ -29,9 +29,9 @@ export default class BattleManager extends Vue {
 
     private effectsPlayed = 0
 
-    private startOfPlayerTurnEffects = [{draw: 1}]
-    private endOfPlayerTurnEffects = []
-    private endOfFoesTurnEffects = []
+    private startOfPlayerTurnEffects: any[] = []
+    private endOfPlayerTurnEffects: any[] = []
+    private endOfFoesTurnEffects: any[] = []
 
     //Gère le déroulé du tour
     @Watch("currentTurnStepIndex")
@@ -191,6 +191,10 @@ export default class BattleManager extends Vue {
 
         if(effects['draw']) {
             this.$store.dispatch("cardToBeDrawn", effects['draw'])
+        }
+
+        if(effects['addToStartTurn']) {
+            this.startOfPlayerTurnEffects.push(effects['addToStartTurn'])
         }
 
 

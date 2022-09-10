@@ -141,4 +141,19 @@ export default {
         },
         "tooltip": 'Heals 50% of your hp',
     },
+
+    "009": {
+        "name": "turbo",
+        "category": "talent",
+        "rarity": "medium",
+        "cost": 1,
+        "target": false,
+        "effect":{
+            "type": "normal",
+            "addToStartTurn": {
+                "draw": 1
+            }
+        },
+        "tooltip": 'At the start of each turn, draw one card',
+    },
 }
