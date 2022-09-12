@@ -104,7 +104,7 @@ export default {
         
         "type": ["water"],
         "hp": 45,
-        "size": 90,
+        "size": 120,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -205,7 +205,7 @@ export default {
         
         "type": ["normal", "flying"],
         "hp": 45,
-        "size": 80,
+        "size": 100,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -306,7 +306,7 @@ export default {
         
         "type": ["electric"],
         "hp": 45,
-        "size": 60,
+        "size": 75,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1259,7 +1259,7 @@ export default {
         
         "type": ["ground"],
         "hp": 45,
-        "size": 45,
+        "size": 65,
         "baseStats": {
             "hp": 45,
             "attack": 2,

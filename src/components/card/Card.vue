@@ -1,16 +1,18 @@
 <template>
-  <div class="card" :class="cardClass" @click.stop="onClick()" :style="{'background-image':`url(${background})`}">
-    <div class="cost" :style="(getFontSize(0.6))">
+  <div class="card" :class="cardClass" @click.stop="onClick()">
+    <div class="background-img" :style="{'background-image':`url(${background})`}"></div>
+    <div class="cost" :style="(getFontSize(1))">
       <img :src="costBackground">
       {{ dataCard[id]['cost'] }}
     </div>
-    <div class="name" :style="(getFontSize(0.5))">{{dataCard[id]['name']}}</div>
+    
+    <div class="name" :style="(getFontSize(0.7))">{{dataCard[id]['name']}}</div>
 
     <div class="illustration" :style="{'background-image':'url(' + illustrationBackground + ')'}"></div>
 
-    <div class="category" :style="(getCategoryStyle(0.4))">{{dataCard[id]['category']}}</div>
+    <div class="category" :style="(getCategoryStyle(0.6))">{{dataCard[id]['category']}}</div>
     
-    <div class="tooltip" :class="cardDamageTooltipClass" :style="(getFontSize(0.6))" v-html="dynamicToolTip"></div>
+    <div class="tooltip" :class="cardDamageTooltipClass" :style="(getFontSize(0.8))" v-html="dynamicToolTip"></div>
   </div>
 </template>
 
@@ -27,14 +29,14 @@ import dataCard from "@/store/constantData/cards/data-cards"
 })
 
 export default class Card extends Vue {
-  private id!: string
-  private state!: string
+  public id!: string
+  public state!: string
 
-  private dataCard = dataCard
+  public dataCard = dataCard
 
-  private isPlayingDrawAnim: boolean = false
-  private isPlayingDiscardFromSelectAnim: boolean = false
-  private isPlayingDiscardFromHand: boolean = false
+  public isPlayingDrawAnim: boolean = false
+  public isPlayingDiscardFromSelectAnim: boolean = false
+  public isPlayingDiscardFromHand: boolean = false
 
   get cardClass(): string {
     const type: string = this.dataCard[this.id]['effect']['type']
@@ -122,20 +124,20 @@ export default class Card extends Vue {
     return multiplier
   }
 
-  private onClick() {
+  public onClick() {
     if(this.dataCard[this.id]['cost'] <= this.$store.state.battle.currentEnergy) {
       this.$emit('cardClicked')
     }
   }
 
-  private playDrawAnim() {
+  public playDrawAnim() {
     if(!this.isPlayingDrawAnim) {
       this.isPlayingDrawAnim = true
       setTimeout(() => { this.isPlayingDrawAnim = false }, 1000 )
     }
   }
 
-  private playDiscardFromSelectAnim() {
+  public playDiscardFromSelectAnim() {
     if(!this.isPlayingDiscardFromSelectAnim) {
       this.isPlayingDiscardFromSelectAnim = true
       setTimeout(() => {
@@ -145,7 +147,7 @@ export default class Card extends Vue {
     }
   }
 
-  private playDiscardFromHandAnim() {
+  public playDiscardFromHandAnim() {
     if(!this.isPlayingDiscardFromHand) {
       this.isPlayingDiscardFromHand = true
       setTimeout(() => {
