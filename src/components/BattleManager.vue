@@ -222,7 +222,6 @@ export default class BattleManager extends Vue {
                 } 
             }, 500)
         }
-
     }
 
     private effectEndCallBack(user?) {

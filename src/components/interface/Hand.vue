@@ -28,16 +28,16 @@ import Card from '../card/Card.vue'
 })
 export default class Hand extends Vue {
 
-    private content!: string[]
-    private selectedCardIndex!: number | null
+    public content!: string[]
+    public selectedCardIndex!: number | null
 
-    private isCardBeingPlayed: boolean = false
+    public isCardBeingPlayed: boolean = false
 
-    private onClick(cardIndex) {
+    public onClick(cardIndex) {
         this.$emit("onCardClicked", cardIndex)
     }
 
-    private getCardPosition(index: number): string {
+    public getCardPosition(index: number): string {
 
         const selectedCardStyle = 'transform : rotate(0deg) scale(1.2); left: 20%; bottom: 153%; filter: none;'
 

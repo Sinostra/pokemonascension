@@ -58,22 +58,22 @@ import { Options, Vue } from 'vue-class-component'
 
 export default class BattleInterface extends Vue {
 
-    private readonly maxCardsInHand: number = 10
-    private readonly delayBetweenDraws: number = 500
+    public readonly maxCardsInHand: number = 10
+    public readonly delayBetweenDraws: number = 500
 
-    private selectedCardIndex: number | null = null
+    public selectedCardIndex: number | null = null
 
-    private canEndTurn: boolean = false
+    public canEndTurn: boolean = false
 
-    private drawPile: string[] = []
-    private hand: string[] = []
-    private discardPile: string[] = []
-    private exhaustPile: string[] = []
+    public drawPile: string[] = []
+    public hand: string[] = []
+    public discardPile: string[] = []
+    public exhaustPile: string[] = []
 
-    private discardFromHandManagerContent: string[] = []
-    private discardFromSelectManagerContent: string[] = []
+    public discardFromHandManagerContent: string[] = []
+    public discardFromSelectManagerContent: string[] = []
 
-    private selectCard(cardIndex): void {
+    public selectCard(cardIndex): void {
         if(cardIndex !== null){
             this.selectedCardIndex = cardIndex
             this.$store.dispatch("selectCard", this.hand[cardIndex])
@@ -86,7 +86,7 @@ export default class BattleInterface extends Vue {
         
     }
 
-    private draw(amount): void {
+    public draw(amount): void {
         if(this.hand.length < this.maxCardsInHand) {
             if(amount > 0) {
                 
@@ -111,18 +111,18 @@ export default class BattleInterface extends Vue {
         }
     }
 
-    private discardFromSelect(index): void {
+    public discardFromSelect(index): void {
         const cardDiscarded = this.hand.splice(index, 1)[0]
         this.discardFromSelectManagerContent.push(cardDiscarded)
     }
 
-    private dumpInto(from, to) {
+    public dumpInto(from, to) {
         for (let i = from.length; i > 0; i--) {
             to.push(from.shift() as string)
         }
     }
 
-    private endTurn() {
+    public endTurn() {
         if(this.canEndTurn) {
             this.canEndTurn = false
             this.dumpInto(this.hand, this.discardFromHandManagerContent)
@@ -133,11 +133,11 @@ export default class BattleInterface extends Vue {
         }
     }
 
-    private getFontSize(multiplier = 1) {
+    public getFontSize(multiplier = 1) {
         return 'font-size: ' + (this.$store.state.settings.baseFontSize) * multiplier + 'px;'
     }
 
-    private refillPlayerDeck() {
+    public refillPlayerDeck() {
         this.drawPile = this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex].deck
     }
 

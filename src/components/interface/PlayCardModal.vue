@@ -16,11 +16,11 @@
 import { Vue } from 'vue-class-component'
 
 export default class PlayCardModal extends Vue {
-    private onClickCancel(): void {
+    public onClickCancel(): void {
         this.$store.dispatch("rightClick")
     }
 
-    private onClickPlay(): void {
+    public onClickPlay(): void {
         this.$store.dispatch("playCurrentlySelectedCard", null)
     }
 }
