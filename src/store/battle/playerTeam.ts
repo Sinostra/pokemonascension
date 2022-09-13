@@ -2,7 +2,7 @@ export default {
     state: {
         team: {
             '1': {
-                id: '025',
+                id: '002',
                 deck: [
                     '001',
                     '006',

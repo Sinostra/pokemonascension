@@ -8,7 +8,12 @@ export default {
         
         "type": ["grass", "poison"],
         "hp": 45,
-        "size": 45
+        "size": 75,
+        "baseStats": {
+            "hp": 45,
+            "attack": 2,
+            "defense": 1
+        }
     },
 
     "002": {
@@ -20,7 +25,12 @@ export default {
         
         "type": ["grass", "poison"],
         "hp": 45,
-        "size": 61
+        "size": 100,
+        "baseStats": {
+            "hp": 45,
+            "attack": 2,
+            "defense": 1
+        }
     },
 
     "003": {

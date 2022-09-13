@@ -194,14 +194,15 @@
         padding: 2%;
         font-family: 'gill sans bold';
         color: #000;
+        -webkit-text-stroke: 0.5px black;
 
 
         &.super-effective :deep(.damage-amount) {
-            color: #ed3419;
+            color: #ff5252;
         }
 
         &.not-very-effective :deep(.damage-amount) {
-            color: #0096ff;
+            color: #3bd3ff;
         }
     }
 }

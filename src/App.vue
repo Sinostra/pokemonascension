@@ -98,6 +98,10 @@ export default {
   font-family: 'ERASDEMI';
   src: url("./assets/fonts/ERASDEMI.ttf");
 }
+@font-face {
+  font-family: 'ERASBD';
+  src: url("./assets/fonts/ERASBD.ttf");
+}
 
 * {
   box-sizing: border-box;
