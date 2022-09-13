@@ -4,7 +4,8 @@
 
   .healthBar-infos-wrapper {
     bottom: -25%;
-    left: 6%;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .pokemon-sprite {

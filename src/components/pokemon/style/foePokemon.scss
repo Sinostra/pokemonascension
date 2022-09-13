@@ -10,15 +10,15 @@
 
     .healthBar-infos-wrapper {
       top: -5vh;
-      left: 0%;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     .intent {
       position: absolute;
-      bottom: 2vw;
       left: 50%;
       width: 5vw;
-      transform: translateX(-50%);
+      transform: translate(-50%, -110%);
       font-family: "ERASDEMI";
       font-weight: 800;
       color: #fff;
