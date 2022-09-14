@@ -21,6 +21,8 @@ export default class Pokemon extends Vue {
   protected isPlayingAttackAnim: boolean = false
   protected isPlayingReturnAnim: boolean = false
 
+  protected mouseOver: boolean = false
+
   protected fainted: boolean = false
 
 
@@ -28,17 +30,71 @@ export default class Pokemon extends Vue {
     return require(`@/assets/img/sprites/${this.$store.state.settings.pokemonSpritesExtension}/${this.id}.${this.$store.state.settings.pokemonSpritesExtension}`)
   }
 
-  get animClass(): string {
+  get wrapperClass(): string {
+    const hoverClass = this.mouseOver ? 'hover' : ''
     let animClass: string = ''
     if(this.isPlayingReturnAnim) animClass = 'return'
     else if (this.isPlayingAttackAnim) animClass = 'attack' 
-    return animClass
+    return `${hoverClass} ${animClass}`
   }
 
   get healthBarClass(): string {
     if(this.getHealthBarPercent() > 67) return 'green'
     else if(this.getHealthBarPercent() > 33 && this.getHealthBarPercent() <= 67) return 'orange'
     else return 'red'
+  }
+
+  get allTypesMatchups() {
+    const pokemonTypes = this.dataPokemon['type']
+    const allTypes = this.$store.state.types.dataTypes
+    return Object.keys(allTypes).reduce((recipient, type) => {
+      let multiplier = 1
+      pokemonTypes.forEach(t => {
+        const currentMultiplier = allTypes[type][t]
+        multiplier *= currentMultiplier
+      });
+      recipient[type] = multiplier
+      return recipient
+    }, {
+      "grass": 1,
+      "fire": 1,
+      "water": 1,
+      "electric": 1,
+      "ground": 1,
+      "rock": 1,
+      "psychic": 1,
+      "ghost": 1,
+      "dark": 1,
+      "fighting": 1,
+      "fairy": 1,
+      "steel": 1,
+      "normal": 1,
+      "flying": 1,
+      "ice": 1,
+      "dragon": 1,
+      "poison": 1,
+      "bug": 1
+    })
+  }
+
+  get weaknesses() {
+    const allTypes = this.$store.state.types.dataTypes
+    return Object.keys(allTypes).reduce((recipient, type) => {
+      if(this.allTypesMatchups[type] > 1) {
+        recipient.push(type)
+      }
+      return recipient
+    }, [] as string[])
+  }
+
+  get resistances() {
+    const allTypes = this.$store.state.types.dataTypes
+    return Object.keys(allTypes).reduce((recipient, type) => {
+      if(this.allTypesMatchups[type] < 1) {
+        recipient.push(type)
+      }
+      return recipient
+    }, [] as string[])
   }
 
   getTypeMatchup(attackingType, defendingTypes) {

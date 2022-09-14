@@ -1,5 +1,5 @@
 <template>
-    <div class="pokemon-wrapper" :style="foePosition" :class="animClass">
+    <div class="pokemon-wrapper" :style="foePosition" :class="wrapperClass">
       <div class="size-wrapper" :style="{'width': dataPokemon.size + '%'}">
         <div class="bottom-wrapper" @click.stop="onClick()">
           <div class="healthBar-infos-wrapper">

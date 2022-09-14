@@ -102,22 +102,37 @@
     background: #ccc;
     bottom: 200%;
     padding: 5px;
+    display: none;
+    flex-direction: column;
 
     .pokemon-data {
       display: flex;
       align-items: center;
       font-family: "ERASDEMI";
+      white-space: nowrap;
+      &:not(:last-child) {
+        margin-bottom: 5px;
+      }
+
+      .text {
+        padding-right: 5px;
+      }
     }
 
     .type {
       width: 10%;
       &:not(:last-child) {
-        margin: 0 5px;
+        margin-right: 5px;
       }
       .type-img {
         display: block;
         width: 100%;
       }
+    }
+  }
+  &.hover {
+    .help-tooltip {
+      display: flex;
     }
   }
 }
