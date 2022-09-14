@@ -27,14 +27,14 @@
                 <div class="healthAmount" :style="getFontSize()">{{currentHealth}} / {{maxHealth}} </div>
               </div>
             </div>
-            <div class="block-wrapper">
+            <!-- <div class="block-wrapper">
               {{block}}
-            </div>
-            <div class="types-wrapper">
+            </div> -->
+            <!-- <div class="types-wrapper">
               <div class="type" v-for="(type, index) in dataPokemon.type" :key="index">
                 <img :src="getTpyeIcon(dataPokemon.type[index])" class="type-img">
               </div>
-            </div>
+            </div> -->
           </div>
           <img :src="spritePath" :class="spriteClass" @mouseover="onHover()" @mouseleave="onHover(false)" class="pokemon-sprite">
         </div>
@@ -61,17 +61,17 @@ import cloneDeep from "lodash.clonedeep"
 })
 
 export default class FoePokemon extends Pokemon {
-  private index!: number;
+  public index!: number;
   protected maxHealth: number = this.maxHealth
 
-  private baseAttack!: number;
-  private baseDefense!: number;
+  public baseAttack!: number;
+  public baseDefense!: number;
 
-  private patternSettings!: any
-  private pattern = []
+  public patternSettings!: any
+  public pattern = []
 
-  private resolvedPattern = []
-  private canShowIntents: boolean = true
+  public resolvedPattern = []
+  public canShowIntents: boolean = true
 
   get foePosition(): string {
     const currentBackground: string = this.$store.state.battle.backgroundUsed
@@ -143,18 +143,18 @@ export default class FoePokemon extends Pokemon {
     return moveClass
   }
 
-  private onClick(): void {
+  public onClick(): void {
     if(this.$store.getters.selectedCard) {
       this.$store.dispatch("foePokemonHasBeenClicked", this.index)
     }
   }
 
-  private onHover(enter: boolean = true): void {
+  public onHover(enter: boolean = true): void {
     if(enter) this.$store.dispatch("mouseOver", this.dataPokemon['type'])
     else this.$store.dispatch("mouseOver", null)
   }
 
-  private setResolvedPattern() {
+  public setResolvedPattern() {
 
     let pattern: any = cloneDeep(this.pattern)
 
@@ -173,7 +173,7 @@ export default class FoePokemon extends Pokemon {
 
   }
 
-  private playMove(time: number = 1) {
+  public playMove(time: number = 1) {
     if(this.fainted) {
       this.$store.dispatch("foeMovePlayed", this.index)
     }

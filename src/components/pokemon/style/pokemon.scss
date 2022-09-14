@@ -96,4 +96,28 @@
       }
     }
   }
+
+  .help-tooltip {
+    position: absolute;
+    background: #ccc;
+    bottom: 200%;
+    padding: 5px;
+
+    .pokemon-data {
+      display: flex;
+      align-items: center;
+      font-family: "ERASDEMI";
+    }
+
+    .type {
+      width: 10%;
+      &:not(:last-child) {
+        margin: 0 5px;
+      }
+      .type-img {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
 }
