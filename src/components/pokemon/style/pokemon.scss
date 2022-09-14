@@ -72,38 +72,23 @@
 
     }
 
-    .block-wrapper {
-      position: absolute;
-      display: none;
-      background: #e0e0e0;
-      color: black;
-      top: -14%;
-      left: -30%;
-      padding: 10%;
+    .blockAmount {
+      color: #00c9fe;
+      font-family: 'ERASDEMI';
+      filter: drop-shadow(1px 1px 1px black);
     }
 
-    .types-wrapper {
-      position: absolute;
-      display: flex;
-      top: -2%;
-      left: 104%;
-      width: 6vw;
-      .type {
-        width: 20%;
-
-        &:first-child {
-          margin-right: 1%;
-        }
-        .type-img {
-          width: 100%;
-        }
-      }
+    .armorBar {
+      height: 1.5vh;
+      background: #00c9fe;
+      border: 2px solid #000;
     }
+
   }
 
   .help-tooltip {
     position: absolute;
-    background: #ccc;
+    background: #fff;
     left: 50%;
     transform: translateX(-50%);
     padding: 5px;
