@@ -35,6 +35,26 @@
                 <img :src="getTpyeIcon(dataPokemon.type[index])" class="type-img">
               </div>
             </div> -->
+                    <div class="help-tooltip">
+          <div class="pokemon-data">
+            <div class="text">{{dataPokemon['name']['english']}}</div>
+            <div class="type" v-for="(type, index) in dataPokemon.type" :key="index">
+              <img :src="getTpyeIcon(type)" class="type-img">
+            </div>
+          </div>
+          <div class="pokemon-data">
+            <div class="text">Weaknesses :</div>
+            <div class="type" v-for="(type, index) in weaknesses" :key="index">
+              <img :src="getTpyeIcon(type)" class="type-img">
+            </div>
+          </div>
+          <div class="pokemon-data">
+            <div class="text">Resistances :</div>
+            <div class="type" v-for="(type, index) in resistances" :key="index">
+              <img :src="getTpyeIcon(type)" class="type-img">
+            </div>
+          </div>
+        </div>
           </div>
           <img :src="spritePath" :class="spriteClass" @mouseover="onHover()" @mouseleave="onHover(false)" class="pokemon-sprite">
         </div>
@@ -150,8 +170,14 @@ export default class FoePokemon extends Pokemon {
   }
 
   public onHover(enter: boolean = true): void {
-    if(enter) this.$store.dispatch("mouseOver", this.dataPokemon['type'])
-    else this.$store.dispatch("mouseOver", null)
+    if(enter) { 
+      this.$store.dispatch("mouseOver", this.dataPokemon['type'])
+      this.mouseOver = true
+    } 
+    else {
+      this.$store.dispatch("mouseOver", null)
+      this.mouseOver = false
+    } 
   }
 
   public setResolvedPattern() {

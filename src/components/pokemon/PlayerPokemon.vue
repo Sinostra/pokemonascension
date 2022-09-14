@@ -57,8 +57,12 @@ export default class PlayerPokemon extends Pokemon {
   }
 
   public onHover(enter: boolean = true): void {
-    if(enter) this.mouseOver = true
-    else this.mouseOver = false
+    if(enter) {
+      this.mouseOver = true
+    } 
+    else {
+      this.mouseOver = false
+    } 
   }
 
   public mounted() {
