@@ -39,7 +39,7 @@ export default class Hand extends Vue {
 
     public getCardPosition(index: number): string {
 
-        const selectedCardStyle = 'transform : rotate(0deg) scale(1.2); left: 20%; bottom: 153%; filter: none;'
+        const selectedCardStyle = 'transform : rotate(0deg) scale(1.2); left: 20%; bottom: 186%; filter: none;'
 
         if(index === this.selectedCardIndex) {
             return selectedCardStyle
@@ -52,7 +52,7 @@ export default class Hand extends Vue {
         const baseRotate =  2
 
         //L'endroit où la carte du milieu se positionne
-        const baseBottom = -3
+        const baseBottom = 35
 
         //L'endroit où la première carte se positionne
         const baseLeft = 50 - (handSize * 3)

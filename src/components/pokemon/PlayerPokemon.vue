@@ -1,7 +1,7 @@
 <template>
     <div class="pokemon-wrapper" :style="playerPosition" :class="wrapperClass">
-      <div class="size-wrapper" :style="{'width': dataPokemon.size + '%'}">
-        <img class="pokemon-sprite" :src="spritePath" @mouseover="onHover()" @mouseleave="onHover(false)">
+      <div class="size-wrapper" :style="{'width': dataPokemon.size + '%'}" @mouseover="onHover()" @mouseleave="onHover(false)">
+        <img class="pokemon-sprite" :src="spritePath">
         <div class="healthBar-infos-wrapper">
           <div class="healthBar">
             <div class="currentHealth" :class="healthBarClass" :style="{'width': getHealthBarPercent() + '%'}"></div>

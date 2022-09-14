@@ -4,6 +4,10 @@
   width: 14%;
   height: 20%;
 
+  .pokemon-sprite {
+    cursor: pointer;
+  }
+
   &.return {
     img {
       animation: return 1s linear forwards;
@@ -104,6 +108,7 @@
     padding: 5px;
     display: none;
     flex-direction: column;
+    border-radius: 5px;
 
     .pokemon-data {
       display: flex;
@@ -131,6 +136,10 @@
     }
   }
   &.hover {
+    .pokemon-sprite {
+      filter: drop-shadow(0 0 0.50rem #f2cd4c) drop-shadow(2px 2px 2px #ffcc00);
+    }
+
     .help-tooltip {
       display: flex;
     }
