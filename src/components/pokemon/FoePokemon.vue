@@ -10,7 +10,7 @@
                     <span v-else :class="damageMoveClass">{{ Math.ceil(nextMove['damage'] * nextMoveDamageModifier)}}</span>
                     <span v-if="nextMove['damageTimes']">x{{nextMove['damageTimes']}}</span>
                   </div>
-                  <div class="img-wrapper">
+                  <div class="img-wrapper" :class="mouseOver ? '' : 'hidden'">
                     <img :src="getTpyeIcon(nextMove['type'])">
                   </div>
                 </div>
@@ -35,7 +35,7 @@
                 <img :src="getTpyeIcon(dataPokemon.type[index])" class="type-img">
               </div>
             </div> -->
-                    <div class="help-tooltip">
+          <div class="help-tooltip">
           <div class="pokemon-data">
             <div class="text">{{dataPokemon['name']['english']}}</div>
             <div class="type" v-for="(type, index) in dataPokemon.type" :key="index">

@@ -2,6 +2,14 @@
   position: relative;
   height: 100%;
 
+  .help-tooltip {
+    bottom: 300%;
+  }
+
+  .hidden {
+    visibility: hidden;
+  }
+
   .bottom-wrapper {
     width: 100%;
     display: flex;
@@ -39,6 +47,8 @@
         &.damage {
           .img-wrapper {
             flex: 0.4;
+            min-width: 20px;
+            min-height: 20px;
           }
         }
 
@@ -50,6 +60,7 @@
 
         .text-wrapper {
           margin-right: 2%;
+          margin-left: 20%;
           font-family: 'ERASBD';
 
           .super-effective {
