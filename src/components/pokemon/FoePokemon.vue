@@ -195,7 +195,7 @@ export default class FoePokemon extends Pokemon {
 
   }
 
-  public playMove(time: number = 1) {
+  public playMove() {
     if(this.fainted) {
       this.$store.dispatch("foeMovePlayed", this.index)
     }
@@ -206,6 +206,7 @@ export default class FoePokemon extends Pokemon {
         effect: this.nextMove,
       })
     }
+    this.canShowIntents = false
   }
 
   public mounted() {
