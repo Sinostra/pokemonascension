@@ -15,9 +15,8 @@
                   </div>
                 </div>
               <div v-if="nextMove['block'] > 0" class="intent-category block">
-                <div class="text-wrapper">{{nextMove['block']}}</div>
                 <div class="img-wrapper">
-                  <img :src="shieldSprite">
+                  <div class="block-text-wrapper">{{nextMove['block']}}</div>
                 </div>
               </div>
             </div>
@@ -99,7 +98,7 @@ export default class FoePokemon extends Pokemon {
   }
 
   get shieldSprite() {
-    return require('@/assets/img/interface/shield.png')
+    return require('@/assets/img/interface/shield4.png')
   }
 
   get nextMove() {

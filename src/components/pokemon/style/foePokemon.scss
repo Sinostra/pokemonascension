@@ -3,7 +3,7 @@
   height: 100%;
 
   .help-tooltip {
-    bottom: 300%;
+    bottom: 400%;
   }
 
   .hidden {
@@ -45,6 +45,7 @@
         filter: drop-shadow(1px 1px 1px black);
 
         &.damage {
+          margin-bottom: 5px;
           .img-wrapper {
             flex: 0.4;
             min-width: 20px;
@@ -53,8 +54,19 @@
         }
 
         &.block {
+          margin-bottom: 5px;
           .img-wrapper {
-            flex: 0.3;
+            width: 1.5vw;
+            height: 1.5vw;
+            background-image: url('../../assets/img/interface/shield4.png');
+            background-size: 100% 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .block-text-wrapper {
+              font-family: 'ERASBD';
+            }
           }
         }
 
