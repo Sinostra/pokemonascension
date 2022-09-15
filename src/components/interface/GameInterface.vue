@@ -2,8 +2,8 @@
     <div class="game-interface" :style="{'background-image':'url(' + getBackground() + ')'}"></div>
     <div class="starter-choice">
         <div class="starters-wrapper">
-            <img class="pokemon-sprite bulba" :src="getStarter('007')">
-            <img class="pokemon-sprite bulba" :src="getStarter('004')">
+            <img class="pokemon-sprite" :src="getStarter('004')">
+            <img class="pokemon-sprite" :src="getStarter('007')">
             <img class="pokemon-sprite bulba" :src="getStarter('001')">
         </div>
     </div>
@@ -53,9 +53,15 @@ export default {
 
     .pokemon-sprite {
         display: block;
+        width: 14%;
+        cursor: pointer;
 
         &.bulba {
-            width: 14%;
+            width: 15%;
+        }
+
+        &:hover {
+            filter: drop-shadow(0 0 0.50rem #f2cd4c) drop-shadow(2px 2px 2px #ffcc00);
         }
     }
 }
