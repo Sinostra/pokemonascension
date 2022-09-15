@@ -59,7 +59,12 @@ export default {
         
         "type": ["fire"],
         "hp": 45,
-        "size": 40
+        "size": 50,
+        "baseStats": {
+            "hp": 45,
+            "attack": 2,
+            "defense": 1
+        }
     },
 
     "005": {
@@ -71,7 +76,12 @@ export default {
         
         "type": ["fire"],
         "hp": 45,
-        "size": 55
+        "size": 75,
+        "baseStats": {
+            "hp": 45,
+            "attack": 2,
+            "defense": 1
+        }
     },
 
     "006": {
@@ -83,7 +93,12 @@ export default {
         
         "type": ["fire", "flying"],
         "hp": 45,
-        "size": 150
+        "size": 200,
+        "baseStats": {
+            "hp": 45,
+            "attack": 2,
+            "defense": 1
+        }
     },
 
     "007": {
@@ -95,7 +110,12 @@ export default {
         
         "type": ["water"],
         "hp": 45,
-        "size": 30
+        "size": 60,
+        "baseStats": {
+            "hp": 45,
+            "attack": 2,
+            "defense": 1
+        }
     },
 
     "008": {
@@ -107,7 +127,12 @@ export default {
         
         "type": ["water"],
         "hp": 45,
-        "size": 30
+        "size": 75,
+        "baseStats": {
+            "hp": 45,
+            "attack": 2,
+            "defense": 1
+        }
     },
 
     "009": {

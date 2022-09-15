@@ -3,14 +3,13 @@
       <div class="size-wrapper" :style="{'width': dataPokemon.size + '%'}" @mouseover="onHover()" @mouseleave="onHover(false)">
         <img class="pokemon-sprite" :src="spritePath">
         <div class="healthBar-infos-wrapper">
-          <div v-if="block">
-            <div class="blockAmount">{{block}}</div>
-            <div class="armorBar" :style="{'width': armorBarPercent + '%'}"></div>
-          </div>
           <div class="healthBar">
             <div class="currentHealth" :class="healthBarClass" :style="{'width': getHealthBarPercent() + '%'}"></div>
             <div class="bottom-infos">
               <div class="healthAmount" :style="getFontSize()">{{currentHealth}} / {{maxHealth}}</div>
+            </div>
+            <div v-if="block" class="block-wrapper">
+              <div class="blockAmount">{{block}}</div>
             </div>
           </div>
         </div>

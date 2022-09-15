@@ -2,7 +2,7 @@ export default {
     state: {
         foeTeam: [
             {
-                id: '017',
+                id: '007',
                 baseStats: {
                     hp: 50,
                     attack: 1,
@@ -11,7 +11,7 @@ export default {
                 patternSetting: {}
             },
             {
-                id: '104',
+                id: '008',
                 baseStats: {
                     hp: 55,
                     attack: 1,

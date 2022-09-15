@@ -72,18 +72,23 @@
 
     }
 
-    .blockAmount {
-      color: #00c9fe;
-      font-family: 'ERASDEMI';
-      filter: drop-shadow(1px 1px 1px black);
+    .block-wrapper {
+      position: absolute;
+      top: 0%;
+      left: 100%;
+      transform: translateY(-30%);
+      width: 1.5vw;
+      height: 1.5vw;
+      background-color: #8c60e8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .blockAmount {
+        color: #fff;
+        font-family: 'ERASDEMI';
+        filter: drop-shadow(1px 1px 1px black);
+      }
     }
-
-    .armorBar {
-      height: 1.5vh;
-      background: #00c9fe;
-      border: 2px solid #000;
-    }
-
   }
 
   .help-tooltip {
