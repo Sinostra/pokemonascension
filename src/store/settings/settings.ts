@@ -1,7 +1,7 @@
 export default {
     state: {
         pokemonSpritesExtension: 'gif',
-        backgroundExtension: '.gif',
+        backgroundExtension: '.jpg',
         baseFontSize: 16,
     },
 }

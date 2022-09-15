@@ -4,7 +4,7 @@
   @click.right.prevent="onRightClick()">
     <Background/>
     <Interface/>
-    <BattleManager/>
+    <!-- <BattleManager/> -->
   </div>
 </template>
 

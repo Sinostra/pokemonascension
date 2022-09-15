@@ -1,6 +1,6 @@
 export default {
     state: {
-        backgroundUsed: 'forest',
+        backgroundUsed: 'starter_background',
         currentEnergy: 3,
         maxEnergy: 3,
         selectedCard: null,
