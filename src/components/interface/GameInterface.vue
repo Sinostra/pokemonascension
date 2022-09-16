@@ -2,33 +2,29 @@
     <div class="game-interface" :style="{'background-image':'url(' + getBackground() + ')'}"></div>
     <div class="starter-choice">
         <div class="starters-wrapper">
-            <img class="pokemon-sprite" :src="getStarter('004')">
-            <img class="pokemon-sprite" :src="getStarter('007')">
-            <img class="pokemon-sprite bulba" :src="getStarter('001')">
+            <DisplayPokemon :id="'004'" :left="5" :width="30"></DisplayPokemon>
+            <DisplayPokemon :id="'007'" :left="45" :width="30"></DisplayPokemon>
+            <DisplayPokemon :id="'001'" :left="80" :width="25"></DisplayPokemon>
         </div>
     </div>
 </template>
 
-<script>
-export default {
-    name: 'GameInterface',
+<script lang="ts">
+import { Options, Vue } from "vue-class-component";
+import DisplayPokemon from "../pokemon/DisplayPokemon.vue"
 
-    data: function() {
-        return {
-
-        }
+@Options({
+  name: "GameInterface",
+    components: {
+        DisplayPokemon
     },
+})
 
-    methods: {
-        getBackground() {
-            return require('./../../assets/img/interface/top_border.jpg')
-        },
-
-        getStarter(id) {
-            return require(`@/assets/img/sprites/${this.$store.state.settings.pokemonSpritesExtension}/${id}.${this.$store.state.settings.pokemonSpritesExtension}`)
-        }
+export default class GameInterface extends Vue {
+    public getBackground() {
+        return require('./../../assets/img/interface/top_border.jpg')
     }
-} 
+}
 </script>
 <style lang="scss" scoped>
 .game-interface {
@@ -46,7 +42,7 @@ export default {
         position: absolute;
         display: flex;
         justify-content: space-evenly;
-        top: 42%;
+        top: 40%;
         transform: translateX(17%);
         width: 75%;
     }
