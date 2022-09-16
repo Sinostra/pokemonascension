@@ -2,9 +2,9 @@
     <div class="game-interface" :style="{'background-image':'url(' + getBackground() + ')'}"></div>
     <div class="starter-choice">
         <div class="starters-wrapper">
-            <DisplayPokemon :id="'004'" :left="5" :width="30"></DisplayPokemon>
-            <DisplayPokemon :id="'007'" :left="45" :width="30"></DisplayPokemon>
-            <DisplayPokemon :id="'001'" :left="80" :width="25"></DisplayPokemon>
+            <DisplayPokemon :id="'004'" :width="100"></DisplayPokemon>
+            <DisplayPokemon :id="'007'" :width="100"></DisplayPokemon>
+            <DisplayPokemon :id="'001'" :width="95"></DisplayPokemon>
         </div>
     </div>
 </template>
@@ -42,8 +42,9 @@ export default class GameInterface extends Vue {
         position: absolute;
         display: flex;
         justify-content: space-evenly;
-        top: 40%;
-        transform: translateX(17%);
+        align-items: flex-end;
+        top: 35%;
+        transform: translateX(19%);
         width: 75%;
     }
 
