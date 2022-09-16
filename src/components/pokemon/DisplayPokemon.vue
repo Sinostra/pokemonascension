@@ -1,7 +1,7 @@
 <template>
     <div class="pokemon-wrapper" :class="wrapperClass" :style="wrapperStyle">
       <div class="size-wrapper" :style="{'width': dataPokemon.size + '%'}" @mouseover="onHover()" @mouseleave="onHover(false)">
-        <img class="pokemon-sprite" :src="spritePath">
+        <img class="pokemon-sprite" :src="spritePath" @click="clickStarter()">
         <div class="help-tooltip">
           <div class="pokemon-data">
             <div class="text">{{dataPokemon['name']['english']}}</div>
@@ -51,6 +51,10 @@ export default class DisplayPokemon extends Pokemon {
     else {
       this.mouseOver = false
     } 
+  }
+
+  public clickStarter() {
+    console.log("You chose " + this.dataPokemon['name']['english'])
   }
 }
 
