@@ -11,7 +11,6 @@ export default [
                 pattern: [
                     {
                         damage: 2,
-                        block: 2,
                         type: 'normal',
                     },
                     {

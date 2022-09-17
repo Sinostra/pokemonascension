@@ -161,7 +161,7 @@ export default class FoePokemon extends Pokemon {
 
   get helpToolTipStyle(): string {
     const multiplier = Object.keys(this.nextMove).filter((key) => key !== "type").length
-    const yTranslate = (50 * multiplier)
+    const yTranslate = (60 * multiplier)
     return `transform: translateX(-50%) translateY(-100%) translateY(-${yTranslate}px)`
   }
 
