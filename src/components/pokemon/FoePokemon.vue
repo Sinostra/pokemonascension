@@ -211,6 +211,7 @@ export default class FoePokemon extends Pokemon {
 
     this.attack = this.baseAttack;
     this.defense = this.baseDefense;
+    this.currentHealth = this.maxHealth
 
     this.$store.subscribeAction((action) => {
       if(action.type === "endPlayerTurn") {

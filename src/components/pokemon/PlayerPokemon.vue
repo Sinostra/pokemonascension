@@ -46,6 +46,7 @@ import Pokemon from "./Pokemon";
 })
 
 export default class PlayerPokemon extends Pokemon {
+
   get playerPosition(): string {
     const currentBackground: string = this.$store.state.battle.backgroundUsed
     return `left: ${this.$store.state.backgrounds.slots[currentBackground]['player']['left']}%; bottom: ${this.$store.state.backgrounds.slots[currentBackground]['player']['bottom']}%;`
@@ -61,6 +62,11 @@ export default class PlayerPokemon extends Pokemon {
   }
 
   public mounted() {
+
+    this.maxHealth = this.dataPokemon.baseStats.hp
+    this.attack = this.dataPokemon.baseStats.attack
+    this.defense = this.dataPokemon.baseStats.defense
+    this.currentHealth = this.maxHealth
 
     this.$store.dispatch("setPlayerAttack", this.attack)
     this.$store.dispatch("setPlayerDefense", this.defense)

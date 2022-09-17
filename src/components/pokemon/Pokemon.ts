@@ -12,9 +12,9 @@ export default class Pokemon extends Vue {
   protected dataPokemon = dataDex[this.id]
 
   protected currentHealth: number = 0;
-  protected maxHealth!: number //= this.dataPokemon.baseStats.hp
-  protected attack!: number //= this.dataPokemon.baseStats.attack
-  protected defense!: number //= this.dataPokemon.baseStats.defense
+  protected maxHealth!: number
+  protected attack!: number
+  protected defense!: number
 
   protected block: number = 0;
 
@@ -191,13 +191,4 @@ export default class Pokemon extends Vue {
   get swordIcon() {
     return require(`@/assets/img/interface/sword.png`)
   }
-
-  public mounted() {
-    console.log(this.dataPokemon)
-    this.maxHealth = this.dataPokemon.baseStats.hp
-    // this.attack = this.dataPokemon.baseStats.attack
-    // this.defense = this.dataPokemon.baseStats.defense
-    // this.currentHealth = this.maxHealth
-  }
-
 }
