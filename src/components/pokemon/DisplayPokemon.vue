@@ -59,10 +59,10 @@ export default class DisplayPokemon extends Pokemon {
       deck: this.dataPokemon['starterDeck'],
       hp: this.dataPokemon['baseStats']['hp'],
     }
-    this.$store.commit("addPokemon", starterData)
-    this.$store.commit("setFoes", this.$store.state.allFoes.dataFoes[0])
+    this.$store.dispatch("addPokemon", starterData)
+    this.$store.dispatch("setFoes", this.$store.state.allFoes.dataFoes[0])
     this.$store.dispatch("changeBackground", 'forest.gif')
-    this.$store.commit("startBattle", "forest")
+    this.$store.dispatch("startBattle", "forest")
   }
 }
 
