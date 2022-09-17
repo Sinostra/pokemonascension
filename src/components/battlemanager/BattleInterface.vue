@@ -97,6 +97,10 @@ export default class BattleInterface extends Vue {
                 else if(this.discardPile.length) {
 
                     this.dumpInto(this.discardPile, this.drawPile)
+                    this.drawPile.sort(() => {
+                        if(Math.random() > 0.5) return -1
+                        else return 1
+                    })
                     this.hand.push(this.drawPile.shift() as string)
                 }
 
@@ -139,6 +143,10 @@ export default class BattleInterface extends Vue {
 
     public refillPlayerDeck() {
         this.drawPile = this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex].deck
+        this.drawPile.sort(() => {
+            if(Math.random() > 0.5) return -1
+            else return 1
+        })
     }
 
     public mounted() {
