@@ -197,7 +197,7 @@ export default {
         
         "type": ["bug"],
         "hp": 45,
-        "size": 30,
+        "size": 50,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -214,7 +214,7 @@ export default {
         
         "type": ["bug"],
         "hp": 45,
-        "size": 30,
+        "size": 50,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -248,7 +248,7 @@ export default {
         
         "type": ["bug", "poison"],
         "hp": 45,
-        "size": 30,
+        "size": 50,
         "baseStats": {
             "hp": 45,
             "attack": 2,

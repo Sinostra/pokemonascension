@@ -301,6 +301,11 @@ export default class BattleManager extends Vue {
     position: absolute;
     width: 100%;
     height: 100%;
+
+    &.rain {
+        background: url('../assets/img/backgrounds/rain.gif');
+        background-size: 20%;
+    }
 }
 
 </style>

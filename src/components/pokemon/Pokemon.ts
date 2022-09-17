@@ -50,31 +50,11 @@ export default class Pokemon extends Vue {
     return Object.keys(allTypes).reduce((recipient, type) => {
       let multiplier = 1
       pokemonTypes.forEach(t => {
-        const currentMultiplier = allTypes[type][t]
-        multiplier *= currentMultiplier
+        multiplier *= allTypes[type][t]
       });
       recipient[type] = multiplier
       return recipient
-    }, {
-      "grass": 1,
-      "fire": 1,
-      "water": 1,
-      "electric": 1,
-      "ground": 1,
-      "rock": 1,
-      "psychic": 1,
-      "ghost": 1,
-      "dark": 1,
-      "fighting": 1,
-      "fairy": 1,
-      "steel": 1,
-      "normal": 1,
-      "flying": 1,
-      "ice": 1,
-      "dragon": 1,
-      "poison": 1,
-      "bug": 1
-    })
+    }, {})
   }
 
   get weaknesses() {
