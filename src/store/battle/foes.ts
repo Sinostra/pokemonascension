@@ -6,7 +6,6 @@ export default {
     mutations: {
         setFoes(state, foes) {
             state.foeTeam = foes
-            console.log(state.foeTeam)
         }
     },
 

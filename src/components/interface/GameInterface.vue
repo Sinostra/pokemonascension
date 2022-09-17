@@ -1,6 +1,6 @@
 <template>
     <div class="game-interface" :style="{'background-image':'url(' + getBackground() + ')'}"></div>
-    <div class="starter-choice">
+    <div class="starter-choice" v-if="!$store.state.battle.isBattleOngoing">
         <div class="starters-wrapper">
             <DisplayPokemon :id="'004'" :width="100"></DisplayPokemon>
             <DisplayPokemon :id="'007'" :width="100"></DisplayPokemon>

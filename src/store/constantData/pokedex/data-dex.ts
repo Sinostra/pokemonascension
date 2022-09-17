@@ -197,7 +197,12 @@ export default {
         
         "type": ["bug"],
         "hp": 45,
-        "size": 30
+        "size": 30,
+        "baseStats": {
+            "hp": 45,
+            "attack": 2,
+            "defense": 1
+        }
     },
 
     "011": {
@@ -209,7 +214,12 @@ export default {
         
         "type": ["bug"],
         "hp": 45,
-        "size": 30
+        "size": 30,
+        "baseStats": {
+            "hp": 45,
+            "attack": 2,
+            "defense": 1
+        }
     },
 
     "012": {
@@ -221,7 +231,12 @@ export default {
         
         "type": ["bug", "flying"],
         "hp": 45,
-        "size": 30
+        "size": 30,
+        "baseStats": {
+            "hp": 45,
+            "attack": 2,
+            "defense": 1
+        }
     },
 
     "013": {
@@ -233,7 +248,12 @@ export default {
         
         "type": ["bug", "poison"],
         "hp": 45,
-        "size": 30
+        "size": 30,
+        "baseStats": {
+            "hp": 45,
+            "attack": 2,
+            "defense": 1
+        }
     },
 
     "014": {
@@ -245,7 +265,12 @@ export default {
         
         "type": ["bug", "poison"],
         "hp": 45,
-        "size": 30
+        "size": 30,
+        "baseStats": {
+            "hp": 45,
+            "attack": 2,
+            "defense": 1
+        }
     },
 
     "015": {
@@ -257,7 +282,12 @@ export default {
         
         "type": ["bug", "poison"],
         "hp": 45,
-        "size": 30
+        "size": 30,
+        "baseStats": {
+            "hp": 45,
+            "attack": 2,
+            "defense": 1
+        }
     },
 
     "016": {

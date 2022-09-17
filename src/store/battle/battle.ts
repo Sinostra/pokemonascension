@@ -8,6 +8,7 @@ export default {
         playerAttack: 0,
         playerDefense: 0,
         typesHover: null,
+        isBattleOngoing: false
     },
     mutations: {
         getEnergy(state, amount: number) {
@@ -57,6 +58,11 @@ export default {
         mouseOver(state, types) {
             state.typesHover = types
         },
+
+        startBattle(state, background) {
+            state.backgroundUsed = background
+            state.isBattleOngoing = true
+        }
     },
     actions: {
 
@@ -105,6 +111,10 @@ export default {
 
         mouseOver(context, types) {
             context.commit("mouseOver", types)
+        },
+
+        startBattle(context, background) {
+            context.commit("startBattle", background)
         },
 
         buffFoeAttack() {},
