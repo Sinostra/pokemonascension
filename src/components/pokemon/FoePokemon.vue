@@ -29,7 +29,7 @@
                 <div class="blockAmount">{{block}}</div>
               </div>
             </div>
-          <div class="help-tooltip">
+          <div class="help-tooltip" :style="helpToolTipStyle">
           <div class="pokemon-data">
             <div class="text">{{dataPokemon['name']['english']}}</div>
             <div class="type" v-for="(type, index) in dataPokemon.type" :key="index">
@@ -75,6 +75,7 @@ import cloneDeep from "lodash.clonedeep"
 })
 
 export default class FoePokemon extends Pokemon {
+
   public index!: number;
   protected maxHealth: number = this.maxHealth
 
@@ -86,6 +87,8 @@ export default class FoePokemon extends Pokemon {
 
   public resolvedPattern = []
   public canShowIntents: boolean = true
+
+  private intentHtml: HTMLElement | null = null
 
   get foePosition(): string {
     const currentBackground: string = this.$store.state.battle.backgroundUsed
@@ -132,7 +135,7 @@ export default class FoePokemon extends Pokemon {
       if(nextMoveDamage < 1) nextMoveDamage = 1
 
       if(!isNaN(nextMoveDamage)) nextMove['damage'] = nextMoveDamage
-    } 
+    }
 
     return nextMove
   }
@@ -143,7 +146,6 @@ export default class FoePokemon extends Pokemon {
       return this.getTypeMatchup(this.nextMove['type'], playerActivePokemonTypes) 
     }
     else return 1
-    
   }
 
   get playerPokemonTypes() {
@@ -155,6 +157,12 @@ export default class FoePokemon extends Pokemon {
     if(this.nextMoveDamageModifier > 1) moveClass = 'super-effective'
     else if(this.nextMoveDamageModifier < 1) moveClass = 'not-very-effective'
     return moveClass
+  }
+
+  get helpToolTipStyle(): string {
+    const multiplier = Object.keys(this.nextMove).filter((key) => key !== "type").length
+    const yTranslate = (50 * multiplier)
+    return `transform: translateX(-50%) translateY(-100%) translateY(-${yTranslate}px)`
   }
 
   public onClick(): void {
