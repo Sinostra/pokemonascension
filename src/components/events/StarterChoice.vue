@@ -26,15 +26,17 @@ export default class GameInterface extends Vue {
 <style lang="scss" scoped>
 .starter-choice {
     position: relative;
+    background: url("../../assets/img/backgrounds/starter_background.jpg");
+    background-size: 100% 100%;
     width: 100%;
-    height: 94%;
+    height: 100%;
 
     .starters-wrapper {
         position: absolute;
         display: flex;
         justify-content: space-evenly;
         align-items: flex-end;
-        top: 35%;
+        top: 37%;
         transform: translateX(19%);
         width: 75%;
     }

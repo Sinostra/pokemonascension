@@ -1,5 +1,5 @@
 <template>
-    <StarterChoice>
+    <StarterChoice/>
 </template>
 
 <script lang="ts">

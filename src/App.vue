@@ -2,8 +2,9 @@
   <div class="global-wrapper"
   :class="getAppClass()"
   @click.right.prevent="onRightClick()">
-    <Background/>
+    <!-- <Background/> -->
     <Interface/>
+    <EventsManager/>
     <BattleManager v-if="$store.state.battle.isBattleOngoing"/>
   </div>
 </template>
@@ -12,13 +13,15 @@
 import { useWindowSize } from 'vue-window-size';
 import Background from './components/Background.vue'
 import BattleManager from './components/BattleManager.vue'
+import EventsManager from './components/EventsManager.vue'
 import Interface from './components/Interface.vue'
 export default {
   name: 'App',
   components: {
     Background,
     BattleManager,
-    Interface
+    EventsManager,
+    Interface,
   },
 
   data:function(){
