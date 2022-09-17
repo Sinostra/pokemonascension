@@ -156,4 +156,40 @@ export default {
         },
         "tooltip": 'At the start of each turn, draw one card',
     },
+    "010": {
+        "name": "vine whip",
+        "category": "attack",
+        "rarity": "common",
+        "cost": 1,
+        "target": true,
+        "effect":{
+            "type": "grass",
+            "damage": 6,
+        },
+        "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy',
+    },
+    "011": {
+        "name": "ember",
+        "category": "attack",
+        "rarity": "common",
+        "cost": 1,
+        "target": true,
+        "effect":{
+            "type": "fire",
+            "damage": 6,
+        },
+        "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy',
+    },
+    "012": {
+        "name": "bubble",
+        "category": "attack",
+        "rarity": "common",
+        "cost": 1,
+        "target": true,
+        "effect":{
+            "type": "water",
+            "damage": 6,
+        },
+        "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy',
+    },
 }
