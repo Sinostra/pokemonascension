@@ -54,7 +54,12 @@ export default class DisplayPokemon extends Pokemon {
   }
 
   public clickStarter() {
-    console.log("You chose " + this.dataPokemon['name']['english'])
+    const starterData = {
+      id: this.id,
+      deck: this.dataPokemon['starterDeck'],
+      hp: this.dataPokemon['baseStats']['hp'],
+    }
+    this.$store.commit("addPokemon", starterData)
   }
 }
 

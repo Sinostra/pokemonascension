@@ -1,46 +1,22 @@
 export default {
     state: {
-        team: {
-            '1': {
-                id: '003',
-                deck: [
-                    '001',
-                    '006',
-                    '007',
-                    '004',
-                    '009',
-                    '005',
-                    '001',
-                    '001',
-                ]
-            },
-
-            '2': {
-                id: '104',
-                deck: [
-                    '005',
-                    '005',
-                    '005',
-                    '005',
-                    '005',
-                    '005',
-                    '005',
-                    '005',
-                ]
-            }
-        },
-
-        activeIndex: '1'
+        team: [],
+        activeIndex: 0
     },
 
     mutations: {
+        addPokemon(state, pokemon) {
+            state.team.push({id: pokemon.id, deck: pokemon.deck, remainingHp: pokemon.hp})
+        },
         switchActivePokemon(state) {
-            if(state.activeIndex == '1') state.activeIndex = '2'
-            else state.activeIndex = '1'
+            
         }
     },
 
     actions: {
+        addPokemon(context, pokemon) {
+            context.commit('addPokemon', pokemon)
+        },
         switchActivePokemon(context) {
             context.commit('switchActivePokemon')
         }
