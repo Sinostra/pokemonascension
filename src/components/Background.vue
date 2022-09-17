@@ -1,5 +1,5 @@
 <template>
-    <div class="background-wrapper" :style="{'background-image':'url(' + getBackgroundUrl() + ')'}"></div>
+    <div v-if="$store.getters.getBackgroundUsed" class="background-wrapper" :style="{'background-image':'url(' + getBackgroundUrl() + ')'}"></div>
 </template>
 
 <script>
@@ -13,7 +13,7 @@ export default {
 
     methods: {
         getBackgroundUrl: function(){
-            return require('./../assets/img/backgrounds/' + this.$store.state.battle.backgroundUsed + this.$store.state.settings.backgroundExtension)
+            return require('@/assets/img/backgrounds/' + this.$store.getters.getBackgroundUsed)
         }
     }
 }

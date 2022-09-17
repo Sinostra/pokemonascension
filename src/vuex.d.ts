@@ -11,7 +11,8 @@ declare module '@vue/runtime-core' {
     settings: any,
     cards: any,
     types: any,
-    allFoes: any
+    allFoes: any,
+    app: any
   }
 
   // provide typings for `this.$store`

@@ -61,6 +61,7 @@ export default class DisplayPokemon extends Pokemon {
     }
     this.$store.commit("addPokemon", starterData)
     this.$store.commit("setFoes", this.$store.state.allFoes.dataFoes[0])
+    this.$store.dispatch("changeBackground", 'forest.gif')
     this.$store.commit("startBattle", "forest")
   }
 }

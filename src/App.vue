@@ -2,9 +2,9 @@
   <div class="global-wrapper"
   :class="getAppClass()"
   @click.right.prevent="onRightClick()">
-    <!-- <Background/> -->
+    <Background/>
     <Interface/>
-    <EventsManager/>
+    <EventsManager v-if="!$store.state.battle.isBattleOngoing"/>
     <BattleManager v-if="$store.state.battle.isBattleOngoing"/>
   </div>
 </template>
@@ -65,6 +65,7 @@ export default {
   mounted:function() {
     window.addEventListener("resize", this.setBaseFontSize);
     window.dispatchEvent(new Event('resize'));
+    this.$store.dispatch("changeBackground", 'starter_background.jpg')
   }
 
 }

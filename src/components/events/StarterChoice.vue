@@ -26,10 +26,9 @@ export default class GameInterface extends Vue {
 <style lang="scss" scoped>
 .starter-choice {
     position: relative;
-    background: url("../../assets/img/backgrounds/starter_background.jpg");
-    background-size: 100% 100%;
     width: 100%;
     height: 100%;
+    z-index: 2;
 
     .starters-wrapper {
         position: absolute;
