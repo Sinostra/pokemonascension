@@ -60,6 +60,7 @@ export default class DisplayPokemon extends Pokemon {
       hp: this.dataPokemon['baseStats']['hp'],
     }
     this.$store.commit("addPokemon", starterData)
+    this.$store.commit("setFoes", this.$store.state.allFoes.dataFoes[0])
   }
 }
 

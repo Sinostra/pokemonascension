@@ -8,7 +8,7 @@
             :maxHealth="pokemon.baseStats.hp"
             :baseAttack="pokemon.baseStats.attack"
             :baseDefense="pokemon.baseStats.defense"
-            :pattern="$store.state.foes.patterns[index]"
+            :pattern="pokemon.patternSetting.pattern"
             :patternSettings="pokemon.patternSetting"
             :index="index"
         >

@@ -7,6 +7,7 @@ import battle from './battle/battle'
 import playerTeam from './battle/playerTeam'
 import foes from './battle/foes'
 import settings from './settings/settings'
+import allFoes from './constantData/foes/allFoes'
 
 export default createStore({
   state: {},
@@ -19,6 +20,7 @@ export default createStore({
     foes,
     settings,
     cards,
-    types
+    types,
+    allFoes
   }
 })
