@@ -62,6 +62,9 @@ export default {
         startBattle(state, background) {
             state.backgroundUsed = background
             state.isBattleOngoing = true
+        },
+        stopBattle(state) {
+            state.isBattleOngoing = false
         }
     },
     actions: {
@@ -115,6 +118,10 @@ export default {
 
         startBattle(context, background) {
             context.commit("startBattle", background)
+        },
+
+        stopBattle(context) {
+            context.commit("stopBattle")
         },
 
         buffFoeAttack() {},

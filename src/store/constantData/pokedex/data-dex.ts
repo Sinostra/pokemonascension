@@ -219,7 +219,7 @@ export default {
         },
         
         "type": ["bug", "flying"],
-        "size": 30,
+        "size": 90,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -251,7 +251,7 @@ export default {
         },
         
         "type": ["bug", "poison"],
-        "size": 30,
+        "size": 50,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -267,7 +267,7 @@ export default {
         },
         
         "type": ["bug", "poison"],
-        "size": 30,
+        "size": 80,
         "baseStats": {
             "hp": 45,
             "attack": 2,

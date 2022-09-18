@@ -291,8 +291,14 @@ export default class BattleManager extends Vue {
             }
 
             if(action.type === "setFoeFainted") {
+                console.log("foe fainted")
                 if(this.$store.getters.getFoeTeam.filter((foe) => !foe.fainted).length === 0) {
+                    console.log("you won")
                     this.currentTurnStepIndex = -1
+                    this.$store.dispatch("stopBattle")
+                    this.$store.dispatch("setFoes", this.$store.state.allFoes.dataFoes[1])
+                    this.$store.dispatch("startBattle", "forest")
+
                 }
             }
 
