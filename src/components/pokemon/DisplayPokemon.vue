@@ -58,6 +58,7 @@ export default class DisplayPokemon extends Pokemon {
       id: this.id,
       deck: this.dataPokemon['starterDeck'],
       hp: this.dataPokemon['baseStats']['hp'],
+      fainted: false,
     }
     this.$store.dispatch("addPokemon", starterData)
     this.$store.dispatch("setFoes", this.$store.state.allFoes.dataFoes[0])

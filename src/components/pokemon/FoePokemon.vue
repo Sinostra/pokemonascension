@@ -215,6 +215,10 @@ export default class FoePokemon extends Pokemon {
     this.canShowIntents = false
   }
 
+  protected faint(): void {
+    this.$store.dispatch("setFoeFainted", this.index)
+  }
+
   public mounted() {
 
     this.attack = this.baseAttack;

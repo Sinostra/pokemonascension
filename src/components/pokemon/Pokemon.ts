@@ -119,6 +119,7 @@ export default class Pokemon extends Vue {
     else {
       this.currentHealth = 0
       this.fainted = true
+      this.faint()
       this.playReturnAnim()
     }
   }
@@ -161,4 +162,6 @@ export default class Pokemon extends Vue {
       this.isPlayingReturnAnim = true
     }
   }
+
+  protected faint(): void {}
 }

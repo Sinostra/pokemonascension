@@ -7,6 +7,7 @@ export default [
                 attack: 1,
                 defense: 1
             },
+            fainted: false,
             patternSetting: {
                 pattern: [
                     {
@@ -26,6 +27,7 @@ export default [
                 attack: 1,
                 defense: 1
             },
+            fainted: false,
             patternSetting: {
                 pattern: [
                     {
@@ -45,6 +47,7 @@ export default [
                 attack: 1,
                 defense: 2
             },
+            fainted: false,
             patternSetting: {
                 pattern: [
                     {
