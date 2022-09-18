@@ -66,7 +66,7 @@ export default class PlayerPokemon extends Pokemon {
     this.maxHealth = this.dataPokemon.baseStats.hp
     this.attack = this.dataPokemon.baseStats.attack
     this.defense = this.dataPokemon.baseStats.defense
-    this.currentHealth = this.maxHealth
+    this.currentHealth = this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex].remainingHp
 
     this.$store.dispatch("setPlayerAttack", this.attack)
     this.$store.dispatch("setPlayerDefense", this.defense)
@@ -86,11 +86,13 @@ export default class PlayerPokemon extends Pokemon {
         }
         else {
           this.takeDamage(action.payload.damage, action.payload.type, action.payload.ignoreBlock)
+          this.$store.dispatch("changeActivePokemonHealth", this.currentHealth)
         }
       }
 
       if(action.type === "heal" && action.payload.user === "player") {
         this.heal(action.payload.amount)
+        this.$store.dispatch("changeActivePokemonHealth", this.currentHealth)
       }
 
       if(action.type === "gainBlock" && action.payload.user === "player") {

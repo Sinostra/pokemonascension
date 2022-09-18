@@ -77,12 +77,6 @@ export default class Pokemon extends Vue {
     }, [] as string[])
   }
 
-  get armorBarPercent() {
-    const armorPercent = (this.block  / this.maxHealth) * 100;
-    if(armorPercent <= 100) return armorPercent
-    else return 100
-  }
-
   getTypeMatchup(attackingType, defendingTypes) {
     const attackMachups = this.$store.state.types.dataTypes[attackingType]
     let multiplier = 1
@@ -166,9 +160,5 @@ export default class Pokemon extends Vue {
     if(!this.isPlayingReturnAnim) {
       this.isPlayingReturnAnim = true
     }
-  }
-
-  get swordIcon() {
-    return require(`@/assets/img/interface/sword.png`)
   }
 }
