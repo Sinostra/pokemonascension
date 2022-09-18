@@ -261,7 +261,6 @@ export default class BattleManager extends Vue {
         }
     }
 
-
     public mounted() {
 
         this.$store.subscribeAction((action) => {
@@ -289,6 +288,16 @@ export default class BattleManager extends Vue {
 
             if(action.type === "playFoeMove") {
                 this.playEffects(action.payload.effect, action.payload.user, "player")
+            }
+
+            if(action.type === "setFoeFainted") {
+                if(this.$store.getters.getFoeTeam.filter((foe) => !foe.fainted).length === 0) {
+                    this.currentTurnStepIndex = -1
+                }
+            }
+
+            if(action.type === "changeActivePokemonHealth" && action.payload === 0) {
+                this.currentTurnStepIndex = -1
             }
 
         })
