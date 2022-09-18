@@ -60,9 +60,5 @@ export default class Background extends Vue {
     background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;
-
-    &.rain {
-        animation: rain 30s linear;
-    }
 }
 </style>
