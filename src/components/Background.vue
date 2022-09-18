@@ -1,21 +1,51 @@
 <template>
-    <div v-if="$store.getters.getBackgroundUsed" class="background-wrapper" :style="{'background-image':'url(' + getBackgroundUrl() + ')'}"></div>
+    <div v-if="$store.getters.getBackgroundUsed" class="background-wrapper" :style="backgroundStyle"></div>
 </template>
 
-<script>
-export default {
-    name: 'Background',
+<script lang="ts">
+import {  Vue } from 'vue-class-component'
 
-    data: function(){
-        return {
-        }
-    },
+export default class Background extends Vue {
 
-    methods: {
-        getBackgroundUrl: function(){
-            return require('@/assets/img/backgrounds/' + this.$store.getters.getBackgroundUsed)
+    private weatherFrame: number = 1
+
+    private weather: string | null = null
+
+    private animWeather() {
+        if(!this.weather) {
+            return
         }
+        if(this.weatherFrame === 3) {
+            this.weatherFrame = 1
+        }
+        else {
+            this.weatherFrame++
+        }
+        setTimeout(() => {
+            this.animWeather()
+        }, 1.5)
     }
+
+    public mounted() {
+        this.animWeather()
+    }
+
+    get backgroundStyle() {
+        const weatherBackground = this.weather ? `url(${this.weatherUrl}),` : ''
+        return `background: ${weatherBackground} url(${this.backgroundUrl}); background-size: cover`
+    }
+
+    get backgroundUrl() {
+        return require('@/assets/img/backgrounds/' + this.$store.getters.getBackgroundUsed) 
+    }
+
+    get weatherUrl() {
+        if(!this.weather) {
+            return
+        }
+        return require(`@/assets/img/backgrounds/weather/${this.weather}/frame_${this.weatherFrame}.png`)
+    }
+
 }
 </script>
 
@@ -27,8 +57,12 @@ export default {
     left: 0;
     top: 0;
     z-index: -1;
-    background-size: 100%;
+    background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;
+
+    &.rain {
+        animation: rain 30s linear;
+    }
 }
 </style>

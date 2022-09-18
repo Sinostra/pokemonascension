@@ -268,8 +268,10 @@ export default class BattleManager extends Vue {
                 this.playCard(this.$store.getters.selectedCard, action.payload)
             }
 
-            if(action.type === "foePokemonHasBeenClicked" && this.$store.state.cards.dataCards[this.$store.getters.selectedCard]['target']) {
-                this.playCard(this.$store.getters.selectedCard, action.payload)
+            if(action.type === "foePokemonHasBeenClicked") {
+                if(this.$store.state.cards.dataCards[this.$store.getters.selectedCard]['target']) {
+                    this.playCard(this.$store.getters.selectedCard, action.payload)
+                }
             }
 
             if(action.type === "drawIsDone") {
@@ -291,15 +293,22 @@ export default class BattleManager extends Vue {
             }
 
             if(action.type === "setFoeFainted") {
-                console.log("foe fainted")
-                if(this.$store.getters.getFoeTeam.filter((foe) => !foe.fainted).length === 0) {
-                    console.log("you won")
-                    this.currentTurnStepIndex = -1
-                    this.$store.dispatch("stopBattle")
-                    this.$store.dispatch("setFoes", this.$store.state.allFoes.dataFoes[1])
-                    this.$store.dispatch("startBattle", "forest")
+                setTimeout(() => {
+                    if(this.$store.getters.getFoeTeam.filter((foe) => !foe.fainted).length === 0) {
+                        this.currentTurnStepIndex = -1
+                        // this.$store.dispatch("stopBattle")
+                        this.$store.dispatch("setFoes", [])
+                        this.$store.dispatch("setFoes", this.$store.state.allFoes.dataFoes[1])
 
-                }
+                        setTimeout(() => {
+                            this.$store.dispatch("setFoes", this.$store.state.allFoes.dataFoes[1])
+                            this.$store.dispatch("refreshFoes")
+                            this.currentTurnStepIndex = 0
+                        }, 1000)
+                    }
+                }, 0)
+                
+                
             }
 
             if(action.type === "changeActivePokemonHealth" && action.payload === 0) {
@@ -318,11 +327,6 @@ export default class BattleManager extends Vue {
     position: absolute;
     width: 100%;
     height: 100%;
-
-    &.rain {
-        background: url('../assets/img/backgrounds/rain.gif');
-        background-size: 20%;
-    }
 }
 
 </style>

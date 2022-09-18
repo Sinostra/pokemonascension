@@ -85,6 +85,7 @@ export default class PlayerPokemon extends Pokemon {
           this.playAttackAnim()
         }
         else {
+          // console.log(`player takes ${action.payload.damage} damage`)
           this.takeDamage(action.payload.damage, action.payload.type, action.payload.ignoreBlock)
           this.$store.dispatch("changeActivePokemonHealth", this.currentHealth)
         }

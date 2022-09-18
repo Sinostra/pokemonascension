@@ -65,6 +65,7 @@ export default {
         },
         stopBattle(state) {
             state.isBattleOngoing = false
+            state.turnCounter = 0
         }
     },
     actions: {
@@ -149,6 +150,8 @@ export default {
         heal() {},
         playFoeMove() {},
         gainBlock() {},
+
+        refreshFoes() {},
     },
     getters: {
         selectedCard: state => {

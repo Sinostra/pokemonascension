@@ -88,8 +88,6 @@ export default class FoePokemon extends Pokemon {
   public resolvedPattern = []
   public canShowIntents: boolean = true
 
-  private intentHtml: HTMLElement | null = null
-
   get foePosition(): string {
     const currentBackground: string = this.$store.state.battle.backgroundUsed
     return `left: ${this.$store.state.backgrounds.slots[currentBackground]['foes'][this.index]['left']}%; bottom: ${this.$store.state.backgrounds.slots[currentBackground]['foes'][this.index]['bottom']}%;`
@@ -264,6 +262,14 @@ export default class FoePokemon extends Pokemon {
 
       if(action.type === "foeTurn" && action.payload === this.index) {
         this.playMove()
+      }
+
+      if(action.type === "refreshFoes") {
+        this.attack = this.baseAttack;
+        this.defense = this.baseDefense;
+        this.currentHealth = this.maxHealth
+        this.isPlayingReturnAnim = false
+        this.$forceUpdate();
       }
     })
   }
