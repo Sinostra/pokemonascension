@@ -202,16 +202,12 @@ export default class FoePokemon extends Pokemon {
   }
 
   public playMove() {
-    if(this.fainted) {
-      this.$store.dispatch("foeMovePlayed", this.index)
-    }
-
-    else {
-      this.$store.dispatch("playFoeMove", {
-        user: this.index,
-        effect: this.nextMove,
-      })
-    }
+     
+    this.$store.dispatch("playFoeMove", {
+      user: this.index,
+      effect: this.nextMove,
+    })
+    
     this.canShowIntents = false
   }
 

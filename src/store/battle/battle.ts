@@ -141,7 +141,6 @@ export default {
         damage() {},
         heal() {},
         playFoeMove() {},
-        foeMovePlayed() {},
         gainBlock() {},
     },
     getters: {

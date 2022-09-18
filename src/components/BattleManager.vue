@@ -33,6 +33,10 @@ export default class BattleManager extends Vue {
     private endOfPlayerTurnEffects: any[] = []
     private endOfFoesTurnEffects: any[] = []
 
+    get firstNotFaintedFoe(): any {
+        return this.$store.getters.getFoeTeam.indexOf(this.$store.getters.getFoeTeam.find((foe) => !foe.fainted))
+    }
+
     //Gère le déroulé du tour
     @Watch("currentTurnStepIndex")
     onTurnStepChange(newValue) {
@@ -56,7 +60,7 @@ export default class BattleManager extends Vue {
             currentEffectsArray = this.endOfPlayerTurnEffects
         }
         else if(this.turnSteps[this.currentTurnStepIndex] === "foesTurn") {
-            this.playFoeTurn(0)
+            this.playFoeTurn(this.firstNotFaintedFoe)
         }
         else if(this.turnSteps[this.currentTurnStepIndex] === "endOfFoesTurnEffects") {
             currentEffectsArray = this.endOfFoesTurnEffects
@@ -230,7 +234,9 @@ export default class BattleManager extends Vue {
         }
 
         if(this.turnSteps[this.currentTurnStepIndex] === "foesTurn") {
-            const nextFoeToPlay = ++user
+
+            const nextIndex = this.$store.getters.getFoeTeam.indexOf(this.$store.getters.getFoeTeam.find((foe) => !foe.fainted && this.$store.getters.getFoeTeam.indexOf(foe) > user))
+            const nextFoeToPlay = nextIndex > 0 ? nextIndex : this.$store.getters.getFoeTeam.length
             setTimeout(() => {
                 this.playFoeTurn(nextFoeToPlay)
             }, 1000)
@@ -283,10 +289,6 @@ export default class BattleManager extends Vue {
 
             if(action.type === "playFoeMove") {
                 this.playEffects(action.payload.effect, action.payload.user, "player")
-            }
-
-            if(action.type === "foeMovePlayed") {
-                setTimeout(() => {this.playFoeTurn(action.payload + 1)}, 1000)            
             }
 
         })
