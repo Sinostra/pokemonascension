@@ -86,6 +86,6 @@ export default class DisplayPokemon extends Pokemon {
 
 .pokemon-sprite {
   display: block;
-  width: 100%;
+  width: 150%;
 }
 </style>

@@ -35,9 +35,9 @@ export default class GameInterface extends Vue {
         display: flex;
         justify-content: space-evenly;
         align-items: flex-end;
-        top: 37%;
-        transform: translateX(19%);
-        width: 75%;
+        top: 32%;
+        transform: translateX(31%);
+        width: 60%;
     }
 
     .pokemon-sprite {
