@@ -114,7 +114,6 @@ export default class BattleManager extends Vue {
 
     private playCard(cardId: string, targetIndex: number | null) {
         this.cardBeingPlayed = this.$store.state.cards.dataCards[cardId]
-        this.$store.dispatch("cardIsPlaying")
         this.emitter.emit("cardIsPlaying")
         this.$store.dispatch("discardCurrentlySelectedCard")
 

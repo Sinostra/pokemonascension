@@ -103,18 +103,20 @@ export default class Hand extends Vue {
         return `transform : rotate(${finalRotate}deg); left: ${finalLeft}%; bottom: ${finalBottom}%;`
     }
 
-    public onCardPlaying() {
-        console.log("event cardIsPlaying received")
+    private onCardPlaying() {
+        this.isCardBeingPlayed = true
+    }
+
+    private oncardDonePlayed() {
+        this.isCardBeingPlayed = false
     }
 
     public mounted() {
 
-        this.$store.subscribeAction((action) => {
-            this.emitter.on("cardIsPlaying", this.onCardPlaying)
+        this.emitter.on("cardIsPlaying", this.onCardPlaying)
+        this.emitter.on("cardDonePlayed", this.oncardDonePlayed)
 
-            if(action.type === "cardIsPlaying") {
-                this.isCardBeingPlayed = true
-            }
+        this.$store.subscribeAction((action) => {
 
             if(action.type === "cardDonePlayed") {
                 this.isCardBeingPlayed = false
@@ -125,6 +127,7 @@ export default class Hand extends Vue {
 
     public beforeUnmount() {
         this.emitter.off("cardIsPlaying", this.onCardPlaying)
+        this.emitter.off("cardDonePlayed", this.oncardDonePlayed)
     }
 }
 

@@ -142,7 +142,6 @@ export default {
 
         cardToBeDrawn() {},
         drawIsDone() {},
-        cardIsPlaying() {},
         cardDonePlayed() {},
 
         damageAllFoes() {},
