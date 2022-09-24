@@ -109,7 +109,7 @@ export default class BattleManager extends Vue {
     private startPlayerTurn() {
         this.$store.commit("startNewTurn")
         this.emitter.emit("startNewTurn")
-        this.$store.dispatch("setEnergy", this.energyPerTurn)
+        this.$store.commit("setEnergy", this.energyPerTurn)
         this.emitter.emit("cardToBeDrawn", this.cardsBeginningTurn)
     }
 
@@ -119,7 +119,7 @@ export default class BattleManager extends Vue {
         this.emitter.emit("discardCurrentlySelectedCard")
 
         setTimeout(() => {
-            this.$store.dispatch("spendEnergy", this.cardBeingPlayed['cost'])
+            this.$store.commit("spendEnergy", this.cardBeingPlayed['cost'])
             this.playEffects(this.cardBeingPlayed.effect, "player", targetIndex)
         }, 0)
     }
@@ -176,27 +176,27 @@ export default class BattleManager extends Vue {
         }
 
         if(effects['buffSelfAttack']) {
-            if(user === "player") this.$store.dispatch("buffPlayerAttack", effects['buffSelfAttack'])
+            if(user === "player") this.$store.commit("buffPlayerAttack", effects['buffSelfAttack'])
             else this.emitter.emit("buffFoeAttack", {user, amount: effects['buffSelfAttack']})
         }
 
         if(effects['buffSelfDefense']) {
-            if(user === "player") this.$store.dispatch("buffPlayerDefense", effects['buffSelfDefense'])
+            if(user === "player") this.$store.commit("buffPlayerDefense", effects['buffSelfDefense'])
             else this.emitter.emit("buffFoeDefense", {user, amount: effects['buffSelfDefense']})
         }
 
         if(effects['debuffAttack']) {
-            if(user !== "player") this.$store.dispatch("deBuffPlayerAttack", effects['debuffAttack'])
+            if(user !== "player") this.$store.commit("deBuffPlayerAttack", effects['debuffAttack'])
             else this.emitter.emit("deBuffFoeAttack", {user, amount: effects['debuffAttack']})
         }
 
         if(effects['debuffDefense']) {
-            if(user !== "player") this.$store.dispatch("deBuffPlayerDefense", effects['debuffDefense'])
+            if(user !== "player") this.$store.commit("deBuffPlayerDefense", effects['debuffDefense'])
             else this.emitter.emit("deBuffFoeDefense", {user, amount: effects['debuffDefense']})
         }
 
         if(effects['energy']) {
-            this.$store.dispatch("getEnergy", effects['energy'])
+            this.$store.commit("getEnergy", effects['energy'])
         }
 
         if(effects['draw']) {
@@ -297,7 +297,7 @@ export default class BattleManager extends Vue {
 
     private onSetFoeFainted() {
         if(this.$store.getters.getFoeTeam.filter((foe) => !foe.fainted).length === 0) {
-            this.$store.dispatch("setFoes", [])
+            this.$store.commit("setFoes", [])
         }
     }
 

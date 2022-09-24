@@ -174,11 +174,11 @@ export default class FoePokemon extends Pokemon {
 
   public onHover(enter: boolean = true): void {
     if(enter) { 
-      this.$store.dispatch("mouseOver", this.dataPokemon['type'])
+      this.$store.commit("mouseOver", this.dataPokemon['type'])
       this.mouseOver = true
     } 
     else {
-      this.$store.dispatch("mouseOver", null)
+      this.$store.commit("mouseOver", null)
       this.mouseOver = false
     } 
   }

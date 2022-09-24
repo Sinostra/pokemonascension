@@ -43,7 +43,7 @@ export default class App extends Vue {
   public mounted() {
     window.addEventListener("resize", this.onResize);
     window.dispatchEvent(new Event('resize'));
-    this.$store.dispatch("changeBackground", 'starter_background.jpg')
+    this.$store.commit("changeBackground", 'starter_background.jpg')
   }
 }
 </script>

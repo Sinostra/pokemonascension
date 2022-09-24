@@ -79,12 +79,12 @@ export default class BattleInterface extends Vue {
     public selectCard(cardIndex): void {
         if(cardIndex !== null){
             this.selectedCardIndex = cardIndex
-            this.$store.dispatch("selectCard", this.hand[cardIndex])
+            this.$store.commit("selectCard", this.hand[cardIndex])
             
         } 
         else {
             this.selectedCardIndex = null
-            this.$store.dispatch("selectCard", null)
+            this.$store.commit("selectCard", null)
         } 
         
     }

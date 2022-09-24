@@ -102,8 +102,8 @@ export default class PlayerPokemon extends Pokemon {
     this.defense = this.dataPokemon.baseStats.defense
     this.currentHealth = this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex].remainingHp
 
-    this.$store.dispatch("setPlayerAttack", this.attack)
-    this.$store.dispatch("setPlayerDefense", this.defense)
+    this.$store.commit("setPlayerAttack", this.attack)
+    this.$store.commit("setPlayerDefense", this.defense)
 
     this.emitter.on("startNewTurn", this.onNewTurn)
     this.emitter.on("damage", this.onDamage)
