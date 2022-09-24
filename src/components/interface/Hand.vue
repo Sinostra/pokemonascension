@@ -15,6 +15,7 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 import Card from '../card/Card.vue'
+import { inject } from 'vue'
 
 @Options({
     name: "Hand",
@@ -32,6 +33,8 @@ export default class Hand extends Vue {
     public selectedCardIndex!: number | null
 
     public isCardBeingPlayed: boolean = false
+
+    private emitter: any = inject('emitter')
 
     public onClick(cardIndex) {
         this.$emit("onCardClicked", cardIndex)
@@ -100,9 +103,15 @@ export default class Hand extends Vue {
         return `transform : rotate(${finalRotate}deg); left: ${finalLeft}%; bottom: ${finalBottom}%;`
     }
 
+    public onCardPlaying() {
+        console.log("event cardIsPlaying received")
+    }
+
     public mounted() {
 
         this.$store.subscribeAction((action) => {
+            this.emitter.on("cardIsPlaying", this.onCardPlaying)
+
             if(action.type === "cardIsPlaying") {
                 this.isCardBeingPlayed = true
             }
@@ -112,6 +121,10 @@ export default class Hand extends Vue {
             }
         })
 
+    }
+
+    public beforeUnmount() {
+        this.emitter.off("cardIsPlaying", this.onCardPlaying)
     }
 }
 

@@ -10,6 +10,7 @@ import BattleScene from './battlemanager/BattleScene.vue'
 import BattleInterface from './battlemanager/BattleInterface.vue'
 import { Options, Vue } from 'vue-class-component'
 import { Watch } from 'vue-property-decorator'
+import { inject } from 'vue'
 
 @Options({
     name: "BattleManager",
@@ -32,6 +33,8 @@ export default class BattleManager extends Vue {
     private startOfPlayerTurnEffects: any[] = []
     private endOfPlayerTurnEffects: any[] = []
     private endOfFoesTurnEffects: any[] = []
+
+    private emitter: any = inject('emitter')
 
     get firstNotFaintedFoe(): any {
         return this.$store.getters.getFoeTeam.indexOf(this.$store.getters.getFoeTeam.find((foe) => !foe.fainted))
@@ -112,6 +115,7 @@ export default class BattleManager extends Vue {
     private playCard(cardId: string, targetIndex: number | null) {
         this.cardBeingPlayed = this.$store.state.cards.dataCards[cardId]
         this.$store.dispatch("cardIsPlaying")
+        this.emitter.emit("cardIsPlaying")
         this.$store.dispatch("discardCurrentlySelectedCard")
 
         setTimeout(() => {
