@@ -274,7 +274,7 @@ export default class FoePokemon extends Pokemon {
   }
 
   private onFoeTurn(payload) {
-    if(payload.user === this.index) {
+    if(payload === this.index) {
       this.playMove()
     }
   }
