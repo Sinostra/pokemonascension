@@ -45,6 +45,7 @@ import PlayCardModal from '../interface/PlayCardModal.vue'
 import DiscardFromSelectManager from '../interface/discard/DiscardFromSelectManager.vue'
 import DiscardFromHandManager from '../interface/discard/DiscardFromHandManager.vue'
 import { Options, Vue } from 'vue-class-component'
+import { inject } from 'vue'
 
 @Options({
     name: "BattleInterface",
@@ -72,6 +73,8 @@ export default class BattleInterface extends Vue {
 
     public discardFromHandManagerContent: string[] = []
     public discardFromSelectManagerContent: string[] = []
+
+    private emitter: any = inject('emitter')
 
     public selectCard(cardIndex): void {
         if(cardIndex !== null){
@@ -149,7 +152,16 @@ export default class BattleInterface extends Vue {
         })
     }
 
+
+    private oncardDonePlayed() {
+        //Au moment où les effets de la carte sont finis, on la met dans la pile de défausse
+        this.dumpInto(this.discardFromSelectManagerContent, this.discardPile)
+    }
+
     public mounted() {
+
+        this.emitter.on("cardDonePlayed", this.oncardDonePlayed)
+
         this.$store.subscribeAction((action) => {
             if(action.type === "cardToBeDrawn") {
                 this.draw(action.payload)
@@ -165,16 +177,15 @@ export default class BattleInterface extends Vue {
                 this.discardFromSelect(cardBeingDiscarded)
             }
 
-            if(action.type === "cardDonePlayed") {
-                //Au moment où les effets de la carte sont finis, on la met dans la pile de défausse
-                this.dumpInto(this.discardFromSelectManagerContent, this.discardPile)
-            }
-
             if(action.type === "playerTurn") {
                 this.canEndTurn = true
             }
         })
         this.refillPlayerDeck()
+    }
+
+    public beforeUnmount() {
+        this.emitter.off("cardDonePlayed", this.oncardDonePlayed)
     }
 
 } 

@@ -233,7 +233,7 @@ export default class BattleManager extends Vue {
 
     private effectEndCallBack(user?) {
         if(this.turnSteps[this.currentTurnStepIndex] === "playerTurn") {
-            this.$store.dispatch("cardDonePlayed")
+            this.emitter.emit("cardDonePlayed")
         }
 
         if(this.turnSteps[this.currentTurnStepIndex] === "foesTurn") {

@@ -112,17 +112,8 @@ export default class Hand extends Vue {
     }
 
     public mounted() {
-
         this.emitter.on("cardIsPlaying", this.onCardPlaying)
         this.emitter.on("cardDonePlayed", this.oncardDonePlayed)
-
-        this.$store.subscribeAction((action) => {
-
-            if(action.type === "cardDonePlayed") {
-                this.isCardBeingPlayed = false
-            }
-        })
-
     }
 
     public beforeUnmount() {
