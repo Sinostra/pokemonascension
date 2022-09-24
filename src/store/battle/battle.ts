@@ -125,28 +125,17 @@ export default {
             context.commit("stopBattle")
         },
 
-        buffFoeAttack() {},
-        buffFoeDefense() {},
-
-        deBuffFoeAttack() {},
-        deBuffFoeDefense() {},
-
         playerTurn() {},
         endPlayerTurn() {},
 
         foePokemonHasBeenClicked() {},
         playCurrentlySelectedCard() {},
         discardCurrentlySelectedCard() {},
-        rightClick() {},
 
-        cardToBeDrawn() {},
         drawIsDone() {},
 
-        damageAllFoes() {},
         damage() {},
-        heal() {},
         playFoeMove() {},
-        gainBlock() {},
     },
     getters: {
         selectedCard: state => {

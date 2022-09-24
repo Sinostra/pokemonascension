@@ -159,14 +159,21 @@ export default class BattleInterface extends Vue {
         this.dumpInto(this.discardFromSelectManagerContent, this.discardPile)
     }
 
+    private oncardToBeDrawn(payload) {
+        this.draw(payload)
+    }
+
+    private onRightClick() {
+        this.selectCard(null)
+    }
+
     public mounted() {
 
         this.emitter.on("cardDonePlayed", this.oncardDonePlayed)
+        this.emitter.on("cardToBeDrawn", this.oncardToBeDrawn)
+        this.emitter.on("rightClick", this.onRightClick)
 
         this.$store.subscribeAction((action) => {
-            if(action.type === "cardToBeDrawn") {
-                this.draw(action.payload)
-            }
 
             if(action.type === "rightClick") {
                 this.selectCard(null)
@@ -187,6 +194,8 @@ export default class BattleInterface extends Vue {
 
     public beforeUnmount() {
         this.emitter.off("cardDonePlayed", this.oncardDonePlayed)
+        this.emitter.off("cardToBeDrawn", this.oncardToBeDrawn)
+        this.emitter.off("rightClick", this.onRightClick)
     }
 
 } 

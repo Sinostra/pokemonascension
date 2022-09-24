@@ -15,6 +15,7 @@ import Background from './components/Background.vue'
 import BattleManager from './components/BattleManager.vue'
 import EventsManager from './components/EventsManager.vue'
 import Interface from './components/Interface.vue'
+import { inject } from 'vue'
 export default {
   name: 'App',
   components: {

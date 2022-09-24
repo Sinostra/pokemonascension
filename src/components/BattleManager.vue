@@ -110,7 +110,7 @@ export default class BattleManager extends Vue {
         this.$store.dispatch("startNewTurn")
         this.emitter.emit("startNewTurn")
         this.$store.dispatch("setEnergy", this.energyPerTurn)
-        this.$store.dispatch("cardToBeDrawn", this.cardsBeginningTurn)
+        this.emitter.emit("cardToBeDrawn", this.cardsBeginningTurn)
     }
 
     private playCard(cardId: string, targetIndex: number | null) {
@@ -132,12 +132,6 @@ export default class BattleManager extends Vue {
             let damage = user === "player" ? effects['damage'] + this.$store.state.battle.playerAttack : effects['damage']
             damage < 0 ? 0 : damage
             if(effects['damageAOE']) {
-                this.$store.dispatch("damageAllFoes", {
-                    damage,
-                    type: effects['type'],
-                    ignoreBlock: effects['ignoreBlock'],
-                })
-
                 this.emitter.emit("damageAllFoes", {
                     damage,
                     type: effects['type'],
@@ -146,14 +140,6 @@ export default class BattleManager extends Vue {
             }
 
             else {
-                this.$store.dispatch("damage", {
-                    damage,
-                    type: effects['type'],
-                    ignoreBlock: effects['ignoreBlock'],
-                    user,
-                    target
-                })
-
                 this.emitter.emit("damage", {
                     damage,
                     type: effects['type'],
@@ -165,13 +151,6 @@ export default class BattleManager extends Vue {
         }
 
         if(effects['selfDamage']) {
-            this.$store.dispatch("damage", {
-                damage: effects['selfDamage'],
-                type: null,
-                ignoreBlock: true,
-                target: user
-            })
-
             this.emitter.emit("damage", {
                 damage: effects['selfDamage'],
                 type: null,
@@ -181,11 +160,6 @@ export default class BattleManager extends Vue {
         }
 
         if(effects['selfHeal']) {
-            this.$store.dispatch("heal", {
-                amount: effects['selfHeal'],
-                user
-            })
-
             this.emitter.emit("heal", {
                 amount: effects['selfHeal'],
                 user
@@ -195,11 +169,6 @@ export default class BattleManager extends Vue {
         if(effects['block']) {
             let amount = user === "player" ? effects['block'] + this.$store.state.battle.playerDefense : effects['block']
             amount < 0 ? 0 : amount
-            this.$store.dispatch("gainBlock", {
-                user,
-                amount
-            })
-
             this.emitter.emit("gainBlock", {
                 amount,
                 user
@@ -231,7 +200,7 @@ export default class BattleManager extends Vue {
         }
 
         if(effects['draw']) {
-            this.$store.dispatch("cardToBeDrawn", effects['draw'])
+            this.emitter.emit("cardToBeDrawn", effects['draw'])
         }
 
         if(effects['addToStartTurn']) {

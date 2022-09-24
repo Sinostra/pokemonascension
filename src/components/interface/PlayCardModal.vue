@@ -14,10 +14,13 @@
 
 <script lang="ts">
 import { Vue } from 'vue-class-component'
+import { inject } from 'vue'
 
 export default class PlayCardModal extends Vue {
+    private emitter: any = inject('emitter')
+
     public onClickCancel(): void {
-        this.$store.dispatch("rightClick")
+        this.emitter.emit("rightClick")
     }
 
     public onClickPlay(): void {
