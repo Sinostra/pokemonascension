@@ -16,9 +16,6 @@ export default {
     },
 
     actions: {
-        setFoeFainted(context, index) {
-            context.commit("setFoeFainted", index)
-        },
         setFoes(context, foes) {
             context.commit("setFoes", foes)
         }

@@ -85,9 +85,6 @@ export default {
         selectCard(context, value) {
             context.commit("selectCard", value)
         },
-        startNewTurn(context) {
-            context.commit("startNewTurn")
-        },
 
         setPlayerAttack(context, amount) {
             context.commit("setPlayerAttack", amount)
@@ -125,16 +122,7 @@ export default {
             context.commit("stopBattle")
         },
 
-        playerTurn() {},
-        endPlayerTurn() {},
-
-        foePokemonHasBeenClicked() {},
-        playCurrentlySelectedCard() {},
-
-        drawIsDone() {},
-
         damage() {},
-        playFoeMove() {},
     },
     getters: {
         selectedCard: state => {

@@ -109,7 +109,7 @@ export default class BattleInterface extends Vue {
 
                 amount --
                 if(amount == 0) {
-                    this.$store.dispatch("drawIsDone")
+                    this.emitter.emit("drawIsDone")
                 }
                 setTimeout(() => {
                     this.draw(amount)
@@ -136,7 +136,6 @@ export default class BattleInterface extends Vue {
             setTimeout(() =>  {
                 this.dumpInto(this.discardFromHandManagerContent, this.discardPile)
                 this.emitter.emit("endPlayerTurn")
-                this.$store.dispatch("endPlayerTurn")
             }, 500)
         }
     }
@@ -169,6 +168,10 @@ export default class BattleInterface extends Vue {
         this.discardFromSelect(cardBeingDiscarded)
     }
 
+    private onPlayerTurn() {
+        this.canEndTurn = true
+    }
+
     private onRightClick() {
         this.selectCard(null)
     }
@@ -178,14 +181,9 @@ export default class BattleInterface extends Vue {
         this.emitter.on("cardDonePlayed", this.oncardDonePlayed)
         this.emitter.on("cardToBeDrawn", this.oncardToBeDrawn)
         this.emitter.on("discardCurrentlySelectedCard", this.onDiscardCurrentlySelectedCard)
+        this.emitter.on("playerTurn", this.onPlayerTurn)
         this.emitter.on("rightClick", this.onRightClick)
 
-        this.$store.subscribeAction((action) => {
-
-            if(action.type === "playerTurn") {
-                this.canEndTurn = true
-            }
-        })
         this.refillPlayerDeck()
     }
 
@@ -193,6 +191,7 @@ export default class BattleInterface extends Vue {
         this.emitter.off("cardDonePlayed", this.oncardDonePlayed)
         this.emitter.off("cardToBeDrawn", this.oncardToBeDrawn)
         this.emitter.off("discardCurrentlySelectedCard", this.onDiscardCurrentlySelectedCard)
+        this.emitter.off("playerTurn", this.onPlayerTurn)
         this.emitter.off("rightClick", this.onRightClick)
     }
 

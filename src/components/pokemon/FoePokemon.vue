@@ -168,7 +168,7 @@ export default class FoePokemon extends Pokemon {
 
   public onClick(): void {
     if(this.$store.getters.selectedCard) {
-      this.$store.dispatch("foePokemonHasBeenClicked", this.index)
+      this.emitter.emit("foePokemonHasBeenClicked", this.index)
     }
   }
 
@@ -203,8 +203,7 @@ export default class FoePokemon extends Pokemon {
   }
 
   public playMove() {
-     
-    this.$store.dispatch("playFoeMove", {
+    this.emitter.emit("playFoeMove", {
       user: this.index,
       effect: this.nextMove,
     })
@@ -213,7 +212,8 @@ export default class FoePokemon extends Pokemon {
   }
 
   protected faint(): void {
-    this.$store.dispatch("setFoeFainted", this.index)
+    this.emitter.emit("setFoeFainted", this.index)
+    this.$store.commit("setFoeFainted", this.index)
   }
 
   private onEndPlayerTurn() {

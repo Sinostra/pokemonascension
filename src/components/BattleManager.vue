@@ -57,7 +57,7 @@ export default class BattleManager extends Vue {
             currentEffectsArray = this.startOfPlayerTurnEffects
         }
         else if(this.turnSteps[this.currentTurnStepIndex] === "playerTurn") {
-            this.$store.dispatch("playerTurn")
+            this.emitter.emit("playerTurn")
         }
         else if(this.turnSteps[this.currentTurnStepIndex] === "endOfPlayerTurnEffects") {
             currentEffectsArray = this.endOfPlayerTurnEffects
@@ -107,7 +107,7 @@ export default class BattleManager extends Vue {
     /* Séquence d'un tour : Début du tour => pioche du joueur => effets de début de tour => le joueur joue son tour => effets de fin de tour => tour des ennemis */
 
     private startPlayerTurn() {
-        this.$store.dispatch("startNewTurn")
+        this.$store.commit("startNewTurn")
         this.emitter.emit("startNewTurn")
         this.$store.dispatch("setEnergy", this.energyPerTurn)
         this.emitter.emit("cardToBeDrawn", this.cardsBeginningTurn)
@@ -267,57 +267,59 @@ export default class BattleManager extends Vue {
         }
     }
 
+    private onPlayCurrentlySelectedCard(payload) {
+        this.playCard(this.$store.getters.selectedCard, payload)
+    }
+
+    private onFoePokemonHasBeenClicked(payload) {
+        if(this.$store.state.cards.dataCards[this.$store.getters.selectedCard]['target']) {
+            this.playCard(this.$store.getters.selectedCard, payload)
+        }
+    }
+
+    private onDrawIsDone() {
+        if(this.turnSteps[this.currentTurnStepIndex] === "playerDraw") {
+            this.currentTurnStepIndex++
+        }
+
+        else {
+            this.effectEndCallBack()
+        }
+    }
+
+    private onEndPlayerTurn() {
+        setTimeout(() => {this.currentTurnStepIndex++}, 1000)
+    }
+
+    private onPlayFoeMove(payload) {
+        this.playEffects(payload.effect, payload.user, "player")
+    }
+
+    private onSetFoeFainted() {
+        if(this.$store.getters.getFoeTeam.filter((foe) => !foe.fainted).length === 0) {
+            this.$store.dispatch("setFoes", [])
+        }
+    }
+
     public mounted() {
 
-        this.$store.subscribeAction((action) => {
-            if(action.type === "playCurrentlySelectedCard") {
-                this.playCard(this.$store.getters.selectedCard, action.payload)
-            }
+        this.emitter.on("playCurrentlySelectedCard", this.onPlayCurrentlySelectedCard)
+        this.emitter.on("foePokemonHasBeenClicked", this.onFoePokemonHasBeenClicked)
+        this.emitter.on("drawIsDone", this.onDrawIsDone)
+        this.emitter.on("endPlayerTurn", this.onEndPlayerTurn)
+        this.emitter.on("playFoeMove", this.onPlayFoeMove)
+        this.emitter.on("setFoeFainted", this.onSetFoeFainted)
 
-            if(action.type === "foePokemonHasBeenClicked") {
-                if(this.$store.state.cards.dataCards[this.$store.getters.selectedCard]['target']) {
-                    this.playCard(this.$store.getters.selectedCard, action.payload)
-                }
-            }
-
-            if(action.type === "drawIsDone") {
-                if(this.turnSteps[this.currentTurnStepIndex] === "playerDraw") {
-                    this.currentTurnStepIndex++
-                }
-
-                else {
-                    this.effectEndCallBack()
-                }
-            }
-
-            if(action.type === "endPlayerTurn") {
-                setTimeout(() => {this.currentTurnStepIndex++}, 1000)
-            }
-
-            if(action.type === "playFoeMove") {
-                this.playEffects(action.payload.effect, action.payload.user, "player")
-            }
-
-            if(action.type === "setFoeFainted") {
-                setTimeout(() => {
-                    if(this.$store.getters.getFoeTeam.filter((foe) => !foe.fainted).length === 0) {
-                        this.currentTurnStepIndex = -1
-                        // this.$store.dispatch("stopBattle")
-                        this.$store.dispatch("setFoes", [])
-                        this.$store.dispatch("setFoes", this.$store.state.allFoes.dataFoes[1])
-
-                        setTimeout(() => {
-                            this.$store.dispatch("setFoes", this.$store.state.allFoes.dataFoes[1])
-                            this.currentTurnStepIndex = 0
-                        }, 1000)
-                    }
-                }, 0)
-                
-                
-            }
-
-        })
         this.currentTurnStepIndex++
+    }
+
+    public beforeUnmount() {
+        this.emitter.off("playCurrentlySelectedCard", this.onPlayCurrentlySelectedCard)
+        this.emitter.off("foePokemonHasBeenClicked", this.onFoePokemonHasBeenClicked)
+        this.emitter.off("drawIsDone", this.onDrawIsDone)
+        this.emitter.off("endPlayerTurn", this.onEndPlayerTurn)
+        this.emitter.off("playFoeMove", this.onPlayFoeMove)
+        this.emitter.off("setFoeFainted", this.onSetFoeFainted)
     }
 
 }

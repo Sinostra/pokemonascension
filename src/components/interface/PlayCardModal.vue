@@ -24,7 +24,7 @@ export default class PlayCardModal extends Vue {
     }
 
     public onClickPlay(): void {
-        this.$store.dispatch("playCurrentlySelectedCard", null)
+        this.emitter.emit("playCurrentlySelectedCard", null)
     }
 }
 </script>
