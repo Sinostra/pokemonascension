@@ -61,6 +61,7 @@ import { Options } from "vue-class-component";
 import Pokemon from "./Pokemon";
 import suffleArray from "@/engine/Shuffle";
 import cloneDeep from "lodash.clonedeep"
+import { inject } from 'vue'
 
 @Options({
   name: "FoePokemon",
@@ -87,6 +88,8 @@ export default class FoePokemon extends Pokemon {
 
   public resolvedPattern = []
   public canShowIntents: boolean = true
+
+  private emitter: any = inject('emitter')
 
   get foePosition(): string {
     const currentBackground: string = this.$store.state.battle.backgroundUsed

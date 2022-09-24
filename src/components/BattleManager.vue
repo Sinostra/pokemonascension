@@ -108,6 +108,7 @@ export default class BattleManager extends Vue {
 
     private startPlayerTurn() {
         this.$store.dispatch("startNewTurn")
+        this.emitter.emit("startNewTurn")
         this.$store.dispatch("setEnergy", this.energyPerTurn)
         this.$store.dispatch("cardToBeDrawn", this.cardsBeginningTurn)
     }
@@ -136,19 +137,42 @@ export default class BattleManager extends Vue {
                     type: effects['type'],
                     ignoreBlock: effects['ignoreBlock'],
                 })
+
+                this.emitter.emit("damageAllFoes", {
+                    damage,
+                    type: effects['type'],
+                    ignoreBlock: effects['ignoreBlock'],
+                })
             }
 
-            else this.$store.dispatch("damage", {
-                damage,
-                type: effects['type'],
-                ignoreBlock: effects['ignoreBlock'],
-                user,
-                target
-            })
+            else {
+                this.$store.dispatch("damage", {
+                    damage,
+                    type: effects['type'],
+                    ignoreBlock: effects['ignoreBlock'],
+                    user,
+                    target
+                })
+
+                this.emitter.emit("damage", {
+                    damage,
+                    type: effects['type'],
+                    ignoreBlock: effects['ignoreBlock'],
+                    user,
+                    target
+                })
+            } 
         }
 
         if(effects['selfDamage']) {
             this.$store.dispatch("damage", {
+                damage: effects['selfDamage'],
+                type: null,
+                ignoreBlock: true,
+                target: user
+            })
+
+            this.emitter.emit("damage", {
                 damage: effects['selfDamage'],
                 type: null,
                 ignoreBlock: true,
@@ -161,6 +185,11 @@ export default class BattleManager extends Vue {
                 amount: effects['selfHeal'],
                 user
             })
+
+            this.emitter.emit("heal", {
+                amount: effects['selfHeal'],
+                user
+            })
         }
 
         if(effects['block']) {
@@ -169,6 +198,11 @@ export default class BattleManager extends Vue {
             this.$store.dispatch("gainBlock", {
                 user,
                 amount
+            })
+
+            this.emitter.emit("gainBlock", {
+                amount,
+                user
             })
         }
 
@@ -312,10 +346,6 @@ export default class BattleManager extends Vue {
                 }, 0)
                 
                 
-            }
-
-            if(action.type === "changeActivePokemonHealth" && action.payload === 0) {
-                this.currentTurnStepIndex = -1
             }
 
         })

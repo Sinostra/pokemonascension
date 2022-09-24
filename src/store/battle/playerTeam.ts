@@ -26,9 +26,6 @@ export default {
         addPokemon(context, pokemon) {
             context.commit('addPokemon', pokemon)
         },
-        changeActivePokemonHealth(context, hp) {
-            context.commit('changeActivePokemonHealth', hp)
-        },
         switchActivePokemon(context) {
             context.commit('switchActivePokemon')
         }

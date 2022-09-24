@@ -40,12 +40,15 @@
 <script lang="ts">
 import { Options } from "vue-class-component";
 import Pokemon from "./Pokemon";
+import { inject } from 'vue'
 
 @Options({
   name: "PlayerPokemon",
 })
 
 export default class PlayerPokemon extends Pokemon {
+
+  private emitter: any = inject('emitter')
 
   get playerPosition(): string {
     const currentBackground: string = this.$store.state.battle.backgroundUsed
@@ -61,6 +64,37 @@ export default class PlayerPokemon extends Pokemon {
     } 
   }
 
+  private onNewTurn() {
+    this.setBlock(0)
+  }
+
+  private onDamage(payload) {
+    if(payload.target !== "player" && payload.target !== null) {
+      this.playAttackAnim()
+    }
+    else {
+      this.takeDamage(payload.damage, payload.type, payload.ignoreBlock)
+      this.$store.commit("changeActivePokemonHealth", this.currentHealth)
+    }
+  }
+
+  private onDamageAllFoes() {
+    this.playAttackAnim()
+  }
+
+  private onHeal(payload) {
+    if(payload.user === "player") {
+      this.heal(payload.amount)
+      this.$store.commit("changeActivePokemonHealth", this.currentHealth)
+    }
+  }
+
+  private onGainBlock(payload) {
+    if(payload.user === "player") {
+      this.gainBlock(payload.amount)
+    }
+  }
+
   public mounted() {
 
     this.maxHealth = this.dataPokemon.baseStats.hp
@@ -71,35 +105,19 @@ export default class PlayerPokemon extends Pokemon {
     this.$store.dispatch("setPlayerAttack", this.attack)
     this.$store.dispatch("setPlayerDefense", this.defense)
 
-    this.$store.subscribeAction((action) => {
-      if(action.type === "startNewTurn") {
-        this.setBlock(0)
-      }
+    this.emitter.on("startNewTurn", this.onNewTurn)
+    this.emitter.on("damage", this.onDamage)
+    this.emitter.on("damageAllFoes", this.onDamageAllFoes)
+    this.emitter.on("heal", this.onHeal)
+    this.emitter.on("gainBlock", this.onGainBlock)
+  }
 
-      if(action.type === "damageAllFoes") {
-        this.playAttackAnim()
-      }
-
-      if(action.type === "damage") {
-        if(action.payload.target !== "player" && action.payload.target !== null) {
-          this.playAttackAnim()
-        }
-        else {
-          // console.log(`player takes ${action.payload.damage} damage`)
-          this.takeDamage(action.payload.damage, action.payload.type, action.payload.ignoreBlock)
-          this.$store.dispatch("changeActivePokemonHealth", this.currentHealth)
-        }
-      }
-
-      if(action.type === "heal" && action.payload.user === "player") {
-        this.heal(action.payload.amount)
-        this.$store.dispatch("changeActivePokemonHealth", this.currentHealth)
-      }
-
-      if(action.type === "gainBlock" && action.payload.user === "player") {
-        this.gainBlock(action.payload.amount)
-      }
-    })
+  public beforeUnmount() {
+    this.emitter.off("startNewTurn", this.onNewTurn)
+    this.emitter.off("damage", this.onDamage)
+    this.emitter.off("damageAllFoes", this.onDamageAllFoes)
+    this.emitter.off("heal", this.onHeal)
+    this.emitter.off("gainBlock", this.onGainBlock)
   }
 }
 

@@ -9,7 +9,7 @@ export default class Background extends Vue {
 
     private weatherFrame: number = 1
 
-    private weather: string | null = 'rain'
+    private weather: string | null = null
 
     private animWeather() {
         if(!this.weather) {
