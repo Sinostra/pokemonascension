@@ -68,62 +68,6 @@ export default {
             state.turnCounter = 0
         }
     },
-    actions: {
-
-        getEnergy(context, amount: number) {
-            context.commit("getEnergy", amount)
-        },
-
-        spendEnergy(context, amount: number) {
-            context.commit("spendEnergy", amount)
-        },
-
-        setEnergy(context, amount: number) {
-            context.commit("setEnergy", amount)
-        },
-
-        selectCard(context, value) {
-            context.commit("selectCard", value)
-        },
-
-        setPlayerAttack(context, amount) {
-            context.commit("setPlayerAttack", amount)
-        },
-
-        setPlayerDefense(context, amount) {
-            context.commit("setPlayerDefense", amount)
-        },
-
-        buffPlayerAttack(context, amount) {
-            context.commit("buffPlayerAttack", amount)
-        },
-
-        buffPlayerDefense(context, amount) {
-            context.commit("buffPlayerDefense", amount)
-        },
-
-        deBuffPlayerAttack(context, amount) {
-            context.commit("deBuffPlayerAttack", amount)
-        },
-
-        deBuffPlayerDefense(context, amount) {
-            context.commit("deBuffPlayerDefense", amount)
-        },
-
-        mouseOver(context, types) {
-            context.commit("mouseOver", types)
-        },
-
-        startBattle(context, background) {
-            context.commit("startBattle", background)
-        },
-
-        stopBattle(context) {
-            context.commit("stopBattle")
-        },
-
-        damage() {},
-    },
     getters: {
         selectedCard: state => {
             return state.selectedCard

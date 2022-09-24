@@ -15,12 +15,6 @@ export default {
         }
     },
 
-    actions: {
-        setFoes(context, foes) {
-            context.commit("setFoes", foes)
-        }
-    },
-
     getters: {
         getFoeTeam: state => {
             return state.foeTeam

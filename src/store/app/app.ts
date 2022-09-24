@@ -9,12 +9,6 @@ export default {
         }
     },
 
-    actions: {
-        changeBackground(context, background) {
-            context.commit("changeBackground", background)
-        }
-    },
-
     getters: {
         getBackgroundUsed: state => {
             return state.backgroundUsed

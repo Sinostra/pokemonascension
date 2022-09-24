@@ -22,15 +22,6 @@ export default {
         }
     },
 
-    actions: {
-        addPokemon(context, pokemon) {
-            context.commit('addPokemon', pokemon)
-        },
-        switchActivePokemon(context) {
-            context.commit('switchActivePokemon')
-        }
-    },
-
     getters: {
         getActiveIndex: state => {
             return state.activeIndex
