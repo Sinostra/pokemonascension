@@ -1,6 +1,6 @@
 <template>
   <div class="global-wrapper"
-  :class="getAppClass()"
+  :class="appClass"
   @click.right.prevent="onRightClick()">
     <Background/>
     <Interface/>
@@ -9,66 +9,42 @@
   </div>
 </template>
 
-<script>
-import { useWindowSize } from 'vue-window-size';
+<script lang="ts">
+import { Options, Vue } from 'vue-class-component'
 import Background from './components/Background.vue'
 import BattleManager from './components/BattleManager.vue'
 import EventsManager from './components/EventsManager.vue'
 import Interface from './components/Interface.vue'
 import { inject } from 'vue'
-export default {
-  name: 'App',
-  components: {
-    Background,
-    BattleManager,
-    EventsManager,
-    Interface,
-  },
 
-  data:function(){
-    return {
-      wrapperWidth: null,
+@Options({
+    name: "BattleInterface",
+    components: {
+        Background,
+        BattleManager,
+        EventsManager,
+        Interface
     }
-  },
+})
 
-  methods: {
-    getAppClass: function(){
-      if(this.windowWidth > 1.8 * this.windowHeight) return 'height-mesure'
-      else return 'width-mesure'
-    },
+export default class App extends Vue {
+  public appClass = "width-mesure"
+  private emitter: any = inject('emitter')
 
-    setBaseFontSize: function() {
-      // this.$store.dispatch('changebaseFontSize', document.querySelector('.global-wrapper').offsetWidth / 100)
-    },
+  public onResize() {
+    if(window.innerWidth > 1.8 * window.innerHeight) this.appClass = 'height-mesure'
+    else this.appClass = 'width-mesure'
+  }
 
-    updateMouseCoordinates(event) {
-      // this.$store.dispatch('updateMousePositionX', event['x'])
-      // this.$store.dispatch('updateMousePositionY', event['y'])
-    },
+  public onRightClick() {
+    this.emitter.emit("rightClick")
+  }
 
-    onRightClick() {
-      this.$store.dispatch("rightClick")
-    },
-
-    onLeftClick() {
-      this.$store.dispatch("leftClick")
-    }
-  },
-
-  setup() {
-    const { width, height } = useWindowSize();
-    return {
-      windowWidth: width,
-      windowHeight: height,
-    };
-  },
-
-  mounted:function() {
-    window.addEventListener("resize", this.setBaseFontSize);
+  public mounted() {
+    window.addEventListener("resize", this.onResize);
     window.dispatchEvent(new Event('resize'));
     this.$store.dispatch("changeBackground", 'starter_background.jpg')
   }
-
 }
 </script>
 

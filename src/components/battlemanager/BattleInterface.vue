@@ -175,10 +175,6 @@ export default class BattleInterface extends Vue {
 
         this.$store.subscribeAction((action) => {
 
-            if(action.type === "rightClick") {
-                this.selectCard(null)
-            }
-
             if(action.type === "discardCurrentlySelectedCard") {
                 const cardBeingDiscarded = this.selectedCardIndex
                 this.selectCard(null)
