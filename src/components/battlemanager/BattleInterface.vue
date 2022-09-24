@@ -135,6 +135,7 @@ export default class BattleInterface extends Vue {
             this.dumpInto(this.hand, this.discardFromHandManagerContent)
             setTimeout(() =>  {
                 this.dumpInto(this.discardFromHandManagerContent, this.discardPile)
+                this.emitter.emit("endPlayerTurn")
                 this.$store.dispatch("endPlayerTurn")
             }, 500)
         }

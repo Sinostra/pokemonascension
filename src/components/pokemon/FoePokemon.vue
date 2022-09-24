@@ -216,57 +216,100 @@ export default class FoePokemon extends Pokemon {
     this.$store.dispatch("setFoeFainted", this.index)
   }
 
+  private onEndPlayerTurn() {
+    this.setBlock(0)
+  }
+
+  private onNewTurn() {
+    this.canShowIntents = true
+  }
+
+  private onDamage(payload) {
+    if(payload.target === this.index) {
+      this.takeDamage(payload.damage, payload.type, payload.ignoreBlock)
+    }
+    if(payload.user === this.index) {
+      this.playAttackAnim()
+    }
+  }
+
+  private onDamageAllFoes(payload) {
+    this.takeDamage(payload.damage, payload.type, payload.ignoreBlock)
+  }
+
+  private onHeal(payload) {
+    if(payload.user === this.index) {
+      this.heal(payload.amount)
+    }
+  }
+
+  private onGainBlock(payload) {
+    if(payload.user === this.index) {
+      this.gainBlock(payload.amount)
+    }
+  }
+
+  private onBuffFoeAttack(payload) {
+    if(payload.user === this.index) {
+      this.attack += payload.amount
+    }
+  }
+
+  private onBuffFoeDefense(payload) {
+    if(payload.user === this.index) {
+      this.defense += payload.amount
+    }
+  }
+
+  private onDeBuffFoeAttack(payload) {
+    if(payload.user === this.index) {
+      this.attack -= payload.amount
+    }
+  }
+
+  private onDeBuffFoeDefense(payload) {
+    if(payload.user === this.index) {
+      this.defense -= payload.amount
+    }
+  }
+
+  private onFoeTurn(payload) {
+    if(payload.user === this.index) {
+      this.playMove()
+    }
+  }
+
   public mounted() {
 
     this.attack = this.baseAttack;
     this.defense = this.baseDefense;
     this.currentHealth = this.maxHealth
 
-    this.$store.subscribeAction((action) => {
-      if(action.type === "endPlayerTurn") {
-        this.setBlock(0)
-      }
+    this.emitter.on("endPlayerTurn", this.onEndPlayerTurn)
+    this.emitter.on("startNewTurn", this.onNewTurn)
+    this.emitter.on("damage", this.onDamage)
+    this.emitter.on("damageAllFoes", this.onDamageAllFoes)
+    this.emitter.on("heal", this.onHeal)
+    this.emitter.on("gainBlock", this.onGainBlock)
+    this.emitter.on("buffFoeAttack", this.onBuffFoeAttack)
+    this.emitter.on("buffFoeDefense", this.onBuffFoeDefense)
+    this.emitter.on("deBuffFoeAttack", this.onDeBuffFoeAttack)
+    this.emitter.on("deBuffFoeDefense", this.onDeBuffFoeDefense)
+    this.emitter.on("foeTurn", this.onFoeTurn)
+  }
 
-      if(action.type === "startNewTurn") {
-        this.canShowIntents = true
-      }
-
-      if((action.type === "damage" && action.payload.target === this.index) || action.type === "damageAllFoes") {
-        this.takeDamage(action.payload.damage, action.payload.type, action.payload.ignoreBlock)
-      }
-
-      if(action.type === "damage" && action.payload.user === this.index) {
-        this.playAttackAnim()
-      }
-
-      if(action.type === "heal" && action.payload.user === this.index) {
-        this.heal(action.payload.amount)
-      }
-
-      if(action.type === "gainBlock" && action.payload.user === this.index) {
-        this.gainBlock(action.payload.amount)
-      }
-
-      if(action.type === "buffFoeAttack" && action.payload.user === this.index) {
-        this.attack += action.payload.amount
-      }
-
-      if(action.type === "buffFoeDefense" && action.payload.user === this.index) {
-        this.defense += action.payload.amount
-      }
-
-      if((action.type === "deBuffFoeAttack" && action.payload.target === this.index) || action.type === "deBuffAllFoesAttack") {
-        this.attack -= action.payload.amount
-      }
-
-      if((action.type === "deBuffFoeDefense" && action.payload.target === this.index) || action.type === "deBuffAllFoesDefense") {
-        this.defense -= action.payload.amount
-      }
-
-      if(action.type === "foeTurn" && action.payload === this.index) {
-        this.playMove()
-      }
-    })
+  public beforeUnmount() {
+    this.emitter.off("endPlayerTurn", this.onEndPlayerTurn)
+    this.emitter.off("startNewTurn", this.onNewTurn)
+    this.emitter.off("damage", this.onDamage)
+    this.emitter.off("damageAllFoes", this.onDamageAllFoes)
+    this.emitter.off("heal", this.onHeal)
+    this.emitter.off("gainBlock", this.onGainBlock)
+    this.emitter.off("buffFoeAttack", this.onBuffFoeAttack)
+    this.emitter.off("buffFoeDefense", this.onBuffFoeDefense)
+    this.emitter.off("deBuffFoeAttack", this.onDeBuffFoeAttack)
+    this.emitter.off("deBuffFoeDefense", this.onDeBuffFoeDefense)
+    this.emitter.off("foeTurn", this.onFoeTurn)
   }
 }
 

@@ -208,22 +208,22 @@ export default class BattleManager extends Vue {
 
         if(effects['buffSelfAttack']) {
             if(user === "player") this.$store.dispatch("buffPlayerAttack", effects['buffSelfAttack'])
-            else this.$store.dispatch("buffFoeAttack", {user, amount: effects['buffSelfAttack']})
+            else this.emitter.emit("buffFoeAttack", {user, amount: effects['buffSelfAttack']})
         }
 
         if(effects['buffSelfDefense']) {
             if(user === "player") this.$store.dispatch("buffPlayerDefense", effects['buffSelfDefense'])
-            else this.$store.dispatch("buffFoeDefense", {user, amount: effects['buffSelfDefense']})
+            else this.emitter.emit("buffFoeDefense", {user, amount: effects['buffSelfDefense']})
         }
 
         if(effects['debuffAttack']) {
             if(user !== "player") this.$store.dispatch("deBuffPlayerAttack", effects['debuffAttack'])
-            else this.$store.dispatch("deBuffFoeAttack", {target, amount: effects['debuffAttack']})
+            else this.emitter.emit("deBuffFoeAttack", {user, amount: effects['debuffAttack']})
         }
 
         if(effects['debuffDefense']) {
             if(user !== "player") this.$store.dispatch("deBuffPlayerDefense", effects['debuffDefense'])
-            else this.$store.dispatch("deBuffFoeDefense", {target, amount: effects['debuffDefense']})
+            else this.emitter.emit("deBuffFoeDefense", {user, amount: effects['debuffDefense']})
         }
 
         if(effects['energy']) {
@@ -290,7 +290,7 @@ export default class BattleManager extends Vue {
 
     private playFoeTurn(index) {
         if(index < this.$store.state.foes.foeTeam.length) {
-            this.$store.dispatch("foeTurn", index)
+            this.emitter.emit("foeTurn", index)
         }
 
         else {

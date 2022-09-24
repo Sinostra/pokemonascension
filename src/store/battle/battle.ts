@@ -133,7 +133,6 @@ export default {
 
         playerTurn() {},
         endPlayerTurn() {},
-        foeTurn() {},
 
         foePokemonHasBeenClicked() {},
         playCurrentlySelectedCard() {},
