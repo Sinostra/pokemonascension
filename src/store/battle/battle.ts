@@ -148,8 +148,6 @@ export default {
         heal() {},
         playFoeMove() {},
         gainBlock() {},
-
-        refreshFoes() {},
     },
     getters: {
         selectedCard: state => {

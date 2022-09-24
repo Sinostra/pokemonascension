@@ -339,7 +339,6 @@ export default class BattleManager extends Vue {
 
                         setTimeout(() => {
                             this.$store.dispatch("setFoes", this.$store.state.allFoes.dataFoes[1])
-                            this.$store.dispatch("refreshFoes")
                             this.currentTurnStepIndex = 0
                         }, 1000)
                     }

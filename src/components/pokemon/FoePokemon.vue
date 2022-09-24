@@ -266,14 +266,6 @@ export default class FoePokemon extends Pokemon {
       if(action.type === "foeTurn" && action.payload === this.index) {
         this.playMove()
       }
-
-      if(action.type === "refreshFoes") {
-        this.attack = this.baseAttack;
-        this.defense = this.baseDefense;
-        this.currentHealth = this.maxHealth
-        this.isPlayingReturnAnim = false
-        this.$forceUpdate();
-      }
     })
   }
 }
