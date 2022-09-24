@@ -130,7 +130,6 @@ export default {
 
         foePokemonHasBeenClicked() {},
         playCurrentlySelectedCard() {},
-        discardCurrentlySelectedCard() {},
 
         drawIsDone() {},
 
