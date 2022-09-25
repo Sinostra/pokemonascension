@@ -19,5 +19,9 @@ export default {
         getFoeTeam: state => {
             return state.foeTeam
         },
+
+        getNotFaintedFoes: state => {
+            return state.foeTeam.filter((foe) => !foe.fainted)
+        }
     }
 }

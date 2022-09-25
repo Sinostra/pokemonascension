@@ -212,8 +212,8 @@ export default class FoePokemon extends Pokemon {
   }
 
   protected faint(): void {
-    this.emitter.emit("setFoeFainted", this.index)
     this.$store.commit("setFoeFainted", this.index)
+    this.emitter.emit("setFoeFainted", this.index)
   }
 
   private onEndPlayerTurn() {
@@ -281,9 +281,12 @@ export default class FoePokemon extends Pokemon {
 
   public mounted() {
 
+    console.log("foe mounted")
+
     this.attack = this.baseAttack;
     this.defense = this.baseDefense;
     this.currentHealth = this.maxHealth
+    this.fainted = false
 
     this.emitter.on("endPlayerTurn", this.onEndPlayerTurn)
     this.emitter.on("startNewTurn", this.onNewTurn)
