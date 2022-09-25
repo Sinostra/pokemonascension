@@ -296,7 +296,7 @@ export default class BattleManager extends Vue {
         if(!this.$store.getters.getNotFaintedFoes.length) {
             setTimeout(() => {
                 this.$store.commit("setFoes", [])
-                this.$store.commit("setFoes", this.$store.state.allFoes.dataFoes[1])
+                // this.$store.commit("setFoes", this.$store.state.allFoes.dataFoes[1])
             }, 1000)
         }
     }

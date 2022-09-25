@@ -12,7 +12,7 @@
             <div class="number text">{{drawPile.length}}</div>
         </div>
 
-        <AfterBattleModal></AfterBattleModal>
+        <AfterBattleModal v-if="$store.state.battle.isBattleOngoing && !$store.getters.getNotFaintedFoes.length"></AfterBattleModal>
 
         <Hand
             :content="hand"

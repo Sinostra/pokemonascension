@@ -13,7 +13,7 @@ export default class AfterBattleModal extends Vue {
     private emitter: any = inject('emitter')
 
     public onClickNextBattle(): void {
-        
+        this.$store.commit("setFoes", this.$store.state.allFoes.dataFoes[1])
     }
 }
 </script>
