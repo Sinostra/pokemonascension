@@ -6,6 +6,7 @@ declare module '@vue/runtime-core' {
     pokedex: any,
     backgrounds: any,
     battle: any,
+    events: any,
     playerTeam: any,
     foes: any,
     settings: any,

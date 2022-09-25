@@ -281,8 +281,6 @@ export default class FoePokemon extends Pokemon {
 
   public mounted() {
 
-    console.log("foe mounted")
-
     this.attack = this.baseAttack;
     this.defense = this.baseDefense;
     this.currentHealth = this.maxHealth

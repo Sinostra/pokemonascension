@@ -4,6 +4,7 @@ import types from './constantData/types/types'
 import backgrounds from './constantData/background/background'
 import cards from './constantData/cards/cards'
 import battle from './battle/battle'
+import events from './events/events'
 import playerTeam from './battle/playerTeam'
 import foes from './battle/foes'
 import settings from './settings/settings'
@@ -17,6 +18,7 @@ export default createStore({
     pokedex,
     backgrounds,
     battle,
+    events,
     playerTeam,
     foes,
     settings,
