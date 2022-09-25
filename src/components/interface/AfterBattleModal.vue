@@ -1,7 +1,12 @@
 <template>
     <div class="modal-wrapper">
-        <div class="modal-txt">Victory !</div>
-        <div class="modal-btn" @click="onClickNextBattle()">Go to the next battle</div>
+        <div v-if="$store.state.battle.displayBattleRewards" class="victory-wrapper">
+            <div class="modal-txt">Victory !</div>
+            <div class="modal-btn" @click="onClickNextBattle()">Go to the next battle</div>
+        </div>
+        <div v-if="$store.state.battle.playerLost" class="defeat-wrapper">
+            <div class="modal-txt">Defeat !</div>
+        </div>
     </div>
 </template>
 

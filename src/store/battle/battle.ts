@@ -10,6 +10,7 @@ export default {
         typesHover: null,
         isBattleOngoing: false,
         displayBattleRewards: false,
+        playerLost: false,
     },
     mutations: {
         getEnergy(state, amount: number) {
@@ -74,6 +75,9 @@ export default {
         stopDisplayBattleRewards(state) {
             state.displayBattleRewards = false
         },
+        playerLost(state) {
+            state.playerLost = true
+        }
     },
     getters: {
         selectedCard: state => {
