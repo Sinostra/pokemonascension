@@ -5,8 +5,8 @@
     <Background/>
     <Interface/>
     <EventsManager v-if="$store.state.events.currentEvent"/>
-    <BattleManager v-if="$store.state.battle.isBattleOngoing"/>
-    <AfterBattleModal v-if="$store.state.battle.displayBattleRewards"></AfterBattleModal>
+    <BattleManager v-if="$store.state.battle.isBattleOngoing && !$store.state.battle.playerLost"/>
+    <AfterBattleModal v-if="$store.state.battle.displayBattleRewards || $store.state.battle.playerLost"></AfterBattleModal>
   </div>
 </template>
 

@@ -302,6 +302,18 @@ export default class BattleManager extends Vue {
         }
     }
 
+    private onSetPlayerFainted() {
+        if(!this.$store.getters.getNotFaintedPokemon.length) {
+            console.log("Player fainted")
+            this.currentTurnStepIndex = -1;
+            setTimeout(() => {
+                this.$store.commit("setFoes", [])
+                this.$store.commit("stopBattle")
+                this.$store.commit("playerLost")
+            }, 1000)
+        }
+    }
+
     public mounted() {
 
         this.emitter.on("playCurrentlySelectedCard", this.onPlayCurrentlySelectedCard)
@@ -310,6 +322,7 @@ export default class BattleManager extends Vue {
         this.emitter.on("endPlayerTurn", this.onEndPlayerTurn)
         this.emitter.on("playFoeMove", this.onPlayFoeMove)
         this.emitter.on("setFoeFainted", this.onSetFoeFainted)
+        this.emitter.on("setPlayerFainted", this.onSetPlayerFainted)
 
         this.currentTurnStepIndex++
     }
@@ -321,6 +334,7 @@ export default class BattleManager extends Vue {
         this.emitter.off("endPlayerTurn", this.onEndPlayerTurn)
         this.emitter.off("playFoeMove", this.onPlayFoeMove)
         this.emitter.off("setFoeFainted", this.onSetFoeFainted)
+        this.emitter.off("setPlayerFainted", this.onSetPlayerFainted)
     }
 
 }

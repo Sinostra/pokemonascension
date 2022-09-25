@@ -64,6 +64,10 @@ export default class PlayerPokemon extends Pokemon {
     } 
   }
 
+  protected faint(): void {
+    this.emitter.emit("setPlayerFainted")
+  }
+
   private onNewTurn() {
     this.setBlock(0)
   }
