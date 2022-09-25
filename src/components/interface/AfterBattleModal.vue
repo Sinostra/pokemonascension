@@ -15,6 +15,8 @@ export default class AfterBattleModal extends Vue {
     public onClickNextBattle(): void {
         this.$store.commit("stopDisplayBattleRewards")
         this.$store.commit("setFoes", this.$store.state.allFoes.dataFoes[1])
+        this.$store.commit("changeBackground", 'forest.gif')
+        this.$store.commit("startBattle", "forest")
     }
 }
 </script>
