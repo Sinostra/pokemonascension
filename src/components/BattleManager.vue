@@ -304,7 +304,6 @@ export default class BattleManager extends Vue {
 
     private onSetPlayerFainted() {
         if(!this.$store.getters.getNotFaintedPokemon.length) {
-            console.log("Player fainted")
             this.currentTurnStepIndex = -1;
             setTimeout(() => {
                 this.$store.commit("setFoes", [])

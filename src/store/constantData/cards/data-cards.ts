@@ -176,7 +176,7 @@ export default {
         "target": true,
         "effect":{
             "type": "fire",
-            "damage": 60,
+            "damage": 6,
         },
         "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy',
     },

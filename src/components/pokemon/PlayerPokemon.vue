@@ -65,6 +65,7 @@ export default class PlayerPokemon extends Pokemon {
   }
 
   protected faint(): void {
+    console.log("Player fainted")
     this.emitter.emit("setPlayerFainted")
   }
 
