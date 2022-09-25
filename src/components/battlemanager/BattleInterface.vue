@@ -46,6 +46,7 @@ import DiscardFromSelectManager from '../interface/discard/DiscardFromSelectMana
 import DiscardFromHandManager from '../interface/discard/DiscardFromHandManager.vue'
 import { Options, Vue } from 'vue-class-component'
 import { inject } from 'vue'
+import cloneDeep from "lodash.clonedeep"
 
 @Options({
     name: "BattleInterface",
@@ -145,7 +146,7 @@ export default class BattleInterface extends Vue {
     }
 
     public refillPlayerDeck() {
-        this.drawPile = this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex].deck
+        this.drawPile = cloneDeep(this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex].deck)
         this.drawPile.sort(() => {
             if(Math.random() > 0.5) return -1
             else return 1
