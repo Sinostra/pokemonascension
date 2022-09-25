@@ -29,6 +29,7 @@
 <script lang="ts">
 import { Options } from "vue-class-component";
 import Pokemon from "./Pokemon";
+import cloneDeep from "lodash.clonedeep"
 
 @Options({
   name: "DisplayPokemon",
@@ -61,7 +62,7 @@ export default class DisplayPokemon extends Pokemon {
       fainted: false,
     }
     this.$store.commit("addPokemon", starterData)
-    this.$store.commit("setFoes", this.$store.state.allFoes.dataFoes[0])
+    this.$store.commit("setFoes", cloneDeep(this.$store.state.allFoes.dataFoes[0]))
     this.$store.commit("changeBackground", 'forest.gif')
     this.$store.commit("removeEvent")
     this.$store.commit("startBattle", "forest")

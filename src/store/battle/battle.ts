@@ -77,6 +77,9 @@ export default {
         },
         playerLost(state) {
             state.playerLost = true
+        },
+        resetPlayerStatus(state) {
+            state.playerLost = false
         }
     },
     getters: {
