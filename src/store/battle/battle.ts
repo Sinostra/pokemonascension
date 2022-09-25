@@ -8,7 +8,8 @@ export default {
         playerAttack: 0,
         playerDefense: 0,
         typesHover: null,
-        isBattleOngoing: false
+        isBattleOngoing: false,
+        displayBattleRewards: false,
     },
     mutations: {
         getEnergy(state, amount: number) {
@@ -66,7 +67,13 @@ export default {
         stopBattle(state) {
             state.isBattleOngoing = false
             state.turnCounter = 0
-        }
+        },
+        displayBattleRewards(state) {
+            state.displayBattleRewards = true
+        },
+        stopDisplayBattleRewards(state) {
+            state.displayBattleRewards = false
+        },
     },
     getters: {
         selectedCard: state => {

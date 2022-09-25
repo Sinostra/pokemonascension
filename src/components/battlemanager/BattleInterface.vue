@@ -12,8 +12,6 @@
             <div class="number text">{{drawPile.length}}</div>
         </div>
 
-        <AfterBattleModal v-if="$store.state.battle.isBattleOngoing && !$store.getters.getNotFaintedFoes.length"></AfterBattleModal>
-
         <Hand
             :content="hand"
             :selectedCardIndex="selectedCardIndex"
@@ -44,7 +42,6 @@
 <script lang="ts">
 import Hand from '../interface/Hand.vue'
 import PlayCardModal from '../interface/PlayCardModal.vue'
-import AfterBattleModal from '../interface/AfterBattleModal.vue'
 import DiscardFromSelectManager from '../interface/discard/DiscardFromSelectManager.vue'
 import DiscardFromHandManager from '../interface/discard/DiscardFromHandManager.vue'
 import { Options, Vue } from 'vue-class-component'
@@ -55,7 +52,6 @@ import { inject } from 'vue'
     components: {
         Hand,
         PlayCardModal,
-        AfterBattleModal,
         DiscardFromSelectManager,
         DiscardFromHandManager
     }

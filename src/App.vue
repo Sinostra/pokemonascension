@@ -6,6 +6,7 @@
     <Interface/>
     <EventsManager v-if="$store.state.events.currentEvent"/>
     <BattleManager v-if="$store.state.battle.isBattleOngoing"/>
+    <AfterBattleModal v-if="$store.state.battle.displayBattleRewards"></AfterBattleModal>
   </div>
 </template>
 
@@ -15,6 +16,7 @@ import Background from './components/Background.vue'
 import BattleManager from './components/BattleManager.vue'
 import EventsManager from './components/EventsManager.vue'
 import Interface from './components/Interface.vue'
+import AfterBattleModal from './components/interface/AfterBattleModal.vue'
 import { inject } from 'vue'
 
 @Options({
@@ -23,7 +25,8 @@ import { inject } from 'vue'
         Background,
         BattleManager,
         EventsManager,
-        Interface
+        Interface,
+        AfterBattleModal
     }
 })
 
