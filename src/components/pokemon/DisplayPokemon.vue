@@ -66,6 +66,10 @@ export default class DisplayPokemon extends Pokemon {
     this.$store.commit("changeBackground", 'forest.gif')
     this.$store.commit("removeEvent")
     this.$store.commit("startBattle", "forest")
+    const $app = document.querySelector("#app")
+    if($app) {
+      $app.requestFullscreen()
+    }
   }
 }
 

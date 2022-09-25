@@ -37,6 +37,7 @@ export default class App extends Vue {
   public onResize() {
     if(window.innerWidth > 1.8 * window.innerHeight) this.appClass = 'height-mesure'
     else this.appClass = 'width-mesure'
+    this.$store.commit("changeBaseFontSize", Math.round(window.innerWidth / 100))
   }
 
   public onRightClick() {
