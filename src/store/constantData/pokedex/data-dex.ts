@@ -69,7 +69,7 @@ export default {
         "type": ["fire"],
         "size": 50,
         "baseStats": {
-            "hp": 1,
+            "hp": 45,
             "attack": 2,
             "defense": 1
         },

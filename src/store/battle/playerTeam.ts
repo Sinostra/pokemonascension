@@ -16,9 +16,12 @@ export default {
                 return
             }
             state.team[state.activeIndex].remainingHp = hp
-            if(hp === 0) {
-                state.team[state.activeIndex].fainted = true
+        },
+        faintActivePokemon(state) {
+            if(!state.team[state.activeIndex]) {
+                return
             }
+            state.team[state.activeIndex].fainted = true
         },
         switchActivePokemon(state) {
             
