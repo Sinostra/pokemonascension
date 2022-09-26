@@ -1,24 +1,24 @@
 <template>
-    <div class="interface-wrapper">
-        <GameInterface/>
+    <div class="interface-wrapper" :style="`height: ${height}%`">
+        <GameInterface
+        @displayInterface="height = 100"
+        @hideInterface="height = 6"
+        ></GameInterface>
     </div>
 </template>
 
-<script>
+<script lang='ts'>
+import { Options, Vue } from 'vue-class-component'
 import GameInterface from './interface/GameInterface.vue'
-export default {
-    name: "Interface",
 
+@Options({
+    name: "Interface",
     components: {
         GameInterface,
-    },
-
-    data: function() {
-        return {
-
-        }
-    },
-
+    }
+})
+export default class Interface extends Vue {
+    public height = 6;
 }
 </script>
 <style lang='scss' scoped>
@@ -27,9 +27,8 @@ export default {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
-    z-index: 3;
+    z-index: 6;
 }
 </style>

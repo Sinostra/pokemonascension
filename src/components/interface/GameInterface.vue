@@ -1,6 +1,6 @@
 <template>
-    <div class="game-interface">
-        <div class="town-map" @click="displayMap = !displayMap"></div>
+    <div class="game-interface" :style="`height: ${height}%`">
+        <div class="town-map" @click="onGameInterfaceClicked()"></div>
     </div>
     <div v-if="displayMap" class="map-wrapper">
         <div class="map"></div>
@@ -15,7 +15,13 @@ import { Options, Vue } from "vue-class-component";
     name: "GameInterface",
 })
 export default class GameInterface extends Vue {
+    public height = 100
     public displayMap = false
+    public onGameInterfaceClicked() {
+        this.displayMap = !this.displayMap
+        this.height = this.displayMap ? 6 : 100
+        this.$emit(this.displayMap ? "displayInterface" : "hideInterface")
+    }
 }
 </script>
 <style lang="scss" scoped>
