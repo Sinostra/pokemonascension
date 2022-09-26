@@ -203,7 +203,7 @@
         color: #000;
 
         :deep(.damage-amount) {
-            -webkit-text-stroke: 0.5px black;
+            -webkit-text-stroke: 0.3px black;
         }
 
         &.super-effective :deep(.damage-amount) {
