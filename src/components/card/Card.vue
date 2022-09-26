@@ -1,7 +1,7 @@
 <template>
   <div class="card" :class="cardClass" @click.stop="onClick()">
     <div class="background-img" :style="{'background-image':`url(${background})`}"></div>
-    <div class="cost" :style="(getFontSize(1))">
+    <div class="cost" :style="(getFontSize(1))" :class="costClass">
       <img :src="costBackground">
       {{ dataCard[id]['cost'] }}
     </div>
@@ -57,6 +57,10 @@ export default class Card extends Vue {
 
   get costBackground() {
     return require(`@/assets/img/cards/bords/${this.dataCard[this.id]['rarity']}_round.png`)
+  }
+
+  get costClass() {
+    return this.dataCard[this.id]['cost'] > this.$store.state.battle.currentEnergy ? "too-much" : ""
   }
 
   get illustrationBackground(): string {

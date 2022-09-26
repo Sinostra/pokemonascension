@@ -121,8 +121,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-family: 'gill extra bold';
+        font-family: 'ERASBD';
         color: #fff;
+
+        &.too-much {
+            color: #ff5252;
+        }
 
         img {
             display: block;
