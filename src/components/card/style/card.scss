@@ -142,9 +142,12 @@
         position: absolute;
         top: 5%;
         left: 14.5%;
+        height: 6%;
         color: black;
         font-family: 'futura';
         text-transform: capitalize;
+        display: flex;
+        align-items: center;
     }
 
     .type {
