@@ -1,21 +1,23 @@
 <template>
-    <div class="game-interface" :style="{'background-image':'url(' + getBackground() + ')'}"></div>
+    <div class="game-interface">
+        <div class="town-map" @click="displayMap = !displayMap"></div>
+    </div>
+    <div v-if="displayMap" class="map-wrapper">
+        <div class="map"></div>
+    </div>
 </template>
 
 <script lang="ts">
-import { Vue } from "vue-class-component";
+import { Options, Vue } from "vue-class-component";
 
 
+@Options({
+    name: "GameInterface",
+})
 export default class GameInterface extends Vue {
-    public getBackground() {
-        return require('./../../assets/img/interface/top_border.jpg')
-    }
+    public displayMap = true
 }
 </script>
 <style lang="scss" scoped>
-.game-interface {
-    width: 100%;
-    height: 6%;
-    background-position: bottom;
-}
+@import './style/gameInterface.scss';
 </style>
