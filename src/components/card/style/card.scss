@@ -201,8 +201,10 @@
         padding: 2%;
         font-family: 'gill sans bold';
         color: #000;
-        -webkit-text-stroke: 0.5px black;
 
+        :deep(.damage-amount) {
+            -webkit-text-stroke: 0.5px black;
+        }
 
         &.super-effective :deep(.damage-amount) {
             color: #ff5252;
