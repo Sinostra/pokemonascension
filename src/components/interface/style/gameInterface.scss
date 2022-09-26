@@ -11,10 +11,7 @@
         width: 2%;
         height: 50%;
         cursor: pointer;
-        background-image: url('../../assets/img/interface/town-map.png');
-        background-position: center;
-        background-size: contain;
-        background-repeat: no-repeat;
+        background: center / contain no-repeat url('../../assets/img/interface/town-map.png');
     }
 }
 
@@ -32,8 +29,6 @@
     .map {
         width: 90%;
         height: 90%;
-        background: no-repeat url('../../assets/img/interface/map.png');
-        background-position: center;
-        background-size: contain;
+        background: center / contain no-repeat url('../../assets/img/interface/map.png');
     }
 }

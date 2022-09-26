@@ -15,7 +15,7 @@ import { Options, Vue } from "vue-class-component";
     name: "GameInterface",
 })
 export default class GameInterface extends Vue {
-    public displayMap = true
+    public displayMap = false
 }
 </script>
 <style lang="scss" scoped>
