@@ -48,6 +48,11 @@ export default class Hand extends Vue {
     public getCardPosition(index: number): string {
 
         const selectedCardStyle = 'transform : rotate(0deg) scale(1.2); left: 20%; bottom: 186%; filter: none;'
+        const currentCardYPosition = ((this.$store.getters.mouseCoordinates.y/window.innerHeight * 100) - this.offSetCardY) * this.cardYmultiplier
+
+        if(index === this.draggedCardIndex && currentCardYPosition <= 120 && this.$store.state.cards.dataCards[this.content[this.draggedCardIndex]]["target"]) {
+            return selectedCardStyle
+        }
 
         if(index === this.draggedCardIndex) {
             const xPercent  = ((this.$store.getters.mouseCoordinates.x/window.innerWidth * 100) - this.offSetCardX) * this.cardXmultiplier
@@ -130,11 +135,10 @@ export default class Hand extends Vue {
         }
         
         if(this.draggedCardIndex !== null && !this.$store.state.cards.dataCards[this.content[this.draggedCardIndex]]["target"]) {
-            console.log(this.$store.state.cards.dataCards[this.content[this.draggedCardIndex]])
             this.emitter.emit("playCurrentlySelectedCard", null)
             return
         }
-        else this.$emit("onCardDragged", null)
+        // else this.$emit("onCardDragged", null)
     }
 
     private onCardPlaying() {
