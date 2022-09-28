@@ -18,7 +18,7 @@
             @onCardClicked="selectCard"
         ></Hand>
 
-        <PlayCardModal v-if="$store.getters.selectedCard !== null"></PlayCardModal>
+        <!-- <PlayCardModal v-if="$store.getters.selectedCard !== null"></PlayCardModal> -->
 
         <DiscardFromSelectManager
             :content="discardFromSelectManagerContent"

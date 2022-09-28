@@ -37,6 +37,11 @@ export default class Hand extends Vue {
 
     public isCardBeingPlayed: boolean = false
 
+    private offSetCardX = 9
+    private offSetCardY = 100
+    private cardXmultiplier = 1.1
+    private cardYmultiplier = 3.33
+
     private emitter: any = inject('emitter')
 
     public getCardPosition(index: number): string {
@@ -44,10 +49,8 @@ export default class Hand extends Vue {
         const selectedCardStyle = 'transform : rotate(0deg) scale(1.2); left: 20%; bottom: 186%; filter: none;'
 
         if(index === this.draggedCardIndex) {
-            const offSetCardX = 9
-            const offSetCardY = 100
-            const xPercent  = ((this.$store.getters.mouseCoordinates.x/window.innerWidth * 100) - offSetCardX) * 1.1
-            const yPercent  = ((this.$store.getters.mouseCoordinates.y/window.innerHeight * 100) - offSetCardY) * 3.33
+            const xPercent  = ((this.$store.getters.mouseCoordinates.x/window.innerWidth * 100) - this.offSetCardX) * this.cardXmultiplier
+            const yPercent  = ((this.$store.getters.mouseCoordinates.y/window.innerHeight * 100) - this.offSetCardY) * this.cardYmultiplier
             return `left: ${xPercent}%; top: ${yPercent}%; transition: none`
         }
 
@@ -116,12 +119,27 @@ export default class Hand extends Vue {
 
     public startDrag(index) {
         this.draggedCardIndex = index
-        this.$store.commit("dragCard", index)
+        this.$store.commit("selectCard", this.content[index])
+        // this.$store.commit("dragCard", this.content[index])
     }
 
     public endDrag() {
+        if(!this.draggedCardIndex) {
+            return
+        }
+        const currentCardYPosition = ((this.$store.getters.mouseCoordinates.y/window.innerHeight * 100) - this.offSetCardY) * this.cardYmultiplier
+        if(currentCardYPosition <= -120 && !this.$store.state.cards.dataCards[this.content[this.draggedCardIndex]]["target"]) {
+            console.log("play card")
+            this.emitter.emit("playCurrentlySelectedCard", null)
+        }
+
+        else {
+            this.$store.commit("selectCard", null)
+            this.draggedCardIndex = null
+        }
         this.draggedCardIndex = null
-        this.$store.commit("dragCard", null)
+        // this.$store.commit("dragCard", null)
+        // this.$store.commit("selectCard", null)
     }
 
     private onCardPlaying() {
