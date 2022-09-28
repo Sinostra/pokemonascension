@@ -98,10 +98,12 @@ export default class Pokemon extends Vue {
     if(typeMultiplier < 1 ) amount = Math.floor(amount * typeMultiplier)
     else amount = Math.ceil(amount * typeMultiplier)
     let damageDealt: number = 0
+    let playDamageAnim = true
 
     if(!ignoreBlock && this.block > 0) {
       if(this.block >= amount) {
         this.block -= amount
+        playDamageAnim = false
       }
 
       else {
@@ -112,6 +114,10 @@ export default class Pokemon extends Vue {
 
     else {
       damageDealt = amount
+    }
+
+    if(playDamageAnim) {
+      this.playDamageAnim()
     }
 
     if(this.currentHealth > damageDealt) {
