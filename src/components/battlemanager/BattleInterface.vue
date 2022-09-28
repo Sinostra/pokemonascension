@@ -18,8 +18,6 @@
             @onCardDragged="selectCard"
         ></Hand>
 
-        <!-- <PlayCardModal v-if="$store.getters.selectedCard !== null"></PlayCardModal> -->
-
         <DiscardFromSelectManager
             :content="discardFromSelectManagerContent"
         ></DiscardFromSelectManager>

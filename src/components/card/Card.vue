@@ -129,7 +129,9 @@ export default class Card extends Vue {
   }
 
   public startDrag() {
-    this.$emit("dragCard")
+    if(this.dataCard[this.id]['cost'] <= this.$store.state.battle.currentEnergy) {
+      this.$emit("dragCard")
+    }
   }
 
   public endDrag() {
