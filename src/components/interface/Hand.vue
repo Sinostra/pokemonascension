@@ -4,9 +4,7 @@
             :key="index"
             :id="card"
             :state="'drawn'"
-            :class="index === selectedCardIndex ? 'selected' : ''"
             :style="getCardPosition(index)"
-            @cardClicked="onClick(index)"
             @dragCard="startDrag(index)"
             @dragEnd="endDrag()"
         >
@@ -26,14 +24,12 @@ import { inject } from 'vue'
     },
     props: {
         content: Array,
-        selectedCardIndex: Number,
         draggedCardIndex: Number,
     }
 })
 export default class Hand extends Vue {
 
     public content!: string[]
-    public selectedCardIndex!: number | null
     public draggedCardIndex!: number | null
 
     public isCardBeingPlayed: boolean = false
@@ -58,10 +54,6 @@ export default class Hand extends Vue {
             const xPercent  = ((this.$store.getters.mouseCoordinates.x/window.innerWidth * 100) - this.offSetCardX) * this.cardXmultiplier
             const yPercent  = ((this.$store.getters.mouseCoordinates.y/window.innerHeight * 100) - this.offSetCardY) * this.cardYmultiplier
             return `left: ${xPercent}%; top: ${yPercent}%; transition: none`
-        }
-
-        if(index === this.selectedCardIndex) {
-            return selectedCardStyle
         }
 
         const handSize = this.content.length
@@ -117,10 +109,6 @@ export default class Hand extends Vue {
         const finalLeft = baseLeft + index * leftShift
 
         return `transform : rotate(${finalRotate}deg); left: ${finalLeft}%; bottom: ${finalBottom}%;`
-    }
-
-    public onClick(cardIndex) {
-        // this.$emit("onCardClicked", cardIndex)
     }
 
     public startDrag(index) {

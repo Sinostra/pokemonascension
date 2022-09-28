@@ -14,9 +14,7 @@
 
         <Hand
             :content="hand"
-            :selectedCardIndex="selectedCardIndex"
             :draggedCardIndex="selectedCardIndex"
-            @onCardClicked="selectCard"
             @onCardDragged="selectCard"
         ></Hand>
 
