@@ -7,6 +7,8 @@
             :class="index === selectedCardIndex ? 'selected' : ''"
             :style="getCardPosition(index)"
             @cardClicked="onClick(index)"
+            @dragCard="startDrag(index)"
+            @dragEnd="endDrag()"
         >
         </Card>
     </div>
@@ -31,18 +33,19 @@ export default class Hand extends Vue {
 
     public content!: string[]
     public selectedCardIndex!: number | null
+    public draggedCardIndex: number | null = null
 
     public isCardBeingPlayed: boolean = false
 
     private emitter: any = inject('emitter')
 
-    public onClick(cardIndex) {
-        this.$emit("onCardClicked", cardIndex)
-    }
-
     public getCardPosition(index: number): string {
 
         const selectedCardStyle = 'transform : rotate(0deg) scale(1.2); left: 20%; bottom: 186%; filter: none;'
+
+        if(index === this.draggedCardIndex) {
+            return `left: ${this.$store.getters.mouseCoordinates.x - 50}px; top: ${this.$store.getters.mouseCoordinates.y - 600}px; transition: none`
+        }
 
         if(index === this.selectedCardIndex) {
             return selectedCardStyle
@@ -101,6 +104,20 @@ export default class Hand extends Vue {
         const finalLeft = baseLeft + index * leftShift
 
         return `transform : rotate(${finalRotate}deg); left: ${finalLeft}%; bottom: ${finalBottom}%;`
+    }
+
+    public onClick(cardIndex) {
+        this.$emit("onCardClicked", cardIndex)
+    }
+
+    public startDrag(index) {
+        this.draggedCardIndex = index
+        this.$store.commit("dragCard", index)
+    }
+
+    public endDrag() {
+        this.draggedCardIndex = null
+        this.$store.commit("dragCard", null)
     }
 
     private onCardPlaying() {

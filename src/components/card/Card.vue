@@ -1,5 +1,5 @@
 <template>
-  <div class="card" :class="cardClass" @click.stop="onClick()">
+  <div class="card" :class="cardClass" @click.stop="onClick()" @mousedown="startDrag()" @mouseup="endDrag()">
     <div class="background-img" :style="{'background-image':`url(${background})`}"></div>
     <div class="cost" :style="(getFontSize(1))" :class="costClass">
       <img :src="costBackground">
@@ -130,8 +130,16 @@ export default class Card extends Vue {
 
   public onClick() {
     if(this.dataCard[this.id]['cost'] <= this.$store.state.battle.currentEnergy) {
-      this.$emit('cardClicked')
+      // this.$emit('cardClicked')
     }
+  }
+
+  public startDrag() {
+    this.$emit("dragCard")
+  }
+
+  public endDrag() {
+    this.$emit("dragEnd")
   }
 
   public playDrawAnim() {

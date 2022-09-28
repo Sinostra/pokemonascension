@@ -4,6 +4,7 @@ export default {
         currentEnergy: 3,
         maxEnergy: 3,
         selectedCard: null,
+        draggedCard: null,
         turnCounter: 0,
         playerAttack: 0,
         playerDefense: 0,
@@ -11,6 +12,10 @@ export default {
         isBattleOngoing: false,
         displayBattleRewards: false,
         playerLost: false,
+        mouseCoordinates: {
+            x: 0,
+            y: 0
+        }
     },
     mutations: {
         getEnergy(state, amount: number) {
@@ -27,6 +32,10 @@ export default {
 
         selectCard(state, value) {
             state.selectedCard = value
+        },
+
+        dragCard(state, value) {
+            state.draggedCard = value
         },
 
         startNewTurn(state) {
@@ -80,11 +89,18 @@ export default {
         },
         resetPlayerStatus(state) {
             state.playerLost = false
+        },
+        updateMouseCoordinates(state, coords) {
+            state.mouseCoordinates.x = coords.x
+            state.mouseCoordinates.y = coords.y
         }
     },
     getters: {
         selectedCard: state => {
             return state.selectedCard
+        },
+        mouseCoordinates: state => {
+            return state.mouseCoordinates
         }
     }
 }

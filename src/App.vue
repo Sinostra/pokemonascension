@@ -44,10 +44,20 @@ export default class App extends Vue {
     this.emitter.emit("rightClick")
   }
 
+  public onMouseMove(event) {
+    this.$store.commit("updateMouseCoordinates", {x: event.x, y: event.y})
+  }
+
   public mounted() {
     window.addEventListener("resize", this.onResize);
+    window.addEventListener("mousemove", this.onMouseMove)
     window.dispatchEvent(new Event('resize'));
     this.$store.commit("changeBackground", 'starter_background.jpg')
+  }
+
+  public beforeUnmount() {
+    window.removeEventListener("resize", this.onResize)
+    window.removeEventListener("mousemove", this.onMouseMove)
   }
 }
 </script>
