@@ -44,10 +44,10 @@ export default class Hand extends Vue {
         const selectedCardStyle = 'transform : rotate(0deg) scale(1.2); left: 20%; bottom: 186%; filter: none;'
 
         if(index === this.draggedCardIndex) {
-            const offSetCardX = 150
-            const offSetCardY = 700
-            const xPercent  = (this.$store.getters.mouseCoordinates.x - offSetCardX)/window.innerWidth * 100
-            const yPercent  = (this.$store.getters.mouseCoordinates.y - offSetCardY)/window.innerHeight * 100
+            const offSetCardX = 9
+            const offSetCardY = 100
+            const xPercent  = ((this.$store.getters.mouseCoordinates.x/window.innerWidth * 100) - offSetCardX) * 1.1
+            const yPercent  = ((this.$store.getters.mouseCoordinates.y/window.innerHeight * 100) - offSetCardY) * 3.33
             return `left: ${xPercent}%; top: ${yPercent}%; transition: none`
         }
 
