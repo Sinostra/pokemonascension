@@ -20,6 +20,7 @@ export default class Pokemon extends Vue {
 
   protected isPlayingAttackAnim: boolean = false
   protected isPlayingReturnAnim: boolean = false
+  protected isPlayingDamageAnim: boolean = false
 
   protected mouseOver: boolean = false
 
@@ -34,7 +35,8 @@ export default class Pokemon extends Vue {
     const hoverClass = this.mouseOver ? 'hover' : ''
     let animClass: string = ''
     if(this.isPlayingReturnAnim) animClass = 'return'
-    else if (this.isPlayingAttackAnim) animClass = 'attack' 
+    else if (this.isPlayingAttackAnim) animClass = 'attack'
+    else if (this.isPlayingDamageAnim) animClass = 'damage'
     return `${hoverClass} ${animClass}`
   }
 
@@ -154,6 +156,13 @@ export default class Pokemon extends Vue {
     if(!this.isPlayingAttackAnim) {
       this.isPlayingAttackAnim = true
       setTimeout(() => { this.isPlayingAttackAnim = false }, 350 )
+    }
+  }
+
+  protected playDamageAnim(): void {
+    if(!this.isPlayingDamageAnim) {
+      this.isPlayingDamageAnim = true
+      setTimeout(() => { this.isPlayingDamageAnim = false }, 350 )
     }
   }
 

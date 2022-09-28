@@ -23,6 +23,12 @@
       animation: attack .35s linear;
     }
   }
+
+  &.damage {
+    .pokemon-sprite {
+      animation: damage .35s linear;
+    }
+  }
   
   .healthBar-infos-wrapper {
     position: absolute;
