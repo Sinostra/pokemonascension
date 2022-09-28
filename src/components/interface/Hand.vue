@@ -129,7 +129,7 @@ export default class Hand extends Vue {
             return
         }
         
-        if(this.draggedCardIndex && !this.$store.state.cards.dataCards[this.content[this.draggedCardIndex]]["target"]) {
+        if(this.draggedCardIndex !== null && !this.$store.state.cards.dataCards[this.content[this.draggedCardIndex]]["target"]) {
             console.log(this.$store.state.cards.dataCards[this.content[this.draggedCardIndex]])
             this.emitter.emit("playCurrentlySelectedCard", null)
             return
