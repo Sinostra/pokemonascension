@@ -15,7 +15,9 @@
         <Hand
             :content="hand"
             :selectedCardIndex="selectedCardIndex"
+            :draggedCardIndex="selectedCardIndex"
             @onCardClicked="selectCard"
+            @onCardDragged="selectCard"
         ></Hand>
 
         <!-- <PlayCardModal v-if="$store.getters.selectedCard !== null"></PlayCardModal> -->

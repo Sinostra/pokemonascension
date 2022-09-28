@@ -26,14 +26,15 @@ import { inject } from 'vue'
     },
     props: {
         content: Array,
-        selectedCardIndex: Number
+        selectedCardIndex: Number,
+        draggedCardIndex: Number,
     }
 })
 export default class Hand extends Vue {
 
     public content!: string[]
     public selectedCardIndex!: number | null
-    public draggedCardIndex: number | null = null
+    public draggedCardIndex!: number | null
 
     public isCardBeingPlayed: boolean = false
 
@@ -114,32 +115,26 @@ export default class Hand extends Vue {
     }
 
     public onClick(cardIndex) {
-        this.$emit("onCardClicked", cardIndex)
+        // this.$emit("onCardClicked", cardIndex)
     }
 
     public startDrag(index) {
-        this.draggedCardIndex = index
-        this.$store.commit("selectCard", this.content[index])
-        // this.$store.commit("dragCard", this.content[index])
+        this.$emit("onCardDragged", index)
     }
 
     public endDrag() {
-        if(!this.draggedCardIndex) {
+        const currentCardYPosition = ((this.$store.getters.mouseCoordinates.y/window.innerHeight * 100) - this.offSetCardY) * this.cardYmultiplier
+        if(currentCardYPosition > -120) {
+            this.$emit("onCardDragged", null)
             return
         }
-        const currentCardYPosition = ((this.$store.getters.mouseCoordinates.y/window.innerHeight * 100) - this.offSetCardY) * this.cardYmultiplier
-        if(currentCardYPosition <= -120 && !this.$store.state.cards.dataCards[this.content[this.draggedCardIndex]]["target"]) {
-            console.log("play card")
+        
+        if(this.draggedCardIndex && !this.$store.state.cards.dataCards[this.content[this.draggedCardIndex]]["target"]) {
+            console.log(this.$store.state.cards.dataCards[this.content[this.draggedCardIndex]])
             this.emitter.emit("playCurrentlySelectedCard", null)
+            return
         }
-
-        else {
-            this.$store.commit("selectCard", null)
-            this.draggedCardIndex = null
-        }
-        this.draggedCardIndex = null
-        // this.$store.commit("dragCard", null)
-        // this.$store.commit("selectCard", null)
+        else this.$emit("onCardDragged", null)
     }
 
     private onCardPlaying() {
