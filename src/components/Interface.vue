@@ -1,5 +1,6 @@
 <template>
     <div class="interface-wrapper" :style="`height: ${height}%`">
+        <MapGenerator></MapGenerator>
         <GameInterface
         @displayInterface="height = 100"
         @hideInterface="height = 6"
@@ -9,11 +10,13 @@
 
 <script lang='ts'>
 import { Options, Vue } from 'vue-class-component'
+import MapGenerator from './interface/MapGenerator.vue'
 import GameInterface from './interface/GameInterface.vue'
 
 @Options({
     name: "Interface",
     components: {
+        MapGenerator,
         GameInterface,
     }
 })
