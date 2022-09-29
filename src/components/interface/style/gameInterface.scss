@@ -28,6 +28,52 @@
     .map {
         width: 90%;
         height: 90%;
-        background: center / contain no-repeat url('../../assets/img/interface/map.png');
+        background-color: #fff;
+        overflow: auto;
+        // background: center / contain no-repeat url('../../assets/img/interface/map.png');
+
+        .row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 10%;
+
+            &.row-6 {
+                height: 30%;
+            }
+
+            .room {
+                width: 10%;
+                height: 100%;
+
+                &.room-0 {
+                    background: center / contain no-repeat url('../../assets/img/interface/map/foe.png');
+                }
+
+                &.room-1 {
+                    background: center / contain no-repeat url('../../assets/img/interface/map/elite.png');
+                }
+
+                &.room-2 {
+                    background: center / contain no-repeat url('../../assets/img/interface/map/unknown.png');
+                }
+
+                &.room-3 {
+                    background: center / contain no-repeat url('../../assets/img/interface/map/shop.png');
+                }
+
+                &.room-4 {
+                    background: center / contain no-repeat url('../../assets/img/interface/map/pkmcentr.png');
+                }
+
+                &.room-5 {
+                    background: center / contain no-repeat url('../../assets/img/interface/map/chest.png');
+                }
+
+                &.room-6 {
+                    background: center / contain no-repeat url('../../assets/img/interface/map/boss.png');
+                }
+            }
+        }
     }
 }

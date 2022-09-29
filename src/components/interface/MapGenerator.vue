@@ -8,8 +8,8 @@ enum RoomType {
     ELITEBATTLE,
     UNKNOWN,
     SHOP,
+    PKMCENTR,
     CHEST,
-    BONFIRE,
     BOSS
 }
 
@@ -38,18 +38,42 @@ export default class MapGenerator extends Vue {
             else {
                 const rand = Math.random()
                 const roomsAmount = rand <= 0.33 ? 2 : rand > 0.33 && rand < 0.66 ? 3 : 4
-                for(let j = 0; j < roomsAmount; j++) {
-                    currentFloor.push(RoomType.BATTLE)
+                //Itération au milieu de la carte, que des coffres
+                if(i === 4) {
+                    for(let j = 0; j < roomsAmount; j++) {
+                        currentFloor.push(RoomType.CHEST)
+                    }
                 }
+                //Itération juste avant le boss, que des centres pokémon
+                else if(i === this.mapLength -2) {
+                    for(let j = 0; j < roomsAmount; j++) {
+                        currentFloor.push(RoomType.PKMCENTR)
+                    }
+                }
+                else {
+                    //Salle au hasard entre : BATTLE, UNKNOWN, SHOP, PKMCENTR, ELITEBATTLE
+                    
+                    for(let j = 0; j < roomsAmount; j++) {
+                        const random = Math.random()
+                        let randRoom
+                        if(random <= 0.45) randRoom = 0
+                        else if(random > 0.45 && random <= 0.70) randRoom = 2
+                        else if(random > 0.70 && random <= 0.80) randRoom = 3
+                        else if(random > 0.80 && random <= 0.90) randRoom = 4
+                        else if(random > 0.90) randRoom = 1
+                        currentFloor.push(randRoom)
+                    }
+                }
+                
             }
 
             this.currentMap.push(currentFloor)
+            this.$emit("mapGenerated", this.currentMap)
         }
     }
 
     public mounted() {
         this.generateMap()
-        console.log(this.currentMap)
     }
 }
 </script>

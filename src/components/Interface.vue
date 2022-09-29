@@ -1,7 +1,11 @@
 <template>
     <div class="interface-wrapper" :style="`height: ${height}%`">
-        <MapGenerator></MapGenerator>
+        <MapGenerator
+        @mapGenerated="gameMap = $event"
+        ></MapGenerator>
+
         <GameInterface
+        :currentMap="gameMap"
         @displayInterface="height = 100"
         @hideInterface="height = 6"
         ></GameInterface>
@@ -22,6 +26,7 @@ import GameInterface from './interface/GameInterface.vue'
 })
 export default class Interface extends Vue {
     public height = 6;
+    public gameMap: any = null
 }
 </script>
 <style lang='scss' scoped>
