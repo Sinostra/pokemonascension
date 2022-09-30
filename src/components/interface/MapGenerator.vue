@@ -13,41 +13,49 @@ enum RoomType {
     BOSS
 }
 
+interface Room {
+    type: RoomType
+    encounterId?: number
+    eventId?: number
+    connections: number[]
+}
+
 export default class MapGenerator extends Vue {
     private emitter: any = inject('emitter')
     private mapLength = 10
-    private currentMap: number[][] = []
+    private currentMap: Room[][] = []
 
     private generateMap() {
         for(let i = 0; i < this.mapLength; i++) {
 
-            let currentFloor: number[] = []
+            let currentFloor: Room[] = []
+            const connections = []
 
             //Première itération, début du chemin
             if(i === 0) {
                 for(let j = 0; j < 3; j++) {
-                    currentFloor.push(RoomType.BATTLE)
+                    currentFloor.push({type: RoomType.BATTLE, connections})
                 }
             }
 
             //Dernière itération, ajout du boss
             else if(i === this.mapLength -1) {
-                currentFloor.push(RoomType.BOSS)
+                currentFloor.push({type: RoomType.BOSS, connections})
             }
 
             else {
                 const rand = Math.random()
                 const roomsAmount = rand <= 0.33 ? 2 : rand > 0.33 && rand < 0.66 ? 3 : 4
                 //Itération au milieu de la carte, que des coffres
-                if(i === 4) {
+                if(i === Math.floor(this.mapLength / 2) - 1) {
                     for(let j = 0; j < roomsAmount; j++) {
-                        currentFloor.push(RoomType.CHEST)
+                        currentFloor.push({type: RoomType.CHEST, connections})
                     }
                 }
                 //Itération juste avant le boss, que des centres pokémon
                 else if(i === this.mapLength -2) {
                     for(let j = 0; j < roomsAmount; j++) {
-                        currentFloor.push(RoomType.PKMCENTR)
+                        currentFloor.push({type: RoomType.PKMCENTR, connections})
                     }
                 }
                 else {
@@ -61,7 +69,7 @@ export default class MapGenerator extends Vue {
                         else if(random > 0.70 && random <= 0.80) randRoom = 3
                         else if(random > 0.80 && random <= 0.90) randRoom = 4
                         else if(random > 0.90) randRoom = 1
-                        currentFloor.push(randRoom)
+                        currentFloor.push({type: randRoom, connections})
                     }
                 }
                 
@@ -72,8 +80,26 @@ export default class MapGenerator extends Vue {
         }
     }
 
+    public generatePaths() {
+        for(let i = 0; i < this.mapLength - 1; i++) {
+            const currentFloor = this.currentMap[i]
+            const nextFloor= this.currentMap[i + 1]
+
+            const roomsDiff = currentFloor.length - nextFloor.length
+
+            if(roomsDiff === 0) {
+                for(let j = 0; j < currentFloor.length; j++) {
+                    console.log(currentFloor[j])
+                    currentFloor[j].connections.push(j)
+                }
+            }
+        }
+        // console.log(this.currentMap)
+    }
+
     public mounted() {
         this.generateMap()
+        this.generatePaths()
     }
 }
 </script>

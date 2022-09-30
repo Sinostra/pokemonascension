@@ -4,8 +4,8 @@
     </div>
     <div v-if="displayMap" class="map-wrapper">
         <div class="map" v-if="currentMap">
-            <div v-for="floor in currentMap" :key="floor" class="row" :class="`row-${floor}`">
-                <div v-for="room in floor" :key="room" class="room" :class="`room-${room}`"></div>
+            <div v-for="floor in currentMap" :key="floor" class="row" :class="`row-${floor.length}`">
+                <div v-for="room in floor" :key="room" class="room" :class="`room-${room.type}`"></div>
             </div>
         </div>
     </div>
