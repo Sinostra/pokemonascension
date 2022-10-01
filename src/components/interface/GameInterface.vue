@@ -5,7 +5,7 @@
     <div v-if="displayMap" class="map-wrapper">
         <div class="map" v-if="currentMap">
             <div v-for="floor in currentMap" :key="floor" class="row" :class="`row-${floor.length}`">
-                <div v-for="room in floor" :key="room" class="room" :class="`room-${room.type}`"></div>
+                <div v-for="room in floor" :key="room" class="room" :class="getRoomClass(room)" @click="setPlayerPosition(room)"></div>
             </div>
         </div>
     </div>
@@ -25,10 +25,27 @@ export default class GameInterface extends Vue {
     public height = 100
     public displayMap = false
     public currentMap!: any
+    public playerPositionOnMap = null
+    public playerCurrentFloor = -1
+
     public onGameInterfaceClicked() {
         this.displayMap = !this.displayMap
         this.height = this.displayMap ? 6 : 100
         this.$emit(this.displayMap ? "displayInterface" : "hideInterface")
+    }
+
+    public setPlayerPosition(room) {
+        this.playerCurrentFloor = room.floor
+    }
+
+    public getRoomClass(room) {
+        const roomClass = `room-${room.type}`
+        let floorClass = ''
+        if(room.floor === this.playerCurrentFloor + 1) {
+            floorClass = 'clickable'
+        }
+
+        return `${roomClass} ${floorClass}`
     }
 }
 </script>

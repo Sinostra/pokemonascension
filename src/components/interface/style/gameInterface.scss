@@ -75,6 +75,10 @@
                 &.room-6 {
                     background: center / contain no-repeat url('../../assets/img/interface/map/boss.png');
                 }
+
+                &:not(.clickable) {
+                    filter: grayscale(90%);
+                }
             }
         }
     }

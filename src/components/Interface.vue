@@ -29,6 +29,7 @@ export default class Interface extends Vue {
     public gameMap: any = null
 }
 </script>
+
 <style lang='scss' scoped>
 .interface-wrapper {
     position: absolute;

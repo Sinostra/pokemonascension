@@ -15,6 +15,8 @@ enum RoomType {
 
 interface Room {
     type: RoomType
+    floor: number
+    index: number
     encounterId?: number
     eventId?: number
     connections: number[]
@@ -37,13 +39,13 @@ export default class MapGenerator extends Vue {
             //Première itération, début du chemin
             if(i === 0) {
                 for(let j = 0; j < 3; j++) {
-                    currentFloor.push({type: RoomType.BATTLE, connections})
+                    currentFloor.push({type: RoomType.BATTLE, floor: i, index: j, connections})
                 }
             }
 
             //Dernière itération, ajout du boss
             else if(i === this.mapLength -1) {
-                currentFloor.push({type: RoomType.BOSS, connections})
+                currentFloor.push({type: RoomType.BOSS, floor: i, index: 0, connections})
             }
 
             else {
@@ -52,13 +54,13 @@ export default class MapGenerator extends Vue {
                 //Itération au milieu de la carte, que des coffres
                 if(i === Math.floor(this.mapLength / 2) - 1) {
                     for(let j = 0; j < roomsAmount; j++) {
-                        currentFloor.push({type: RoomType.CHEST, connections})
+                        currentFloor.push({type: RoomType.CHEST, floor: i, index: j, connections})
                     }
                 }
                 //Itération juste avant le boss, que des centres pokémon
                 else if(i === this.mapLength -2) {
                     for(let j = 0; j < roomsAmount; j++) {
-                        currentFloor.push({type: RoomType.PKMCENTR, connections})
+                        currentFloor.push({type: RoomType.PKMCENTR, floor: i, index: j, connections})
                     }
                 }
                 else {
@@ -72,7 +74,7 @@ export default class MapGenerator extends Vue {
                         else if(random > 0.70 && random <= 0.80) randRoom = 3
                         else if(random > 0.80 && random <= 0.90) randRoom = 4
                         else if(random > 0.90) randRoom = 1
-                        currentFloor.push({type: randRoom, connections})
+                        currentFloor.push({type: randRoom, floor: i, index: j, connections})
                     }
                 }
                 
