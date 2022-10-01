@@ -112,6 +112,23 @@ export default class MapGenerator extends Vue {
                     const randomIndex = Math.floor(Math.random() * 2)
                     currentFloor[randomIndex].connections.push(1)
                 }
+
+                else {
+                    const randomIndex = Math.floor(Math.random() * 3)
+                    if(randomIndex === 0) {
+                        currentFloor[0].connections.push(1)
+                        currentFloor[1].connections = [2]
+                    }
+
+                    else if(randomIndex === 1) {
+                        currentFloor[1].connections = [1, 2]
+                    }
+
+                    else {
+                        currentFloor[2].connections.push(2)
+                        currentFloor[1].connections = [1]
+                    }
+                }
             }
 
             else if(roomsDiff === 0) {
