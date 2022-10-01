@@ -87,14 +87,12 @@ export default class MapGenerator extends Vue {
 
             const roomsDiff = currentFloor.length - nextFloor.length
 
-            if(roomsDiff === 0) {
-                for(let j = 0; j < currentFloor.length; j++) {
-                    console.log(currentFloor[j])
-                    currentFloor[j].connections.push(j)
+            currentFloor.forEach((room, index) => {
+                if(roomsDiff === 0) {
+                    room.connections = [index]
                 }
-            }
+            })
         }
-        // console.log(this.currentMap)
     }
 
     public mounted() {
