@@ -124,7 +124,7 @@ export default class MapGenerator extends Vue {
                         currentFloor[1].connections = [1, 2]
                     }
 
-                    else {
+                    else if(randomIndex === 2){
                         currentFloor[2].connections.push(2)
                         currentFloor[1].connections = [1]
                     }
