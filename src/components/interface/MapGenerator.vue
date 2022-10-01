@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Vue } from 'vue-class-component'
+import { Options, Vue } from 'vue-class-component'
 import { inject } from 'vue'
 import cloneDeep from "lodash.clonedeep"
 
@@ -20,6 +20,9 @@ interface Room {
     connections: number[]
 }
 
+@Options({
+    name: "MapGenerator",
+})
 export default class MapGenerator extends Vue {
     private emitter: any = inject('emitter')
     private mapLength = 10
@@ -82,16 +85,36 @@ export default class MapGenerator extends Vue {
 
     public generatePaths() {
         for(let i = 0; i < this.mapLength - 1; i++) {
+
             const currentFloor = this.currentMap[i]
             const nextFloor= this.currentMap[i + 1]
-
             const roomsDiff = currentFloor.length - nextFloor.length
 
-            currentFloor.forEach((room, index) => {
-                if(roomsDiff === 0) {
+            //Si on est avant le boss, toutes les salles y mènent
+            if(i === this.mapLength - 2) {
+                currentFloor.forEach((room) => {
+                    room.connections = [0]
+                })
+            }
+
+            else if(roomsDiff === -2) {
+                currentFloor[0].connections = [0, 1]
+                currentFloor[1].connections = [2, 3]
+            }
+
+            else if(roomsDiff === 0) {
+                currentFloor.forEach((room, index) => {
                     room.connections = [index]
-                }
-            })
+                })
+            }
+
+            else if(roomsDiff === 2) {
+                currentFloor[0].connections = [0]
+                currentFloor[1].connections = [0]
+                currentFloor[2].connections = [1]
+                currentFloor[3].connections = [1]
+            }
+
         }
     }
 
