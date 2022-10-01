@@ -102,10 +102,37 @@ export default class MapGenerator extends Vue {
                 currentFloor[1].connections = [2, 3]
             }
 
+            else if(roomsDiff === -1) {
+
+            }
+
             else if(roomsDiff === 0) {
                 currentFloor.forEach((room, index) => {
                     room.connections = [index]
                 })
+            }
+
+            else if(roomsDiff === 1) {
+                currentFloor[0].connections = [0]
+                currentFloor[currentFloor.length - 1].connections = [nextFloor.length -1]
+
+                if(currentFloor.length === 3) {
+                    const randomLink = Math.floor(Math.random() * 2)
+                    currentFloor[1].connections = [randomLink]
+                }
+
+                else {
+                    const randomIndex = Math.floor(Math.random() * 2) + 1
+                    if(randomIndex === 1) {
+                        currentFloor[1].connections = [0]
+                        currentFloor[2].connections = [1]
+                    }
+
+                    else {
+                        currentFloor[1].connections = [1]
+                        currentFloor[2].connections = [2] 
+                    }
+                }
             }
 
             else if(roomsDiff === 2) {
@@ -119,6 +146,12 @@ export default class MapGenerator extends Vue {
     }
 
     public mounted() {
+
+        for(let i = 0; i < 10; i++) {
+            console.log(Math.floor(Math.random() * 2))
+        }
+
+        
         this.generateMap()
         this.generatePaths()
     }
