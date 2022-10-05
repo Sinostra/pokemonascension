@@ -208,6 +208,10 @@
         &.not-very-effective :deep(.damage-amount) {
             color: #3bd3ff;
         }
+
+        .bold {
+            font-weight: bold;
+        }
     }
 }
 
