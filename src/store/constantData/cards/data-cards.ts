@@ -148,6 +148,7 @@ export default {
         "rarity": "medium",
         "cost": 1,
         "target": false,
+        "exhaust": true,
         "effect":{
             "type": "normal",
             "addToStartTurn": {

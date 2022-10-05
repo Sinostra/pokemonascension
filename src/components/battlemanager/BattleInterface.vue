@@ -119,7 +119,13 @@ export default class BattleInterface extends Vue {
 
     public discardFromSelect(index): void {
         const cardDiscarded = this.hand.splice(index, 1)[0]
-        this.discardFromSelectManagerContent.push(cardDiscarded)
+        if(this.$store.state.cards.dataCards[cardDiscarded]['exhaust']) {
+            this.exhaustPile.push(cardDiscarded)
+        }
+        else {
+            this.discardFromSelectManagerContent.push(cardDiscarded)
+        }
+        
     }
 
     public dumpInto(from, to) {

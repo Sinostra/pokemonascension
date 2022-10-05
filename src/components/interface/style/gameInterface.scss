@@ -76,9 +76,9 @@
                     background: center / contain no-repeat url('../../assets/img/interface/map/boss.png');
                 }
 
-                &:not(.clickable) {
-                    filter: grayscale(90%);
-                }
+                // &:not(.clickable) {
+                //     filter: grayscale(90%);
+                // }
             }
         }
     }
