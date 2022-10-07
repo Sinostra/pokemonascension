@@ -1,5 +1,5 @@
 <template>
-<div class="battle-interface">
+<div :class="hasSelectedCardTarget ? 'arrow-cursor' : ''" class="battle-interface">
     <!-- <div class="top-wrapper">
         <div class="btn" @click="clickSwitch()">Switch</div>
     </div> -->
@@ -74,6 +74,17 @@ export default class BattleInterface extends Vue {
     public discardFromSelectManagerContent: string[] = []
 
     private emitter: any = inject('emitter')
+
+    get hasSelectedCardTarget(): boolean {
+        if(this.selectedCardIndex === null) {
+            return false
+        }
+
+        else {
+            const cardId = this.hand[this.selectedCardIndex]
+            return this.$store.state.cards.dataCards[cardId]['target']
+        }
+    }
 
     public selectCard(cardIndex): void {
         if(cardIndex !== null){
