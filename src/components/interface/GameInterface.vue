@@ -1,7 +1,7 @@
 <template>
     <div class="game-interface">
-        <div class="town-map" @click="clickInterfaceButton('GameMap')"></div>
-        <div class="team" @click="clickInterfaceButton('PlayerTeam')"></div>
+        <div class="interface-item town-map" @click="clickInterfaceButton('GameMap')"></div>
+        <div class="interface-item team" :class="!$store.getters.getPlayerTeam.length ? 'inactive' : ''" @click="clickInterfaceButton('PlayerTeam')"></div>
     </div>
 
     <div v-if="currentDisplayedComp" class="component-overlay">

@@ -11,18 +11,23 @@
     padding: 0 1%;
     z-index: 6;
 
-    .town-map {
+    .interface-item {
         width: 2%;
         height: 50%;
         cursor: pointer;
-        background: center / contain no-repeat url('../../assets/img/interface/town-map.png');
-    }
 
-    .team {
-        width: 2%;
-        height: 50%;
-        cursor: pointer;
-        background: center / contain no-repeat url('../../assets/img/interface/poke-ball.png');
+        &.inactive {
+            filter: grayscale(50);
+            pointer-events: none;
+        }
+
+        &.town-map {
+            background: center / contain no-repeat url('../../assets/img/interface/town-map.png');
+        }
+
+        &.team {
+            background: center / contain no-repeat url('../../assets/img/interface/poke-ball.png');
+        }
     }
 }
 

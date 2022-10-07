@@ -29,12 +29,16 @@ export default {
     },
 
     getters: {
+        getPlayerTeam: state => {
+            return state.team
+        },
+
         getActiveIndex: state => {
             return state.activeIndex
         },
 
         getNotFaintedPokemon: state => {
             return state.team.filter((pokemon) => !pokemon.fainted)
-        }
+        },
     }
 }
