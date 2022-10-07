@@ -1,65 +1,38 @@
 <template>
-    <div class="game-interface" :style="`height: ${height}%`">
-        <div class="town-map" @click="onMapClicked()"></div>
-        <div class="team" @click="onTeamClicked()"></div>
+    <div class="game-interface">
+        <div class="town-map" @click="clickInterfaceButton('GameMap')"></div>
+        <div class="team" @click="clickInterfaceButton('PlayerTeam')"></div>
     </div>
-    <!-- <div v-if="displayMap" class="map-wrapper">
-        <div class="map" v-if="currentMap">
-            <div v-for="floor in currentMap" :key="floor" class="row" :class="`row-${floor.length}`">
-                <div v-for="room in floor" :key="room" class="room" :class="getRoomClass(room)" @click="setPlayerPosition(room)"></div>
-            </div>
-        </div>
+
+    <div v-if="currentDisplayedComp" class="component-overlay">
+        <component v-bind:is="currentDisplayedComp"></component>
     </div>
-    <div v-if="displayTeam" class="team-wrapper"></div> -->
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import PlayerTeam from "./gameinterfacecomponents/PlayerTeam.vue"
+import GameMap from "./gameinterfacecomponents/GameMap.vue"
 
 
 @Options({
     name: "GameInterface",
-    props: {
-        currentMap: Array
+    components: {
+        PlayerTeam,
+        GameMap
     }
 })
 export default class GameInterface extends Vue {
-    public height = 6
-    public displayMap = false
-    public displayTeam = false
-    public currentMap!: any
-    public playerPositionOnMap = null
-    public playerCurrentFloor = -1
+    public currentDisplayedComp = ''
 
-    private onGameInterfaceClicked(message) { 
-        this.height = this.displayMap || this.displayTeam ? 6 : 100
-        this.$emit(message)
-    }
-
-    public onMapClicked() {
-        this.displayMap = !this.displayMap
-        this.displayTeam = false
-        this.onGameInterfaceClicked(this.displayMap ? "displayInterface" : "hideInterface")
-    }
-
-    public onTeamClicked() {
-        this.displayTeam = !this.displayTeam
-        this.displayMap = false
-        this.onGameInterfaceClicked(this.displayTeam ? "displayInterface" : "hideInterface")
-    }
-
-    public setPlayerPosition(room) {
-        this.playerCurrentFloor = room.floor
-    }
-
-    public getRoomClass(room) {
-        const roomClass = `room-${room.type}`
-        let floorClass = ''
-        if(room.floor === this.playerCurrentFloor + 1) {
-            floorClass = 'clickable'
+    public clickInterfaceButton(buttonName) {
+        if(buttonName === this.currentDisplayedComp) {
+            this.currentDisplayedComp = ''
         }
 
-        return `${roomClass} ${floorClass}`
+        else {
+            this.currentDisplayedComp = buttonName
+        }
     }
 }
 </script>

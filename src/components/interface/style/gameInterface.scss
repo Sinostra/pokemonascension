@@ -3,6 +3,7 @@
     top: 0;
     left: 0;
     width: 100%;
+    height: 6%;
     background-image: url('../../assets/img/interface/top_border.jpg');
     background-position: bottom;
     display: flex;
@@ -25,84 +26,13 @@
     }
 }
 
-.map-wrapper {
+
+.component-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 94%;
     background: rgba($color: #000000, $alpha: 0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .map {
-        width: 90%;
-        height: 90%;
-        background-color: #fff;
-        overflow: auto;
-        // background: center / contain no-repeat url('../../assets/img/interface/map.png');
-
-        .row {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 10%;
-            margin-top: 5%;
-
-            &.row-1 {
-                height: 30%;
-            }
-
-            .room {
-                width: 10%;
-                height: 100%;
-                cursor: pointer;
-
-                &.room-0 {
-                    background: center / contain no-repeat url('../../assets/img/interface/map/foe.png');
-                }
-
-                &.room-1 {
-                    background: center / contain no-repeat url('../../assets/img/interface/map/elite.png');
-                }
-
-                &.room-2 {
-                    background: center / contain no-repeat url('../../assets/img/interface/map/unknown.png');
-                }
-
-                &.room-3 {
-                    background: center / contain no-repeat url('../../assets/img/interface/map/shop.png');
-                }
-
-                &.room-4 {
-                    background: center / contain no-repeat url('../../assets/img/interface/map/pkmcentr.png');
-                }
-
-                &.room-5 {
-                    background: center / contain no-repeat url('../../assets/img/interface/map/chest.png');
-                }
-
-                &.room-6 {
-                    background: center / contain no-repeat url('../../assets/img/interface/map/boss.png');
-                }
-
-                // &:not(.clickable) {
-                //     filter: grayscale(90%);
-                // }
-            }
-        }
-    }
-}
-
-.team-wrapper {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 94%;
-    background: rgba($color: #000000, $alpha: 0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    z-index: 5;
 }
