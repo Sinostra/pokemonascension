@@ -3,7 +3,7 @@
   :class="appClass"
   @click.right.prevent="onRightClick()">
     <Background/>
-    <Interface/>
+    <GameInterface/>
     <EventsManager v-if="$store.state.events.currentEvent"/>
     <BattleManager v-if="$store.state.battle.isBattleOngoing && !$store.state.battle.playerLost"/>
     <AfterBattleModal v-if="$store.state.battle.displayBattleRewards || $store.state.battle.playerLost"></AfterBattleModal>
@@ -15,17 +15,17 @@ import { Options, Vue } from 'vue-class-component'
 import Background from './components/Background.vue'
 import BattleManager from './components/BattleManager.vue'
 import EventsManager from './components/EventsManager.vue'
-import Interface from './components/Interface.vue'
+import GameInterface from './components/interface/GameInterface.vue'
 import AfterBattleModal from './components/interface/AfterBattleModal.vue'
 import { inject } from 'vue'
 
 @Options({
-    name: "BattleInterface",
+    name: "App",
     components: {
         Background,
         BattleManager,
         EventsManager,
-        Interface,
+        GameInterface,
         AfterBattleModal
     }
 })
