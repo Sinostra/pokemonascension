@@ -1,5 +1,5 @@
 <template>
-    <StarterChoice/>
+    <component v-bind:is="$store.state.events.currentEvent"></component>
 </template>
 
 <script lang="ts">
@@ -14,8 +14,6 @@ import { Options, Vue } from 'vue-class-component'
     }
 })
 
-export default class EventsManager extends Vue {
-
-}
+export default class EventsManager extends Vue {}
 
 </script>

@@ -1,6 +1,6 @@
 export default {
     state: {
-        currentEvent: "starterChoice"
+        currentEvent: "StarterChoice"
     },
 
     mutations: {
