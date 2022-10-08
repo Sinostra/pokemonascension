@@ -1,9 +1,9 @@
 <template>
     <div class="starter-choice">
         <div class="starters-wrapper">
-            <DisplayPokemon :id="'004'" :width="100"></DisplayPokemon>
-            <DisplayPokemon :id="'007'" :width="100"></DisplayPokemon>
-            <DisplayPokemon :id="'001'" :width="95"></DisplayPokemon>
+            <DisplayPokemon :id="'004'" :width="80" :displayHelpTooltip="true"></DisplayPokemon>
+            <DisplayPokemon :id="'007'" :width="90" :displayHelpTooltip="true"></DisplayPokemon>
+            <DisplayPokemon :id="'001'" :width="95" :displayHelpTooltip="true"></DisplayPokemon>
         </div>
     </div>
 </template>
@@ -35,8 +35,8 @@ export default class GameInterface extends Vue {
         display: flex;
         justify-content: space-evenly;
         align-items: flex-end;
-        top: 32%;
-        transform: translateX(31%);
+        top: 31%;
+        transform: translateX(32%);
         width: 60%;
     }
 
