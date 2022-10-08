@@ -1,6 +1,6 @@
 <template>
     <div class="pokemon-wrapper" :class="wrapperClass" :style="wrapperStyle" @mouseover="onHover()" @mouseleave="onHover(false)">
-      <img class="pokemon-sprite" :src="spritePath" @click="clickStarter()">
+      <img class="pokemon-sprite" :src="spritePath" @click="clickPokemon()">
       <div v-if="displayHelpTooltip" class="help-tooltip">
         <div class="pokemon-data">
           <div class="text">{{dataPokemon['name']['english']}}</div>
@@ -27,7 +27,6 @@
 <script lang="ts">
 import { Options } from "vue-class-component";
 import Pokemon from "./Pokemon";
-import cloneDeep from "lodash.clonedeep"
 
 @Options({
   name: "DisplayPokemon",
@@ -54,22 +53,8 @@ export default class DisplayPokemon extends Pokemon {
     } 
   }
 
-  public clickStarter() {
-    const starterData = {
-      id: this.id,
-      deck: this.dataPokemon['starterDeck'],
-      hp: this.dataPokemon['baseStats']['hp'],
-      fainted: false,
-    }
-    this.$store.commit("addPokemon", starterData)
-    this.$store.commit("setFoes", cloneDeep(this.$store.state.allFoes.dataFoes[0]))
-    this.$store.commit("changeBackground", 'forest.gif')
-    this.$store.commit("removeEvent")
-    this.$store.commit("startBattle", "forest")
-    // const $app = document.querySelector("#app")
-    // if($app) {
-    //   $app.requestFullscreen()
-    // }
+  public clickPokemon() {
+    this.$emit("clickPokemon", this.id)
   }
 }
 

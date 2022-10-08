@@ -1,9 +1,24 @@
 <template>
     <div class="starter-choice">
         <div class="starters-wrapper">
-            <DisplayPokemon :id="'004'" :width="80" :displayHelpTooltip="true"></DisplayPokemon>
-            <DisplayPokemon :id="'007'" :width="90" :displayHelpTooltip="true"></DisplayPokemon>
-            <DisplayPokemon :id="'001'" :width="95" :displayHelpTooltip="true"></DisplayPokemon>
+            <DisplayPokemon
+                :id="'004'"
+                :width="80"
+                :displayHelpTooltip="true"
+                @clickPokemon="clickStarter($event)"
+            ></DisplayPokemon>
+            <DisplayPokemon
+                :id="'007'"
+                :width="90"
+                :displayHelpTooltip="true"
+                @clickPokemon="clickStarter($event)"
+            ></DisplayPokemon>
+            <DisplayPokemon
+                :id="'001'"
+                :width="95"
+                :displayHelpTooltip="true"
+                @clickPokemon="clickStarter($event)"
+            ></DisplayPokemon>
         </div>
     </div>
 </template>
@@ -11,6 +26,7 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import DisplayPokemon from "../pokemon/DisplayPokemon.vue"
+import cloneDeep from "lodash.clonedeep"
 
 @Options({
   name: "GameInterface",
@@ -20,6 +36,25 @@ import DisplayPokemon from "../pokemon/DisplayPokemon.vue"
 })
 
 export default class GameInterface extends Vue {
+
+    public clickStarter(id: string) {
+        
+        const starterData = {
+            id: id,
+            deck: this.$store.getters.getDex[id]['starterDeck'],
+            hp: this.$store.getters.getDex[id]['baseStats']['hp'],
+            fainted: false,
+        }
+        this.$store.commit("addPokemon", starterData)
+        this.$store.commit("setFoes", cloneDeep(this.$store.state.allFoes.dataFoes[0]))
+        this.$store.commit("changeBackground", 'forest.gif')
+        this.$store.commit("removeEvent")
+        this.$store.commit("startBattle", "forest")
+    // const $app = document.querySelector("#app")
+    // if($app) {
+    //   $app.requestFullscreen()
+    // }
+    }
 
 }
 </script>
