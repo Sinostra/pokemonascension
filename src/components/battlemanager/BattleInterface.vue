@@ -38,9 +38,9 @@
 </template>
 
 <script lang="ts">
-import Hand from '../interface/Hand.vue'
-import DiscardFromSelectManager from '../interface/discard/DiscardFromSelectManager.vue'
-import DiscardFromHandManager from '../interface/discard/DiscardFromHandManager.vue'
+import Hand from './Hand.vue'
+import DiscardFromSelectManager from './discard/DiscardFromSelectManager.vue'
+import DiscardFromHandManager from './discard/DiscardFromHandManager.vue'
 import { Options, Vue } from 'vue-class-component'
 import { inject } from 'vue'
 import cloneDeep from "lodash.clonedeep"

@@ -13,7 +13,7 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 import Background from './components/Background.vue'
-import BattleManager from './components/BattleManager.vue'
+import BattleManager from './components/battlemanager/BattleManager.vue'
 import EventsManager from './components/EventsManager.vue'
 import GameInterface from './components/interface/GameInterface.vue'
 import AfterBattleModal from './components/interface/AfterBattleModal.vue'

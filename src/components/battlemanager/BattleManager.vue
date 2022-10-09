@@ -6,8 +6,8 @@
 </template>
 
 <script lang="ts">
-import BattleScene from './battlemanager/BattleScene.vue'
-import BattleInterface from './battlemanager/BattleInterface.vue'
+import BattleScene from './BattleScene.vue'
+import BattleInterface from './BattleInterface.vue'
 import { Options, Vue } from 'vue-class-component'
 import { Watch } from 'vue-property-decorator'
 import { inject } from 'vue'
