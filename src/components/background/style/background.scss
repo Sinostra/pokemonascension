@@ -16,4 +16,8 @@
     &.forest {
         background-image: url("../../assets/img/backgrounds/forest.gif");
     }
+
+    &.rain {
+        animation: rain 1s linear forwards;
+    }
 }
