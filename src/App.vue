@@ -52,7 +52,7 @@ export default class App extends Vue {
     window.addEventListener("resize", this.onResize);
     window.addEventListener("mousemove", this.onMouseMove)
     window.dispatchEvent(new Event('resize'));
-    this.$store.commit("changeBackground", 'starter_background.jpg')
+    this.$store.commit("changeBackground", 'starter_background')
   }
 
   public beforeUnmount() {

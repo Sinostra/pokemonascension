@@ -51,7 +51,7 @@ export default class PlayerPokemon extends Pokemon {
   private emitter: any = inject('emitter')
 
   get playerPosition(): string {
-    const currentBackground: string = this.$store.state.battle.backgroundUsed
+    const currentBackground: string = this.$store.getters.getBackgroundUsed
     return `left: ${this.$store.state.backgrounds.slots[currentBackground]['player']['left']}%; bottom: ${this.$store.state.backgrounds.slots[currentBackground]['player']['bottom']}%;`
   }
 

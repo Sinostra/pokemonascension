@@ -47,9 +47,9 @@ export default class GameInterface extends Vue {
         }
         this.$store.commit("addPokemon", starterData)
         this.$store.commit("setFoes", cloneDeep(this.$store.state.allFoes.dataFoes[0]))
-        this.$store.commit("changeBackground", 'forest.gif')
+        this.$store.commit("changeBackground", 'forest')
         this.$store.commit("removeEvent")
-        this.$store.commit("startBattle", "forest")
+        this.$store.commit("startBattle")
     // const $app = document.querySelector("#app")
     // if($app) {
     //   $app.requestFullscreen()

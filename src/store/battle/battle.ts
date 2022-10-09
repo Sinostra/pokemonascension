@@ -1,6 +1,5 @@
 export default {
     state: {
-        backgroundUsed: 'starter_background',
         currentEnergy: 3,
         maxEnergy: 3,
         selectedCard: null,
@@ -12,6 +11,7 @@ export default {
         isBattleOngoing: false,
         displayBattleRewards: false,
         playerLost: false,
+        currentWeather: '',
         mouseCoordinates: {
             x: 0,
             y: 0
@@ -70,8 +70,7 @@ export default {
             state.typesHover = types
         },
 
-        startBattle(state, background) {
-            state.backgroundUsed = background
+        startBattle(state) {
             state.isBattleOngoing = true
         },
         stopBattle(state) {
@@ -89,6 +88,9 @@ export default {
         },
         resetPlayerStatus(state) {
             state.playerLost = false
+        },
+        setWeather(state, weather) {
+            state.currentWeather = weather 
         },
         updateMouseCoordinates(state, coords) {
             state.mouseCoordinates.x = coords.x

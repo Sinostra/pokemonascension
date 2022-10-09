@@ -1,5 +1,5 @@
 <template>
-    <div v-if="$store.getters.getBackgroundUsed" class="background-wrapper" :style="backgroundStyle"></div>
+    <div v-if="$store.getters.getBackgroundUsed" class="background-wrapper" :class="backgroundClass"></div>
 </template>
 
 <script lang="ts">
@@ -30,13 +30,8 @@ export default class Background extends Vue {
         this.animWeather()
     }
 
-    get backgroundStyle() {
-        const weatherBackground = this.weather ? `url(${this.weatherUrl}),` : ''
-        return `background: ${weatherBackground} url(${this.backgroundUrl}); background-size: cover`
-    }
-
-    get backgroundUrl() {
-        return require('@/assets/img/backgrounds/' + this.$store.getters.getBackgroundUsed) 
+    get backgroundClass() {
+        return `${this.$store.getters.getBackgroundUsed} ${this.$store.state.battle.currentWeather}`
     }
 
     get weatherUrl() {
@@ -50,15 +45,5 @@ export default class Background extends Vue {
 </script>
 
 <style lang='scss' scoped>
-.background-wrapper {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    z-index: -1;
-    background-size: cover;
-    background-position: bottom;
-    background-repeat: no-repeat;
-}
+@import './style/background.scss';
 </style>

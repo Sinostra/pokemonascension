@@ -92,7 +92,7 @@ export default class FoePokemon extends Pokemon {
   private emitter: any = inject('emitter')
 
   get foePosition(): string {
-    const currentBackground: string = this.$store.state.battle.backgroundUsed
+    const currentBackground: string = this.$store.getters.getBackgroundUsed
     return `left: ${this.$store.state.backgrounds.slots[currentBackground]['foes'][this.index]['left']}%; bottom: ${this.$store.state.backgrounds.slots[currentBackground]['foes'][this.index]['bottom']}%;`
   }
 

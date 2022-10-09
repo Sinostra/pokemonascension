@@ -23,8 +23,8 @@ export default class AfterBattleModal extends Vue {
         this.$store.commit("setFoes", [])
         this.$store.commit("stopDisplayBattleRewards")
         this.$store.commit("setFoes", cloneDeep(this.$store.state.allFoes.dataFoes[1]))
-        this.$store.commit("changeBackground", 'forest.gif')
-        this.$store.commit("startBattle", "forest")
+        this.$store.commit("changeBackground", 'forest')
+        this.$store.commit("startBattle")
     }
 
     public onClickRestart() {
@@ -33,7 +33,7 @@ export default class AfterBattleModal extends Vue {
         this.$store.commit("stopBattle")
         this.$store.commit("resetPlayerStatus")
         this.$store.commit("stopDisplayBattleRewards")
-        this.$store.commit("changeBackground", 'starter_background.jpg')
+        this.$store.commit("changeBackground", 'starter_background')
         this.$store.commit("setEvent", 'starterChoice')
     }
 }
