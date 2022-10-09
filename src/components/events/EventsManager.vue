@@ -4,7 +4,7 @@
 
 <script lang="ts">
 
-import StarterChoice from './events/StarterChoice.vue'
+import StarterChoice from './StarterChoice.vue'
 import { Options, Vue } from 'vue-class-component'
 
 @Options({

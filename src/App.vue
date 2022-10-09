@@ -12,9 +12,9 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import Background from './components/Background.vue'
+import Background from './components/background/Background.vue'
 import BattleManager from './components/battlemanager/BattleManager.vue'
-import EventsManager from './components/EventsManager.vue'
+import EventsManager from './components/events/EventsManager.vue'
 import GameInterface from './components/interface/GameInterface.vue'
 import AfterBattleModal from './components/interface/AfterBattleModal.vue'
 import { inject } from 'vue'
