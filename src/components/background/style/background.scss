@@ -17,7 +17,14 @@
         background-image: url("../../assets/img/backgrounds/forest.gif");
     }
 
-    &.rain {
-        animation: rain 1s linear forwards;
+    .weather-wrapper {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+
+        &.rain {
+            animation: rain 0.5s linear forwards;
+            animation-iteration-count: infinite;
+        }
     }
 }

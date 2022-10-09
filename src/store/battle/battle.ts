@@ -11,7 +11,7 @@ export default {
         isBattleOngoing: false,
         displayBattleRewards: false,
         playerLost: false,
-        currentWeather: 'rain',
+        currentWeather: '',
         mouseCoordinates: {
             x: 0,
             y: 0
