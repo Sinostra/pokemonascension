@@ -39,7 +39,6 @@
 
 <script lang="ts">
 import Hand from '../interface/Hand.vue'
-import PlayCardModal from '../interface/PlayCardModal.vue'
 import DiscardFromSelectManager from '../interface/discard/DiscardFromSelectManager.vue'
 import DiscardFromHandManager from '../interface/discard/DiscardFromHandManager.vue'
 import { Options, Vue } from 'vue-class-component'
@@ -50,7 +49,6 @@ import cloneDeep from "lodash.clonedeep"
     name: "BattleInterface",
     components: {
         Hand,
-        PlayCardModal,
         DiscardFromSelectManager,
         DiscardFromHandManager
     }
