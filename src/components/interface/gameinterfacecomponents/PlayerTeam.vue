@@ -4,17 +4,19 @@
         :key="index"
         class="team-member-wrapper"
         >
-            <DisplayPokemon
-            :id="pokemon.id"
-            :width="100"
-            :displayHelpTooltip="false"
-            ></DisplayPokemon>
+            <div class="pokemon-info">
+                <DisplayPokemon
+                :id="pokemon.id"
+                :width="100"
+                :displayHelpTooltip="false"
+                ></DisplayPokemon>
 
-            <div class="healthBar-infos-wrapper">
-                <div class="healthBar">
-                    <div class="currentHealth" :class="getHealthBarClass(index)" :style="{'width': getHealthBarPercent(index) + '%'}"></div>
-                    <div class="bottom-infos">
-                        <div class="healthAmount" :style="getFontSize(0.8)">{{getCurrentHealth(index)}}/{{getMaxHealth(index)}}</div>
+                <div class="healthBar-infos-wrapper">
+                    <div class="healthBar">
+                        <div class="currentHealth" :class="getHealthBarClass(index)" :style="{'width': getHealthBarPercent(index) + '%'}"></div>
+                        <div class="bottom-infos">
+                            <div class="healthAmount" :style="getFontSize(0.8)">{{getCurrentHealth(index)}}/{{getMaxHealth(index)}}</div>
+                        </div>
                     </div>
                 </div>
             </div>
