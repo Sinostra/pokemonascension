@@ -1,5 +1,50 @@
-.team-member-wrapper {
+
+.team-wrapper {
     display: flex;
-    justify-content: space-around;
     padding-top: 10px;
+    justify-content: center;
+
+    .team-member-wrapper {
+        width: 10%;
+
+        .pokemon-wrapper {
+            height: auto;
+        }
+
+        .healthBar-infos-wrapper {
+            .healthBar {
+                background-color: #363636;
+                border: 1px solid #000;
+                position: relative;
+                filter: drop-shadow(0px 2px 1px #000);
+                height: 1.2vh;
+
+                .currentHealth {
+                    height: calc(100% + 1px);
+                  
+                    &.green {
+                      background: #45c43a;
+                    }
+                  
+                    &.orange {
+                      background: #e5bf37;
+                    }
+                  
+                    &.red {
+                      background: #ef3131;
+                    }
+                }
+
+                .bottom-infos {
+                    display: flex;
+            
+                    .healthAmount {
+                      font-family: 'ERASDEMI';
+                      color: #fff;
+                    }
+                }
+            }
+        }
+    }
 }
+
