@@ -18,6 +18,10 @@
                     </div>
                 </div>
             </div>
+
+            <DisplayDeck
+                :deck="pokemon.deck"
+            ></DisplayDeck>
         </div>
     </div>
     
@@ -25,13 +29,13 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import DisplayPokemon from "../../pokemon/DisplayPokemon.vue"
-import DisplayCard from "../../card/DisplayCard.vue"
+import DisplayDeck from "../../card/DisplayDeck.vue"
 
 @Options({
     name: "PlayerTeam",
     components: {
         DisplayPokemon,
-        DisplayCard
+        DisplayDeck
     }
 })
 export default class PlayerTeam extends Vue {

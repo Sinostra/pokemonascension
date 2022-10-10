@@ -24,7 +24,7 @@ import { Options, Vue } from "vue-class-component";
 import dataCard from "@/store/constantData/cards/data-cards"
 
 @Options({
-  name: "Card",
+  name: "DisplayCard",
   props: {
     id: String,
   }
@@ -75,7 +75,5 @@ export default class DisplayCard extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import './style/card.scss';
-@import '../animations/cards/draw.scss';
-@import '../animations/cards/discard.scss';
+@import './style/displayCard.scss';
 </style>
