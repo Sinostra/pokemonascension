@@ -7,11 +7,11 @@
             <div class="pokemon-info">
                 <DisplayPokemon
                 :id="pokemon.id"
-                :width="100"
+                :width="getWidth(index)"
                 :displayHelpTooltip="false"
                 ></DisplayPokemon>
 
-                <div class="healthBar-infos-wrapper">
+                <div class="healthBar-infos-wrapper" :style="`width: ${getWidth(index)}%`">
                     <div class="healthBar">
                         <div class="currentHealth" :class="getHealthBarClass(index)" :style="{'width': getHealthBarPercent(index) + '%'}"></div>
                         <div class="bottom-infos">
@@ -45,6 +45,11 @@ export default class PlayerTeam extends Vue {
     public getMaxHealth(index) {
         const id = this.$store.getters.getPlayerTeam[index]['id']
         return this.$store.getters.getDex[id]['baseStats']['hp']
+    }
+
+    public getWidth(index) {
+        const id = this.$store.getters.getPlayerTeam[index]['id']
+        return this.$store.getters.getDex[id]['size']
     }
 
     public getCurrentHealth(index) {

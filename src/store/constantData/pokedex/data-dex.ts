@@ -67,7 +67,7 @@ export default {
         },
         
         "type": ["fire"],
-        "size": 50,
+        "size": 65,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -127,7 +127,7 @@ export default {
         },
         
         "type": ["water"],
-        "size": 60,
+        "size": 65,
         "baseStats": {
             "hp": 45,
             "attack": 2,
