@@ -1,6 +1,6 @@
 <template>
   <div class="card" :class="dataCard[id]['effect']['type']">
-    <div class="background-img" :style="{'background-image':`url(${background})`}"></div>
+    <img class="background-img" :src="background">
     <div class="cost" :style="(getFontSize(1))">
       <img :src="costBackground">
       {{ dataCard[id]['cost'] }}
