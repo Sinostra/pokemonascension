@@ -10,20 +10,18 @@ import foes from './battle/foes'
 import settings from './settings/settings'
 import allFoes from './constantData/foes/allFoes'
 import app from './app/app'
-import cloneDeep from "lodash.clonedeep"
 
 export default createStore({
   state: {},
 
   actions: {
 
-    goToNextBattle(context, state) {
-      console.log(state)
-      // context.commit("setFoes", [])
-      // context.commit("stopDisplayBattleRewards")
-      // context.commit("setFoes", cloneDeep(state.state.allFoes.dataFoes[1]))
-      // context.commit("changeBackground", 'forest')
-      // context.commit("startBattle")
+    goToNextBattle(context, foes) {
+      context.commit("setFoes", [])
+      context.commit("stopDisplayBattleRewards")
+      context.commit("setFoes", foes)
+      context.commit("changeBackground", 'forest')
+      context.commit("startBattle")
     },
 
     resetGame(context) {

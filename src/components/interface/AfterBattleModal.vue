@@ -14,12 +14,14 @@
 <script lang="ts">
 import { Vue } from 'vue-class-component'
 import { inject } from 'vue'
+import cloneDeep from "lodash.clonedeep"
 
 export default class AfterBattleModal extends Vue {
     private emitter: any = inject('emitter')
 
     public onClickNextBattle() {
-        this.$store.dispatch("goToNextBattle")
+        const nextFoes = cloneDeep(this.$store.state.allFoes.dataFoes[1])
+        this.$store.dispatch("goToNextBattle", nextFoes)
     }
 
     public onClickRestart() {
