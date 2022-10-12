@@ -165,7 +165,7 @@ export default {
         "target": true,
         "effect":{
             "type": "grass",
-            "damage": 6,
+            "damage": 60,
         },
         "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy',
     },

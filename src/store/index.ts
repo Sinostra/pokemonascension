@@ -10,9 +10,32 @@ import foes from './battle/foes'
 import settings from './settings/settings'
 import allFoes from './constantData/foes/allFoes'
 import app from './app/app'
+import cloneDeep from "lodash.clonedeep"
 
 export default createStore({
   state: {},
+
+  actions: {
+
+    goToNextBattle(context, state) {
+      console.log(state)
+      // context.commit("setFoes", [])
+      // context.commit("stopDisplayBattleRewards")
+      // context.commit("setFoes", cloneDeep(state.state.allFoes.dataFoes[1]))
+      // context.commit("changeBackground", 'forest')
+      // context.commit("startBattle")
+    },
+
+    resetGame(context) {
+      context.commit("emptyPlayerTeam")
+      context.commit("setFoes", [])
+      context.commit("stopBattle")
+      context.commit("resetPlayerStatus")
+      context.commit("stopDisplayBattleRewards")
+      context.commit("changeBackground", 'starter_background')
+      context.commit("setEvent", 'StarterChoice')
+    }
+  },
   
   modules: {
     pokedex,
