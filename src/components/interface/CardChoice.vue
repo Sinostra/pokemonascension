@@ -1,6 +1,6 @@
 <template>
     <div v-if="!hasChosenCard" class="proposed-cards-wrapper">
-        <div v-for="(card, index) in proposedCards" :key="index" class="proposed-card">
+        <div v-for="(card, index) in proposedCards" :key="index" class="proposed-card" @click="onCardClick(card)">
             <DisplayCard :id="card"></DisplayCard>
         </div>
     </div>
@@ -24,6 +24,11 @@ export default class CardChoice extends Vue {
     public proposedCards: string[] = []
 
     public hasChosenCard = false
+
+    public onCardClick(card) {
+        this.$store.commit("addCardToPokemon", {pokemonIndex: this.$store.getters.getActiveIndex, cardId: card})
+        this.hasChosenCard = true
+    }
 
     public mounted() {
         const cardChoice = cloneDeep(this.$store.getters.getDex[this.$store.getters.getActivePokemon.id]['compatibleCards'])
