@@ -23,8 +23,8 @@ export default {
             }
             state.team[state.activeIndex].fainted = true
         },
-        addCardToPokemon(state, pokemonIndex: number, cardId: string) {
-            state.team[pokemonIndex]['deck'].push(cardId)
+        addCardToPokemon(state, payload) {
+            state.team[payload.pokemonIndex]['deck'].push(payload.cardId)
         },
         switchActivePokemon(state) {
             
