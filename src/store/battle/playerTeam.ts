@@ -1,39 +1,6 @@
 export default {
     state: {
-        team: [
-            {
-                "id": "001",
-                "deck": [
-                  "010",
-                  "010",
-                  "010",
-                  "010",
-                  "010",
-                  "004",
-                  "004",
-                  "004",
-                  "004",
-                  "007"
-                ],
-                "remainingHp": 45
-            },
-            {
-                "id": "004",
-                "deck": [
-                  "011",
-                  "011",
-                  "011",
-                  "011",
-                  "011",
-                  "004",
-                  "004",
-                  "004",
-                  "004",
-                  "007"
-                ],
-                "remainingHp": 45
-            } 
-        ],
+        team: [],
         activeIndex: 0,
     },
 
@@ -56,9 +23,12 @@ export default {
             }
             state.team[state.activeIndex].fainted = true
         },
+        addCardToPokemon(state, pokemonIndex: number, cardId: string) {
+            state.team[pokemonIndex]['deck'].push(cardId)
+        },
         switchActivePokemon(state) {
             
-        }
+        },
     },
 
     getters: {

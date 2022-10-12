@@ -34,7 +34,7 @@ export default class AfterBattleModal extends Vue {
         this.$store.commit("resetPlayerStatus")
         this.$store.commit("stopDisplayBattleRewards")
         this.$store.commit("changeBackground", 'starter_background')
-        this.$store.commit("setEvent", 'starterChoice')
+        this.$store.commit("setEvent", 'StarterChoice')
     }
 }
 </script>
