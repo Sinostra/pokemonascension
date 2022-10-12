@@ -1,5 +1,5 @@
 <template>
-    <div class="proposed-cards-wrapper">
+    <div v-if="!hasChosenCard" class="proposed-cards-wrapper">
         <div v-for="(card, index) in proposedCards" :key="index" class="proposed-card">
             <DisplayCard :id="card"></DisplayCard>
         </div>
@@ -22,6 +22,8 @@ export default class CardChoice extends Vue {
     public proposedCardsAmount = 3
 
     public proposedCards: string[] = []
+
+    public hasChosenCard = false
 
     public mounted() {
         const cardChoice = cloneDeep(this.$store.getters.getDex[this.$store.getters.getActivePokemon.id]['compatibleCards'])

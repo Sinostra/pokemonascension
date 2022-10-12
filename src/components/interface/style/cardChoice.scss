@@ -1,7 +1,13 @@
 .proposed-cards-wrapper {
     display: flex;
+    justify-content: space-evenly;
 
     .proposed-card {
         width: 20%;
+        cursor: pointer;
+
+        &:hover {
+            scale: 1.1;
+        }
     }
 }

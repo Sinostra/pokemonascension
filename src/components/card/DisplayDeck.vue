@@ -1,10 +1,8 @@
 <template>
   <div class="deck-wrapper">
-    <DisplayCard
-      v-for="(card, index) in deck"
-      :key="index"
-      :id="card"
-    ></DisplayCard>
+    <div v-for="(card, index) in deck" :key="index" class="card-slot">
+      <DisplayCard :id="card"></DisplayCard>
+    </div>
   </div>
 </template>
 

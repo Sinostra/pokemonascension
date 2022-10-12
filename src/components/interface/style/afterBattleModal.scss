@@ -14,7 +14,7 @@
     justify-content: center;
 
     .modal-txt {
-        padding-bottom: 10px;
+        padding-bottom: 30px;
         text-align: center;
     }
 
@@ -26,5 +26,7 @@
         border-radius: 5px;
         border: 2px #fff solid;
         padding: 10px 15px;
+        max-width: 30%;
+        margin: 30px auto 0;
     }
 }
