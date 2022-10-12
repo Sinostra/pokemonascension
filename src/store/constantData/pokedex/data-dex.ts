@@ -13,6 +13,9 @@ export default {
             "attack": 2,
             "defense": 1
         },
+        "compatibleCards": [
+            "003", "004", "005", "007", "009", "010"
+        ],
         "starterDeck": [
             "010",
             "010",
@@ -73,6 +76,9 @@ export default {
             "attack": 2,
             "defense": 1
         },
+        "compatibleCards": [
+            "003", "004", "005", "007", "009", "011"
+        ],
         "starterDeck": [
             "011",
             "011",
@@ -133,6 +139,9 @@ export default {
             "attack": 2,
             "defense": 1
         },
+        "compatibleCards": [
+            "003", "004", "005", "007", "009", "012"
+        ],
         "starterDeck": [
             "012",
             "012",

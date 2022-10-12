@@ -2,6 +2,7 @@
     <div class="modal-wrapper">
         <div v-if="$store.state.battle.displayBattleRewards" class="victory-wrapper">
             <div class="modal-txt">Victory !</div>
+            <CardChoice></CardChoice>
             <div class="modal-btn" @click="onClickNextBattle()">Go to the next battle</div>
         </div>
         <div v-if="$store.state.battle.playerLost" class="defeat-wrapper">
@@ -12,13 +13,17 @@
 </template>
 
 <script lang="ts">
-import { Vue } from 'vue-class-component'
-import { inject } from 'vue'
+import { Options, Vue } from 'vue-class-component'
+import CardChoice from "./CardChoice.vue"
 import cloneDeep from "lodash.clonedeep"
 
+@Options({
+    name: "AfterBattleModal",
+    components: {
+        CardChoice
+    }
+})
 export default class AfterBattleModal extends Vue {
-    private emitter: any = inject('emitter')
-
     public onClickNextBattle() {
         const nextFoes = cloneDeep(this.$store.state.allFoes.dataFoes[1])
         this.$store.dispatch("goToNextBattle", nextFoes)

@@ -40,6 +40,10 @@ export default {
             return state.activeIndex
         },
 
+        getActivePokemon: state => {
+            return state.team[state.activeIndex]
+        },
+
         getNotFaintedPokemon: state => {
             return state.team.filter((pokemon) => !pokemon.fainted)
         },
