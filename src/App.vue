@@ -18,6 +18,7 @@ import EventsManager from './components/events/EventsManager.vue'
 import GameInterface from './components/interface/GameInterface.vue'
 import AfterBattleModal from './components/interface/AfterBattleModal.vue'
 import { inject } from 'vue'
+import { ClassContainer } from "./engine/ClassContainer"
 
 @Options({
     name: "App",
@@ -49,6 +50,12 @@ export default class App extends Vue {
   }
 
   public mounted() {
+
+    const car = 'Audi'
+
+    let tesla: any = new DynamicClass(car, 'Someone');
+    // console.log(`Type of object \'tesla\': ${tesla.constructor['name']}`);
+
     window.addEventListener("resize", this.onResize);
     window.addEventListener("mousemove", this.onMouseMove)
     window.dispatchEvent(new Event('resize'));
@@ -58,6 +65,15 @@ export default class App extends Vue {
   public beforeUnmount() {
     window.removeEventListener("resize", this.onResize)
     window.removeEventListener("mousemove", this.onMouseMove)
+  }
+}
+
+class DynamicClass {
+  constructor(className: string, opts: any) {
+    if (ClassContainer[className] === undefined || ClassContainer[className] === null) {
+        throw new Error(`Class type of \'${className}\' is not in the store`);
+    }
+    return new ClassContainer[className](opts);
   }
 }
 </script>
