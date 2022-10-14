@@ -18,7 +18,7 @@ import EventsManager from './components/events/EventsManager.vue'
 import GameInterface from './components/interface/GameInterface.vue'
 import AfterBattleModal from './components/interface/AfterBattleModal.vue'
 import { inject } from 'vue'
-import { ClassContainer } from "./engine/ClassContainer"
+import { EffectContainer } from "./engine/EffectContainer"
 
 @Options({
     name: "App",
@@ -53,7 +53,7 @@ export default class App extends Vue {
 
     const effect = 'AttackEffect'
 
-    let attack = new ClassContainer[effect]({
+    let attack = new EffectContainer[effect]({
       user: 'player',
       target: 0,
       damageAmount: 6,
