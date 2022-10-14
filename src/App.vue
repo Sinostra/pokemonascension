@@ -51,6 +51,10 @@ export default class App extends Vue {
 
   public mounted() {
 
+    const multiAttack = new EffectContainer['MultiAttackEffect']({damageTimes: 5})
+    multiAttack.playEffect()
+    // console.log(multiAttack)
+
     // const effect = 'AttackEffect'
 
     // let attack = new EffectContainer[effect]({
@@ -61,12 +65,12 @@ export default class App extends Vue {
     //   ignoreBlock: false,
     // })
 
-    let attack = new EffectContainer['AttackEffect']()
-    let block = new EffectContainer['BlockEfffect']()
+    // let attack = new EffectContainer['AttackEffect']()
+    // let block = new EffectContainer['BlockEfffect']()
 
-    let multi = new EffectContainer['MultiEffect']([attack, block])
+    // let multi = new EffectContainer['MultiEffect']([attack, block])
 
-    multi.playEffect()
+    // multi.playEffect()
 
     // console.log(multi)
 
