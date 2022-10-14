@@ -51,10 +51,17 @@ export default class App extends Vue {
 
   public mounted() {
 
-    const car = 'Audi'
+    const effect = 'AttackEffect'
 
-    let tesla: any = new DynamicClass(car, 'Someone');
-    // console.log(`Type of object \'tesla\': ${tesla.constructor['name']}`);
+    let attack: any = new DynamicClass(effect, {
+      user: 'player',
+      target: 0,
+      damageAmount: 6,
+      damageType: 'grass',
+      ignoreBlock: false,
+    });
+
+    console.log(attack)
 
     window.addEventListener("resize", this.onResize);
     window.addEventListener("mousemove", this.onMouseMove)
