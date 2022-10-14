@@ -61,12 +61,28 @@ export class DrawEfffect extends BaseEffect implements IEffect {
   playEffect(): Promise<void> {
     return new Promise((resolve) => {
       this.emitter.emit("draw", this.params)
-      resolve()
+      this.emitter.on("drawIsDone", resolve())
+      // this.emitter.off("drawIsDone", resolve())
+    })
+  }
+}
+
+export class MultiEffect implements IEffect {
+  constructor(effects) {
+    this.effects = effects
+  }
+  private effects: IEffect[] = []
+  playEffect(): Promise<void> {
+    return new Promise((resolve) => {
+      Promise.all(this.effects.map((effect) => effect.playEffect())).then(() => {
+        resolve()
+      })
     })
   }
 }
 
 export const EffectContainer: any = {
+  MultiEffect,
   AttackEffect,
   BlockEfffect,
   HealEfffect,

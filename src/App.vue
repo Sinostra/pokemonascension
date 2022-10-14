@@ -51,17 +51,27 @@ export default class App extends Vue {
 
   public mounted() {
 
-    const effect = 'AttackEffect'
+    // const effect = 'AttackEffect'
 
-    let attack = new EffectContainer[effect]({
-      user: 'player',
-      target: 0,
-      damageAmount: 6,
-      damageType: 'grass',
-      ignoreBlock: false,
-    })
+    // let attack = new EffectContainer[effect]({
+    //   user: 'player',
+    //   target: 0,
+    //   damageAmount: 6,
+    //   damageType: 'grass',
+    //   ignoreBlock: false,
+    // })
 
-    console.log(attack)
+    let attack = new EffectContainer['AttackEffect']()
+    let block = new EffectContainer['BlockEfffect']()
+
+    let multi = new EffectContainer['MultiEffect']([attack, block])
+
+    multi.playEffect()
+
+    // console.log(multi)
+
+    // attack.playEffect()
+    // block.playEffect()
 
     window.addEventListener("resize", this.onResize);
     window.addEventListener("mousemove", this.onMouseMove)
