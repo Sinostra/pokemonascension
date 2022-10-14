@@ -53,13 +53,13 @@ export default class App extends Vue {
 
     const effect = 'AttackEffect'
 
-    let attack: any = new DynamicClass(effect, {
+    let attack = new ClassContainer[effect]({
       user: 'player',
       target: 0,
       damageAmount: 6,
       damageType: 'grass',
       ignoreBlock: false,
-    });
+    })
 
     console.log(attack)
 
@@ -72,15 +72,6 @@ export default class App extends Vue {
   public beforeUnmount() {
     window.removeEventListener("resize", this.onResize)
     window.removeEventListener("mousemove", this.onMouseMove)
-  }
-}
-
-class DynamicClass {
-  constructor(className: string, opts: any) {
-    if (ClassContainer[className] === undefined || ClassContainer[className] === null) {
-        throw new Error(`Class type of \'${className}\' is not in the store`);
-    }
-    return new ClassContainer[className](opts);
   }
 }
 </script>

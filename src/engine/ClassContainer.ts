@@ -1,37 +1,23 @@
 import { inject } from 'vue'
 
 export interface IEffect {
-  params: any
   playEffect(): void
 }
 
-
-export class Tesla {
-    constructor(private ai: string) {
-      console.log(`${ai} is driving Tesla`);
-    }
-}
-
-export class Audi {
-    constructor(private ai: string) {
-      console.log(`${ai} is driving Audi`);
-    }
-}
-
-export class AttackEffect implements IEffect {
+class BaseEffect {
   constructor(params) {
     this.params = params
   }
-  private emitter: any = inject('emitter')
-  params
+  protected emitter: any = inject('emitter')
+  public params
+}
 
+export class AttackEffect extends BaseEffect implements IEffect {
   playEffect() {
     this.emitter.emit("damage", this.params)
   }
 }
 
 export const ClassContainer: any = {
-    Tesla,
-    Audi,
-    AttackEffect
+  AttackEffect
 }
