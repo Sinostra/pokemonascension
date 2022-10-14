@@ -91,15 +91,19 @@ export class MultiAttackEffect  extends BaseEffect implements IEffect {
         return new Promise((resolve) => {
           let currentIndex = index
           const delay = index === 0 ? 0 : attackDelay
-          if(!attacks[currentIndex]) {
-            resolve()
-          }
-          else {
-            playAttack(attacks[currentIndex], delay).then(() => {
-              currentIndex++
+
+          playAttack(attacks[currentIndex], delay).then(() => {
+            currentIndex++
+            // console.log(currentIndex, attacks.length)
+            if(currentIndex === attacks.length) {
+              resolve(currentIndex)
+            }
+            else {
               playAllAttacks(currentIndex)
-            })
-          }
+              resolve(currentIndex)
+            }
+          })
+
         })
       }
 
