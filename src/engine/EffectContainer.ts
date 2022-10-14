@@ -87,30 +87,36 @@ export class MultiAttackEffect  extends BaseEffect implements IEffect {
         })
       }
 
-      const playAllAttacks = (index): Promise<void> => {
-        return new Promise((resolve) => {
-          let currentIndex = index
-          const delay = index === 0 ? 0 : attackDelay
+      const playAllAttacks = (index) => {
+        let currentIndex = index
+        const delay = index === 0 ? 0 : attackDelay
 
-          playAttack(attacks[currentIndex], delay).then(() => {
-            currentIndex++
-            // console.log(currentIndex, attacks.length)
-            if(currentIndex === attacks.length) {
-              resolve(currentIndex)
-            }
-            else {
-              playAllAttacks(currentIndex)
-              resolve(currentIndex)
-            }
-          })
-
+        return playAttack(attacks[currentIndex], delay).then(() => {
+          currentIndex++
+          // console.log(currentIndex, attacks.length)
+          if(currentIndex < attacks.length) {
+            playAllAttacks(currentIndex)
+          }
+          return currentIndex
+          // if(currentIndex === attacks.length) {
+          //   return(currentIndex)
+          // }
+          // else {
+          //   playAllAttacks(currentIndex)
+          // }
         })
+
+        // return currentIndex
       }
 
-      playAllAttacks(0).then(() => {
-        console.log('all attacks have been played')
-        resolve()
+      playAllAttacks(0).then((index) => {
+        console.log(index)
       })
+
+      // playAllAttacks(0).then((index) => {
+      //   console.log(index)
+      //   resolve()
+      // })
     })
   }
 }
