@@ -193,4 +193,30 @@ export default {
         },
         "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy',
     },
+    "013": {
+        "name": "power-up punch",
+        "category": "attack",
+        "rarity": "common",
+        "cost": 1,
+        "target": true,
+        "effect": {
+            "name": "MultiEffect",
+            "type": "fighting",
+            "params": [
+                {
+                    "effectName": "AttackEffect",
+                    "effectParams": {
+                        "damage": 2,
+                    }
+                },
+                {
+                    "effectName": "BuffEfffect",
+                    "effectParams": {
+                        "attack": 1,
+                    }
+                }
+            ],
+        },
+        "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy and raise your attack by 1',
+    },
 }
