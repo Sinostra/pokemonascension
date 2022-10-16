@@ -51,8 +51,18 @@ export default class App extends Vue {
 
   public mounted() {
 
-    const multiAttack = new EffectContainer['MultiAttackEffect']({damageTimes: 5})
-    multiAttack.playEffect().then(() => console.log("done"))
+    const drawEffect = new EffectContainer['DrawEfffect']("draw", {amount: 2})
+    console.log(drawEffect)
+    drawEffect.playEffect().then(() => {
+      console.log("draw is done")
+    })
+
+    this.emitter.emit("drawIsDone")
+
+    console.log(drawEffect)
+
+    // const multiAttack = new EffectContainer['MultiAttackEffect']({damageTimes: 5})
+    // multiAttack.playEffect().then(() => console.log("done"))
     // console.log(multiAttack)
 
     // const effect = 'AttackEffect'

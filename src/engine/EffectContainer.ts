@@ -16,7 +16,6 @@ export class AttackEffect extends BaseEffect implements IEffect {
   playEffect(): Promise<void> {
     return new Promise((resolve) => {
       this.emitter.emit("damage", this.params)
-      console.log('x damage dealt')
       resolve()
     })
   }
@@ -73,11 +72,10 @@ export class DrawEfffect extends BaseEffect implements IEffect {
   }
 }
 
-export class MultiAttackEffect  extends BaseEffect implements IEffect {
+export class MultiAttackEffect extends BaseEffect implements IEffect {
   playEffect(): Promise<void> {
     return new Promise((resolve) => {
       const attacks: AttackEffect[] = []
-      const attackDelay: number = 500
       for(let i = 0; i < this.params.damageTimes; i++) {
         attacks.push(new AttackEffect(this.params))
       }
@@ -95,7 +93,7 @@ export class MultiAttackEffect  extends BaseEffect implements IEffect {
       const playAllAttacks = (index): Promise<void> => {
         return new Promise((resolve) => {
           let currentIndex = index
-          const delay = index === 0 ? 0 : attackDelay
+          const delay = index === 0 ? 0 : 500
           if(currentIndex >= attacks.length) {
             resolve()
           }
