@@ -52,7 +52,7 @@ export default class App extends Vue {
   public mounted() {
 
     const multiAttack = new EffectContainer['MultiAttackEffect']({damageTimes: 5})
-    multiAttack.playEffect()
+    multiAttack.playEffect().then(() => console.log("done"))
     // console.log(multiAttack)
 
     // const effect = 'AttackEffect'
