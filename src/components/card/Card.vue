@@ -76,22 +76,22 @@ export default class Card extends Vue {
 
   get dynamicToolTip() {
 
-    if(!this.dataCard[this.id]['effect']['damage'] && !this.dataCard[this.id]['effect']['block']) {
+    if(!this.dataCard[this.id]['effect']['params']['damage'] && !this.dataCard[this.id]['effect']['params']['block']) {
       return this.dataCard[this.id]['tooltip']
     } 
 
     let finalDamage = 0
     let finalBlock = 0
-    if(this.dataCard[this.id]['effect']['damage']) {
-      finalDamage = this.dataCard[this.id]['effect']['damage'] + this.$store.state.battle.playerAttack;
+    if(this.dataCard[this.id]['effect']['params']['damage']) {
+      finalDamage = this.dataCard[this.id]['effect']['params']['damage'] + this.$store.state.battle.playerAttack;
       if(this.$store.state.battle.typesHover) {
         if(this.cardDamageTooltipModifier < 1) finalDamage = Math.floor(finalDamage * this.cardDamageTooltipModifier)
         else finalDamage = Math.ceil(finalDamage * this.cardDamageTooltipModifier)
       }
     }
 
-    if(this.dataCard[this.id]['effect']['block']) {
-      finalBlock = this.dataCard[this.id]['effect']['block'] + this.$store.state.battle.playerDefense;
+    if(this.dataCard[this.id]['effect']['params']['block']) {
+      finalBlock = this.dataCard[this.id]['effect']['params']['block'] + this.$store.state.battle.playerDefense;
     }
 
     return this.dataCard[this.id]['tooltip'].replace('§', finalDamage).replace('µ', finalBlock)

@@ -50,43 +50,6 @@ export default class App extends Vue {
   }
 
   public mounted() {
-
-    const drawEffect = new EffectContainer['DrawEfffect']("draw", {amount: 2})
-    console.log(drawEffect)
-    drawEffect.playEffect().then(() => {
-      console.log("draw is done")
-    })
-
-    this.emitter.emit("drawIsDone")
-
-    console.log(drawEffect)
-
-    // const multiAttack = new EffectContainer['MultiAttackEffect']({damageTimes: 5})
-    // multiAttack.playEffect().then(() => console.log("done"))
-    // console.log(multiAttack)
-
-    // const effect = 'AttackEffect'
-
-    // let attack = new EffectContainer[effect]({
-    //   user: 'player',
-    //   target: 0,
-    //   damageAmount: 6,
-    //   damageType: 'grass',
-    //   ignoreBlock: false,
-    // })
-
-    // let attack = new EffectContainer['AttackEffect']()
-    // let block = new EffectContainer['BlockEfffect']()
-
-    // let multi = new EffectContainer['MultiEffect']([attack, block])
-
-    // multi.playEffect()
-
-    // console.log(multi)
-
-    // attack.playEffect()
-    // block.playEffect()
-
     window.addEventListener("resize", this.onResize);
     window.addEventListener("mousemove", this.onMouseMove)
     window.dispatchEvent(new Event('resize'));

@@ -1,14 +1,13 @@
-import { inject } from 'vue'
-
 export interface IEffect {
   playEffect(): Promise<void>
 }
 
 class BaseEffect {
-  constructor(params) {
+  constructor(params, emitter) {
     this.params = params
+    this.emitter = emitter
   }
-  protected emitter: any = inject('emitter')
+  public emitter
   public params
 }
 
@@ -62,12 +61,16 @@ export class DrawEfffect extends BaseEffect implements IEffect {
     return new Promise((resolve) => {
 
       const clearEmitter = () => {
-        this.emitter.all.clear()
-        resolve()
+        this.emitter.off("drawIsDone", resolvePromise)
       }
 
+      const resolvePromise = () => {
+        resolve()
+        clearEmitter()
+      } 
+
       this.emitter.emit("draw", this.params)
-      this.emitter.on("drawIsDone", clearEmitter)
+      this.emitter.on("drawIsDone", resolvePromise)
     })
   }
 }
@@ -77,7 +80,7 @@ export class MultiAttackEffect extends BaseEffect implements IEffect {
     return new Promise((resolve) => {
       const attacks: AttackEffect[] = []
       for(let i = 0; i < this.params.damageTimes; i++) {
-        attacks.push(new AttackEffect(this.params))
+        attacks.push(new AttackEffect(this.params, this.emitter))
       }
 
       const playAttack = (attack: AttackEffect, delay): Promise<void> => {

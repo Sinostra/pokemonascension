@@ -11,6 +11,7 @@ import BattleInterface from './BattleInterface.vue'
 import { Options, Vue } from 'vue-class-component'
 import { Watch } from 'vue-property-decorator'
 import { inject } from 'vue'
+import { EffectContainer } from "../../engine/EffectContainer"
 
 @Options({
     name: "BattleManager",
@@ -123,29 +124,34 @@ export default class BattleManager extends Vue {
 
     private playEffects(effects: any, user: number | string | null, target: number | string | null, inInterval: boolean = false) {
 
+        const effect = new EffectContainer[effects.name]({user, target, ...effects.params}, this.emitter)
+        console.log(effect)
+
+        effect.playEffect()
+
         let damageTime = 1;
     
-        if(effects['damage']) {
-            let damage = user === "player" ? effects['damage'] + this.$store.state.battle.playerAttack : effects['damage']
-            damage < 0 ? 0 : damage
-            if(effects['damageAOE']) {
-                this.emitter.emit("damageAllFoes", {
-                    damage,
-                    type: effects['type'],
-                    ignoreBlock: effects['ignoreBlock'],
-                })
-            }
+        // if(effects['damage']) {
+        //     let damage = user === "player" ? effects['damage'] + this.$store.state.battle.playerAttack : effects['damage']
+        //     damage < 0 ? 0 : damage
+        //     if(effects['damageAOE']) {
+        //         this.emitter.emit("damageAllFoes", {
+        //             damage,
+        //             type: effects['type'],
+        //             ignoreBlock: effects['ignoreBlock'],
+        //         })
+        //     }
 
-            else {
-                this.emitter.emit("damage", {
-                    damage,
-                    type: effects['type'],
-                    ignoreBlock: effects['ignoreBlock'],
-                    user,
-                    target
-                })
-            } 
-        }
+        //     else {
+        //         this.emitter.emit("damage", {
+        //             damage,
+        //             type: effects['type'],
+        //             ignoreBlock: effects['ignoreBlock'],
+        //             user,
+        //             target
+        //         })
+        //     } 
+        // }
 
         if(effects['selfDamage']) {
             this.emitter.emit("damage", {

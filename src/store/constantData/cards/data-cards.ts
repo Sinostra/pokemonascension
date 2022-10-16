@@ -6,18 +6,11 @@ export default {
         "cost": 1,
         "target": true,
         "effect": {
+            "name": "AttackEffect",
             "type": "electric",
-            "draw": 0,
-            "damage": 6,
-            "damageTimes": 1,
-            "selfDamage": 0,
-            "damageAOE": false,
-            "block": 0,
-            "ignoreBlock": false,
-            "energy": 0,
-            "buffSelfAttack": -1,
-            "buffSelfDefense": -1,
-            "debuffAttack": 2,
+            "params": {
+                "damage": 6,
+            }
         },
         "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy',
     },
@@ -30,14 +23,12 @@ export default {
         "cost": 1,
         "target": false,
         "effect": {
+            "name": "AttackEffect",
             "type": "electric",
-            "damageTimes": 1,
-            "draw": 0,
-            "damage": 3,
-            "damageAOE": true,
-            "block": 0,
-            "ignoreBlock": false,
-            "energy": 0,
+            "params": {
+                "damage": 3,
+                "damageAOE": true,
+            }
         },
         "tooltip": 'Deal § damage to all ennemies',
     },
@@ -49,13 +40,11 @@ export default {
         "cost": 0,
         "target": false,
         "effect": {
+            "name": "DrawEfffect",
             "type": "psychic",
-            "draw": 2,
-            "damage": 0,
-            "damageAOE": false,
-            "block": 0,
-            "ignoreBlock": false,
-            "energy": 0,
+            "params": {
+                "draw": 2,
+            }
         },
         "tooltip": 'Draw 2 cards',
     },
@@ -67,13 +56,11 @@ export default {
         "cost": 1,
         "target": false,
         "effect": {
+            "name": "BlockEfffect",
             "type": "normal",
-            "draw": 0,
-            "damage": 0,
-            "damageAOE": false,
-            "block": 5,
-            "ignoreBlock": false,
-            "energy": 0,
+            "params": {
+                "block": 5,
+            }
         },
         "tooltip": 'Gain µ block',
     },
@@ -85,13 +72,11 @@ export default {
         "cost": 1,
         "target": false,
         "effect": {
+            "name" : "EnergyEfffect",
             "type": "normal",
-            "draw": 0,
-            "damage": 0,
-            "damageAOE": false,
-            "block": 0,
-            "ignoreBlock": false,
-            "energy": 2,
+            "params": {
+                "energy": 2,
+            }
         },
         "tooltip": 'Gain 2 energy',
     },
@@ -103,14 +88,12 @@ export default {
         "cost": 1,
         "target": true,
         "effect": {
+            "name": "MultiAttackEffect",
             "type": "normal",
-            "draw": 0,
-            "damage": 2,
-            "damageTimes": 3,
-            "damageAOE": false,
-            "block": 0,
-            "ignoreBlock": false,
-            "energy": 0,
+            "params": {
+                "damage": 2,
+                "damageTimes": 3,
+            }
         },
         "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy 3 times',
     },
@@ -122,9 +105,12 @@ export default {
         "cost": 1,
         "target": false,
         "effect": {
+            "name": "BuffEfffect",
             "type": "psychic",
-            "buffSelfAttack": 1,
-            "buffSelfDefense": 1,
+            "params" : {
+                "buffAttack": 1,
+                "buffDefense": 1
+            }
         },
         "tooltip": 'Raises your attack and defense by one',
     },
@@ -136,8 +122,11 @@ export default {
         "cost": 1,
         "target": false,
         "effect":{
+            "name": "HealEfffect",
             "type": "psychic",
-            "selfHeal": 50
+            "params": {
+                "selfHeal": 50
+            }
         },
         "tooltip": 'Heals 50% of your hp',
     },
@@ -164,8 +153,11 @@ export default {
         "cost": 1,
         "target": true,
         "effect":{
+            "name": "AttackEffect",
             "type": "grass",
-            "damage": 6,
+            "params": {
+                "damage": 6,
+            },
         },
         "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy',
     },
@@ -176,8 +168,11 @@ export default {
         "cost": 1,
         "target": true,
         "effect":{
+            "name": "AttackEffect",
             "type": "fire",
-            "damage": 60,
+            "params": {
+                "damage": 60,
+            },
         },
         "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy',
     },
@@ -188,8 +183,11 @@ export default {
         "cost": 1,
         "target": true,
         "effect":{
+            "name": "AttackEffect",
             "type": "water",
-            "damage": 6,
+            "params": {
+                "damage": 6,
+            },
         },
         "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy',
     },
