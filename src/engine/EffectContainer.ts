@@ -61,9 +61,14 @@ export class EnergyEfffect extends BaseEffect implements IEffect {
 export class DrawEfffect extends BaseEffect implements IEffect {
   playEffect(): Promise<void> {
     return new Promise((resolve) => {
+
+      const clearEmitter = () => {
+        this.emitter.all.clear()
+        resolve()
+      }
+
       this.emitter.emit("draw", this.params)
-      this.emitter.on("drawIsDone", resolve())
-      // this.emitter.off("drawIsDone", resolve())
+      this.emitter.on("drawIsDone", clearEmitter)
     })
   }
 }
