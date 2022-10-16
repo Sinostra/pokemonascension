@@ -111,7 +111,7 @@ export default class BattleManager extends Vue {
         this.$store.commit("startNewTurn")
         this.emitter.emit("startNewTurn")
         this.$store.commit("setEnergy", this.energyPerTurn)
-        this.emitter.emit("cardToBeDrawn", this.cardsBeginningTurn)
+        this.emitter.emit("draw", {draw :this.cardsBeginningTurn})
     }
 
     private playCard(cardId: string, targetIndex: number | null) {
@@ -122,22 +122,9 @@ export default class BattleManager extends Vue {
         this.playEffects(this.cardBeingPlayed.effect, "player", targetIndex)
     }
 
-    private playEffects(effects: any, user: number | string | null, target: number | string | null, inInterval: boolean = false) {
-
+    private playEffects(effects: any, user: number | string | null, target: number | string | null) {
         const effect = new EffectContainer[effects.name]({user, target, ...effects.params}, this.emitter)
-        effect.playEffect()
-
-        if(effects['energy']) {
-            this.$store.commit("getEnergy", effects['energy'])
-        }
-
-        if(effects['draw']) {
-            this.emitter.emit("cardToBeDrawn", effects['draw'])
-        }
-
-        if(effects['addToStartTurn']) {
-            this.startOfPlayerTurnEffects.push(effects['addToStartTurn'])
-        }
+        effect.playEffect().then(() => this.effectEndCallBack(user))
     }
 
     private effectEndCallBack(user?) {

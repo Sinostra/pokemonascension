@@ -173,7 +173,7 @@ export default class BattleInterface extends Vue {
     }
 
     private oncardToBeDrawn(payload) {
-        this.draw(payload)
+        this.draw(payload.draw)
     }
 
     private onDiscardCurrentlySelectedCard() {
@@ -193,7 +193,7 @@ export default class BattleInterface extends Vue {
     public mounted() {
 
         this.emitter.on("cardDonePlayed", this.oncardDonePlayed)
-        this.emitter.on("cardToBeDrawn", this.oncardToBeDrawn)
+        this.emitter.on("draw", this.oncardToBeDrawn)
         this.emitter.on("discardCurrentlySelectedCard", this.onDiscardCurrentlySelectedCard)
         this.emitter.on("playerTurn", this.onPlayerTurn)
         this.emitter.on("rightClick", this.onRightClick)
@@ -203,7 +203,7 @@ export default class BattleInterface extends Vue {
 
     public beforeUnmount() {
         this.emitter.off("cardDonePlayed", this.oncardDonePlayed)
-        this.emitter.off("cardToBeDrawn", this.oncardToBeDrawn)
+        this.emitter.off("draw", this.oncardToBeDrawn)
         this.emitter.off("discardCurrentlySelectedCard", this.onDiscardCurrentlySelectedCard)
         this.emitter.off("playerTurn", this.onPlayerTurn)
         this.emitter.off("rightClick", this.onRightClick)

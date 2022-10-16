@@ -107,6 +107,10 @@ export default class PlayerPokemon extends Pokemon {
     }
   }
 
+  private onEnergy(payload) {
+    this.$store.commit("getEnergy", payload.energy)
+  }
+
   public mounted() {
 
     this.maxHealth = this.dataPokemon.baseStats.hp
@@ -122,6 +126,7 @@ export default class PlayerPokemon extends Pokemon {
     this.emitter.on('block', this.onBlock)
     this.emitter.on('buff', this.onBuff)
     this.emitter.on("heal", this.onHeal)
+    this.emitter.on("energy", this.onEnergy)
   }
 
   public beforeUnmount() {
@@ -130,6 +135,7 @@ export default class PlayerPokemon extends Pokemon {
     this.emitter.off("block", this.onBlock)
     this.emitter.off('buff', this.onBuff)
     this.emitter.off("heal", this.onHeal)
+    this.emitter.off("energy", this.onEnergy)
   }
 }
 
