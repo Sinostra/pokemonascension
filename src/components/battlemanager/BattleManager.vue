@@ -125,7 +125,7 @@ export default class BattleManager extends Vue {
     private playEffects(effects: any, user: number | string | null, target: number | string | null, inInterval: boolean = false) {
 
         const effect = new EffectContainer[effects.name]({user, target, ...effects.params}, this.emitter)
-        console.log(effect)
+        // console.log(effect)
 
         effect.playEffect()
 

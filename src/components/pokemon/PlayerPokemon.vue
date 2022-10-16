@@ -96,7 +96,7 @@ export default class PlayerPokemon extends Pokemon {
 
   private onGainBlock(payload) {
     if(payload.user === "player") {
-      this.gainBlock(payload.amount)
+      this.gainBlock(payload.block)
     }
   }
 
@@ -114,7 +114,7 @@ export default class PlayerPokemon extends Pokemon {
     this.emitter.on("damage", this.onDamage)
     this.emitter.on("damageAllFoes", this.onDamageAllFoes)
     this.emitter.on("heal", this.onHeal)
-    this.emitter.on("gainBlock", this.onGainBlock)
+    this.emitter.on('block', this.onGainBlock)
   }
 
   public beforeUnmount() {
@@ -122,7 +122,7 @@ export default class PlayerPokemon extends Pokemon {
     this.emitter.off("damage", this.onDamage)
     this.emitter.off("damageAllFoes", this.onDamageAllFoes)
     this.emitter.off("heal", this.onHeal)
-    this.emitter.off("gainBlock", this.onGainBlock)
+    this.emitter.off("block", this.onGainBlock)
   }
 }
 

@@ -245,7 +245,7 @@ export default class FoePokemon extends Pokemon {
 
   private onGainBlock(payload) {
     if(payload.user === this.index) {
-      this.gainBlock(payload.amount)
+      this.gainBlock(payload.block)
     }
   }
 
@@ -291,7 +291,7 @@ export default class FoePokemon extends Pokemon {
     this.emitter.on("damage", this.onDamage)
     this.emitter.on("damageAllFoes", this.onDamageAllFoes)
     this.emitter.on("heal", this.onHeal)
-    this.emitter.on("gainBlock", this.onGainBlock)
+    this.emitter.on("block", this.onGainBlock)
     this.emitter.on("buffFoeAttack", this.onBuffFoeAttack)
     this.emitter.on("buffFoeDefense", this.onBuffFoeDefense)
     this.emitter.on("deBuffFoeAttack", this.onDeBuffFoeAttack)
@@ -305,7 +305,7 @@ export default class FoePokemon extends Pokemon {
     this.emitter.off("damage", this.onDamage)
     this.emitter.off("damageAllFoes", this.onDamageAllFoes)
     this.emitter.off("heal", this.onHeal)
-    this.emitter.off("gainBlock", this.onGainBlock)
+    this.emitter.off("block", this.onGainBlock)
     this.emitter.off("buffFoeAttack", this.onBuffFoeAttack)
     this.emitter.off("buffFoeDefense", this.onBuffFoeDefense)
     this.emitter.off("deBuffFoeAttack", this.onDeBuffFoeAttack)
