@@ -233,43 +233,26 @@ export default class FoePokemon extends Pokemon {
     }
   }
 
-  private onDamageAllFoes(payload) {
-    this.takeDamage(payload.damage, payload.type, payload.ignoreBlock)
-  }
-
-  private onHeal(payload) {
-    if(payload.user === this.index) {
-      this.heal(payload.amount)
-    }
-  }
-
-  private onGainBlock(payload) {
+  private onBlock(payload) {
     if(payload.user === this.index) {
       this.gainBlock(payload.block)
     }
   }
 
-  private onBuffFoeAttack(payload) {
-    if(payload.user === this.index) {
-      this.attack += payload.amount
+  private onBuff(payload) {
+    if((payload.user === this.index && payload.target === null) || payload.target === this.index) {
+      if(payload.buffAttack) {
+        this.attack += payload.buffAttack
+      }
+      if(payload.buffDefense) {
+        this.defense += payload.buffDefense
+      }
     }
   }
 
-  private onBuffFoeDefense(payload) {
+  private onHeal(payload) {
     if(payload.user === this.index) {
-      this.defense += payload.amount
-    }
-  }
-
-  private onDeBuffFoeAttack(payload) {
-    if(payload.user === this.index) {
-      this.attack -= payload.amount
-    }
-  }
-
-  private onDeBuffFoeDefense(payload) {
-    if(payload.user === this.index) {
-      this.defense -= payload.amount
+      this.heal(payload.amount)
     }
   }
 
@@ -289,13 +272,9 @@ export default class FoePokemon extends Pokemon {
     this.emitter.on("endPlayerTurn", this.onEndPlayerTurn)
     this.emitter.on("startNewTurn", this.onNewTurn)
     this.emitter.on("damage", this.onDamage)
-    this.emitter.on("damageAllFoes", this.onDamageAllFoes)
+    this.emitter.on("block", this.onBlock)
+    this.emitter.on("buff", this.onBuff)
     this.emitter.on("heal", this.onHeal)
-    this.emitter.on("block", this.onGainBlock)
-    this.emitter.on("buffFoeAttack", this.onBuffFoeAttack)
-    this.emitter.on("buffFoeDefense", this.onBuffFoeDefense)
-    this.emitter.on("deBuffFoeAttack", this.onDeBuffFoeAttack)
-    this.emitter.on("deBuffFoeDefense", this.onDeBuffFoeDefense)
     this.emitter.on("foeTurn", this.onFoeTurn)
   }
 
@@ -303,13 +282,9 @@ export default class FoePokemon extends Pokemon {
     this.emitter.off("endPlayerTurn", this.onEndPlayerTurn)
     this.emitter.off("startNewTurn", this.onNewTurn)
     this.emitter.off("damage", this.onDamage)
-    this.emitter.off("damageAllFoes", this.onDamageAllFoes)
+    this.emitter.off("block", this.onBlock)
+    this.emitter.off("buff", this.onBuff)
     this.emitter.off("heal", this.onHeal)
-    this.emitter.off("block", this.onGainBlock)
-    this.emitter.off("buffFoeAttack", this.onBuffFoeAttack)
-    this.emitter.off("buffFoeDefense", this.onBuffFoeDefense)
-    this.emitter.off("deBuffFoeAttack", this.onDeBuffFoeAttack)
-    this.emitter.off("deBuffFoeDefense", this.onDeBuffFoeDefense)
     this.emitter.off("foeTurn", this.onFoeTurn)
   }
 }

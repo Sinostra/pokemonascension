@@ -125,78 +125,7 @@ export default class BattleManager extends Vue {
     private playEffects(effects: any, user: number | string | null, target: number | string | null, inInterval: boolean = false) {
 
         const effect = new EffectContainer[effects.name]({user, target, ...effects.params}, this.emitter)
-        // console.log(effect)
-
         effect.playEffect()
-
-        let damageTime = 1;
-    
-        // if(effects['damage']) {
-        //     let damage = user === "player" ? effects['damage'] + this.$store.state.battle.playerAttack : effects['damage']
-        //     damage < 0 ? 0 : damage
-        //     if(effects['damageAOE']) {
-        //         this.emitter.emit("damageAllFoes", {
-        //             damage,
-        //             type: effects['type'],
-        //             ignoreBlock: effects['ignoreBlock'],
-        //         })
-        //     }
-
-        //     else {
-        //         this.emitter.emit("damage", {
-        //             damage,
-        //             type: effects['type'],
-        //             ignoreBlock: effects['ignoreBlock'],
-        //             user,
-        //             target
-        //         })
-        //     } 
-        // }
-
-        if(effects['selfDamage']) {
-            this.emitter.emit("damage", {
-                damage: effects['selfDamage'],
-                type: null,
-                ignoreBlock: true,
-                target: user
-            })
-        }
-
-        if(effects['selfHeal']) {
-            this.emitter.emit("heal", {
-                amount: effects['selfHeal'],
-                user
-            })
-        }
-
-        if(effects['block']) {
-            let amount = user === "player" ? effects['block'] + this.$store.state.battle.playerDefense : effects['block']
-            amount < 0 ? 0 : amount
-            this.emitter.emit("gainBlock", {
-                amount,
-                user
-            })
-        }
-
-        if(effects['buffSelfAttack']) {
-            if(user === "player") this.$store.commit("buffPlayerAttack", effects['buffSelfAttack'])
-            else this.emitter.emit("buffFoeAttack", {user, amount: effects['buffSelfAttack']})
-        }
-
-        if(effects['buffSelfDefense']) {
-            if(user === "player") this.$store.commit("buffPlayerDefense", effects['buffSelfDefense'])
-            else this.emitter.emit("buffFoeDefense", {user, amount: effects['buffSelfDefense']})
-        }
-
-        if(effects['debuffAttack']) {
-            if(user !== "player") this.$store.commit("deBuffPlayerAttack", effects['debuffAttack'])
-            else this.emitter.emit("deBuffFoeAttack", {user, amount: effects['debuffAttack']})
-        }
-
-        if(effects['debuffDefense']) {
-            if(user !== "player") this.$store.commit("deBuffPlayerDefense", effects['debuffDefense'])
-            else this.emitter.emit("deBuffFoeDefense", {user, amount: effects['debuffDefense']})
-        }
 
         if(effects['energy']) {
             this.$store.commit("getEnergy", effects['energy'])
@@ -208,32 +137,6 @@ export default class BattleManager extends Vue {
 
         if(effects['addToStartTurn']) {
             this.startOfPlayerTurnEffects.push(effects['addToStartTurn'])
-        }
-
-
-        //Gestion de la fin de l'effet
-        if(!effects['draw'] && (!effects['damageTimes'] || effects['damageTimes'] <= 1) && !inInterval) {
-            setTimeout(() => {
-                this.effectEndCallBack(user)
-            }, 500)
-        }
-        else if(effects['damageTimes']) {
-            const repeatedEffects = {
-                damage: effects['damage'],
-                type: effects['type'],
-                ignoreBlock: effects['ignoreBlock'],
-                selfDamage: effects['selfDamage'],
-            }
-            const attackInterval = setInterval(() => {
-                damageTime++
-                this.playEffects(repeatedEffects, user, target, true)
-                if(damageTime  >= effects['damageTimes']) {
-                    clearInterval(attackInterval)
-                    setTimeout(() => {
-                        this.effectEndCallBack(user)
-                    }, 500)
-                } 
-            }, 500)
         }
     }
 
@@ -283,10 +186,6 @@ export default class BattleManager extends Vue {
     private onDrawIsDone() {
         if(this.turnSteps[this.currentTurnStepIndex] === "playerDraw") {
             this.currentTurnStepIndex++
-        }
-
-        else {
-            this.effectEndCallBack()
         }
     }
 

@@ -83,20 +83,27 @@ export default class PlayerPokemon extends Pokemon {
     }
   }
 
-  private onDamageAllFoes() {
-    this.playAttackAnim()
+  private onBlock(payload) {
+    if(payload.user === "player") {
+      this.gainBlock(payload.block)
+    }
+  }
+
+  private onBuff(payload) {
+    if((payload.user === "player" && payload.target === null) || payload.target === "player") {
+      if(payload.buffAttack) {
+        this.$store.commit("buffPlayerAttack", payload.buffAttack)
+      }
+      if(payload.buffDefense) {
+        this.$store.commit("buffPlayerDefense", payload.buffDefense)
+      }
+    }
   }
 
   private onHeal(payload) {
     if(payload.user === "player") {
       this.heal(payload.amount)
       this.$store.commit("changeActivePokemonHealth", this.currentHealth)
-    }
-  }
-
-  private onGainBlock(payload) {
-    if(payload.user === "player") {
-      this.gainBlock(payload.block)
     }
   }
 
@@ -112,17 +119,17 @@ export default class PlayerPokemon extends Pokemon {
 
     this.emitter.on("startNewTurn", this.onNewTurn)
     this.emitter.on("damage", this.onDamage)
-    this.emitter.on("damageAllFoes", this.onDamageAllFoes)
+    this.emitter.on('block', this.onBlock)
+    this.emitter.on('buff', this.onBuff)
     this.emitter.on("heal", this.onHeal)
-    this.emitter.on('block', this.onGainBlock)
   }
 
   public beforeUnmount() {
     this.emitter.off("startNewTurn", this.onNewTurn)
     this.emitter.off("damage", this.onDamage)
-    this.emitter.off("damageAllFoes", this.onDamageAllFoes)
+    this.emitter.off("block", this.onBlock)
+    this.emitter.off('buff', this.onBuff)
     this.emitter.off("heal", this.onHeal)
-    this.emitter.off("block", this.onGainBlock)
   }
 }
 
