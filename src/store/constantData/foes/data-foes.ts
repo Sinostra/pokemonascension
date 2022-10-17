@@ -11,11 +11,18 @@ export default [
             patternSetting: {
                 pattern: [
                     {
-                        damage: 2,
+                        name: 'AttackEffect',
                         type: 'normal',
+                        params: {
+                            damage: 2,
+                        }
                     },
                     {
-                        block: 2,
+                        name: 'BlockEfffect',
+                        type: 'normal',
+                        params: {
+                            block: 2,
+                        }
                     },
                 ]
             }
@@ -31,11 +38,18 @@ export default [
             patternSetting: {
                 pattern: [
                     {
-                        damage: 2,
+                        name: 'AttackEffect',
                         type: 'poison',
+                        params: {
+                            damage: 2,
+                        }
                     },
                     {
-                        block: 2,
+                        name: 'BlockEfffect',
+                        type: 'normal',
+                        params: {
+                            block: 2,
+                        }
                     },
                 ]
             }
@@ -51,14 +65,25 @@ export default [
             patternSetting: {
                 pattern: [
                     {
-                        damage: 3,
+                        name: 'AttackEffect',
                         type: 'normal',
+                        params: {
+                            damage: 3,
+                        }
                     },
                     {
-                        block: 4,
+                        name: 'BlockEfffect',
+                        type: 'normal',
+                        params: {
+                            block: 4,
+                        }
                     },
                     {
-                        block: 4,
+                        name: 'BlockEfffect',
+                        type: 'normal',
+                        params: {
+                            block: 4,
+                        }
                     },
                 ],
             }
@@ -76,14 +101,25 @@ export default [
             patternSetting: {
                 pattern: [
                     {
-                        damage: 3,
+                        name: 'AttackEffect',
                         type: 'poison',
+                        params: {
+                            damage: 3,
+                        }
                     },
                     {
-                        block: 4,
+                        name: 'BlockEfffect',
+                        type: 'normal',
+                        params: {
+                            block: 4,
+                        }
                     },
                     {
-                        block: 4,
+                        name: 'BlockEfffect',
+                        type: 'normal',
+                        params: {
+                            block: 4,
+                        }
                     },
                 ]
             }
@@ -99,16 +135,26 @@ export default [
             patternSetting: {
                 pattern: [
                     {
-                        damage: 2,
-                        damageTimes: 2,
+                        name: 'MultiAttackEffect',
                         type: 'bug',
+                        params: {
+                            damage: 2,
+                            damageTimes: 2,
+                        }
                     },
                     {
-                        damage: 4,
+                        name: 'AttackEffect',
                         type: 'poison',
+                        params: {
+                            damage: 4,
+                        }
                     },
                     {
-                        block: 3,
+                        name: 'BlockEfffect',
+                        type: 'normal',
+                        params: {
+                            block: 3,
+                        }
                     },
                 ]
             }
@@ -124,15 +170,25 @@ export default [
             patternSetting: {
                 pattern: [
                     {
-                        damage: 4,
+                        name: 'AttackEffect',
                         type: 'bug',
+                        params: {
+                            damage: 4,
+                        }
                     },
                     {
-                        damage: 4,
+                        name: 'AttackEffect',
                         type: 'flying',
+                        params: {
+                            damage: 4,
+                        }
                     },
                     {
-                        block: 3,
+                        name: 'BlockEfffect',
+                        type: 'normal',
+                        params: {
+                            block: 3,
+                        }
                     },
                 ]
             }

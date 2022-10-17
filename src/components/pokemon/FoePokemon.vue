@@ -3,20 +3,20 @@
       <div class="size-wrapper" :style="{'width': dataPokemon.size + '%'}">
         <div class="bottom-wrapper" @click.stop="onClick()">
           <div class="healthBar-infos-wrapper">
-            <div v-if="nextMove && canShowIntents" class="intent" :style="getFontSize(1.2)">
-              <div v-if="nextMove['damage'] > 0" class="intent-category damage">
+            <div v-if="nextMove && nextMove['params'] && canShowIntents" class="intent" :style="getFontSize(1.2)">
+              <div v-if="nextMove['params']['damage'] > 0" class="intent-category damage">
                   <div class="text-wrapper">
-                    <span v-if="nextMoveDamageModifier < 1" :class="damageMoveClass">{{ Math.floor(nextMove['damage'] * nextMoveDamageModifier)}}</span>
-                    <span v-else :class="damageMoveClass">{{ Math.ceil(nextMove['damage'] * nextMoveDamageModifier)}}</span>
-                    <span v-if="nextMove['damageTimes']">x{{nextMove['damageTimes']}}</span>
+                    <span v-if="nextMoveDamageModifier < 1" :class="damageMoveClass">{{ Math.floor(nextMove['params']['damage'] * nextMoveDamageModifier)}}</span>
+                    <span v-else :class="damageMoveClass">{{ Math.ceil(nextMove['params']['damage'] * nextMoveDamageModifier)}}</span>
+                    <span v-if="nextMove['damageTimes']">x{{nextMove['params']['damageTimes']}}</span>
                   </div>
                   <div class="img-wrapper" :class="mouseOver ? '' : 'hidden'">
                     <img :src="getTpyeIcon(nextMove['type'])">
                   </div>
-                </div>
-              <div v-if="nextMove['block'] > 0" class="intent-category block">
+              </div>
+              <div v-if="nextMove['params']['block'] > 0" class="intent-category block">
                 <div class="img-wrapper">
-                  <div class="block-text-wrapper">{{nextMove['block']}}</div>
+                  <div class="block-text-wrapper">{{nextMove['params']['block']}}</div>
                 </div>
               </div>
             </div>
