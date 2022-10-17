@@ -14,7 +14,7 @@ export default {
             "defense": 1
         },
         "compatibleCards": [
-            "003", "004", "005", "007", "009", "010"
+            "003", "004", "005", "007", "010"
         ],
         "starterDeck": [
             "010",
@@ -77,7 +77,7 @@ export default {
             "defense": 1
         },
         "compatibleCards": [
-            "003", "004", "005", "007", "009", "011"
+            "003", "004", "005", "007", "011"
         ],
         "starterDeck": [
             "011",
@@ -140,7 +140,7 @@ export default {
             "defense": 1
         },
         "compatibleCards": [
-            "003", "004", "005", "007", "009", "012"
+            "003", "004", "005", "007", "012"
         ],
         "starterDeck": [
             "012",

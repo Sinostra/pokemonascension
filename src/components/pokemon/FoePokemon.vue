@@ -8,7 +8,7 @@
                   <div class="text-wrapper">
                     <span v-if="nextMoveDamageModifier < 1" :class="damageMoveClass">{{ Math.floor(nextMove['params']['damage'] * nextMoveDamageModifier)}}</span>
                     <span v-else :class="damageMoveClass">{{ Math.ceil(nextMove['params']['damage'] * nextMoveDamageModifier)}}</span>
-                    <span v-if="nextMove['damageTimes']">x{{nextMove['params']['damageTimes']}}</span>
+                    <span v-if="nextMove['params']['damageTimes']">x{{nextMove['params']['damageTimes']}}</span>
                   </div>
                   <div class="img-wrapper" :class="mouseOver ? '' : 'hidden'">
                     <img :src="getTpyeIcon(nextMove['type'])">
@@ -125,17 +125,17 @@ export default class FoePokemon extends Pokemon {
 
     let nextMoveDamage = 0
 
-    if(nextMove['block']) {
-      nextMove['block'] += this.defense
+    if(nextMove['params']['block']) {
+      nextMove['params']['block'] += this.defense
     }
 
-    if(nextMove['damage']) {
+    if(nextMove['params']['damage']) {
 
-      nextMoveDamage = nextMove['damage'] + this.attack
+      nextMoveDamage = nextMove['params']['damage'] + this.attack
 
       if(nextMoveDamage < 1) nextMoveDamage = 1
 
-      if(!isNaN(nextMoveDamage)) nextMove['damage'] = nextMoveDamage
+      if(!isNaN(nextMoveDamage)) nextMove['params']['damage'] = nextMoveDamage
     }
 
     return nextMove
