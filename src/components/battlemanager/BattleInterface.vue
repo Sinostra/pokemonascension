@@ -169,7 +169,9 @@ export default class BattleInterface extends Vue {
 
     private oncardDonePlayed() {
         //Au moment où les effets de la carte sont finis, on la met dans la pile de défausse
-        this.dumpInto(this.discardFromSelectManagerContent, this.discardPile)
+        setTimeout(() => {
+            this.dumpInto(this.discardFromSelectManagerContent, this.discardPile)
+        }, 500);
     }
 
     private oncardToBeDrawn(payload) {
