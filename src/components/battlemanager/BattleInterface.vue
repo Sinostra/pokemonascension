@@ -16,6 +16,7 @@
             :content="hand"
             :draggedCardIndex="selectedCardIndex"
             @onCardDragged="selectCard"
+            @discardFromSelectAnimEnded="ondiscardFromSelectAnimEnded"
         ></Hand>
 
         <DiscardFromSelectManager
@@ -70,6 +71,9 @@ export default class BattleInterface extends Vue {
 
     public discardFromHandManagerContent: string[] = []
     public discardFromSelectManagerContent: string[] = []
+
+    private currentlyPlayedEffectDone: boolean = false;
+    private currentlyPlayedAnimDone: boolean = false;
 
     private emitter: any = inject('emitter')
 
@@ -166,12 +170,23 @@ export default class BattleInterface extends Vue {
         })
     }
 
+    private checkCardAnimEffectDone() {
+        if(this.currentlyPlayedEffectDone && this.currentlyPlayedAnimDone) {
+            this.discardPile.push(this.discardFromSelectManagerContent.shift() as string)
+            this.currentlyPlayedEffectDone = false
+            this.currentlyPlayedAnimDone = false
+        }
+    }
+
 
     private oncardDonePlayed() {
-        //Au moment où les effets de la carte sont finis, on la met dans la pile de défausse
-        setTimeout(() => {
-            this.dumpInto(this.discardFromSelectManagerContent, this.discardPile)
-        }, 500);
+        this.currentlyPlayedEffectDone = true
+        this.checkCardAnimEffectDone()
+    }
+
+    private ondiscardFromSelectAnimEnded() {
+        this.currentlyPlayedAnimDone = true
+        this.checkCardAnimEffectDone()
     }
 
     private oncardToBeDrawn(payload) {
@@ -195,6 +210,7 @@ export default class BattleInterface extends Vue {
     public mounted() {
 
         this.emitter.on("cardDonePlayed", this.oncardDonePlayed)
+        this.emitter.on("discardFromSelectAnimEnded", this.ondiscardFromSelectAnimEnded)
         this.emitter.on("draw", this.oncardToBeDrawn)
         this.emitter.on("discardCurrentlySelectedCard", this.onDiscardCurrentlySelectedCard)
         this.emitter.on("playerTurn", this.onPlayerTurn)
@@ -205,6 +221,7 @@ export default class BattleInterface extends Vue {
 
     public beforeUnmount() {
         this.emitter.off("cardDonePlayed", this.oncardDonePlayed)
+        this.emitter.off("discardFromSelectAnimEnded", this.ondiscardFromSelectAnimEnded)
         this.emitter.off("draw", this.oncardToBeDrawn)
         this.emitter.off("discardCurrentlySelectedCard", this.onDiscardCurrentlySelectedCard)
         this.emitter.off("playerTurn", this.onPlayerTurn)

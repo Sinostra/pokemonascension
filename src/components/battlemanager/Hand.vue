@@ -37,7 +37,7 @@ export default class Hand extends Vue {
     private offSetCardX = 9
     private offSetCardY = 100
     private cardXmultiplier = 1.1
-    private cardYmultiplier = 3.33
+    private cardYmultiplier = 10/3
 
     private emitter: any = inject('emitter')
 

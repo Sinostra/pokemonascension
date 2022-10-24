@@ -22,6 +22,7 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import dataCard from "@/store/constantData/cards/data-cards"
+import { inject } from 'vue'
 
 @Options({
   name: "Card",
@@ -40,6 +41,8 @@ export default class Card extends Vue {
   public isPlayingDrawAnim: boolean = false
   public isPlayingDiscardFromSelectAnim: boolean = false
   public isPlayingDiscardFromHand: boolean = false
+
+  private emitter: any = inject('emitter')
 
   get cardClass(): string {
     const type: string = this.dataCard[this.id]['effect']['type']
@@ -153,7 +156,7 @@ export default class Card extends Vue {
       this.isPlayingDiscardFromSelectAnim = true
       setTimeout(() => {
         this.isPlayingDiscardFromSelectAnim = false
-        this.$emit('discardAnimEnded')
+        this.emitter.emit("discardFromSelectAnimEnded")
       }, 500 )
     }
   }
