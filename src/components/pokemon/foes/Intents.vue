@@ -60,6 +60,8 @@ export default class Intents extends Vue {
             let resolvedModifiers = 0
             const attackStat = 'attack'
             const defenseStat = 'defense'
+            // const attackStat = reversedStats ? 'defense' : 'attack'
+            // const defenseStat = reversedStats ? 'attack' : 'defense'
             if(this.nextMove.params.modifiers) {
                 resolvedModifiers = this.nextMove.params.modifiers.map((modifier) => {
                     switch(modifier) {
@@ -84,6 +86,8 @@ export default class Intents extends Vue {
             let resolvedModifiers = 0
             const attackStat = 'attack'
             const defenseStat = 'defense'
+            // const attackStat = reversedStats ? 'defense' : 'attack'
+            // const defenseStat = reversedStats ? 'attack' : 'defense'
             if(this.nextMove.params.modifiers) {
                 resolvedModifiers = this.nextMove.params.modifiers.map((modifier) => {
                     switch(modifier) {

@@ -7,6 +7,7 @@
             <div class="currentHealth" :class="healthBarClass" :style="{'width': getHealthBarPercent() + '%'}"></div>
             <div class="bottom-infos">
               <div class="healthAmount" :style="getFontSize(0.8)">{{currentHealth}}/{{maxHealth}}</div>
+              <div class="healthAmount" :style="getFontSize(0.8)">{{$store.state.battle.playerStats.attack}}/{{$store.state.battle.playerStats.defense}}</div>
             </div>
             <div v-if="block" class="block-wrapper">
               <div class="blockAmount">{{block}}</div>

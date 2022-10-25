@@ -15,6 +15,7 @@ export default [
                         type: 'normal',
                         params: {
                             value: 2,
+                            modifiers: ["userAttack"]
                         }
                     },
                     {
@@ -22,6 +23,7 @@ export default [
                         type: 'normal',
                         params: {
                             value: 2,
+                            modifiers: ["userDefense"]
                         }
                     },
                 ]
@@ -42,6 +44,7 @@ export default [
                         type: 'poison',
                         params: {
                             value: 2,
+                            modifiers: ["userAttack"]
                         }
                     },
                     {
@@ -49,6 +52,7 @@ export default [
                         type: 'normal',
                         params: {
                             value: 2,
+                            modifiers: ["userDefense"]
                         }
                     },
                 ]
@@ -69,6 +73,7 @@ export default [
                         type: 'normal',
                         params: {
                             value: 3,
+                            modifiers: ["userAttack"]
                         }
                     },
                     {
@@ -76,6 +81,7 @@ export default [
                         type: 'normal',
                         params: {
                             value: 4,
+                            modifiers: ["userDefense"]
                         }
                     },
                     {
@@ -83,6 +89,7 @@ export default [
                         type: 'normal',
                         params: {
                             value: 4,
+                            modifiers: ["userDefense"]
                         }
                     },
                 ],
@@ -105,6 +112,7 @@ export default [
                         type: 'poison',
                         params: {
                             value: 3,
+                            modifiers: ["userAttack"]
                         }
                     },
                     {
@@ -112,6 +120,7 @@ export default [
                         type: 'normal',
                         params: {
                             value: 4,
+                            modifiers: ["userDefense"]
                         }
                     },
                     {
@@ -119,6 +128,7 @@ export default [
                         type: 'normal',
                         params: {
                             value: 4,
+                            modifiers: ["userDefense"]
                         }
                     },
                 ]
@@ -140,6 +150,7 @@ export default [
                         params: {
                             value: 2,
                             damageTimes: 2,
+                            modifiers: ["userAttack"]
                         }
                     },
                     {
@@ -147,6 +158,7 @@ export default [
                         type: 'poison',
                         params: {
                             value: 4,
+                            modifiers: ["userAttack"]
                         }
                     },
                     {
@@ -154,6 +166,7 @@ export default [
                         type: 'normal',
                         params: {
                             value: 3,
+                            modifiers: ["userDefense"]
                         }
                     },
                 ]
@@ -174,6 +187,7 @@ export default [
                         type: 'bug',
                         params: {
                             value: 4,
+                            modifiers: ["userAttack"]
                         }
                     },
                     {
@@ -181,6 +195,7 @@ export default [
                         type: 'flying',
                         params: {
                             value: 4,
+                            modifiers: ["userAttack"]
                         }
                     },
                     {
@@ -188,6 +203,7 @@ export default [
                         type: 'normal',
                         params: {
                             value: 3,
+                            modifiers: ["userDefense"]
                         }
                     },
                 ]
