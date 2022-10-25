@@ -57,7 +57,7 @@ export default class DisplayCard extends Vue {
       return this.dataCard[this.id]['tooltip']
     } 
 
-    return this.dataCard[this.id]['tooltip'].replace('§', this.dataCard[this.id]['effect']['params']['damage']).replace('µ', this.dataCard[this.id]['effect']['params']['block'])
+    return this.dataCard[this.id]['tooltip'].replace('§', this.dataCard[this.id]['effect']['params']['value']).replace('µ', this.dataCard[this.id]['effect']['params']['value'])
 
   }
 

@@ -226,7 +226,7 @@ export default class FoePokemon extends Pokemon {
 
   private onDamage(payload) {
     if(payload.target === this.index) {
-      this.takeDamage(payload.damage, payload.type, payload.ignoreBlock)
+      this.takeDamage(payload.value, payload.type, payload.ignoreBlock)
     }
     if(payload.user === this.index) {
       this.playAttackAnim()
@@ -235,17 +235,17 @@ export default class FoePokemon extends Pokemon {
 
   private onBlock(payload) {
     if(payload.user === this.index) {
-      this.gainBlock(payload.block)
+      this.gainBlock(payload.value)
     }
   }
 
   private onBuff(payload) {
     if((payload.user === this.index && payload.target === null) || payload.target === this.index) {
       if(payload.buffAttack) {
-        this.attack += payload.buffAttack
+        this.$store.commit("buffFoeAttack", {index: this.index, buff: payload.buffAttack})
       }
       if(payload.buffDefense) {
-        this.defense += payload.buffDefense
+        this.$store.commit("buffFoeDefense", {index: this.index, buff: payload.buffDefense})
       }
     }
   }

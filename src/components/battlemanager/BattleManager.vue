@@ -126,7 +126,32 @@ export default class BattleManager extends Vue {
     }
 
     private playEffects(effects: any, user: number | string | null, target: number | string | null) {
+        let resolvedModifiers = 0
+        if(effects.params.modifiers) {
+            resolvedModifiers = effects.params.modifiers.map((modifier) => {
+                if(user === "player") {
+                    switch(modifier) {
+                        case 'userAttack': return this.$store.state.battle.playerAttack
+                        case 'userDefense': return this.$store.state.battle.playerDefense
+                        case 'targetAttack': return this.$store.getters.getFoeTeam[target as number]['stats']['attack']
+                        case 'targetDefense': return this.$store.getters.getFoeTeam[target as number]['stats']['defense']
+                    }
+                }
+                else {
+                    switch(modifier) {
+                        case 'userAttack': return this.$store.getters.getFoeTeam[user as number]['stats']['attack']
+                        case 'userDefense': return this.$store.getters.getFoeTeam[user as number]['stats']['defense']
+                        case 'targetAttack': return this.$store.state.battle.playerAttack
+                        case 'targetDefense': return this.$store.state.battle.playerDefense
+                    }
+                }
+                
+            }).reduce((prev, next) => prev + next)
+            
+        }
+        
         const effect = new EffectContainer[effects.name]({user, target, ...effects.params}, this.emitter)
+        effect.params.value += resolvedModifiers
         effect.playEffect().then(() => this.effectEndCallBack(user))
     }
 

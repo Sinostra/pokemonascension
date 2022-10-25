@@ -78,14 +78,14 @@ export default class PlayerPokemon extends Pokemon {
       this.playAttackAnim()
     }
     else {
-      this.takeDamage(payload.damage, payload.type, payload.ignoreBlock)
+      this.takeDamage(payload.value, payload.type, payload.ignoreBlock)
       this.$store.commit("changeActivePokemonHealth", this.currentHealth)
     }
   }
 
   private onBlock(payload) {
     if(payload.user === "player") {
-      this.gainBlock(payload.block)
+      this.gainBlock(payload.value)
     }
   }
 

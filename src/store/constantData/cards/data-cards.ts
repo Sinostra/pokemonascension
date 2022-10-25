@@ -9,7 +9,7 @@ export default {
             "name": "AttackEffect",
             "type": "electric",
             "params": {
-                "damage": 6,
+                "value": 6,
             }
         },
         "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy',
@@ -26,7 +26,7 @@ export default {
             "name": "AttackEffect",
             "type": "electric",
             "params": {
-                "damage": 3,
+                "value": 3,
                 "damageAOE": true,
             }
         },
@@ -59,7 +59,8 @@ export default {
             "name": "BlockEfffect",
             "type": "normal",
             "params": {
-                "block": 5,
+                "value": 5,
+                "modifiers": ["userDefense"]
             }
         },
         "tooltip": 'Gain µ block',
@@ -91,7 +92,7 @@ export default {
             "name": "MultiAttackEffect",
             "type": "normal",
             "params": {
-                "damage": 2,
+                "value": 2,
                 "damageTimes": 3,
             }
         },
@@ -156,7 +157,8 @@ export default {
             "name": "AttackEffect",
             "type": "grass",
             "params": {
-                "damage": 6,
+                "value": 6,
+                "modifiers": ["userAttack"]
             },
         },
         "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy',
@@ -171,7 +173,8 @@ export default {
             "name": "AttackEffect",
             "type": "fire",
             "params": {
-                "damage": 60,
+                "value": 60,
+                "modifiers": ["userAttack"]
             },
         },
         "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy',
@@ -186,7 +189,8 @@ export default {
             "name": "AttackEffect",
             "type": "water",
             "params": {
-                "damage": 6,
+                "value": 6,
+                "modifiers": ["userAttack"]
             },
         },
         "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy',
@@ -204,7 +208,7 @@ export default {
                 {
                     "effectName": "AttackEffect",
                     "effectParams": {
-                        "damage": 2,
+                        "value": 2,
                     }
                 },
                 {
