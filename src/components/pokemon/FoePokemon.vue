@@ -6,6 +6,10 @@
             <Intents v-if="canShowIntents"
               :nextMove="nextMove"
               :mouseOver="mouseOver"
+              :stats="{
+                attack: $store.getters.getFoeTeam[index]['stats']['attack'],
+                defense: $store.getters.getFoeTeam[index]['stats']['defense'],
+              }"
             ></Intents>
             <div class="healthBar">
               <div class="currentHealth" :class="healthBarClass" :style="{'width': getHealthBarPercent() + '%'}"></div>

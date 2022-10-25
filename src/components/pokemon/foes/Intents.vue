@@ -1,18 +1,18 @@
 <template>
     <div v-if="nextMove && nextMove['params']" class="intent">
-        <div v-if="attackIntent" class="intent-category damage">
+        <div v-if="attackIntentValue" class="intent-category damage">
             <div class="text-wrapper">
-                <span v-if="nextMoveDamageModifier < 1" :class="damageMoveClass">{{ Math.floor(nextMove['params']['value'] * nextMoveDamageModifier)}}</span>
-                <span v-else :class="damageMoveClass">{{ Math.ceil(nextMove['params']['value'] * nextMoveDamageModifier)}}</span>
+                <span v-if="nextMoveDamageModifier < 1" :class="damageMoveClass">{{ Math.floor(attackIntentValue)}}</span>
+                <span v-else :class="damageMoveClass">{{ Math.ceil(attackIntentValue)}}</span>
                 <span v-if="nextMove['params']['damageTimes']">x{{nextMove['params']['damageTimes']}}</span>
             </div>
             <div class="img-wrapper" :class="mouseOver ? '' : 'hidden'">
                 <img :src="getTpyeIcon(nextMove['type'])" class="type-icon">
             </div>
         </div>
-        <div v-if="blockIntent" class="intent-category block">
+        <div v-if="blockIntentValue" class="intent-category block">
             <div class="img-wrapper">
-                <div class="block-text-wrapper">{{nextMove['params']['value']}}</div>
+                <div class="block-text-wrapper">{{blockIntentValue}}</div>
             </div>
         </div>
     </div>
@@ -27,6 +27,7 @@ import getTypeMatchup from "@/engine/TypeMatchup";
   props: {
     nextMove: Object,
     mouseOver: Boolean,
+    stats: Object,
   }
 })
 
@@ -34,6 +35,7 @@ export default class Intents extends Vue {
 
     public nextMove!: any
     public mouseOver!: boolean
+    private stats!: any
 
     get nextMoveDamageModifier(): number {
         const playerActivePokemonTypes = this.$store.state.pokedex.constantDex[this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex]['id']]['type']
@@ -50,12 +52,51 @@ export default class Intents extends Vue {
         return moveClass
     }
 
-    get attackIntent() {
-        return this.nextMove.name === "AttackEffect"
+    get attackIntentValue(): number {
+        if(this.nextMove.name !== "AttackEffect") {
+            return 0
+        }
+        else {
+            let resolvedModifiers = 0
+            const attackStat = 'attack'
+            const defenseStat = 'defense'
+            if(this.nextMove.params.modifiers) {
+                resolvedModifiers = this.nextMove.params.modifiers.map((modifier) => {
+                    switch(modifier) {
+                        case 'userAttack': return this.stats[attackStat]
+                        case 'userDefense': return this.stats[defenseStat]
+                        case 'targetAttack': return this.$store.state.battle.playerStats[attackStat]
+                        case 'targetDefense': return this.$store.state.battle.playerStats[defenseStat]
+                    }
+                }).reduce((prev, next) => prev + next)
+            }
+
+            const damageWithModifiers = this.nextMove.params.value + resolvedModifiers
+            return damageWithModifiers * this.nextMoveDamageModifier
+        }
     }
 
-    get blockIntent() {
-        return this.nextMove.name === "BlockEfffect"
+    get blockIntentValue(): number {
+        if(this.nextMove.name !== "BlockEfffect") {
+            return 0
+        }
+        else {
+            let resolvedModifiers = 0
+            const attackStat = 'attack'
+            const defenseStat = 'defense'
+            if(this.nextMove.params.modifiers) {
+                resolvedModifiers = this.nextMove.params.modifiers.map((modifier) => {
+                    switch(modifier) {
+                        case 'userAttack': return this.stats[attackStat]
+                        case 'userDefense': return this.stats[defenseStat]
+                        case 'targetAttack': return this.$store.state.battle.playerStats[attackStat]
+                        case 'targetDefense': return this.$store.state.battle.playerStats[defenseStat]
+                    }
+                }).reduce((prev, next) => prev + next)
+            }
+
+            return this.nextMove.params.value + resolvedModifiers
+        }
     }
 
     public getTpyeIcon(type) {

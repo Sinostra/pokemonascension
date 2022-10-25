@@ -1,6 +1,7 @@
 import { Options, Vue } from 'vue-class-component';
 import dataDex from "@/store/constantData/pokedex/data-dex"
 import getTypeMatchup from "@/engine/TypeMatchup";
+import typeMatchups from "@/engine/Types";
 
 @Options({
   props: {
@@ -49,7 +50,7 @@ export default class Pokemon extends Vue {
 
   get allTypesMatchups() {
     const pokemonTypes = this.dataPokemon['type']
-    const allTypes = this.$store.state.types.dataTypes
+    const allTypes = typeMatchups
     return Object.keys(allTypes).reduce((recipient, type) => {
       let multiplier = 1
       pokemonTypes.forEach(t => {
@@ -61,7 +62,7 @@ export default class Pokemon extends Vue {
   }
 
   get weaknesses() {
-    const allTypes = this.$store.state.types.dataTypes
+    const allTypes = typeMatchups
     return Object.keys(allTypes).reduce((recipient, type) => {
       if(this.allTypesMatchups[type] > 1) {
         recipient.push(type)
@@ -71,7 +72,7 @@ export default class Pokemon extends Vue {
   }
 
   get resistances() {
-    const allTypes = this.$store.state.types.dataTypes
+    const allTypes = typeMatchups
     return Object.keys(allTypes).reduce((recipient, type) => {
       if(this.allTypesMatchups[type] < 1) {
         recipient.push(type)
