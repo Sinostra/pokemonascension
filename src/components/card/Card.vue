@@ -86,7 +86,7 @@ export default class Card extends Vue {
     let finalDamage = 0
     let finalBlock = 0
     if(this.dataCard[this.id]['effect']['params']['value']) {
-      finalDamage = this.dataCard[this.id]['effect']['params']['value'] + this.$store.state.battle.playerAttack;
+      finalDamage = this.dataCard[this.id]['effect']['params']['value'] + this.$store.state.battle.playerStats.attack;
       if(this.$store.state.battle.typesHover) {
         if(this.cardDamageTooltipModifier < 1) finalDamage = Math.floor(finalDamage * this.cardDamageTooltipModifier)
         else finalDamage = Math.ceil(finalDamage * this.cardDamageTooltipModifier)
@@ -94,7 +94,7 @@ export default class Card extends Vue {
     }
 
     if(this.dataCard[this.id]['effect']['params']['value']) {
-      finalBlock = this.dataCard[this.id]['effect']['params']['value'] + this.$store.state.battle.playerDefense;
+      finalBlock = this.dataCard[this.id]['effect']['params']['value'] + this.$store.state.battle.playerStats.defense;
     }
 
     return this.dataCard[this.id]['tooltip'].replace('§', finalDamage).replace('µ', finalBlock)

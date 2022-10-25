@@ -127,22 +127,26 @@ export default class BattleManager extends Vue {
 
     private playEffects(effects: any, user: number | string | null, target: number | string | null) {
         let resolvedModifiers = 0
+        const attackStat = 'attack'
+        const defenseStat = 'defense'
+        // const attackStat = reversedStats ? 'defense' : 'attack'
+        // const defenseStat = reversedStats ? 'attack' : 'defense'
         if(effects.params.modifiers) {
             resolvedModifiers = effects.params.modifiers.map((modifier) => {
                 if(user === "player") {
                     switch(modifier) {
-                        case 'userAttack': return this.$store.state.battle.playerAttack
-                        case 'userDefense': return this.$store.state.battle.playerDefense
-                        case 'targetAttack': return this.$store.getters.getFoeTeam[target as number]['stats']['attack']
-                        case 'targetDefense': return this.$store.getters.getFoeTeam[target as number]['stats']['defense']
+                        case 'userAttack': return this.$store.state.battle.playerStats[attackStat]
+                        case 'userDefense': return this.$store.state.battle.playerStats[defenseStat]
+                        case 'targetAttack': return this.$store.getters.getFoeTeam[target as number]['stats'][attackStat]
+                        case 'targetDefense': return this.$store.getters.getFoeTeam[target as number]['stats'][defenseStat]
                     }
                 }
                 else {
                     switch(modifier) {
-                        case 'userAttack': return this.$store.getters.getFoeTeam[user as number]['stats']['attack']
-                        case 'userDefense': return this.$store.getters.getFoeTeam[user as number]['stats']['defense']
-                        case 'targetAttack': return this.$store.state.battle.playerAttack
-                        case 'targetDefense': return this.$store.state.battle.playerDefense
+                        case 'userAttack': return this.$store.getters.getFoeTeam[user as number]['stats'][attackStat]
+                        case 'userDefense': return this.$store.getters.getFoeTeam[user as number]['stats'][defenseStat]
+                        case 'targetAttack': return this.$store.state.battle.playerStats[attackStat]
+                        case 'targetDefense': return this.$store.state.battle.playerStats[defenseStat]
                     }
                 }
                 

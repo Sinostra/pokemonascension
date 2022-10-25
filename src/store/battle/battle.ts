@@ -5,8 +5,10 @@ export default {
         selectedCard: null,
         draggedCard: null,
         turnCounter: 0,
-        playerAttack: 0,
-        playerDefense: 0,
+        playerStats: {
+            attack: 0,
+            defense: 0
+        },
         typesHover: null,
         isBattleOngoing: false,
         displayBattleRewards: false,
@@ -43,27 +45,19 @@ export default {
         },
 
         setPlayerAttack(state, amount) {
-            state.playerAttack = amount
+            state.playerStats.attack = amount
         },
 
         setPlayerDefense(state, amount) {
-            state.playerDefense = amount
+            state.playerStats.defense = amount
         },
 
         buffPlayerAttack(state, amount) {
-            state.playerAttack += amount
+            state.playerStats.attack += amount
         },
 
         buffPlayerDefense(state, amount) {
-            state.playerDefense += amount
-        },
-
-        deBuffPlayerAttack(state, amount) {
-            state.playerAttack -= amount
-        },
-
-        deBuffPlayerDefense(state, amount) {
-            state.playerDefense -= amount
+            state.playerStats.defense += amount
         },
 
         mouseOver(state, types) {
