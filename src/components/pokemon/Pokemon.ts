@@ -1,5 +1,6 @@
 import { Options, Vue } from 'vue-class-component';
 import dataDex from "@/store/constantData/pokedex/data-dex"
+import getTypeMatchup from "@/engine/TypeMatchup";
 
 @Options({
   props: {
@@ -79,22 +80,11 @@ export default class Pokemon extends Vue {
     }, [] as string[])
   }
 
-  getTypeMatchup(attackingType, defendingTypes) {
-    const attackMachups = this.$store.state.types.dataTypes[attackingType]
-    let multiplier = 1
-
-    defendingTypes.forEach((type) => {
-      multiplier *= attackMachups[type]
-    })
-
-    return multiplier
-  }
-
   protected takeDamage(amount: number, type: string | null, ignoreBlock: boolean = false): void {
 
     //Type de l'attaque null dans le cas de selfDamage
     //Application des faiblesses et résistances avant l'attaque pour éviter que l'armure ne soit prise en compte
-    const typeMultiplier = type ? this.getTypeMatchup(type, this.dataPokemon.type) : 1
+    const typeMultiplier = type ? getTypeMatchup(type, this.dataPokemon.type) : 1
     if(typeMultiplier < 1 ) amount = Math.floor(amount * typeMultiplier)
     else amount = Math.ceil(amount * typeMultiplier)
     let damageDealt: number = 0

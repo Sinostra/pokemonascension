@@ -22,6 +22,7 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import dataCard from "@/store/constantData/cards/data-cards"
+import getTypeMatchup from "@/engine/TypeMatchup";
 import { inject } from 'vue'
 
 @Options({
@@ -103,7 +104,7 @@ export default class Card extends Vue {
 
   get cardDamageTooltipModifier() {
     if(!this.$store.state.battle.typesHover) return 1
-    return this.getTypeMatchup(this.dataCard[this.id]['effect']['type'], this.$store.state.battle.typesHover)
+    return getTypeMatchup(this.dataCard[this.id]['effect']['type'], this.$store.state.battle.typesHover)
   }
 
   get cardDamageTooltipClass() {
@@ -121,17 +122,6 @@ export default class Card extends Vue {
     const fontSize = this.getFontSize(multiplier)
     const background = `background-image :url(${this.categoryBackground});`
     return fontSize + background
-  }
-
-  getTypeMatchup(attackingType, defendingTypes) {
-    const attackMachups = this.$store.state.types.dataTypes[attackingType]
-    let multiplier = 1
-
-    defendingTypes.forEach((type) => {
-      multiplier *= attackMachups[type]
-    })
-
-    return multiplier
   }
 
   public startDrag() {
