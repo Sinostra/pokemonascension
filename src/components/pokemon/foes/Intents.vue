@@ -53,7 +53,11 @@ export default class Intents extends Vue {
     }
 
     get attackIntentValue(): number {
-        if(this.nextMove.name !== "AttackEffect") {
+        let foundEffect = this.checkIntentContent("AttackEffect")
+        if(!foundEffect) {
+            foundEffect = this.checkIntentContent("MultiAttackEffect")
+        }
+        if(!foundEffect) {
             return 0
         }
         else {
@@ -79,7 +83,8 @@ export default class Intents extends Vue {
     }
 
     get blockIntentValue(): number {
-        if(this.nextMove.name !== "BlockEfffect") {
+        const foundEffect = this.checkIntentContent("BlockEfffect")
+        if(!foundEffect) {
             return 0
         }
         else {
@@ -101,6 +106,17 @@ export default class Intents extends Vue {
 
             return this.nextMove.params.value + resolvedModifiers
         }
+    }
+
+    private checkIntentContent(name) {
+        if(this.nextMove.name === name) {
+            return this.nextMove
+        }
+        let foundEffect = undefined
+        if(this.nextMove.params.name === "MultiEffect") {
+            foundEffect = this.nextMove.params.find((effect) => effect.effectName === name)
+        }
+        return foundEffect
     }
 
     public getTpyeIcon(type) {

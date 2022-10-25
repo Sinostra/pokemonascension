@@ -206,15 +206,15 @@ export default {
             "type": "fighting",
             "params": [
                 {
-                    "effectName": "AttackEffect",
-                    "effectParams": {
+                    "name": "AttackEffect",
+                    "params": {
                         "value": 2,
                     }
                 },
                 {
-                    "effectName": "BuffEfffect",
-                    "effectParams": {
-                        "attack": 1,
+                    "name": "BuffEfffect",
+                    "params": {
+                        "buffAttack": 1,
                     }
                 }
             ],
