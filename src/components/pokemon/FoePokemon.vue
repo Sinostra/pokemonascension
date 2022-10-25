@@ -3,23 +3,10 @@
       <div class="size-wrapper" :style="{'width': dataPokemon.size + '%'}">
         <div class="bottom-wrapper" @click.stop="onClick()">
           <div class="healthBar-infos-wrapper">
-            <div v-if="nextMove && nextMove['params'] && canShowIntents" class="intent" :style="getFontSize(1.2)">
-              <div v-if="nextMove['params']['damage'] > 0" class="intent-category damage">
-                  <div class="text-wrapper">
-                    <span v-if="nextMoveDamageModifier < 1" :class="damageMoveClass">{{ Math.floor(nextMove['params']['damage'] * nextMoveDamageModifier)}}</span>
-                    <span v-else :class="damageMoveClass">{{ Math.ceil(nextMove['params']['damage'] * nextMoveDamageModifier)}}</span>
-                    <span v-if="nextMove['params']['damageTimes']">x{{nextMove['params']['damageTimes']}}</span>
-                  </div>
-                  <div class="img-wrapper" :class="mouseOver ? '' : 'hidden'">
-                    <img :src="getTpyeIcon(nextMove['type'])">
-                  </div>
-              </div>
-              <div v-if="nextMove['params']['block'] > 0" class="intent-category block">
-                <div class="img-wrapper">
-                  <div class="block-text-wrapper">{{nextMove['params']['block']}}</div>
-                </div>
-              </div>
-            </div>
+            <Intents v-if="canShowIntents"
+              :nextMove="nextMove"
+              :mouseOver="mouseOver"
+            ></Intents>
             <div class="healthBar">
               <div class="currentHealth" :class="healthBarClass" :style="{'width': getHealthBarPercent() + '%'}"></div>
               <div class="bottom-infos">
@@ -29,26 +16,26 @@
                 <div class="blockAmount">{{block}}</div>
               </div>
             </div>
-          <div class="help-tooltip" :style="helpToolTipStyle">
-          <div class="pokemon-data">
-            <div class="text">{{dataPokemon['name']['english']}}</div>
-            <div class="type" v-for="(type, index) in dataPokemon.type" :key="index">
-              <img :src="getTpyeIcon(type)" class="type-img">
+            <div class="help-tooltip" :style="helpToolTipStyle">
+              <div class="pokemon-data">
+                <div class="text">{{dataPokemon['name']['english']}}</div>
+                <div class="type" v-for="(type, index) in dataPokemon.type" :key="index">
+                  <img :src="getTpyeIcon(type)" class="type-img">
+                </div>
+              </div>
+              <div class="pokemon-data">
+                <div class="text">Weaknesses :</div>
+                <div class="type" v-for="(type, index) in weaknesses" :key="index">
+                  <img :src="getTpyeIcon(type)" class="type-img">
+                </div>
+              </div>
+              <div class="pokemon-data">
+                <div class="text">Resistances :</div>
+                <div class="type" v-for="(type, index) in resistances" :key="index">
+                  <img :src="getTpyeIcon(type)" class="type-img">
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="pokemon-data">
-            <div class="text">Weaknesses :</div>
-            <div class="type" v-for="(type, index) in weaknesses" :key="index">
-              <img :src="getTpyeIcon(type)" class="type-img">
-            </div>
-          </div>
-          <div class="pokemon-data">
-            <div class="text">Resistances :</div>
-            <div class="type" v-for="(type, index) in resistances" :key="index">
-              <img :src="getTpyeIcon(type)" class="type-img">
-            </div>
-          </div>
-        </div>
           </div>
           <img :src="spritePath" :class="spriteClass" @mouseover="onHover()" @mouseleave="onHover(false)" class="pokemon-sprite">
         </div>
@@ -59,12 +46,16 @@
 <script lang="ts">
 import { Options } from "vue-class-component";
 import Pokemon from "./Pokemon";
+import Intents from "./foes/Intents.vue";
 import suffleArray from "@/engine/Shuffle";
 import cloneDeep from "lodash.clonedeep"
 import { inject } from 'vue'
 
 @Options({
   name: "FoePokemon",
+  components: {
+    Intents
+  },
   props: {
     index: Number,
     maxHealth: Number,
@@ -123,41 +114,7 @@ export default class FoePokemon extends Pokemon {
 
     nextMove = cloneDeep(this.resolvedPattern[nextMoveIndex])
 
-    let nextMoveDamage = 0
-
-    if(nextMove['params']['block']) {
-      nextMove['params']['block'] += this.defense
-    }
-
-    if(nextMove['params']['damage']) {
-
-      nextMoveDamage = nextMove['params']['damage'] + this.attack
-
-      if(nextMoveDamage < 1) nextMoveDamage = 1
-
-      if(!isNaN(nextMoveDamage)) nextMove['params']['damage'] = nextMoveDamage
-    }
-
     return nextMove
-  }
-
-  get nextMoveDamageModifier(): number {
-    const playerActivePokemonTypes = this.$store.state.pokedex.constantDex[this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex]['id']]['type']
-    if(this.nextMove['type']) {
-      return this.getTypeMatchup(this.nextMove['type'], playerActivePokemonTypes) 
-    }
-    else return 1
-  }
-
-  get playerPokemonTypes() {
-    return this.$store.state.pokedex.constantDex[this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex]['id']]['type']
-  }
-
-  get damageMoveClass(): string {
-    let moveClass = ''
-    if(this.nextMoveDamageModifier > 1) moveClass = 'super-effective'
-    else if(this.nextMoveDamageModifier < 1) moveClass = 'not-very-effective'
-    return moveClass
   }
 
   get helpToolTipStyle(): string {

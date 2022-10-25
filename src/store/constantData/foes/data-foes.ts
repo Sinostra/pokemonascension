@@ -14,14 +14,14 @@ export default [
                         name: 'AttackEffect',
                         type: 'normal',
                         params: {
-                            damage: 2,
+                            value: 2,
                         }
                     },
                     {
                         name: 'BlockEfffect',
                         type: 'normal',
                         params: {
-                            block: 2,
+                            value: 2,
                         }
                     },
                 ]
@@ -41,14 +41,14 @@ export default [
                         name: 'AttackEffect',
                         type: 'poison',
                         params: {
-                            damage: 2,
+                            value: 2,
                         }
                     },
                     {
                         name: 'BlockEfffect',
                         type: 'normal',
                         params: {
-                            block: 2,
+                            value: 2,
                         }
                     },
                 ]
@@ -68,21 +68,21 @@ export default [
                         name: 'AttackEffect',
                         type: 'normal',
                         params: {
-                            damage: 3,
+                            value: 3,
                         }
                     },
                     {
                         name: 'BlockEfffect',
                         type: 'normal',
                         params: {
-                            block: 4,
+                            value: 4,
                         }
                     },
                     {
                         name: 'BlockEfffect',
                         type: 'normal',
                         params: {
-                            block: 4,
+                            value: 4,
                         }
                     },
                 ],
@@ -104,21 +104,21 @@ export default [
                         name: 'AttackEffect',
                         type: 'poison',
                         params: {
-                            damage: 3,
+                            value: 3,
                         }
                     },
                     {
                         name: 'BlockEfffect',
                         type: 'normal',
                         params: {
-                            block: 4,
+                            value: 4,
                         }
                     },
                     {
                         name: 'BlockEfffect',
                         type: 'normal',
                         params: {
-                            block: 4,
+                            value: 4,
                         }
                     },
                 ]
@@ -138,7 +138,7 @@ export default [
                         name: 'MultiAttackEffect',
                         type: 'bug',
                         params: {
-                            damage: 2,
+                            value: 2,
                             damageTimes: 2,
                         }
                     },
@@ -146,14 +146,14 @@ export default [
                         name: 'AttackEffect',
                         type: 'poison',
                         params: {
-                            damage: 4,
+                            value: 4,
                         }
                     },
                     {
                         name: 'BlockEfffect',
                         type: 'normal',
                         params: {
-                            block: 3,
+                            value: 3,
                         }
                     },
                 ]
@@ -173,21 +173,21 @@ export default [
                         name: 'AttackEffect',
                         type: 'bug',
                         params: {
-                            damage: 4,
+                            value: 4,
                         }
                     },
                     {
                         name: 'AttackEffect',
                         type: 'flying',
                         params: {
-                            damage: 4,
+                            value: 4,
                         }
                     },
                     {
                         name: 'BlockEfffect',
                         type: 'normal',
                         params: {
-                            block: 3,
+                            value: 3,
                         }
                     },
                 ]

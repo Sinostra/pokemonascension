@@ -1,0 +1,69 @@
+.intent {
+    position: absolute;
+    left: 50%;
+    width: 5vw;
+    transform: translate(-50%, -110%);
+    font-family: "ERASDEMI";
+    font-weight: 800;
+    color: #fff;
+    -webkit-text-stroke: 0.4px black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .intent-category {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      filter: drop-shadow(1px 1px 1px black);
+
+      &.damage {
+        margin-bottom: 5px;
+        .img-wrapper {
+          flex: 0.4;
+          min-width: 20px;
+          min-height: 20px;
+          display: flex;
+        }
+      }
+
+      &.block {
+        margin-bottom: 5px;
+        .img-wrapper {
+          width: 1.5vw;
+          height: 1.5vw;
+          background-image: url('../../../assets/img/interface/shield4.png');
+          background-size: 100% 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .block-text-wrapper {
+            font-family: 'ERASBD';
+          }
+        }
+      }
+
+      .text-wrapper {
+        margin-right: 2%;
+        margin-left: 20%;
+        font-family: 'ERASBD';
+
+        .super-effective {
+          color: #ff5252;
+        }
+
+        .not-very-effective {
+          color: #3bd3ff;
+        }
+      }
+
+      .type-icon {
+        width: 100%;
+      }
+    }
+
+    .hidden {
+        visibility: hidden;
+    }
+}
