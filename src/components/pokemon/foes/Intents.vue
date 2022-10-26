@@ -67,8 +67,8 @@ export default class Intents extends Vue {
             const defenseStat = 'defense'
             // const attackStat = reversedStats ? 'defense' : 'attack'
             // const defenseStat = reversedStats ? 'attack' : 'defense'
-            if(this.nextMove.params.modifiers) {
-                resolvedModifiers = this.nextMove.params.modifiers.map((modifier) => {
+            if(foundEffect.params.modifiers) {
+                resolvedModifiers = foundEffect.params.modifiers.map((modifier) => {
                     switch(modifier) {
                         case 'userAttack': return this.stats[attackStat]
                         case 'userDefense': return this.stats[defenseStat]
@@ -78,7 +78,7 @@ export default class Intents extends Vue {
                 }).reduce((prev, next) => prev + next)
             }
 
-            const damageWithModifiers = this.nextMove.params.value + resolvedModifiers
+            const damageWithModifiers = foundEffect.params.value + resolvedModifiers
             return damageWithModifiers * this.nextMoveDamageModifier
         }
     }
@@ -94,8 +94,8 @@ export default class Intents extends Vue {
             const defenseStat = 'defense'
             // const attackStat = reversedStats ? 'defense' : 'attack'
             // const defenseStat = reversedStats ? 'attack' : 'defense'
-            if(this.nextMove.params.modifiers) {
-                resolvedModifiers = this.nextMove.params.modifiers.map((modifier) => {
+            if(foundEffect.params.modifiers) {
+                resolvedModifiers = foundEffect.params.modifiers.map((modifier) => {
                     switch(modifier) {
                         case 'userAttack': return this.stats[attackStat]
                         case 'userDefense': return this.stats[defenseStat]
@@ -105,7 +105,7 @@ export default class Intents extends Vue {
                 }).reduce((prev, next) => prev + next)
             }
 
-            return this.nextMove.params.value + resolvedModifiers
+            return foundEffect.params.value + resolvedModifiers
         }
     }
 

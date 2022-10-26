@@ -113,7 +113,7 @@ export default {
                 "buffDefense": 1
             }
         },
-        "tooltip": 'Raises your attack and defense by one',
+        "tooltip": 'Raises your attack and defense by 1',
     },
 
     "008": {

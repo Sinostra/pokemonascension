@@ -23,6 +23,7 @@
 import Card from "./Card"
 import { Options } from "vue-class-component";
 import getTypeMatchup from "@/engine/TypeMatchup";
+import checkEffectContent from "@/engine/CheckEffectContent"
 import { inject } from 'vue'
 
 @Options({
@@ -69,26 +70,67 @@ export default class PlayableCard extends Card {
 
   get dynamicToolTip() {
 
-    if(!this.dataCard[this.id]['effect']['params']['value'] && !this.dataCard[this.id]['effect']['params']['value']) {
-      return this.dataCard[this.id]['tooltip']
-    } 
-
     let finalDamage = 0
     let finalBlock = 0
-    // if(this.dataCard[this.id]['effect']['params']['value']) {
-    //   finalDamage = this.dataCard[this.id]['effect']['params']['value'] + this.$store.state.battle.playerStats.attack;
-    //   if(this.$store.state.battle.typesHover) {
-    //     if(this.cardDamageTooltipModifier < 1) finalDamage = Math.floor(finalDamage * this.cardDamageTooltipModifier)
-    //     else finalDamage = Math.ceil(finalDamage * this.cardDamageTooltipModifier)
-    //   }
-    // }
 
-    // if(this.dataCard[this.id]['effect']['params']['value']) {
-    //   finalBlock = this.dataCard[this.id]['effect']['params']['value'] + this.$store.state.battle.playerStats.defense;
-    // }
+    let damageValue = 0
+    let blockValue = 0 
+    let attackEffect = checkEffectContent(this.dataCard[this.id]['effect'], "AttackEffect")
+    if(!attackEffect) {
+      attackEffect = checkEffectContent(this.dataCard[this.id]['effect'], "MultiAttackEffect")
+    }
+    if(attackEffect) {
+      let resolvedModifiers = 0
+      const attackStat = 'attack'
+      const defenseStat = 'defense'
+      // const attackStat = reversedStats ? 'defense' : 'attack'
+      // const defenseStat = reversedStats ? 'attack' : 'defense'
+      if(attackEffect.params.modifiers) {
+        resolvedModifiers = attackEffect.params.modifiers.map((modifier) => {
+          switch(modifier) {
+            case 'userAttack': return this.$store.state.battle.playerStats[attackStat]
+            case 'userDefense': return this.$store.state.battle.playerStats[defenseStat]
+            case 'targetAttack': return this.foeHover.stats[attackStat] || 0
+            case 'targetDefense': return this.foeHover.stats[defenseStat] || 0
+          }
+        }).reduce((prev, next) => prev + next)
+      }
 
+      damageValue = attackEffect.params.value + resolvedModifiers
+    }
+
+    let blockEffect = checkEffectContent(this.dataCard[this.id]['effect'], "BlockEfffect")
+    if(blockEffect) {
+      let resolvedModifiers = 0
+      const attackStat = 'attack'
+      const defenseStat = 'defense'
+      // const attackStat = reversedStats ? 'defense' : 'attack'
+      // const defenseStat = reversedStats ? 'attack' : 'defense'
+      if(blockEffect.params.modifiers) {
+        resolvedModifiers = blockEffect.params.modifiers.map((modifier) => {
+          switch(modifier) {
+            case 'userAttack': return this.$store.state.battle.playerStats[attackStat]
+            case 'userDefense': return this.$store.state.battle.playerStats[defenseStat]
+            case 'targetAttack': return this.foeHover.stats[attackStat] || 0
+            case 'targetDefense': return this.foeHover.stats[defenseStat] || 0
+          }
+        }).reduce((prev, next) => prev + next)
+      }
+
+      blockValue = blockEffect.params.value + resolvedModifiers
+    }
+
+    finalDamage += damageValue
+    finalBlock += blockValue
+
+    if(this.cardDamageTooltipModifier < 1) {
+      finalDamage = Math.floor(finalDamage * this.cardDamageTooltipModifier)
+    }
+    else {
+      finalDamage = Math.ceil(finalDamage * this.cardDamageTooltipModifier)
+    }
+    
     return this.dataCard[this.id]['tooltip'].replace('§', finalDamage).replace('µ', finalBlock)
-
   }
 
   get cardDamageTooltipModifier() {
