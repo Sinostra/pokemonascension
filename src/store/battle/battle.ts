@@ -9,7 +9,7 @@ export default {
             attack: 0,
             defense: 0
         },
-        typesHover: null,
+        indexFoeHover: null,
         isBattleOngoing: false,
         displayBattleRewards: false,
         playerLost: false,
@@ -61,7 +61,7 @@ export default {
         },
 
         mouseOver(state, types) {
-            state.typesHover = types
+            state.indexFoeHover = types
         },
 
         startBattle(state) {
