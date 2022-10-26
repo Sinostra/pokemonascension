@@ -1,23 +1,23 @@
 <template>
     <div class="being-discarded">
-        <Card v-for="(card, index) in content"
+        <PlayableCard v-for="(card, index) in content"
             :key="index"
             :id="card"
             :state="'discardedFromHand'"
             :style="'transform : scale(0)'"
         >
-        </Card>
+        </PlayableCard>
     </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import Card from '../../card/Card.vue'
+import PlayableCard from '../../card/PlayableCard.vue'
 
 @Options({
     name: "DiscardFromHandManager",
     components: {
-        Card
+        PlayableCard
     },
     props: {
         content: Array,

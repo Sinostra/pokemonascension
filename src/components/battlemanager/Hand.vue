@@ -1,6 +1,6 @@
 <template>
     <div class="hand" :class="isCardBeingPlayed ? 'lockedHand' : ''">
-        <Card v-for="(card, index) in content"
+        <PlayableCard v-for="(card, index) in content"
             :key="index"
             :id="card"
             :state="'drawn'"
@@ -8,19 +8,19 @@
             @dragCard="startDrag(index)"
             @dragEnd="endDrag()"
         >
-        </Card>
+        </PlayableCard>
     </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import Card from '../card/Card.vue'
+import PlayableCard from '../card/PlayableCard.vue'
 import { inject } from 'vue'
 
 @Options({
     name: "Hand",
     components: {
-        Card
+        PlayableCard
     },
     props: {
         content: Array,

@@ -20,24 +20,20 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
-import dataCard from "@/store/constantData/cards/data-cards"
+import Card from "./Card"
+import { Options } from "vue-class-component";
 import getTypeMatchup from "@/engine/TypeMatchup";
 import { inject } from 'vue'
 
 @Options({
-  name: "Card",
+  name: "PlayableCard",
   props: {
-    id: String,
     state: String
   }
 })
 
-export default class Card extends Vue {
-  public id!: string
+export default class PlayableCard extends Card {
   public state!: string
-
-  public dataCard = dataCard
 
   public isPlayingDrawAnim: boolean = false
   public isPlayingDiscardFromSelectAnim: boolean = false
@@ -58,24 +54,8 @@ export default class Card extends Vue {
     return `${type} ${draw} ${discardFromSelect} ${discardFromHand}`
   }
 
-  get background() {
-    return require(`@/assets/img/cards/bords/${this.dataCard[this.id]['rarity']}2.png`)
-  }
-
-  get costBackground() {
-    return require(`@/assets/img/cards/bords/${this.dataCard[this.id]['rarity']}_round.png`)
-  }
-
   get costClass() {
     return this.dataCard[this.id]['cost'] > this.$store.state.battle.currentEnergy ? "too-much" : ""
-  }
-
-  get illustrationBackground(): string {
-    return require(`@/assets/img/cards/illustrations/${this.id}.jpg`)
-  }
-
-  get categoryBackground() {
-    return require(`@/assets/img/cards/${this.dataCard[this.id]['category']}_${this.dataCard[this.id]['rarity']}.png`)
   }
 
   get dynamicToolTip() {
@@ -112,16 +92,6 @@ export default class Card extends Vue {
     if(this.cardDamageTooltipModifier > 1) tooltipClass = 'super-effective'
     else if(this.cardDamageTooltipModifier < 1) tooltipClass = 'not-very-effective'
     return tooltipClass
-  }
-
-  getFontSize(multiplier = 1): string {
-    return `font-size: ${(this.$store.state.settings.baseFontSize) * multiplier}px;`
-  }
-
-  getCategoryStyle(multiplier = 1) {
-    const fontSize = this.getFontSize(multiplier)
-    const background = `background-image :url(${this.categoryBackground});`
-    return fontSize + background
   }
 
   public startDrag() {
