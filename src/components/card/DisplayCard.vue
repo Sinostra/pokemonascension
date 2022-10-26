@@ -21,17 +21,28 @@
 
 <script lang="ts">
 import Card from "./Card"
-
+import checkEffectContent from "@/engine/CheckEffectContent"
 
 export default class DisplayCard extends Card {
 
   get dynamicToolTip() {
 
-    if(!this.dataCard[this.id]['effect']['params']['damage'] && !this.dataCard[this.id]['effect']['params']['block']) {
-      return this.dataCard[this.id]['tooltip']
-    } 
+    let damageValue = 0
+    let blockValue = 0 
+    let attackEffect = checkEffectContent(this.dataCard[this.id]['effect'], "AttackEffect")
+    if(!attackEffect) {
+      attackEffect = checkEffectContent(this.dataCard[this.id]['effect'], "MultiAttackEffect")
+    }
+    if(attackEffect) {
+      damageValue = attackEffect.params.value
+    }
 
-    return this.dataCard[this.id]['tooltip'].replace('§', this.dataCard[this.id]['effect']['params']['value']).replace('µ', this.dataCard[this.id]['effect']['params']['value'])
+    let blockEffect = checkEffectContent(this.dataCard[this.id]['effect'], "BlockEfffect")
+    if(blockEffect) {
+      blockValue = blockEffect.params.value
+    }
+
+    return this.dataCard[this.id]['tooltip'].replace('§', damageValue).replace('µ', blockValue)
   }
 }
 </script>

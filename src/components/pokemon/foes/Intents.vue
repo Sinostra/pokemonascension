@@ -4,7 +4,7 @@
             <div class="text-wrapper">
                 <span v-if="nextMoveDamageModifier < 1" :class="damageMoveClass">{{ Math.floor(attackIntentValue)}}</span>
                 <span v-else :class="damageMoveClass">{{ Math.ceil(attackIntentValue)}}</span>
-                <span v-if="nextMove['params']['damageTimes']">x{{nextMove['params']['damageTimes']}}</span>
+                <span v-if="multiAttackAmount">x{{multiAttackAmount}}</span>
             </div>
             <div class="img-wrapper" :class="mouseOver ? '' : 'hidden'">
                 <img :src="getTpyeIcon(nextMove['type'])" class="type-icon">
@@ -21,6 +21,7 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 import getTypeMatchup from "@/engine/TypeMatchup";
+import checkEffectContent from "@/engine/CheckEffectContent"
 
 @Options({
   name: "Intents",
@@ -53,9 +54,9 @@ export default class Intents extends Vue {
     }
 
     get attackIntentValue(): number {
-        let foundEffect = this.checkIntentContent("AttackEffect")
+        let foundEffect = checkEffectContent(this.nextMove, "AttackEffect")
         if(!foundEffect) {
-            foundEffect = this.checkIntentContent("MultiAttackEffect")
+            foundEffect = checkEffectContent(this.nextMove, "MultiAttackEffect")
         }
         if(!foundEffect) {
             return 0
@@ -83,7 +84,7 @@ export default class Intents extends Vue {
     }
 
     get blockIntentValue(): number {
-        const foundEffect = this.checkIntentContent("BlockEfffect")
+        const foundEffect = checkEffectContent(this.nextMove, "BlockEfffect")
         if(!foundEffect) {
             return 0
         }
@@ -108,15 +109,14 @@ export default class Intents extends Vue {
         }
     }
 
-    private checkIntentContent(name) {
-        if(this.nextMove.name === name) {
-            return this.nextMove
+    get multiAttackAmount(): number {
+        const foundEffect = checkEffectContent(this.nextMove, "MultiAttackEffect")
+        if(!foundEffect) {
+            return 0
         }
-        let foundEffect = undefined
-        if(this.nextMove.params.name === "MultiEffect") {
-            foundEffect = this.nextMove.params.find((effect) => effect.effectName === name)
+        else {
+            return foundEffect.params.damageTimes
         }
-        return foundEffect
     }
 
     public getTpyeIcon(type) {
