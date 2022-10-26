@@ -11,7 +11,7 @@
     <div class="illustration" :style="{'background-image':'url(' + illustrationBackground + ')'}"></div>
 
     <div class="category" :style="(getCategoryStyle(0.6))">{{dataCard[id]['category']}}</div>
-    
+
     <div class="tooltip" :class="cardDamageTooltipClass" :style="(getFontSize(0.8))">
       <div v-html="dynamicToolTip"></div>
       <div v-if="dataCard[id]['exhaust']" class="bold">Exhaust</div>
@@ -58,6 +58,15 @@ export default class PlayableCard extends Card {
     return this.dataCard[this.id]['cost'] > this.$store.state.battle.currentEnergy ? "too-much" : ""
   }
 
+  get foeHover() {
+    if(this.$store.state.battle.indexFoeHover === null) {
+      return null
+    }
+    else {
+      return this.$store.getters.getFoeTeam[this.$store.state.battle.indexFoeHover]
+    }
+  }
+
   get dynamicToolTip() {
 
     if(!this.dataCard[this.id]['effect']['params']['value'] && !this.dataCard[this.id]['effect']['params']['value']) {
@@ -66,25 +75,26 @@ export default class PlayableCard extends Card {
 
     let finalDamage = 0
     let finalBlock = 0
-    if(this.dataCard[this.id]['effect']['params']['value']) {
-      finalDamage = this.dataCard[this.id]['effect']['params']['value'] + this.$store.state.battle.playerStats.attack;
-      if(this.$store.state.battle.typesHover) {
-        if(this.cardDamageTooltipModifier < 1) finalDamage = Math.floor(finalDamage * this.cardDamageTooltipModifier)
-        else finalDamage = Math.ceil(finalDamage * this.cardDamageTooltipModifier)
-      }
-    }
+    // if(this.dataCard[this.id]['effect']['params']['value']) {
+    //   finalDamage = this.dataCard[this.id]['effect']['params']['value'] + this.$store.state.battle.playerStats.attack;
+    //   if(this.$store.state.battle.typesHover) {
+    //     if(this.cardDamageTooltipModifier < 1) finalDamage = Math.floor(finalDamage * this.cardDamageTooltipModifier)
+    //     else finalDamage = Math.ceil(finalDamage * this.cardDamageTooltipModifier)
+    //   }
+    // }
 
-    if(this.dataCard[this.id]['effect']['params']['value']) {
-      finalBlock = this.dataCard[this.id]['effect']['params']['value'] + this.$store.state.battle.playerStats.defense;
-    }
+    // if(this.dataCard[this.id]['effect']['params']['value']) {
+    //   finalBlock = this.dataCard[this.id]['effect']['params']['value'] + this.$store.state.battle.playerStats.defense;
+    // }
 
     return this.dataCard[this.id]['tooltip'].replace('§', finalDamage).replace('µ', finalBlock)
 
   }
 
   get cardDamageTooltipModifier() {
-    if(!this.$store.state.battle.typesHover) return 1
-    return getTypeMatchup(this.dataCard[this.id]['effect']['type'], this.$store.state.battle.typesHover)
+    if(!this.foeHover) return 1
+    const foeHoverTypes = this.$store.getters.getDex[this.foeHover.id].type
+    return getTypeMatchup(this.dataCard[this.id]['effect']['type'], foeHoverTypes)
   }
 
   get cardDamageTooltipClass() {
