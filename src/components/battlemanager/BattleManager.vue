@@ -155,6 +155,7 @@ export default class BattleManager extends Vue {
         }
         
         const effect = new EffectContainer[effects.name]({user, target, type: effects.type, ...effects.params}, this.emitter)
+        // console.log(effect)
         effect.params.value += resolvedModifiers
         effect.playEffect().then(() => this.effectEndCallBack(user))
     }

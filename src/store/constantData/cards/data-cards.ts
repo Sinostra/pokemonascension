@@ -30,7 +30,7 @@ export default {
                 "damageAOE": true,
             }
         },
-        "tooltip": 'Deal § damage to all ennemies',
+        "tooltip": 'Deal <span class="damage-amount">§</span> damage to all ennemies',
     },
 
     "003": {
@@ -209,6 +209,7 @@ export default {
                     "name": "AttackEffect",
                     "params": {
                         "value": 2,
+                        "modifiers": ["userAttack"]
                     }
                 },
                 {
@@ -220,5 +221,33 @@ export default {
             ],
         },
         "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy and raise your attack by 1',
+    },
+    "014": {
+        "name": "steel wing",
+        "category": "attack",
+        "rarity": "common",
+        "cost": 1,
+        "target": true,
+        "effect": {
+            "name": "MultiEffect",
+            "type": "steel",
+            "params": [
+                {
+                    "name": "AttackEffect",
+                    "params": {
+                        "value": 3,
+                        "modifiers": ["userAttack"]
+                    }
+                },
+                {
+                    "name": "BlockEfffect",
+                    "params": {
+                        "value": 3,
+                        "modifiers": ["userDefense"]
+                    }
+                }
+            ],
+        },
+        "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy and gain µ block',
     },
 }

@@ -3,7 +3,7 @@ export default function checkEffectContent(effect, name) {
         return effect
     }
     let foundEffect = undefined
-    if(effect.params.name === "MultiEffect") {
+    if(effect.name === "MultiEffect") {
         foundEffect = effect.params.find((e) => e.name === name)
     }
     return foundEffect
