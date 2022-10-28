@@ -12,6 +12,7 @@ import { Options, Vue } from 'vue-class-component'
 import { Watch } from 'vue-property-decorator'
 import { inject } from 'vue'
 import { EffectContainer } from "../../engine/EffectContainer"
+import cloneDeep from "lodash.clonedeep"
 
 @Options({
     name: "BattleManager",
@@ -126,37 +127,8 @@ export default class BattleManager extends Vue {
     }
 
     private playEffects(effects: any, user: number | string | null, target: number | string | null) {
-        let resolvedModifiers = 0
-        const attackStat = 'attack'
-        const defenseStat = 'defense'
-        // const attackStat = reversedStats ? 'defense' : 'attack'
-        // const defenseStat = reversedStats ? 'attack' : 'defense'
-        if(effects.params.modifiers) {
-            resolvedModifiers = effects.params.modifiers.map((modifier) => {
-                if(user === "player") {
-                    switch(modifier) {
-                        case 'userAttack': return this.$store.state.battle.playerStats[attackStat]
-                        case 'userDefense': return this.$store.state.battle.playerStats[defenseStat]
-                        case 'targetAttack': return this.$store.getters.getFoeTeam[target as number]['stats'][attackStat]
-                        case 'targetDefense': return this.$store.getters.getFoeTeam[target as number]['stats'][defenseStat]
-                    }
-                }
-                else {
-                    switch(modifier) {
-                        case 'userAttack': return this.$store.getters.getFoeTeam[user as number]['stats'][attackStat]
-                        case 'userDefense': return this.$store.getters.getFoeTeam[user as number]['stats'][defenseStat]
-                        case 'targetAttack': return this.$store.state.battle.playerStats[attackStat]
-                        case 'targetDefense': return this.$store.state.battle.playerStats[defenseStat]
-                    }
-                }
-                
-            }).reduce((prev, next) => prev + next)
-            
-        }
-        
-        const effect = new EffectContainer[effects.name]({user, target, type: effects.type, ...effects.params}, this.emitter)
-        // console.log(effect)
-        effect.params.value += resolvedModifiers
+        const cardEffect = this.applyModifiers(effects, user, target)
+        const effect = new EffectContainer[cardEffect.name]({user, target, type: cardEffect.type, ...cardEffect.params}, this.emitter)
         effect.playEffect().then(() => this.effectEndCallBack(user))
     }
 
@@ -181,6 +153,48 @@ export default class BattleManager extends Vue {
             ) {
             this.effectsPlayed++
         }
+    }
+
+    private applyModifiers(effect, user, target) {
+        const cardEffect = cloneDeep(effect)
+        if(cardEffect.name !== "MultiEffect") {
+            let resolvedModifiers = 0
+            const attackStat = 'attack'
+            const defenseStat = 'defense'
+            // const attackStat = reversedStats ? 'defense' : 'attack'
+            // const defenseStat = reversedStats ? 'attack' : 'defense'
+            if(cardEffect.params.modifiers) {
+                resolvedModifiers = cardEffect.params.modifiers.map((modifier) => {
+                    if(user === "player") {
+                        switch(modifier) {
+                            case 'userAttack': return this.$store.state.battle.playerStats[attackStat]
+                            case 'userDefense': return this.$store.state.battle.playerStats[defenseStat]
+                            case 'targetAttack': return this.$store.getters.getFoeTeam[target as number]['stats'][attackStat]
+                            case 'targetDefense': return this.$store.getters.getFoeTeam[target as number]['stats'][defenseStat]
+                        }
+                    }
+                    else {
+                        switch(modifier) {
+                            case 'userAttack': return this.$store.getters.getFoeTeam[user as number]['stats'][attackStat]
+                            case 'userDefense': return this.$store.getters.getFoeTeam[user as number]['stats'][defenseStat]
+                            case 'targetAttack': return this.$store.state.battle.playerStats[attackStat]
+                            case 'targetDefense': return this.$store.state.battle.playerStats[defenseStat]
+                        }
+                    }
+                    
+                }).reduce((prev, next) => prev + next)
+            }
+
+            cardEffect.params.value += resolvedModifiers
+        }
+
+        else {
+            cardEffect.params = cardEffect.params.map((subEffect) => {
+                return this.applyModifiers(subEffect, user, target)
+            })
+        }
+        
+        return cardEffect
     }
 
     private playFoeTurn(index) {

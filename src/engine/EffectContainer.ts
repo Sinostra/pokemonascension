@@ -119,14 +119,25 @@ export class MultiAttackEffect extends BaseEffect implements IEffect {
   }
 }
 
-export class MultiEffect implements IEffect {
-  constructor(effects) {
-    this.effects = effects
-  }
-  private effects: IEffect[] = []
+export class MultiEffect extends BaseEffect implements IEffect {
   playEffect(): Promise<void> {
+    const subEffects = Object.values(this.params).filter((val) => typeof val === 'object')
+    const effects = subEffects.map((effect) => {
+      return {
+        effect,
+        ...{
+          user: this.params.user,
+          target: this.params.target,
+          type: this.params.type,
+        }
+      }
+    }).map((e) => {
+      const effect = e.effect as any
+      return new EffectContainer[effect.name]({user: e.user, target: e.target, type: e.type, ...effect.params}, this.emitter)
+    })
+    
     return new Promise((resolve) => {
-      Promise.all(this.effects.map((effect) => effect.playEffect())).then(() => {
+      Promise.all(effects.map((effect) => effect.playEffect())).then(() => {
         resolve()
       })
     })
