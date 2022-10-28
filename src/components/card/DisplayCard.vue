@@ -37,11 +37,10 @@ export default class DisplayCard extends Card {
       damageValue = attackEffect.params.value
     }
 
-    let blockEffect = checkEffectContent(this.dataCard[this.id]['effect'], "BlockEfffect")
+    let blockEffect = checkEffectContent(this.dataCard[this.id]['effect'], "BlockEffect")
     if(blockEffect) {
       blockValue = blockEffect.params.value
     }
-    // console.log(attackEffect)
 
     return this.dataCard[this.id]['tooltip'].replace('§', damageValue).replace('µ', blockValue)
   }

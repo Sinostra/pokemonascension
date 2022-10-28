@@ -19,7 +19,7 @@ export default [
                         }
                     },
                     {
-                        name: 'BlockEfffect',
+                        name: 'BlockEffect',
                         type: 'normal',
                         params: {
                             value: 2,
@@ -48,7 +48,7 @@ export default [
                         }
                     },
                     {
-                        name: 'BlockEfffect',
+                        name: 'BlockEffect',
                         type: 'normal',
                         params: {
                             value: 2,
@@ -77,7 +77,7 @@ export default [
                         }
                     },
                     {
-                        name: 'BlockEfffect',
+                        name: 'BlockEffect',
                         type: 'normal',
                         params: {
                             value: 4,
@@ -85,7 +85,7 @@ export default [
                         }
                     },
                     {
-                        name: 'BlockEfffect',
+                        name: 'BlockEffect',
                         type: 'normal',
                         params: {
                             value: 4,
@@ -116,7 +116,7 @@ export default [
                         }
                     },
                     {
-                        name: 'BlockEfffect',
+                        name: 'BlockEffect',
                         type: 'normal',
                         params: {
                             value: 4,
@@ -124,7 +124,7 @@ export default [
                         }
                     },
                     {
-                        name: 'BlockEfffect',
+                        name: 'BlockEffect',
                         type: 'normal',
                         params: {
                             value: 4,
@@ -162,7 +162,7 @@ export default [
                         }
                     },
                     {
-                        name: 'BlockEfffect',
+                        name: 'BlockEffect',
                         type: 'normal',
                         params: {
                             value: 3,
@@ -199,7 +199,7 @@ export default [
                         }
                     },
                     {
-                        name: 'BlockEfffect',
+                        name: 'BlockEffect',
                         type: 'normal',
                         params: {
                             value: 3,

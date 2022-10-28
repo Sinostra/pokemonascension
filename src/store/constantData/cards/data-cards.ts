@@ -40,7 +40,7 @@ export default {
         "cost": 0,
         "target": false,
         "effect": {
-            "name": "DrawEfffect",
+            "name": "DrawEffect",
             "type": "psychic",
             "params": {
                 "draw": 2,
@@ -56,7 +56,7 @@ export default {
         "cost": 1,
         "target": false,
         "effect": {
-            "name": "BlockEfffect",
+            "name": "BlockEffect",
             "type": "normal",
             "params": {
                 "value": 5,
@@ -73,7 +73,7 @@ export default {
         "cost": 1,
         "target": false,
         "effect": {
-            "name" : "EnergyEfffect",
+            "name" : "EnergyEffect",
             "type": "normal",
             "params": {
                 "energy": 2,
@@ -93,6 +93,7 @@ export default {
             "type": "normal",
             "params": {
                 "value": 2,
+                "modifiers": ["userAttack"],
                 "damageTimes": 3,
             }
         },
@@ -106,7 +107,7 @@ export default {
         "cost": 1,
         "target": false,
         "effect": {
-            "name": "BuffEfffect",
+            "name": "BuffEffect",
             "type": "psychic",
             "params" : {
                 "buffAttack": 1,
@@ -123,7 +124,7 @@ export default {
         "cost": 1,
         "target": false,
         "effect":{
-            "name": "HealEfffect",
+            "name": "HealEffect",
             "type": "psychic",
             "params": {
                 "selfHeal": 50
@@ -213,7 +214,7 @@ export default {
                     }
                 },
                 {
-                    "name": "BuffEfffect",
+                    "name": "BuffEffect",
                     "params": {
                         "buffAttack": 1,
                     }
@@ -233,6 +234,13 @@ export default {
             "type": "steel",
             "params": [
                 {
+                    "name": "BuffEffect",
+                    "params" : {
+                        "buffAttack": 1,
+                        "buffDefense": 1
+                    }
+                },
+                {
                     "name": "AttackEffect",
                     "params": {
                         "value": 3,
@@ -240,7 +248,7 @@ export default {
                     }
                 },
                 {
-                    "name": "BlockEfffect",
+                    "name": "BlockEffect",
                     "params": {
                         "value": 3,
                         "modifiers": ["userDefense"]

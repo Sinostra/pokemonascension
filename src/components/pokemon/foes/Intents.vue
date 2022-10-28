@@ -84,7 +84,7 @@ export default class Intents extends Vue {
     }
 
     get blockIntentValue(): number {
-        const foundEffect = checkEffectContent(this.nextMove, "BlockEfffect")
+        const foundEffect = checkEffectContent(this.nextMove, "BlockEffect")
         if(!foundEffect) {
             return 0
         }

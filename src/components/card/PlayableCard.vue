@@ -99,7 +99,7 @@ export default class PlayableCard extends Card {
       damageValue = attackEffect.params.value + resolvedModifiers
     }
 
-    let blockEffect = checkEffectContent(this.dataCard[this.id]['effect'], "BlockEfffect")
+    let blockEffect = checkEffectContent(this.dataCard[this.id]['effect'], "BlockEffect")
     if(blockEffect) {
       let resolvedModifiers = 0
       const attackStat = 'attack'
