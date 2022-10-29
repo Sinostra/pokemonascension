@@ -186,6 +186,15 @@ export default class FoePokemon extends Pokemon {
     this.canShowIntents = true
   }
 
+  private applyBuff(payload) {
+    if(payload.buffAttack) {
+      this.$store.commit("buffFoeAttack", {index: this.index, buff: payload.buffAttack})
+      }
+    if(payload.buffDefense) {
+      this.$store.commit("buffFoeDefense", {index: this.index, buff: payload.buffDefense})
+    }
+  }
+
   private onDamage(payload) {
     if(payload.target === this.index) {
       this.takeDamage(payload.value, payload.type, payload.ignoreBlock)
@@ -201,14 +210,15 @@ export default class FoePokemon extends Pokemon {
     }
   }
 
-  private onBuff(payload) {
-    if((payload.user === this.index && payload.target === null) || payload.target === this.index) {
-      if(payload.buffAttack) {
-        this.$store.commit("buffFoeAttack", {index: this.index, buff: payload.buffAttack})
-      }
-      if(payload.buffDefense) {
-        this.$store.commit("buffFoeDefense", {index: this.index, buff: payload.buffDefense})
-      }
+  private onSelfBuff(payload) {
+    if(payload.user === this.index) {
+      this.applyBuff(payload)
+    }
+  }
+
+  private onTargetBuff(payload) {
+    if(payload.target === this.index) {
+      this.applyBuff(payload)
     }
   }
 
@@ -235,7 +245,8 @@ export default class FoePokemon extends Pokemon {
     this.emitter.on("startNewTurn", this.onNewTurn)
     this.emitter.on("damage", this.onDamage)
     this.emitter.on("block", this.onBlock)
-    this.emitter.on("buff", this.onBuff)
+    this.emitter.on("selfbuff", this.onSelfBuff)
+    this.emitter.on('targetbuff', this.onTargetBuff)
     this.emitter.on("heal", this.onHeal)
     this.emitter.on("foeTurn", this.onFoeTurn)
   }
@@ -245,7 +256,8 @@ export default class FoePokemon extends Pokemon {
     this.emitter.off("startNewTurn", this.onNewTurn)
     this.emitter.off("damage", this.onDamage)
     this.emitter.off("block", this.onBlock)
-    this.emitter.off("buff", this.onBuff)
+    this.emitter.off("selfbuff", this.onSelfBuff)
+    this.emitter.off('targetbuff', this.onTargetBuff)
     this.emitter.off("heal", this.onHeal)
     this.emitter.off("foeTurn", this.onFoeTurn)
   }

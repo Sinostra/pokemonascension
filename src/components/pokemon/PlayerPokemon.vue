@@ -70,6 +70,15 @@ export default class PlayerPokemon extends Pokemon {
     this.emitter.emit("setPlayerFainted")
   }
 
+  private applyBuff(payload) {
+    if(payload.buffAttack) {
+        this.$store.commit("buffPlayerAttack", payload.buffAttack)
+      }
+    if(payload.buffDefense) {
+      this.$store.commit("buffPlayerDefense", payload.buffDefense)
+    }
+  }
+
   private onNewTurn() {
     this.setBlock(0)
   }
@@ -90,14 +99,15 @@ export default class PlayerPokemon extends Pokemon {
     }
   }
 
-  private onBuff(payload) {
-    if((payload.user === "player" && payload.target === null) || payload.target === "player") {
-      if(payload.buffAttack) {
-        this.$store.commit("buffPlayerAttack", payload.buffAttack)
-      }
-      if(payload.buffDefense) {
-        this.$store.commit("buffPlayerDefense", payload.buffDefense)
-      }
+  private onSelfBuff(payload) {
+    if(payload.user === "player") {
+      this.applyBuff(payload)
+    }
+  }
+
+  private onTargetBuff(payload) {
+    if(payload.target === "player") {
+      this.applyBuff(payload)
     }
   }
 
@@ -125,7 +135,8 @@ export default class PlayerPokemon extends Pokemon {
     this.emitter.on("startNewTurn", this.onNewTurn)
     this.emitter.on("damage", this.onDamage)
     this.emitter.on('block', this.onBlock)
-    this.emitter.on('buff', this.onBuff)
+    this.emitter.on('selfbuff', this.onSelfBuff)
+    this.emitter.on('targetbuff', this.onTargetBuff)
     this.emitter.on("heal", this.onHeal)
     this.emitter.on("energy", this.onEnergy)
   }
@@ -134,7 +145,8 @@ export default class PlayerPokemon extends Pokemon {
     this.emitter.off("startNewTurn", this.onNewTurn)
     this.emitter.off("damage", this.onDamage)
     this.emitter.off("block", this.onBlock)
-    this.emitter.off('buff', this.onBuff)
+    this.emitter.off('selfbuff', this.onSelfBuff)
+    this.emitter.off('targetbuff', this.onTargetBuff)
     this.emitter.off("heal", this.onHeal)
     this.emitter.off("energy", this.onEnergy)
   }

@@ -107,7 +107,7 @@ export default {
         "cost": 1,
         "target": false,
         "effect": {
-            "name": "BuffEffect",
+            "name": "SelfBuffEffect",
             "type": "psychic",
             "params" : {
                 "buffAttack": 1,
@@ -214,7 +214,7 @@ export default {
                     }
                 },
                 {
-                    "name": "BuffEffect",
+                    "name": "SelfBuffEffect",
                     "params": {
                         "buffAttack": 1,
                     }
@@ -234,7 +234,7 @@ export default {
             "type": "steel",
             "params": [
                 {
-                    "name": "BuffEffect",
+                    "name": "SelfBuffEffect",
                     "params" : {
                         "buffAttack": 1,
                         "buffDefense": 1
