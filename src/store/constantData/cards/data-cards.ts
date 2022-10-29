@@ -234,6 +234,12 @@ export default {
             "type": "steel",
             "params": [
                 {
+                    "name": "DrawEffect",
+                    "params": {
+                        "draw": 2,
+                    }
+                },
+                {
                     "name": "SelfBuffEffect",
                     "params" : {
                         "buffAttack": 1,
@@ -241,10 +247,11 @@ export default {
                     }
                 },
                 {
-                    "name": "AttackEffect",
+                    "name": "MultiAttackEffect",
                     "params": {
                         "value": 3,
-                        "modifiers": ["userAttack"]
+                        "modifiers": ["userAttack"],
+                        "damageTimes": 3,
                     }
                 },
                 {
