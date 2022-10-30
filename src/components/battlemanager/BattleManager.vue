@@ -32,6 +32,14 @@ export default class BattleManager extends Vue {
 
     private effectsPlayed = 0
 
+    private playerDraw: any[] = [{
+        name: "DrawEffect",
+        type: null,
+        remainingTurns: 3,
+        params: {
+            draw: 5,
+        }
+    }]
     private startOfPlayerTurnEffects: any[] = []
     private endOfPlayerTurnEffects: any[] = []
     private endOfFoesTurnEffects: any[] = []
@@ -43,67 +51,98 @@ export default class BattleManager extends Vue {
     }
 
     //Gère le déroulé du tour
-    @Watch("currentTurnStepIndex")
-    onTurnStepChange(newValue) {
-        if(newValue >= this.turnSteps.length) {
-            this.currentTurnStepIndex = 0
-            return
-        }
+    // @Watch("currentTurnStepIndex")
+    // onTurnStepChange(newValue) {
+    //     if(newValue >= this.turnSteps.length) {
+    //         this.currentTurnStepIndex = 0
+    //         return
+    //     }
 
-        let currentEffectsArray: any[] | null = null;
+    //     let currentEffectsArray: any[] | null = null;
 
-        if(this.turnSteps[this.currentTurnStepIndex] === "playerDraw") {
-            this.startPlayerTurn()
-        }
-        else if(this.turnSteps[this.currentTurnStepIndex] === "startOfPlayerTurnEffects") {
-            currentEffectsArray = this.startOfPlayerTurnEffects
-        }
-        else if(this.turnSteps[this.currentTurnStepIndex] === "playerTurn") {
-            this.emitter.emit("playerTurn")
-        }
-        else if(this.turnSteps[this.currentTurnStepIndex] === "endOfPlayerTurnEffects") {
-            currentEffectsArray = this.endOfPlayerTurnEffects
-        }
-        else if(this.turnSteps[this.currentTurnStepIndex] === "foesTurn") {
-            this.playFoeTurn(this.firstNotFaintedFoe)
-        }
-        else if(this.turnSteps[this.currentTurnStepIndex] === "endOfFoesTurnEffects") {
-            currentEffectsArray = this.endOfFoesTurnEffects
-        }
+    //     if(this.turnSteps[this.currentTurnStepIndex] === "playerDraw") {
+    //         this.startPlayerTurn()
+    //     }
+    //     else if(this.turnSteps[this.currentTurnStepIndex] === "startOfPlayerTurnEffects") {
+    //         currentEffectsArray = this.startOfPlayerTurnEffects
+    //     }
+    //     else if(this.turnSteps[this.currentTurnStepIndex] === "playerTurn") {
+    //         this.emitter.emit("playerTurn")
+    //     }
+    //     else if(this.turnSteps[this.currentTurnStepIndex] === "endOfPlayerTurnEffects") {
+    //         currentEffectsArray = this.endOfPlayerTurnEffects
+    //     }
+    //     else if(this.turnSteps[this.currentTurnStepIndex] === "foesTurn") {
+    //         this.playFoeTurn(this.firstNotFaintedFoe)
+    //     }
+    //     else if(this.turnSteps[this.currentTurnStepIndex] === "endOfFoesTurnEffects") {
+    //         currentEffectsArray = this.endOfFoesTurnEffects
+    //     }
 
-        if(!!currentEffectsArray) {
-            if(currentEffectsArray.length) {
-                this.playEffects(currentEffectsArray[this.effectsPlayed], null, null)
-            }
-            else {
-                this.currentTurnStepIndex++
-            }
-        }
-    }
+    //     if(!!currentEffectsArray) {
+    //         if(currentEffectsArray.length) {
+    //             this.playEffects(currentEffectsArray[this.effectsPlayed], null, null)
+    //         }
+    //         else {
+    //             this.currentTurnStepIndex++
+    //         }
+    //     }
+    // }
 
     //Gère l'appel des effets de l'étape en cours
-    @Watch("effectsPlayed")
-    onValueChange(newValue, oldValue) {
-        if(newValue > oldValue){
-            let currentEffectsArray: any[] | null = null;
-            if(this.turnSteps[this.currentTurnStepIndex] === "startOfPlayerTurnEffects") {
-                currentEffectsArray = this.startOfPlayerTurnEffects
-            }
-            else if(this.turnSteps[this.currentTurnStepIndex] === "endOfPlayerTurnEffects") {
-                currentEffectsArray = this.endOfPlayerTurnEffects
-            }
-            else if(this.turnSteps[this.currentTurnStepIndex] === "endOfFoesTurnEffects") {
-                currentEffectsArray = this.endOfFoesTurnEffects
-            }
+    // @Watch("effectsPlayed")
+    // onValueChange(newValue, oldValue) {
+    //     if(newValue > oldValue){
+    //         let currentEffectsArray: any[] | null = null;
+    //         if(this.turnSteps[this.currentTurnStepIndex] === "startOfPlayerTurnEffects") {
+    //             currentEffectsArray = this.startOfPlayerTurnEffects
+    //         }
+    //         else if(this.turnSteps[this.currentTurnStepIndex] === "endOfPlayerTurnEffects") {
+    //             currentEffectsArray = this.endOfPlayerTurnEffects
+    //         }
+    //         else if(this.turnSteps[this.currentTurnStepIndex] === "endOfFoesTurnEffects") {
+    //             currentEffectsArray = this.endOfFoesTurnEffects
+    //         }
     
-            if(!!currentEffectsArray) {
-                if(newValue >= currentEffectsArray.length) {
-                    this.currentTurnStepIndex++
-                    this.effectsPlayed = 0
-                }
-                else this.playEffects(currentEffectsArray[this.effectsPlayed], null, null)
+    //         if(!!currentEffectsArray) {
+    //             if(newValue >= currentEffectsArray.length) {
+    //                 this.currentTurnStepIndex++
+    //                 this.effectsPlayed = 0
+    //             }
+    //             else this.playEffects(currentEffectsArray[this.effectsPlayed], null, null)
+    //         }
+    //     }
+    // }
+
+    private playArrayEffects(array): Promise<any[]> {
+        const passedArray = cloneDeep(array)
+        console.log(array)
+        const effects = passedArray.map((effect) => {
+            return new EffectContainer[effect.name]({user: effect.user, target: effect.target, type: effect.type, ...effect.params}, this.emitter)
+        })
+        return new Promise((resolve) => {
+            Promise.all(effects.map((effect) => effect.playEffect())).then(() => {
+                const resolvedPassedArray = this.manageRemainingTurns(passedArray)
+                console.log(resolvedPassedArray)
+                resolve(passedArray)
+            })
+        })
+    }
+
+    private manageRemainingTurns(paramArray): any[] {
+        const resolvedArray = paramArray.reduce((recipient, current) => {
+            if(!current.remainingTurns) {
+                recipient.push(current)
             }
-        }
+            else {
+                current.remainingTurns--
+                if(current.remainingTurns > 0) {
+                    recipient.push(current)
+                }
+            }
+            return recipient
+        }, [])
+        return resolvedArray
     }
 
     /* Séquence d'un tour : Début du tour => pioche du joueur => effets de début de tour => le joueur joue son tour => effets de fin de tour => tour des ennemis */
@@ -262,7 +301,11 @@ export default class BattleManager extends Vue {
         this.emitter.on("setFoeFainted", this.onSetFoeFainted)
         this.emitter.on("setPlayerFainted", this.onSetPlayerFainted)
 
-        this.currentTurnStepIndex++
+        this.playArrayEffects(this.playerDraw).then((array) => {
+
+        })
+    
+        // this.currentTurnStepIndex++
     }
 
     public beforeUnmount() {
