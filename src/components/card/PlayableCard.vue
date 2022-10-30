@@ -90,8 +90,8 @@ export default class PlayableCard extends Card {
           switch(modifier) {
             case 'userAttack': return this.$store.state.battle.playerStats[attackStat]
             case 'userDefense': return this.$store.state.battle.playerStats[defenseStat]
-            case 'targetAttack': return this.foeHover.stats[attackStat] || 0
-            case 'targetDefense': return this.foeHover.stats[defenseStat] || 0
+            case 'targetAttack': return this.foeHover ? this.foeHover.stats[attackStat] : 0
+            case 'targetDefense': return this.foeHover ? this.foeHover.stats[defenseStat] : 0
           }
         }).reduce((prev, next) => prev + next)
       }
