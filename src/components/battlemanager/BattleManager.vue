@@ -35,7 +35,7 @@ export default class BattleManager extends Vue {
     private playerDraw: any[] = [{
         name: "DrawEffect",
         type: null,
-        remainingTurns: 3,
+        remainingTurns: 1,
         params: {
             draw: 5,
         }
@@ -115,22 +115,19 @@ export default class BattleManager extends Vue {
     // }
 
     private playArrayEffects(array): Promise<any[]> {
-        const passedArray = cloneDeep(array)
-        console.log(array)
-        const effects = passedArray.map((effect) => {
+        const effects = array.map((effect) => {
             return new EffectContainer[effect.name]({user: effect.user, target: effect.target, type: effect.type, ...effect.params}, this.emitter)
         })
         return new Promise((resolve) => {
             Promise.all(effects.map((effect) => effect.playEffect())).then(() => {
-                const resolvedPassedArray = this.manageRemainingTurns(passedArray)
-                console.log(resolvedPassedArray)
-                resolve(passedArray)
+                const resolvedPassedArray = this.manageRemainingTurns(array)
+                resolve(resolvedPassedArray)
             })
         })
     }
 
-    private manageRemainingTurns(paramArray): any[] {
-        const resolvedArray = paramArray.reduce((recipient, current) => {
+    private manageRemainingTurns(array): any[] {
+        const resolvedArray = array.reduce((recipient, current) => {
             if(!current.remainingTurns) {
                 recipient.push(current)
             }
@@ -301,8 +298,11 @@ export default class BattleManager extends Vue {
         this.emitter.on("setFoeFainted", this.onSetFoeFainted)
         this.emitter.on("setPlayerFainted", this.onSetPlayerFainted)
 
-        this.playArrayEffects(this.playerDraw).then((array) => {
+        
 
+        this.playArrayEffects(this.playerDraw).then((array) => {
+            this.playerDraw = array
+            console.log(this.playerDraw)
         })
     
         // this.currentTurnStepIndex++

@@ -102,32 +102,28 @@ export default class BattleInterface extends Vue {
     }
 
     public draw(amount): void {
-        if(this.hand.length < this.maxCardsInHand) {
-            if(amount > 0) {
-                
-                if(this.drawPile.length) {
-                    this.hand.push(this.drawPile.shift() as string)
-                }
-
-                else if(this.discardPile.length) {
-
-                    this.dumpInto(this.discardPile, this.drawPile)
-                    this.drawPile.sort(() => {
-                        if(Math.random() > 0.5) return -1
-                        else return 1
-                    })
-                    this.hand.push(this.drawPile.shift() as string)
-                }
-
-                amount --
-                if(amount == 0) {
-                    this.emitter.emit("drawIsDone")
-                }
-                setTimeout(() => {
-                    this.draw(amount)
-                }, this.delayBetweenDraws)
-            }
+        if(this.hand.length === this.maxCardsInHand || amount === 0 || (!this.drawPile.length && !this.discardPile.length)) {
+            this.emitter.emit("drawIsDone")
+            return
         }
+
+        if(this.drawPile.length) {
+            this.hand.push(this.drawPile.shift() as string)
+        }
+        else {
+            this.dumpInto(this.discardPile, this.drawPile)
+            this.drawPile.sort(() => {
+                if(Math.random() > 0.5) return -1
+                else return 1
+            })
+            this.hand.push(this.drawPile.shift() as string)
+        }
+
+        amount--
+        setTimeout(() => {
+            this.draw(amount)
+        }, this.delayBetweenDraws)
+
     }
 
     public discardFromSelect(index): void {

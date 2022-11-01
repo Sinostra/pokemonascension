@@ -69,17 +69,19 @@ export class DrawEffect extends BaseEffect implements IEffect {
   playEffect(): Promise<void> {
     return new Promise((resolve) => {
 
-      const clearEmitter = () => {
-        this.emitter.off("drawIsDone", resolvePromise)
-      }
-
       const resolvePromise = () => {
         resolve()
         clearEmitter()
       } 
 
-      this.emitter.emit("draw", this.params)
       this.emitter.on("drawIsDone", resolvePromise)
+
+      const clearEmitter = () => {
+        this.emitter.off("drawIsDone", resolvePromise)
+      }
+
+      this.emitter.emit("draw", this.params)
+      
     })
   }
 }
