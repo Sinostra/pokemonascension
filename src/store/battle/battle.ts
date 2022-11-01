@@ -1,6 +1,6 @@
 export default {
     state: {
-        currentEnergy: 3,
+        currentEnergy: 0,
         maxEnergy: 3,
         selectedCard: null,
         draggedCard: null,

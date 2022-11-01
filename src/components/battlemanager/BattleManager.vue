@@ -115,6 +115,11 @@ export default class BattleManager extends Vue {
     // }
 
     private playArrayEffects(array): Promise<any[]> {
+        if(!array.length) {
+            return new Promise((resolve) => {
+                resolve(array)
+            })
+        }
         const effects = array.map((effect) => {
             return new EffectContainer[effect.name]({user: effect.user, target: effect.target, type: effect.type, ...effect.params}, this.emitter)
         })
@@ -148,7 +153,7 @@ export default class BattleManager extends Vue {
         this.$store.commit("startNewTurn")
         this.emitter.emit("startNewTurn")
         this.$store.commit("setEnergy", this.energyPerTurn)
-        this.emitter.emit("draw", {draw :this.cardsBeginningTurn})
+        // this.emitter.emit("draw", {draw :this.cardsBeginningTurn})
     }
 
     private playCard(cardId: string, targetIndex: number | null) {
@@ -169,9 +174,10 @@ export default class BattleManager extends Vue {
     }
 
     private effectEndCallBack(user?) {
-        if(this.turnSteps[this.currentTurnStepIndex] === "playerTurn") {
-            this.emitter.emit("cardDonePlayed")
-        }
+        this.emitter.emit("cardDonePlayed")
+        // if(this.turnSteps[this.currentTurnStepIndex] === "playerTurn") {
+        //     this.emitter.emit("cardDonePlayed")
+        // }
 
         if(this.turnSteps[this.currentTurnStepIndex] === "foesTurn") {
 
@@ -302,7 +308,12 @@ export default class BattleManager extends Vue {
 
         this.playArrayEffects(this.playerDraw).then((array) => {
             this.playerDraw = array
-            console.log(this.playerDraw)
+        }).then(() => {
+            this.playArrayEffects(this.startOfPlayerTurnEffects).then((array) => {
+                this.startOfPlayerTurnEffects = array
+            })
+        }).then(() => {
+            this.startPlayerTurn()
         })
     
         // this.currentTurnStepIndex++
