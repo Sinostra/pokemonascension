@@ -87,10 +87,12 @@ export default class BattleManager extends Vue {
         this.playEffects(this.cardBeingPlayed.effect, "player", targetIndex)
     }
 
-    private playEffects(effects: any, user: number | string | null, target: number | string | null) {
-        const cardEffect = this.applyModifiers(effects, user, target)
-        const effect = new EffectContainer[cardEffect.name]({user, target, type: cardEffect.type, ...cardEffect.params}, this.emitter)
-        effect.playEffect().then(() => this.emitter.emit("cardDonePlayed"))
+    private playEffects(effects: any, user: number | string | null, target: number | string | null): Promise<void> {
+        return new Promise((resolve) => {
+            const cardEffect = this.applyModifiers(effects, user, target)
+            const effect = new EffectContainer[cardEffect.name]({user, target, type: cardEffect.type, ...cardEffect.params}, this.emitter)
+            effect.playEffect().then(() => this.emitter.emit("cardDonePlayed")).then(() => resolve())
+        })
     }
 
 
@@ -157,6 +159,14 @@ export default class BattleManager extends Vue {
         }
     }
 
+    private onEndPlayerTurn() {
+        this.playArrayEffects(this.endOfPlayerTurnEffects).then((array) => {
+            this.endOfPlayerTurnEffects = array
+        }).then(() => {
+            console.log("player turn ended")
+        })
+    }
+
     private onPlayFoeMove(payload) {
         this.playEffects(payload.effect, payload.user, "player")
     }
@@ -185,6 +195,7 @@ export default class BattleManager extends Vue {
 
         this.emitter.on("playCurrentlySelectedCard", this.onPlayCurrentlySelectedCard)
         this.emitter.on("foePokemonHasBeenClicked", this.onFoePokemonHasBeenClicked)
+        this.emitter.on("endPlayerTurn", this.onEndPlayerTurn)
         this.emitter.on("playFoeMove", this.onPlayFoeMove)
         this.emitter.on("setFoeFainted", this.onSetFoeFainted)
         this.emitter.on("setPlayerFainted", this.onSetPlayerFainted)
@@ -199,12 +210,14 @@ export default class BattleManager extends Vue {
             })
         }).then(() => {
             this.startPlayerTurn()
+            this.emitter.emit("playerTurn")
         })
     }
 
     public beforeUnmount() {
         this.emitter.off("playCurrentlySelectedCard", this.onPlayCurrentlySelectedCard)
         this.emitter.off("foePokemonHasBeenClicked", this.onFoePokemonHasBeenClicked)
+        this.emitter.off("endPlayerTurn", this.onEndPlayerTurn)
         this.emitter.off("playFoeMove", this.onPlayFoeMove)
         this.emitter.off("setFoeFainted", this.onSetFoeFainted)
         this.emitter.off("setPlayerFainted", this.onSetPlayerFainted)
