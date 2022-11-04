@@ -87,7 +87,9 @@ export default class BattleManager extends Vue {
         this.emitter.emit("cardIsPlaying")
         this.emitter.emit("discardCurrentlySelectedCard")
         this.$store.commit("spendEnergy", this.cardBeingPlayed['cost'])
-        this.playEffects(this.cardBeingPlayed.effect, "player", targetIndex)
+        setTimeout(() => {
+            this.playEffects(this.cardBeingPlayed.effect, "player", targetIndex)
+        }, 1)   
     }
 
     private playEffects(effects: any, user: number | string | null, target: number | string | null): Promise<void> {
