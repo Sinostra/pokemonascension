@@ -26,10 +26,12 @@ export default class BattleManager extends Vue {
     private cardsBeginningTurn: number = 5
     private energyPerTurn = 3
 
+    private foePlayedTurn: number[] = []
+
     private playerDraw: any[] = [{
         name: "DrawEffect",
         type: null,
-        remainingTurns: 1,
+        // remainingTurns: 2,
         params: {
             draw: this.cardsBeginningTurn,
         }
@@ -77,6 +79,7 @@ export default class BattleManager extends Vue {
 
     private startPlayerTurn() {
         this.$store.commit("setEnergy", this.energyPerTurn)
+        this.emitter.emit("playerTurn")
     }
 
     private playCard(cardId: string, targetIndex: number | null) {
@@ -138,15 +141,45 @@ export default class BattleManager extends Vue {
         return cardEffect
     }
 
-    private playFoeTurn(index) {
-        if(index < this.$store.state.foes.foeTeam.length) {
-            this.emitter.emit("foeTurn", index)
-        }
+    private getNotFaintedFoesIndexes() {
+        return this.$store.getters.getFoeTeam.reduce((recipient, foe) => {
+            if(!foe.fainted) {
+                recipient.push(this.$store.getters.getFoeTeam.indexOf(foe))
+            }
+            return recipient
+        }, [])
     }
 
     private startNewTurn() {
         this.$store.commit("startNewTurn")
         this.emitter.emit("startNewTurn")
+        this.playArrayEffects(this.playerDraw).then((array) => {
+            this.playerDraw = array
+        }).then(() => {
+            this.playArrayEffects(this.startOfPlayerTurnEffects).then((array) => {
+                this.startOfPlayerTurnEffects = array
+            })
+        }).then(() => {
+            this.startPlayerTurn()
+        })
+    }
+
+    private playNextFoeTurn() {
+        setTimeout(() => {
+            const foesToPlay = this.getNotFaintedFoesIndexes().filter((foeIndex) => !this.foePlayedTurn.includes(foeIndex))
+            if(foesToPlay.length) {
+                this.foePlayedTurn.push(foesToPlay[0])
+                this.emitter.emit("foeTurn", foesToPlay[0])
+            }
+            else {
+                this.playArrayEffects(this.endOfFoesTurnEffects).then((array) => {
+                    this.endOfFoesTurnEffects = array
+                }).then(() => {
+                    this.foePlayedTurn = []
+                    this.startNewTurn()
+                })
+            }
+        }, 1000)
     }
 
     private onPlayCurrentlySelectedCard(payload) {
@@ -163,12 +196,14 @@ export default class BattleManager extends Vue {
         this.playArrayEffects(this.endOfPlayerTurnEffects).then((array) => {
             this.endOfPlayerTurnEffects = array
         }).then(() => {
-            console.log("player turn ended")
+            this.playNextFoeTurn()
         })
     }
 
     private onPlayFoeMove(payload) {
-        this.playEffects(payload.effect, payload.user, "player")
+        this.playEffects(payload.effect, payload.user, "player").then(() => {
+            this.playNextFoeTurn()
+        })
     }
 
     private onSetFoeFainted() {
@@ -201,17 +236,6 @@ export default class BattleManager extends Vue {
         this.emitter.on("setPlayerFainted", this.onSetPlayerFainted)
 
         this.startNewTurn()
-
-        this.playArrayEffects(this.playerDraw).then((array) => {
-            this.playerDraw = array
-        }).then(() => {
-            this.playArrayEffects(this.startOfPlayerTurnEffects).then((array) => {
-                this.startOfPlayerTurnEffects = array
-            })
-        }).then(() => {
-            this.startPlayerTurn()
-            this.emitter.emit("playerTurn")
-        })
     }
 
     public beforeUnmount() {
