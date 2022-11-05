@@ -213,20 +213,7 @@ export default class BattleManager extends Vue {
 
     private onAddToTurn(payload) {
         const targetArray = payload.step === "startPlayerTurn" ? this.startOfPlayerTurnEffects : payload.step === "endPlayerTurn" ? this.endOfPlayerTurnEffects : this.endOfFoesTurnEffects
-        if(payload.effectToAdd.name !== "DrawEffect") {
-            targetArray.push(payload.effectToAdd)
-        }
-        else {
-            const previousDrawEffect = targetArray.find((effect) => effect.name === "DrawEffect")
-            if(!previousDrawEffect) {
-                targetArray.push(payload.effectToAdd)
-            }
-            else {
-                previousDrawEffect['params']['draw'] += 1
-            }
-            
-        }
-        
+        targetArray.push(payload.effectToAdd)
     }
 
     private onPlayFoeMove(payload) {
