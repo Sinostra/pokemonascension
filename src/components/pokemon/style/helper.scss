@@ -1,0 +1,35 @@
+.help-tooltip {
+    position: absolute;
+    background: #fff;
+    left: 50%;
+    padding: 5px;
+    display: none;
+    flex-direction: column;
+    border-radius: 5px;
+    min-width: 240px;
+
+    .pokemon-data {
+      display: flex;
+      align-items: center;
+      font-family: "ERASDEMI";
+      white-space: nowrap;
+      &:not(:last-child) {
+        margin-bottom: 5px;
+      }
+
+      .text {
+        padding-right: 5px;
+      }
+    }
+
+    .type {
+      width: 10%;
+      &:not(:last-child) {
+        margin-right: 5px;
+      }
+      .type-img {
+        display: block;
+        width: 100%;
+      }
+    }
+}

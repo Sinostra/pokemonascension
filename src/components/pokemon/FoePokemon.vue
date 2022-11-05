@@ -21,26 +21,7 @@
                 <div class="blockAmount">{{block}}</div>
               </div>
             </div>
-            <div class="help-tooltip" :style="helpToolTipStyle">
-              <div class="pokemon-data">
-                <div class="text">{{dataPokemon['name']['english']}}</div>
-                <div class="type" v-for="(type, index) in dataPokemon.type" :key="index">
-                  <img :src="getTpyeIcon(type)" class="type-img">
-                </div>
-              </div>
-              <div class="pokemon-data">
-                <div class="text">Weaknesses :</div>
-                <div class="type" v-for="(type, index) in weaknesses" :key="index">
-                  <img :src="getTpyeIcon(type)" class="type-img">
-                </div>
-              </div>
-              <div class="pokemon-data">
-                <div class="text">Resistances :</div>
-                <div class="type" v-for="(type, index) in resistances" :key="index">
-                  <img :src="getTpyeIcon(type)" class="type-img">
-                </div>
-              </div>
-            </div>
+            <Helper :id="id" :style="helpToolTipStyle"></Helper>
           </div>
           <img :src="spritePath" :class="spriteClass" @mouseover="onHover()" @mouseleave="onHover(false)" class="pokemon-sprite">
         </div>
@@ -52,6 +33,7 @@
 import { Options } from "vue-class-component";
 import Pokemon from "./Pokemon";
 import Intents from "./foes/Intents.vue";
+import Helper from "./Helper.vue"
 import suffleArray from "@/engine/Shuffle";
 import cloneDeep from "lodash.clonedeep"
 import { inject } from 'vue'
@@ -59,7 +41,8 @@ import { inject } from 'vue'
 @Options({
   name: "FoePokemon",
   components: {
-    Intents
+    Intents,
+    Helper
   },
   props: {
     index: Number,

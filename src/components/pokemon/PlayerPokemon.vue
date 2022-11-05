@@ -14,26 +14,7 @@
             </div>
           </div>
         </div>
-        <div class="help-tooltip">
-          <div class="pokemon-data">
-            <div class="text">{{dataPokemon['name']['english']}}</div>
-            <div class="type" v-for="(type, index) in dataPokemon.type" :key="index">
-              <img :src="getTpyeIcon(type)" class="type-img">
-            </div>
-          </div>
-          <div class="pokemon-data">
-            <div class="text">Weaknesses :</div>
-            <div class="type" v-for="(type, index) in weaknesses" :key="index">
-              <img :src="getTpyeIcon(type)" class="type-img">
-            </div>
-          </div>
-          <div class="pokemon-data">
-            <div class="text">Resistances :</div>
-            <div class="type" v-for="(type, index) in resistances" :key="index">
-              <img :src="getTpyeIcon(type)" class="type-img">
-            </div>
-          </div>
-        </div>
+        <Helper :id="id"></Helper>
       </div>
   </div>
 </template>
@@ -41,10 +22,14 @@
 <script lang="ts">
 import { Options } from "vue-class-component";
 import Pokemon from "./Pokemon";
+import Helper from "./Helper.vue"
 import { inject } from 'vue'
 
 @Options({
   name: "PlayerPokemon",
+  components: {
+    Helper
+  },
 })
 
 export default class PlayerPokemon extends Pokemon {

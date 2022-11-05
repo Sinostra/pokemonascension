@@ -1,35 +1,20 @@
 <template>
     <div class="pokemon-wrapper" :class="wrapperClass" :style="wrapperStyle" @mouseover="onHover()" @mouseleave="onHover(false)">
       <img class="pokemon-sprite" :src="spritePath" @click="clickPokemon()">
-      <div v-if="displayHelpTooltip" class="help-tooltip">
-        <div class="pokemon-data">
-          <div class="text">{{dataPokemon['name']['english']}}</div>
-          <div class="type" v-for="(type, index) in dataPokemon.type" :key="index">
-            <img :src="getTpyeIcon(type)" class="type-img">
-          </div>
-        </div>
-        <div class="pokemon-data">
-          <div class="text">Weaknesses :</div>
-          <div class="type" v-for="(type, index) in weaknesses" :key="index">
-            <img :src="getTpyeIcon(type)" class="type-img">
-          </div>
-        </div>
-        <div class="pokemon-data">
-          <div class="text">Resistances :</div>
-          <div class="type" v-for="(type, index) in resistances" :key="index">
-            <img :src="getTpyeIcon(type)" class="type-img">
-          </div>
-        </div>
-      </div>
+      <Helper v-if="displayHelpTooltip" :id="id"></Helper>
   </div>
 </template>
 
 <script lang="ts">
 import { Options } from "vue-class-component";
 import Pokemon from "./Pokemon";
+import Helper from "./Helper.vue"
 
 @Options({
   name: "DisplayPokemon",
+  components: {
+    Helper
+  },
   props: {
     width: Number,
     displayHelpTooltip: Boolean
