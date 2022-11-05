@@ -142,9 +142,17 @@ export default {
         "target": false,
         "exhaust": true,
         "effect":{
+            "name": "AddToTurnEffect",
             "type": "normal",
-            "addToStartTurn": {
-                "draw": 1
+            "params": {
+                "step": "startPlayerTurn",
+                "effectToAdd": {
+                    "name": "DrawEffect",
+                    "type": null,
+                    "params": {
+                        "draw": 1
+                    }
+                }
             }
         },
         "tooltip": 'At the start of each turn, draw one card',

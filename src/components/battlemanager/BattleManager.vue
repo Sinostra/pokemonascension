@@ -9,7 +9,7 @@
 import BattleScene from './BattleScene.vue'
 import BattleInterface from './BattleInterface.vue'
 import { Options, Vue } from 'vue-class-component'
-import { inject } from 'vue'
+import { effect, inject } from 'vue'
 import { EffectContainer } from "../../engine/EffectContainer"
 import cloneDeep from "lodash.clonedeep"
 
@@ -110,6 +110,9 @@ export default class BattleManager extends Vue {
     private applyModifiers(effect, user, target) {
         const cardEffect = cloneDeep(effect)
         if(cardEffect.name !== "MultiEffect") {
+            if(!cardEffect.params.modifiers) {
+                return cardEffect
+            }
             let resolvedModifiers = 0
             const attackStat = 'attack'
             const defenseStat = 'defense'
@@ -208,6 +211,24 @@ export default class BattleManager extends Vue {
         })
     }
 
+    private onAddToTurn(payload) {
+        const targetArray = payload.step === "startPlayerTurn" ? this.startOfPlayerTurnEffects : payload.step === "endPlayerTurn" ? this.endOfPlayerTurnEffects : this.endOfFoesTurnEffects
+        if(payload.effectToAdd.name !== "DrawEffect") {
+            targetArray.push(payload.effectToAdd)
+        }
+        else {
+            const previousDrawEffect = targetArray.find((effect) => effect.name === "DrawEffect")
+            if(!previousDrawEffect) {
+                targetArray.push(payload.effectToAdd)
+            }
+            else {
+                previousDrawEffect['params']['draw'] += 1
+            }
+            
+        }
+        
+    }
+
     private onPlayFoeMove(payload) {
         this.playEffects(payload.effect, payload.user, "player").then(() => {
             this.playNextFoeTurn()
@@ -239,6 +260,7 @@ export default class BattleManager extends Vue {
         this.emitter.on("playCurrentlySelectedCard", this.onPlayCurrentlySelectedCard)
         this.emitter.on("foePokemonHasBeenClicked", this.onFoePokemonHasBeenClicked)
         this.emitter.on("endPlayerTurn", this.onEndPlayerTurn)
+        this.emitter.on("addToTurn", this.onAddToTurn)
         this.emitter.on("playFoeMove", this.onPlayFoeMove)
         this.emitter.on("setFoeFainted", this.onSetFoeFainted)
         this.emitter.on("setPlayerFainted", this.onSetPlayerFainted)
@@ -250,6 +272,7 @@ export default class BattleManager extends Vue {
         this.emitter.off("playCurrentlySelectedCard", this.onPlayCurrentlySelectedCard)
         this.emitter.off("foePokemonHasBeenClicked", this.onFoePokemonHasBeenClicked)
         this.emitter.off("endPlayerTurn", this.onEndPlayerTurn)
+        this.emitter.off("addToTurn", this.onAddToTurn)
         this.emitter.off("playFoeMove", this.onPlayFoeMove)
         this.emitter.off("setFoeFainted", this.onSetFoeFainted)
         this.emitter.off("setPlayerFainted", this.onSetPlayerFainted)

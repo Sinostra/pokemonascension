@@ -130,6 +130,15 @@ export class MultiAttackEffect extends BaseEffect implements IEffect {
   }
 }
 
+export class AddToTurnEffect extends BaseEffect implements IEffect {
+  playEffect(): Promise<void> {
+    return new Promise((resolve) => {
+      this.emitter.emit("addToTurn", this.params)
+      resolve()
+    })
+  }
+}
+
 export class MultiEffect extends BaseEffect implements IEffect {
   playEffect(): Promise<void> {
     const subEffects = Object.values(this.params).filter((val) => typeof val === 'object')
@@ -159,6 +168,7 @@ export const EffectContainer: any = {
   MultiEffect,
   MultiAttackEffect,
   AttackEffect,
+  AddToTurnEffect,
   BlockEffect,
   HealEffect,
   SelfBuffEffect,
