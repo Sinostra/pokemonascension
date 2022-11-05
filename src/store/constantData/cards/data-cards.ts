@@ -278,9 +278,9 @@ export default {
             "params": {
                 "value": 6,
                 "modifiers": ["userAttack"],
-                "leechlife":  true
+                "leechlife":  30
             },
         },
-        "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy',
+        "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy and heals you for 30% of the damage dealt.',
     },
 }

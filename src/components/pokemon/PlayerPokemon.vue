@@ -89,6 +89,10 @@ export default class PlayerPokemon extends Pokemon {
     }
     else {
       const damageDealt = this.takeDamage(payload.value, payload.type, payload.ignoreBlock)
+      if(payload.leechlife) {
+        const leechValue = Math.floor((damageDealt * (payload.leechlife / 100)))
+        this.emitter.emit("heal", {user : payload.user, value: leechValue})
+      }
       this.$store.commit("changeActivePokemonHealth", this.currentHealth)
     }
   }
@@ -113,7 +117,13 @@ export default class PlayerPokemon extends Pokemon {
 
   private onHeal(payload) {
     if(payload.user === "player") {
-      this.heal(payload.amount)
+      if(!payload.percentage) {
+        this.heal(payload.value)
+      }
+      else {
+        const totalValue = Math.floor((this.maxHealth * (payload.value / 100)))
+        this.heal(totalValue)
+      }
       this.$store.commit("changeActivePokemonHealth", this.currentHealth)
     }
   }

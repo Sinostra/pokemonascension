@@ -197,8 +197,11 @@ export default class FoePokemon extends Pokemon {
 
   private onDamage(payload) {
     if(payload.target === this.index) {
-      console.log(payload)
       const damageDealt = this.takeDamage(payload.value, payload.type, payload.ignoreBlock)
+      if(payload.leechlife) {
+        const leechValue = Math.floor((damageDealt * (payload.leechlife / 100)))
+        this.emitter.emit("heal", {user : payload.user, value: leechValue})
+      }
     }
     if(payload.user === this.index) {
       this.playAttackAnim()
@@ -225,7 +228,13 @@ export default class FoePokemon extends Pokemon {
 
   private onHeal(payload) {
     if(payload.user === this.index) {
-      this.heal(payload.amount)
+      if(!payload.percentage) {
+        this.heal(payload.value)
+      }
+      else {
+        const totalValue = Math.floor((this.maxHealth * (payload.value / 100)))
+        this.heal(totalValue)
+      }
     }
   }
 
