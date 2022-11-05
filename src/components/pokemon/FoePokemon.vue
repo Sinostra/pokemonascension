@@ -11,16 +11,13 @@
                 defense: $store.getters.getFoeTeam[index]['stats']['defense'],
               }"
             ></Intents>
-            <div class="healthBar">
-              <div class="currentHealth" :class="healthBarClass" :style="{'width': getHealthBarPercent() + '%'}"></div>
-              <div class="bottom-infos">
-                <div class="healthAmount" :style="getFontSize(0.8)">{{currentHealth}}/{{maxHealth}}</div>
-                <div class="healthAmount" :style="getFontSize(0.8)">{{$store.getters.getFoeTeam[index]['stats']['attack']}}/{{$store.getters.getFoeTeam[index]['stats']['defense']}}</div>
-              </div>
-              <div v-if="block" class="block-wrapper">
-                <div class="blockAmount">{{block}}</div>
-              </div>
-            </div>
+            <HealthBar
+              :maxHealth="maxHealth"
+              :currentHealth="currentHealth"
+              :block="block"
+              :attack="$store.getters.getFoeTeam[index]['stats']['attack']"
+              :defense="$store.getters.getFoeTeam[index]['stats']['defense']"
+            ></HealthBar>
             <Helper :id="id" :style="helpToolTipStyle"></Helper>
           </div>
           <img :src="spritePath" :class="spriteClass" @mouseover="onHover()" @mouseleave="onHover(false)" class="pokemon-sprite">
@@ -34,6 +31,7 @@ import { Options } from "vue-class-component";
 import Pokemon from "./Pokemon";
 import Intents from "./foes/Intents.vue";
 import Helper from "./Helper.vue"
+import HealthBar from "./HealthBar.vue"
 import suffleArray from "@/engine/Shuffle";
 import cloneDeep from "lodash.clonedeep"
 import { inject } from 'vue'
@@ -42,7 +40,8 @@ import { inject } from 'vue'
   name: "FoePokemon",
   components: {
     Intents,
-    Helper
+    Helper,
+    HealthBar
   },
   props: {
     index: Number,
@@ -62,8 +61,8 @@ export default class FoePokemon extends Pokemon {
   public baseAttack!: number;
   public baseDefense!: number;
 
-  public patternSettings!: any
   public pattern = []
+  public patternSettings!: any
 
   public resolvedPattern = []
   public canShowIntents: boolean = true

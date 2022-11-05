@@ -3,16 +3,13 @@
       <div class="size-wrapper" :style="{'width': dataPokemon.size + '%'}" @mouseover="onHover()" @mouseleave="onHover(false)">
         <img class="pokemon-sprite" :src="spritePath">
         <div class="healthBar-infos-wrapper">
-          <div class="healthBar">
-            <div class="currentHealth" :class="healthBarClass" :style="{'width': getHealthBarPercent() + '%'}"></div>
-            <div class="bottom-infos">
-              <div class="healthAmount" :style="getFontSize(0.8)">{{currentHealth}}/{{maxHealth}}</div>
-              <div class="healthAmount" :style="getFontSize(0.8)">{{$store.state.battle.playerStats.attack}}/{{$store.state.battle.playerStats.defense}}</div>
-            </div>
-            <div v-if="block" class="block-wrapper">
-              <div class="blockAmount">{{block}}</div>
-            </div>
-          </div>
+          <HealthBar
+            :maxHealth="maxHealth"
+            :currentHealth="currentHealth"
+            :block="block"
+            :attack="$store.state.battle.playerStats.attack"
+            :defense="$store.state.battle.playerStats.defense"
+          ></HealthBar>
         </div>
         <Helper :id="id"></Helper>
       </div>
@@ -23,12 +20,14 @@
 import { Options } from "vue-class-component";
 import Pokemon from "./Pokemon";
 import Helper from "./Helper.vue"
+import HealthBar from "./HealthBar.vue"
 import { inject } from 'vue'
 
 @Options({
   name: "PlayerPokemon",
   components: {
-    Helper
+    Helper,
+    HealthBar
   },
 })
 

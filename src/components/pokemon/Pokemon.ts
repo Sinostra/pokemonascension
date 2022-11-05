@@ -1,7 +1,6 @@
 import { Options, Vue } from 'vue-class-component';
 import dataDex from "@/store/constantData/pokedex/data-dex"
 import getTypeMatchup from "@/engine/TypeMatchup";
-import typeMatchups from "@/engine/Types";
 
 @Options({
   props: {
@@ -40,45 +39,6 @@ export default class Pokemon extends Vue {
     else if (this.isPlayingAttackAnim) animClass = 'attack'
     else if (this.isPlayingDamageAnim) animClass = 'damage'
     return `${hoverClass} ${animClass}`
-  }
-
-  get healthBarClass(): string {
-    if(this.getHealthBarPercent() > 67) return 'green'
-    else if(this.getHealthBarPercent() > 33 && this.getHealthBarPercent() <= 67) return 'orange'
-    else return 'red'
-  }
-
-  get allTypesMatchups() {
-    const pokemonTypes = this.dataPokemon['type']
-    const allTypes = typeMatchups
-    return Object.keys(allTypes).reduce((recipient, type) => {
-      let multiplier = 1
-      pokemonTypes.forEach(t => {
-        multiplier *= allTypes[type][t]
-      });
-      recipient[type] = multiplier
-      return recipient
-    }, {})
-  }
-
-  get weaknesses() {
-    const allTypes = typeMatchups
-    return Object.keys(allTypes).reduce((recipient, type) => {
-      if(this.allTypesMatchups[type] > 1) {
-        recipient.push(type)
-      }
-      return recipient
-    }, [] as string[])
-  }
-
-  get resistances() {
-    const allTypes = typeMatchups
-    return Object.keys(allTypes).reduce((recipient, type) => {
-      if(this.allTypesMatchups[type] < 1) {
-        recipient.push(type)
-      }
-      return recipient
-    }, [] as string[])
   }
 
   protected takeDamage(amount: number, type: string | null, ignoreBlock: boolean = false): number {
@@ -137,18 +97,6 @@ export default class Pokemon extends Vue {
 
   protected setBlock(amount: number) {
     this.block = amount
-  }
-
-  protected getTpyeIcon(type) {
-    return require(`@/assets/img/types/${type}.png`)
-  }
-
-  protected getHealthBarPercent(): number {
-    return (this.currentHealth  / this.maxHealth) * 100;
-  }
-
-  protected getFontSize(multiplier = 1): string {
-    return `font-size: ${(this.$store.state.settings.baseFontSize) * multiplier}px;`
   }
 
   protected playAttackAnim(): void {
