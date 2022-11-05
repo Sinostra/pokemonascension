@@ -41,4 +41,24 @@
     }
   }
 
+  .block-wrapper {
+    position: absolute;
+    top: 0%;
+    left: 95%;
+    transform: translateY(-30%);
+    width: 1.5vw;
+    height: 1.5vw;
+    background-image: url('../../assets/img/interface/shield4.png');
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .blockAmount {
+      color: #fff;
+      font-family: 'ERASDEMI';
+      filter: drop-shadow(1px 1px 1px black);
+      margin-bottom: 2px;
+    }
+  }
+
 }
