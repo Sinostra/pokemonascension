@@ -81,7 +81,7 @@ export default class Pokemon extends Vue {
     }, [] as string[])
   }
 
-  protected takeDamage(amount: number, type: string | null, ignoreBlock: boolean = false): void {
+  protected takeDamage(amount: number, type: string | null, ignoreBlock: boolean = false): number {
 
     //Type de l'attaque null dans le cas de selfDamage
     //Application des faiblesses et résistances avant l'attaque pour éviter que l'armure ne soit prise en compte
@@ -121,6 +121,8 @@ export default class Pokemon extends Vue {
       this.faint()
       this.playReturnAnim()
     }
+
+    return damageDealt
   }
 
   protected heal(amount: number) {

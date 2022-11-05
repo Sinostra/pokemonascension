@@ -197,7 +197,8 @@ export default class FoePokemon extends Pokemon {
 
   private onDamage(payload) {
     if(payload.target === this.index) {
-      this.takeDamage(payload.value, payload.type, payload.ignoreBlock)
+      console.log(payload)
+      const damageDealt = this.takeDamage(payload.value, payload.type, payload.ignoreBlock)
     }
     if(payload.user === this.index) {
       this.playAttackAnim()

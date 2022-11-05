@@ -127,7 +127,8 @@ export default {
             "name": "HealEffect",
             "type": "psychic",
             "params": {
-                "selfHeal": 50
+                "value": 50,
+                "percentage": true
             }
         },
         "tooltip": 'Heals 50% of your hp',
@@ -264,5 +265,22 @@ export default {
             ],
         },
         "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy and gain µ block',
+    },
+    "015": {
+        "name": "giga drain",
+        "category": "attack",
+        "rarity": "common",
+        "cost": 1,
+        "target": true,
+        "effect":{
+            "name": "AttackEffect",
+            "type": "grass",
+            "params": {
+                "value": 6,
+                "modifiers": ["userAttack"],
+                "leechlife":  true
+            },
+        },
+        "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy',
     },
 }
