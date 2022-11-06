@@ -87,6 +87,12 @@ export default class PlayerPokemon extends Pokemon {
     }
   }
 
+  private onSelfDamage(payload) {
+    if(payload.user === "player") {
+      this.takeDamage(payload.value, null, true)
+    }
+  }
+
   private onSelfBuff(payload) {
     if(payload.user === "player") {
       this.applyBuff(payload)
@@ -129,6 +135,7 @@ export default class PlayerPokemon extends Pokemon {
     this.emitter.on("startNewTurn", this.onNewTurn)
     this.emitter.on("damage", this.onDamage)
     this.emitter.on('block', this.onBlock)
+    this.emitter.on('selfdamage', this.onSelfDamage)
     this.emitter.on('selfbuff', this.onSelfBuff)
     this.emitter.on('targetbuff', this.onTargetBuff)
     this.emitter.on("heal", this.onHeal)
@@ -139,6 +146,7 @@ export default class PlayerPokemon extends Pokemon {
     this.emitter.off("startNewTurn", this.onNewTurn)
     this.emitter.off("damage", this.onDamage)
     this.emitter.off("block", this.onBlock)
+    this.emitter.off('selfdamage', this.onSelfDamage)
     this.emitter.off('selfbuff', this.onSelfBuff)
     this.emitter.off('targetbuff', this.onTargetBuff)
     this.emitter.off("heal", this.onHeal)

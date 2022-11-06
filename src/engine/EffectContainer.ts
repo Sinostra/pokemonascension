@@ -38,6 +38,15 @@ export class HealEffect extends BaseEffect implements IEffect {
   }
 }
 
+export class SelfDamageEffect extends BaseEffect implements IEffect {
+  playEffect(): Promise<void> {
+    return new Promise((resolve) => {
+      this.emitter.emit("selfdamage", this.params)
+      resolve()
+    })
+  }
+}
+
 export class SelfBuffEffect extends BaseEffect implements IEffect {
   playEffect(): Promise<void> {
     return new Promise((resolve) => {
@@ -171,6 +180,7 @@ export const EffectContainer: any = {
   AddToTurnEffect,
   BlockEffect,
   HealEffect,
+  SelfDamageEffect,
   SelfBuffEffect,
   TargetBuffEffect,
   EnergyEffect,
