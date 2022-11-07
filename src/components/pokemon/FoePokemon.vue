@@ -158,6 +158,7 @@ export default class FoePokemon extends Pokemon {
   protected faint(): void {
     this.$store.commit("setFoeFainted", this.index)
     this.emitter.emit("setFoeFainted", this.index)
+    this.emitter.emit("fainted", this.index)
   }
 
   private onEndPlayerTurn() {

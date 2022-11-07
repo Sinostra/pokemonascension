@@ -92,7 +92,8 @@ export default {
             "name": "MultiAttackEffect",
             "type": "normal",
             "params": {
-                "value": 2,
+                // "value": 2,
+                "value": 60,
                 "modifiers": ["userAttack"],
                 "damageTimes": 3,
             }

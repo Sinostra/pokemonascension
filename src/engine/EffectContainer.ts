@@ -98,6 +98,7 @@ export class DrawEffect extends BaseEffect implements IEffect {
 export class MultiAttackEffect extends BaseEffect implements IEffect {
   playEffect(): Promise<void> {
     return new Promise((resolve) => {
+
       const attacks: AttackEffect[] = []
       for(let i = 0; i < this.params.damageTimes; i++) {
         attacks.push(new AttackEffect(this.params, this.emitter))
@@ -113,19 +114,39 @@ export class MultiAttackEffect extends BaseEffect implements IEffect {
         })
       }
 
-      const playAllAttacks = (index): Promise<void> => {
+      const playAllAttacks = (index, bool = true): Promise<void> => {
         return new Promise((resolve) => {
+
+          let canAttack =  true
+
+          const clearEmitter = () => {
+            this.emitter.off("fainted", checkFainted)
+          }
+  
+          const resolvePromise = () => {
+            resolve()
+            clearEmitter()
+          }
+
+          const checkFainted = (payload) => {
+            if(payload === this.params.user || payload === this.params.target) {
+              canAttack =  false
+            }
+          }
+
+          this.emitter.on("fainted", checkFainted)
+
           let currentIndex = index
           const delay = index === 0 ? 0 : 500
-          if(currentIndex >= attacks.length) {
-            resolve()
+          if(currentIndex >= attacks.length || !bool) {
+            resolvePromise()
           }
 
           else {
             playAttack(attacks[currentIndex], delay).then(() => {
               currentIndex++
-              playAllAttacks(currentIndex).then(() => {
-                resolve()
+              playAllAttacks(currentIndex, canAttack).then(() => {
+                resolvePromise()
               })
             })
           }
