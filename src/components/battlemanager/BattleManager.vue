@@ -48,12 +48,13 @@ export default class BattleManager extends Vue {
                 resolve(array)
             })
         }
-        const effects = array.map((effect) => {
+        const resolvedDrawArray = this.manageDrawEffects(array)
+        const effects = resolvedDrawArray.map((effect) => {
             return new EffectContainer[effect.name]({user: effect.user, target: effect.target, type: effect.type, ...effect.params}, this.emitter)
         })
         return new Promise((resolve) => {
             Promise.all(effects.map((effect) => effect.playEffect())).then(() => {
-                const resolvedPassedArray = this.manageRemainingTurns(array)
+                const resolvedPassedArray = this.manageRemainingTurns(resolvedDrawArray)
                 resolve(resolvedPassedArray)
             })
         })
@@ -73,6 +74,21 @@ export default class BattleManager extends Vue {
             return recipient
         }, [])
         return resolvedArray
+    }
+
+    private manageDrawEffects(array) {
+        const resolvedArray = array.reduce((recipient, effect) => {
+            if(effect.name !== "MultiEffect") {
+                recipient.push(effect)
+            }
+            else {
+                recipient.push(this.manageDrawEffects(effect))
+            }
+            
+            return recipient
+        }, [])
+        console.log(array)
+        return array
     }
 
     /* Séquence d'un tour : Début du tour => pioche du joueur => effets de début de tour => le joueur joue son tour => effets de fin de tour => tour des ennemis */
