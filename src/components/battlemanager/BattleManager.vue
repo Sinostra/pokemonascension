@@ -9,7 +9,7 @@
 import BattleScene from './BattleScene.vue'
 import BattleInterface from './BattleInterface.vue'
 import { Options, Vue } from 'vue-class-component'
-import { effect, inject } from 'vue'
+import { inject } from 'vue'
 import { EffectContainer } from "../../engine/EffectContainer"
 import cloneDeep from "lodash.clonedeep"
 
@@ -28,14 +28,16 @@ export default class BattleManager extends Vue {
 
     private foePlayedTurn: number[] = []
 
-    private playerDraw: any[] = [{
-        name: "DrawEffect",
-        type: null,
-        // remainingTurns: 2,
-        params: {
-            draw: this.cardsBeginningTurn,
+    private playerDraw: any[] = [
+        {
+            name: "DrawEffect",
+            type: null,
+            // remainingTurns: 2,
+            params: {
+                draw: this.cardsBeginningTurn,
+            }
         }
-    }]
+    ]
     private startOfPlayerTurnEffects: any[] = []
     private endOfPlayerTurnEffects: any[] = []
     private endOfFoesTurnEffects: any[] = []
@@ -76,19 +78,33 @@ export default class BattleManager extends Vue {
         return resolvedArray
     }
 
+    //Sert à piocher toutes les cartes dans un seul effet
     private manageDrawEffects(array) {
+        let drawEffects = 0
         const resolvedArray = array.reduce((recipient, effect) => {
             if(effect.name !== "MultiEffect") {
-                recipient.push(effect)
+                if(effect.name === "DrawEffect") {
+                    drawEffects += effect.params.draw
+                    effect.params.draw = 0
+                }
             }
             else {
-                recipient.push(this.manageDrawEffects(effect))
+                effect.params = effect.params.map((subEffect) => {
+                    if(subEffect.name === "DrawEffect") {
+                        drawEffects += subEffect.params.draw
+                        subEffect.params.draw = 0
+                    }
+                    return subEffect
+                })
             }
+
+            recipient.push(effect)
             
             return recipient
         }, [])
-        console.log(array)
-        return array
+
+        resolvedArray.push({name: "DrawEffect", type: null, params: {draw: drawEffects}})
+        return resolvedArray
     }
 
     /* Séquence d'un tour : Début du tour => pioche du joueur => effets de début de tour => le joueur joue son tour => effets de fin de tour => tour des ennemis */
