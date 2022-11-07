@@ -225,6 +225,23 @@ export default class BattleManager extends Vue {
         }, 1000)
     }
 
+    private checkBattleEnded() {
+        if(!this.$store.getters.getNotFaintedFoes.length) {
+            setTimeout(() => {
+                this.$store.commit("setFoes", [])
+                this.$store.commit("stopBattle")
+                this.$store.commit("displayBattleRewards")
+            }, 1000)
+        }
+        if(!this.$store.getters.getNotFaintedPokemon.length) {
+            setTimeout(() => {
+                this.$store.commit("setFoes", [])
+                this.$store.commit("stopBattle")
+                this.$store.commit("playerLost")
+            }, 1000)
+        }
+    }
+
     private onPlayCurrentlySelectedCard(payload) {
         this.playCard(this.$store.getters.selectedCard, payload)
     }
@@ -254,35 +271,14 @@ export default class BattleManager extends Vue {
         })
     }
 
-    private onSetFoeFainted() {
-        if(!this.$store.getters.getNotFaintedFoes.length) {
-            setTimeout(() => {
-                this.$store.commit("setFoes", [])
-                this.$store.commit("stopBattle")
-                this.$store.commit("displayBattleRewards")
-            }, 1000)
-        }
-    }
-
-    private onSetPlayerFainted() {
-        if(!this.$store.getters.getNotFaintedPokemon.length) {
-            setTimeout(() => {
-                this.$store.commit("setFoes", [])
-                this.$store.commit("stopBattle")
-                this.$store.commit("playerLost")
-            }, 1000)
-        }
-    }
 
     public mounted() {
-
         this.emitter.on("playCurrentlySelectedCard", this.onPlayCurrentlySelectedCard)
         this.emitter.on("foePokemonHasBeenClicked", this.onFoePokemonHasBeenClicked)
         this.emitter.on("endPlayerTurn", this.onEndPlayerTurn)
         this.emitter.on("addToTurn", this.onAddToTurn)
         this.emitter.on("playFoeMove", this.onPlayFoeMove)
-        this.emitter.on("setFoeFainted", this.onSetFoeFainted)
-        this.emitter.on("setPlayerFainted", this.onSetPlayerFainted)
+        this.emitter.on("fainted", this.checkBattleEnded)
 
         this.startNewTurn()
     }
@@ -293,8 +289,7 @@ export default class BattleManager extends Vue {
         this.emitter.off("endPlayerTurn", this.onEndPlayerTurn)
         this.emitter.off("addToTurn", this.onAddToTurn)
         this.emitter.off("playFoeMove", this.onPlayFoeMove)
-        this.emitter.off("setFoeFainted", this.onSetFoeFainted)
-        this.emitter.off("setPlayerFainted", this.onSetPlayerFainted)
+        this.emitter.off("fainted", this.checkBattleEnded)
     }
 
 }

@@ -51,7 +51,6 @@ export default class PlayerPokemon extends Pokemon {
 
   protected faint(): void {
     this.$store.commit("faintActivePokemon")
-    this.emitter.emit("setPlayerFainted")
     this.emitter.emit("fainted", "player")
   }
 
