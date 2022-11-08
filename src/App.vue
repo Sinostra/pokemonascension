@@ -123,6 +123,7 @@ body {
 .global-wrapper {
   
   position: relative;
+  overflow: hidden;
 
   .text {
     font-family: "Open Sans", sans-serif;
