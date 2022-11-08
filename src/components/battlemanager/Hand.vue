@@ -1,5 +1,5 @@
 <template>
-    <div class="hand" :class="isCardBeingPlayed ? 'lockedHand' : ''">
+    <!-- <div class="hand" :class="isCardBeingPlayed ? 'lockedHand' : ''"> -->
         <PlayableCard v-for="(card, index) in content"
             :key="index"
             :id="card"
@@ -9,7 +9,7 @@
             @dragEnd="endDrag()"
         >
         </PlayableCard>
-    </div>
+    <!-- </div> -->
 </template>
 
 <script lang="ts">
@@ -60,10 +60,10 @@ export default class Hand extends Vue {
         const evenHand = handSize % 2 == 0
 
         //Une rotation de carte
-        const baseRotate =  2
+        const baseRotate =  4
 
         //L'endroit où la carte du milieu se positionne
-        const baseBottom = 35
+        const baseBottom = -2
 
         //L'endroit où la première carte se positionne
         const baseLeft = 50 - (handSize * 3)
@@ -97,7 +97,7 @@ export default class Hand extends Vue {
         finalRotate *= -1
 
         //L'écart vertical entre deux cartes
-        const bottomShift = 1.5 * Math.abs(difference)
+        const bottomShift = 1 * Math.abs(difference)
 
         const finalBottom = baseBottom - (bottomShift * Math.abs(difference))
 

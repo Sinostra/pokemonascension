@@ -1,6 +1,6 @@
 <template>
     <div class="battlemanager">
-        <BattleScene/>
+        <!-- <BattleScene/> -->
         <BattleInterface/>
     </div>
 </template>

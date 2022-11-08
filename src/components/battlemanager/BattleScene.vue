@@ -32,7 +32,6 @@ import { Options, Vue } from 'vue-class-component'
 
 export default class BattleScene extends Vue {
 
-
     get activePokemon() {
         return this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex].id
     }
@@ -45,7 +44,8 @@ export default class BattleScene extends Vue {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 100%;
+    height: 75%;
+    z-index: 2;
 }
 </style>
 

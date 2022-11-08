@@ -5,9 +5,8 @@
     left: 50%;
     transform: translate(-50%);
     width: 100%;
-    height: 30%;
+    height: 100%;
     z-index: 4;
-    bottom: -13%;
 
     &.lockedHand {
         pointer-events: none;

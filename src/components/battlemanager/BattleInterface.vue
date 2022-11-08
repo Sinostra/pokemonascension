@@ -4,6 +4,23 @@
         <div class="btn" @click="clickSwitch()">Switch</div>
     </div> -->
     <div class="bottom-wrapper">
+
+        <div class="battle-wrapper">
+            <PlayerPokemon :id="activePokemon"></PlayerPokemon>
+            <FoePokemon
+                v-for="(pokemon, index) in $store.getters.getFoeTeam"
+                :key="index"
+                :id="pokemon.id"
+                :maxHealth="pokemon.stats.hp"
+                :baseAttack="pokemon.stats.attack"
+                :baseDefense="pokemon.stats.defense"
+                :pattern="pokemon.patternSetting.pattern"
+                :patternSettings="pokemon.patternSetting"
+                :index="index"
+            >
+            </FoePokemon>
+        </div>
+
         <div class="energy-wrapper text" :style="getFontSize()">
             {{$store.state.battle.currentEnergy}}/{{$store.state.battle.maxEnergy}}
         </div>
@@ -42,6 +59,8 @@
 import Hand from './Hand.vue'
 import DiscardFromSelectManager from './discard/DiscardFromSelectManager.vue'
 import DiscardFromHandManager from './discard/DiscardFromHandManager.vue'
+import PlayerPokemon from './../pokemon/PlayerPokemon.vue'
+import FoePokemon from './../pokemon/FoePokemon.vue'
 import { Options, Vue } from 'vue-class-component'
 import { inject } from 'vue'
 import cloneDeep from "lodash.clonedeep"
@@ -51,7 +70,9 @@ import cloneDeep from "lodash.clonedeep"
     components: {
         Hand,
         DiscardFromSelectManager,
-        DiscardFromHandManager
+        DiscardFromHandManager,
+        PlayerPokemon,
+        FoePokemon,
     }
 })
 
@@ -76,6 +97,10 @@ export default class BattleInterface extends Vue {
     private currentlyPlayedAnimDone: boolean = false;
 
     private emitter: any = inject('emitter')
+
+    get activePokemon() {
+        return this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex].id
+    }
 
     get hasSelectedCardTarget(): boolean {
         if(this.selectedCardIndex === null) {
