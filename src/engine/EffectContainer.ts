@@ -99,10 +99,7 @@ export class MultiAttackEffect extends BaseEffect implements IEffect {
   playEffect(): Promise<void> {
     return new Promise((resolve) => {
 
-      const attacks: AttackEffect[] = []
-      for(let i = 0; i < this.params.damageTimes; i++) {
-        attacks.push(new AttackEffect(this.params, this.emitter))
-      }
+      const attacks: AttackEffect[] = Array(this.params.damageTimes).fill(new AttackEffect(this.params, this.emitter))
 
       const playAttack = (attack: AttackEffect, delay): Promise<void> => {
         return new Promise((resolve) => {
@@ -130,7 +127,7 @@ export class MultiAttackEffect extends BaseEffect implements IEffect {
 
           const checkFainted = (payload) => {
             if(payload === this.params.user || payload === this.params.target) {
-              canAttack =  false
+              canAttack = false
             }
           }
 
@@ -175,11 +172,9 @@ export class MultiEffect extends BaseEffect implements IEffect {
     const effects = subEffects.map((effect) => {
       return {
         effect,
-        ...{
-          user: this.params.user,
-          target: this.params.target,
-          type: this.params.type,
-        }
+        user: this.params.user,
+        target: this.params.target,
+        type: this.params.type,
       }
     }).map((e) => {
       const effect = e.effect as any

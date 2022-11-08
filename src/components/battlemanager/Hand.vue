@@ -32,9 +32,7 @@ export default class Hand extends Vue {
 
     public isCardBeingPlayed: boolean = false
 
-    private offSetCardX = 9
     private offSetCardY = 100
-    private cardXmultiplier = 1.1
     private cardYmultiplier = 10/3
 
     private emitter: any = inject('emitter')
@@ -49,9 +47,9 @@ export default class Hand extends Vue {
         }
 
         if(index === this.draggedCardIndex) {
-            const xPercent  = ((this.$store.getters.mouseCoordinates.x/window.innerWidth * 100) - this.offSetCardX) * this.cardXmultiplier
-            const yPercent  = ((this.$store.getters.mouseCoordinates.y/window.innerHeight * 100) - this.offSetCardY) * this.cardYmultiplier
-            return `left: ${xPercent}%; top: ${yPercent}%; transition: none`
+            const xPos  = this.$store.getters.mouseCoordinates.x
+            const yPos  = this.$store.getters.mouseCoordinates.y
+            return `left: ${xPos}px; top: ${yPos}px; transform: translate(-50%, -100%); transition: none`
         }
 
         const handSize = this.content.length

@@ -1,5 +1,5 @@
 <template>
-  <div class="global-wrapper"
+  <div id="global-wrapper"
   :class="appClass"
   @click.right.prevent="onRightClick()">
     <Background/>
@@ -18,7 +18,6 @@ import EventsManager from './components/events/EventsManager.vue'
 import GameInterface from './components/interface/GameInterface.vue'
 import AfterBattleModal from './components/interface/AfterBattleModal.vue'
 import { inject } from 'vue'
-import { EffectContainer } from "./engine/EffectContainer"
 
 @Options({
     name: "App",
@@ -54,6 +53,13 @@ export default class App extends Vue {
     window.addEventListener("mousemove", this.onMouseMove)
     window.dispatchEvent(new Event('resize'));
     this.$store.commit("changeBackground", 'starter_background')
+    const $wrapper = document.querySelector('#global-wrapper')
+    if(!!$wrapper) {
+      console.log(window.innerWidth)
+      console.log(window.innerHeight)
+      console.log($wrapper.getBoundingClientRect())
+    }
+    
   }
 
   public beforeUnmount() {
@@ -120,7 +126,7 @@ body {
   align-items: center;
 }
 
-.global-wrapper {
+#global-wrapper {
   
   position: relative;
   overflow: hidden;
