@@ -1,15 +1,13 @@
 <template>
-    <!-- <div class="hand" :class="isCardBeingPlayed ? 'lockedHand' : ''"> -->
-        <PlayableCard v-for="(card, index) in content"
-            :key="index"
-            :id="card"
-            :state="'drawn'"
-            :position="getCardPosition(index)"
-            @dragCard="startDrag(index)"
-            @dragEnd="endDrag()"
-        >
-        </PlayableCard>
-    <!-- </div> -->
+    <PlayableCard v-for="(card, index) in content"
+        :key="index"
+        :id="card"
+        :state="'drawn'"
+        :position="getCardPosition(index)"
+        @dragCard="startDrag(index)"
+        @dragEnd="endDrag()"
+    >
+    </PlayableCard>
 </template>
 
 <script lang="ts">

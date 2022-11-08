@@ -1,10 +1,5 @@
 <template>
-<div :class="hasSelectedCardTarget ? 'arrow-cursor' : ''" class="battle-interface">
-    <!-- <div class="top-wrapper">
-        <div class="btn" @click="clickSwitch()">Switch</div>
-    </div> -->
-    <div class="bottom-wrapper">
-
+    <div :class="hasSelectedCardTarget ? 'arrow-cursor' : ''" class="battle-interface">
         <div class="battle-wrapper">
             <PlayerPokemon :id="activePokemon"></PlayerPokemon>
             <FoePokemon
@@ -52,7 +47,6 @@
             End Turn
         </div>
     </div>
-</div>
 </template>
 
 <script lang="ts">

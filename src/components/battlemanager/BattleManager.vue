@@ -1,12 +1,10 @@
 <template>
     <div class="battlemanager">
-        <!-- <BattleScene/> -->
         <BattleInterface/>
     </div>
 </template>
 
 <script lang="ts">
-import BattleScene from './BattleScene.vue'
 import BattleInterface from './BattleInterface.vue'
 import { Options, Vue } from 'vue-class-component'
 import { inject } from 'vue'
@@ -16,7 +14,6 @@ import cloneDeep from "lodash.clonedeep"
 @Options({
     name: "BattleManager",
     components: {
-        BattleScene,
         BattleInterface
     }
 })
