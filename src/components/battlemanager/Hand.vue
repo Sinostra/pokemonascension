@@ -4,7 +4,7 @@
             :key="index"
             :id="card"
             :state="'drawn'"
-            :style="getCardPosition(index)"
+            :position="getCardPosition(index)"
             @dragCard="startDrag(index)"
             @dragEnd="endDrag()"
         >

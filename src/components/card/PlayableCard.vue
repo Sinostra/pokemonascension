@@ -1,6 +1,6 @@
 <template>
-  <div class="card" :class="cardClass" @mousedown="startDrag()" @mouseup="endDrag()">
-    <div class="background-img" :style="{'background-image':`url(${background})`}"></div>
+  <div class="card" :class="cardClass" @mousedown="startDrag()" @mouseup="endDrag()" :style="cardPosition">
+    <img class="background-img" :src="background">
     <div class="cost" :style="(getFontSize(1))" :class="costClass">
       <img :src="costBackground">
       {{ dataCard[id]['cost'] }}
@@ -29,12 +29,14 @@ import { inject } from 'vue'
 @Options({
   name: "PlayableCard",
   props: {
-    state: String
+    state: String,
+    position: String
   }
 })
 
 export default class PlayableCard extends Card {
   public state!: string
+  public position!: string
 
   public isPlayingDrawAnim: boolean = false
   public isPlayingDiscardFromSelectAnim: boolean = false
@@ -53,6 +55,13 @@ export default class PlayableCard extends Card {
       return `${type} ${playable}`
     }
     return `${type} ${draw} ${discardFromSelect} ${discardFromHand}`
+  }
+
+  get cardPosition() {
+    if(this.isPlayingDrawAnim || this.isPlayingDiscardFromSelectAnim || this.isPlayingDiscardFromHand) {
+      return ''
+    }
+    return this.position
   }
 
   get costClass() {
