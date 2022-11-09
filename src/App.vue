@@ -38,6 +38,10 @@ export default class App extends Vue {
     if(window.innerWidth > 1.8 * window.innerHeight) this.appClass = 'height-mesure'
     else this.appClass = 'width-mesure'
     this.$store.commit("changeBaseFontSize", Math.round(window.innerWidth / 100))
+    const $wrapper = document.querySelector('#global-wrapper')
+    if(!!$wrapper) {
+      this.$store.commit("updateAppSize", $wrapper.getBoundingClientRect())
+    }
   }
 
   public onRightClick() {
@@ -53,13 +57,6 @@ export default class App extends Vue {
     window.addEventListener("mousemove", this.onMouseMove)
     window.dispatchEvent(new Event('resize'));
     this.$store.commit("changeBackground", 'starter_background')
-    const $wrapper = document.querySelector('#global-wrapper')
-    if(!!$wrapper) {
-      console.log(window.innerWidth)
-      console.log(window.innerHeight)
-      console.log($wrapper.getBoundingClientRect())
-    }
-    
   }
 
   public beforeUnmount() {

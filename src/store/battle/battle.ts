@@ -14,10 +14,6 @@ export default {
         displayBattleRewards: false,
         playerLost: false,
         currentWeather: '',
-        mouseCoordinates: {
-            x: 0,
-            y: 0
-        }
     },
     mutations: {
         getEnergy(state, amount: number) {
@@ -86,17 +82,10 @@ export default {
         setWeather(state, weather) {
             state.currentWeather = weather 
         },
-        updateMouseCoordinates(state, coords) {
-            state.mouseCoordinates.x = coords.x
-            state.mouseCoordinates.y = coords.y
-        }
     },
     getters: {
         selectedCard: state => {
             return state.selectedCard
         },
-        mouseCoordinates: state => {
-            return state.mouseCoordinates
-        }
     }
 }
