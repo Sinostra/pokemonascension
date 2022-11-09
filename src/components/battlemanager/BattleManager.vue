@@ -25,6 +25,21 @@ export default class BattleManager extends Vue {
 
     private foePlayedTurn: number[] = []
 
+    private countDownEffects: any[] = [
+        // {
+        //     countDownTimer: 0,
+        //     effect: {
+        //         name: "DrawEffect",
+        //         user: "player",
+        //         target: null,
+        //         type: null,
+        //         params: {
+        //             draw: this.cardsBeginningTurn,
+        //         }
+        //     }
+        // }
+    ]
+
     private playerDraw: any[] = [
         {
             name: "DrawEffect",
@@ -104,6 +119,25 @@ export default class BattleManager extends Vue {
         return resolvedArray
     }
 
+    private manageCountDownEffects(array): Promise<any[]> {
+        return new Promise((resolve) => {
+            const resolvedArray = array.reduce((recipient, currentEffect) => {
+                if(currentEffect.countDownTimer > 0) {
+                    currentEffect.countDownTimer--
+                    recipient.push(currentEffect)
+                }
+                else if(currentEffect.countDownTimer === 0) {
+                    const effect = currentEffect.effect
+                    const playableEffect = new EffectContainer[effect.name]({user: effect.user, target: effect.target, type: effect.type, ...effect.params}, this.emitter)
+                    playableEffect.playEffect()
+                }
+                return recipient
+            }, [])
+
+            resolve(resolvedArray)
+        })
+    }
+
     /* Séquence d'un tour : Début du tour => pioche du joueur => effets de début de tour => le joueur joue son tour => effets de fin de tour => tour des ennemis */
 
     private startPlayerTurn() {
@@ -127,9 +161,6 @@ export default class BattleManager extends Vue {
             const effect = new EffectContainer[cardEffect.name]({user, target, type: cardEffect.type, ...cardEffect.params}, this.emitter)
             effect.playEffect().then(() => {
                 this.emitter.emit("cardDonePlayed")
-                // if(cardEffect.name === "AttackEffect") {
-
-                // }
                 resolve()
             })
         })
@@ -193,8 +224,11 @@ export default class BattleManager extends Vue {
     private startNewTurn() {
         this.$store.commit("startNewTurn")
         this.emitter.emit("startNewTurn")
-        this.playArrayEffects(this.playerDraw).then((array) => {
-            this.playerDraw = array
+        this.manageCountDownEffects(this.countDownEffects).then((array) => {
+            this.countDownEffects = array
+        }).then(() => {
+            this.playArrayEffects(this.playerDraw).then((array) => {
+                this.playerDraw = array
         }).then(() => {
             this.playArrayEffects(this.startOfPlayerTurnEffects).then((array) => {
                 this.startOfPlayerTurnEffects = array
@@ -202,6 +236,8 @@ export default class BattleManager extends Vue {
         }).then(() => {
             this.startPlayerTurn()
         })
+        })
+        
     }
 
     private playNextFoeTurn() {
@@ -258,7 +294,21 @@ export default class BattleManager extends Vue {
     }
 
     private onAddToTurn(payload) {
-        const targetArray = payload.step === "startPlayerTurn" ? this.startOfPlayerTurnEffects : payload.step === "endPlayerTurn" ? this.endOfPlayerTurnEffects : this.endOfFoesTurnEffects
+        let targetArray: any[] = []
+        switch(payload.step) {
+            case 'startPlayerTurn':
+                targetArray = this.startOfPlayerTurnEffects
+                break;
+            case 'endPlayerTurn':
+                targetArray = this.endOfPlayerTurnEffects
+                break;
+            case 'endFoesTurn':
+                targetArray = this.endOfFoesTurnEffects
+                break;
+            case 'countDown':
+                targetArray = this.countDownEffects
+                break;
+        }
         targetArray.push(payload.effectToAdd)
     }
 
