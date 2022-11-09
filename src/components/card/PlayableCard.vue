@@ -162,6 +162,7 @@ export default class PlayableCard extends Card {
   }
 
   public endDrag() {
+    console.log('mouse up card')
     this.$emit("dragEnd")
   }
 

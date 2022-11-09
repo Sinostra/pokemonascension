@@ -24,6 +24,8 @@
             <div class="number text">{{drawPile.length}}</div>
         </div>
 
+        <HandArea/>
+
         <Hand
             :content="hand"
             :draggedCardIndex="selectedCardIndex"
@@ -50,6 +52,7 @@
 
 <script lang="ts">
 import Hand from './Hand.vue'
+import HandArea from './HandArea.vue'
 import DiscardFromSelectManager from './discard/DiscardFromSelectManager.vue'
 import DiscardFromHandManager from './discard/DiscardFromHandManager.vue'
 import PlayerPokemon from './../pokemon/PlayerPokemon.vue'
@@ -62,6 +65,7 @@ import cloneDeep from "lodash.clonedeep"
     name: "BattleInterface",
     components: {
         Hand,
+        HandArea,
         DiscardFromSelectManager,
         DiscardFromHandManager,
         PlayerPokemon,
