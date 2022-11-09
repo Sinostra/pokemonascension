@@ -24,13 +24,13 @@
             <div class="number text">{{drawPile.length}}</div>
         </div>
 
-        <HandArea/>
-
         <Hand
             :content="hand"
             :draggedCardIndex="selectedCardIndex"
             @onCardDragged="selectCard"
         ></Hand>
+
+        <HandArea/>
 
         <DiscardFromSelectManager
             :content="discardFromSelectManagerContent"

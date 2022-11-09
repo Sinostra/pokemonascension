@@ -3,7 +3,7 @@
     width: 10.85%;
     border-radius: 20px;
     cursor: pointer;
-    z-index: 4;
+    z-index: 5;
     left: auto;
     top: auto;
     transition: left .3s, bottom .3s ease-out;
@@ -95,7 +95,7 @@
     }
 
     &:not(.selected):hover {
-        z-index: 5;
+        z-index: 6;
         scale: 1.1;
     }
 
