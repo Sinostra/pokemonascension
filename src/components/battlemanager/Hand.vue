@@ -42,7 +42,7 @@ export default class Hand extends Vue {
 
     public getCardPosition(index: number): string {
 
-        const selectedCardStyle = 'transform : rotate(0deg) scale(1.2); left: 20%; bottom: 186%; filter: none;'
+        const selectedCardStyle = 'transform : rotate(0deg) scale(1.2); left: 20%; bottom: 46%; filter: none;'
         const currentCardYPosition = ((this.$store.getters.mouseCoordinates.y/window.innerHeight * 100) - this.offSetCardY) * this.cardYmultiplier
 
         if(index === this.draggedCardIndex && currentCardYPosition <= 120 && this.$store.state.cards.dataCards[this.content[this.draggedCardIndex]]["target"]) {
