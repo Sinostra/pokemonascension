@@ -43,10 +43,13 @@ export default class App extends Vue {
     if(window.innerWidth > 1.8 * window.innerHeight) this.appClass = 'height-mesure'
     else this.appClass = 'width-mesure'
     this.$store.commit("changeBaseFontSize", Math.round(window.innerWidth / 100))
-    const $wrapper = document.querySelector('#global-wrapper')
-    if(!!$wrapper) {
-      this.$store.commit("updateAppSize", $wrapper.getBoundingClientRect())
-    }
+    //Attente d'une milliseconde pour avoir les bonnes dimensions
+    setTimeout(() => {
+      const $wrapper: HTMLElement | null = document.querySelector('#global-wrapper')
+      if(!!$wrapper) {
+        this.$store.commit("updateAppSize", $wrapper.getBoundingClientRect())
+      }
+    }, 1)
   }
 
   public onRightClick() {

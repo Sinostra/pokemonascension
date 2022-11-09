@@ -1,5 +1,5 @@
 <template>
-    <div v-if="$store.getters.getBackgroundUsed" class="background-wrapper" :class="$store.getters.getBackgroundUsed">
+    <div v-if="$store.getters.getBackgroundUsed" id="background-wrapper" :class="$store.getters.getBackgroundUsed">
         <div class="weather-wrapper" :class="$store.state.battle.currentWeather"></div>
     </div>
 </template>

@@ -20,8 +20,8 @@ export default {
             state.mouseCoordinates.y = coords.y
         },
         updateAppSize(state, size) {
-            state.appSize.width = Math.round(size.width)
-            state.appSize.height = Math.round(size.height)
+            state.appSize.width = size.width
+            state.appSize.height = size.height
         }
     },
 
