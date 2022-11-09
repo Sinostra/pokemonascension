@@ -2,6 +2,9 @@
   <div id="global-wrapper"
   :class="appClass"
   @click.right.prevent="onRightClick()">
+    <div class="debug">
+      <DebugBox/>
+    </div>
     <Background/>
     <GameInterface/>
     <EventsManager v-if="$store.state.events.currentEvent"/>
@@ -17,6 +20,7 @@ import BattleManager from './components/battlemanager/BattleManager.vue'
 import EventsManager from './components/events/EventsManager.vue'
 import GameInterface from './components/interface/GameInterface.vue'
 import AfterBattleModal from './components/interface/AfterBattleModal.vue'
+import DebugBox from './components/DebugBox.vue'
 import { inject } from 'vue'
 
 @Options({
@@ -26,7 +30,8 @@ import { inject } from 'vue'
         BattleManager,
         EventsManager,
         GameInterface,
-        AfterBattleModal
+        AfterBattleModal,
+        DebugBox,
     }
 })
 
@@ -159,5 +164,12 @@ body {
   z-index: 200;
   max-width: 300px;
   position: relative;
+}
+
+.debug {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10000;
 }
 </style>
