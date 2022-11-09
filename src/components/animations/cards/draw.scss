@@ -1,56 +1,56 @@
 @keyframes draw {
     0% {
       left: -1%;
-      top: 17%;
+      bottom: 0;
       transform: scale(0.1);
     }
     10% {
         left: 5%;
-        top: -23%;
+        bottom: 10%;
         transform: scale(0.2);
     }
     20% {
         left: 10%;
-        top: -73%;
+        bottom: 20%;
         transform: scale(0.2);
     }
     30% {
         left: 15%;
-        top: -123%;
+        bottom: 30%;
         transform: scale(0.6);
     }
     40% {
         left: 20%;
-        top: -153%;
+        bottom: 40%;
         transform: scale(0.8);
     }
     50% {
         left: 25%;
-        top: -153%;
+        bottom: 50%;
         transform: scale(1);
     }
     60% {
         left: 30%;
-        top: -123%;
+        bottom: 40%;
     }
     70% {
         left: 35%;
-        top: -93%;
+        bottom: 30%;
     }
     80% {
         left: 40%;
-        top: -63%;
+        bottom: 20%;
     }
     90% {
         left: 45%;
-        top: -33%;
+        bottom: 10%;
     }
     99% {
         left: 45%;
-        top: 0%;
+        bottom: 0;
     }
     100% {
         left: auto;
-        top: auto;
+        bottom: auto;
     }
 }
