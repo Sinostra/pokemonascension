@@ -2,9 +2,9 @@
   <div id="global-wrapper"
   :class="appClass"
   @click.right.prevent="onRightClick()">
-    <div class="debug">
+    <!-- <div class="debug">
       <DebugBox/>
-    </div>
+    </div> -->
     <Background/>
     <GameInterface/>
     <EventsManager v-if="$store.state.events.currentEvent"/>
