@@ -28,7 +28,6 @@
             :content="hand"
             :draggedCardIndex="selectedCardIndex"
             @onCardDragged="selectCard"
-            @discardFromSelectAnimEnded="ondiscardFromSelectAnimEnded"
         ></Hand>
 
         <DiscardFromSelectManager

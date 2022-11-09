@@ -23,6 +23,9 @@ import { inject } from 'vue'
     props: {
         content: Array,
         draggedCardIndex: Number,
+    },
+    emits: {
+        onCardDragged: String,
     }
 })
 export default class Hand extends Vue {
@@ -49,7 +52,7 @@ export default class Hand extends Vue {
         if(index === this.draggedCardIndex) {
             const xPos  = this.$store.getters.mouseCoordinates.x
             const yPos  = this.$store.getters.mouseCoordinates.y
-            return `left: ${xPos}px; top: ${yPos}px; transform: translate(-50%, -100%); transition: none`
+            return `left: ${xPos}px; top: ${yPos}px; transform: translate(-50%, -50%); transition: none`
         }
 
         const handSize = this.content.length
