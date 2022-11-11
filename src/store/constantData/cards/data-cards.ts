@@ -10,6 +10,7 @@ export default {
             "type": "electric",
             "params": {
                 "value": 6,
+                "modifiers": ["userAttack"],
             }
         },
         "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy',
@@ -25,9 +26,10 @@ export default {
         "effect": {
             "name": "AttackEffect",
             "type": "electric",
+            "cardAOE": true,
             "params": {
                 "value": 3,
-                "damageAOE": true,
+                "modifiers": ["userAttack"],
             }
         },
         "tooltip": 'Deal <span class="damage-amount">§</span> damage to all ennemies',

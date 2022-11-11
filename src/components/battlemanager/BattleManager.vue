@@ -155,7 +155,11 @@ export default class BattleManager extends Vue {
         }, 1)   
     }
 
-    private playEffects(effects: any, user: number | string | null, target: number | string | null): Promise<void> {
+    private playEffects(effects: any, user: number | string | null, cardTarget: number | string | null): Promise<void> {
+        let target = cardTarget
+        if(effects.cardAOE) {
+            target = "allFoes"
+        }
         return new Promise((resolve) => {
             const cardEffect = this.applyModifiers(effects, user, target)
             const effect = new EffectContainer[cardEffect.name]({user, target, type: cardEffect.type, ...cardEffect.params}, this.emitter)

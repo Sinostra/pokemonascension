@@ -180,7 +180,7 @@ export default class FoePokemon extends Pokemon {
   }
 
   private onDamage(payload) {
-    if(payload.target === this.index) {
+    if(payload.target === this.index || payload.target === "allFoes") {
       const damageDealt = this.takeDamage(payload.value, payload.type, payload.ignoreBlock)
       if(payload.leechlife) {
         const leechValue = Math.floor((damageDealt * (payload.leechlife / 100)))
@@ -211,7 +211,7 @@ export default class FoePokemon extends Pokemon {
   }
 
   private onTargetBuff(payload) {
-    if(payload.target === this.index) {
+    if(payload.target === this.index || payload.target === "allFoes") {
       this.applyBuff(payload)
     }
   }
