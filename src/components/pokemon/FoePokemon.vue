@@ -50,6 +50,7 @@ import { inject } from 'vue'
     baseDefense: Number,
     pattern: Array,
     patternSettings: Object,
+    canTarget: Number,
   }
 })
 
@@ -67,6 +68,8 @@ export default class FoePokemon extends Pokemon {
   public resolvedPattern = []
   public canShowIntents: boolean = true
 
+  public canTarget!: number
+
   private emitter: any = inject('emitter')
 
   get foePosition(): string {
@@ -75,8 +78,7 @@ export default class FoePokemon extends Pokemon {
   }
 
   get spriteClass(): string {
-    if(this.$store.getters.selectedCard === null) return ''
-    return this.$store.state.cards.dataCards[this.$store.getters.selectedCard]['target'] ? 'target' : ''
+    return this.canTarget !== null ? 'target'  : ''
   }
 
   get shieldSprite() {

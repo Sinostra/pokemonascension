@@ -12,6 +12,7 @@
                 :pattern="pokemon.patternSetting.pattern"
                 :patternSettings="pokemon.patternSetting"
                 :index="index"
+                :canTarget="selectedCardIndex"
             >
             </FoePokemon>
         </div>
