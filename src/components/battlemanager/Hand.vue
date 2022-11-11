@@ -55,7 +55,7 @@ export default class Hand extends Vue {
         const evenHand = handSize % 2 == 0
 
         //Une rotation de carte
-        const baseRotate =  4
+        const baseRotate =  2
 
         //L'endroit où la carte du milieu se positionne
         const baseBottom = -2
@@ -92,7 +92,7 @@ export default class Hand extends Vue {
         finalRotate *= -1
 
         //L'écart vertical entre deux cartes
-        const bottomShift = 1 * Math.abs(difference)
+        const bottomShift = 0.2 * Math.abs(difference)
 
         const finalBottom = baseBottom - (bottomShift * Math.abs(difference))
 
