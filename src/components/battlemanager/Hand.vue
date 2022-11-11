@@ -42,7 +42,7 @@ export default class Hand extends Vue {
     public getCardPosition(index: number): string {
 
         if(index === this.selectedCardIndex) {
-            return 'transform : rotate(0deg) scale(1.2); left: 20%; bottom: 46%; filter: none;'
+            return 'transform : rotate(0deg) scale(1.2); left: 20%; bottom: 46%; filter: none; transition: none'
         }
 
         if(index === this.draggedCardIndex) {
