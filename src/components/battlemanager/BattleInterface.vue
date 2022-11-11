@@ -1,6 +1,6 @@
 <template>
-    <div :class="hasSelectedCardTarget ? 'arrow-cursor' : ''" class="battle-interface">
-        <div class="battle-wrapper">
+    <div class="battle-interface">
+        <div class="battle-wrapper" @mouseup.left="onMouseUpInterface()">
             <PlayerPokemon :id="activePokemon"></PlayerPokemon>
             <FoePokemon
                 v-for="(pokemon, index) in $store.getters.getFoeTeam"
@@ -24,14 +24,16 @@
             <div class="number text">{{drawPile.length}}</div>
         </div>
 
+        <div class="hand-area" :class="draggedCardIndex !== null && selectedCardIndex === null ? 'active' : ''" @mouseup="onMouseUpHandArea()"></div>
         <Hand
             :content="hand"
-            :draggedCardIndex="selectedCardIndex"
+            :draggedCardIndex="draggedCardIndex"
+            :selectedCardIndex="selectedCardIndex"
             @onCardDragged="selectCard"
-        ></Hand>
-
-        <HandArea/>
-
+        >
+        </Hand>
+        
+        
         <DiscardFromSelectManager
             :content="discardFromSelectManagerContent"
         ></DiscardFromSelectManager>
@@ -52,7 +54,6 @@
 
 <script lang="ts">
 import Hand from './Hand.vue'
-import HandArea from './HandArea.vue'
 import DiscardFromSelectManager from './discard/DiscardFromSelectManager.vue'
 import DiscardFromHandManager from './discard/DiscardFromHandManager.vue'
 import PlayerPokemon from './../pokemon/PlayerPokemon.vue'
@@ -65,7 +66,6 @@ import cloneDeep from "lodash.clonedeep"
     name: "BattleInterface",
     components: {
         Hand,
-        HandArea,
         DiscardFromSelectManager,
         DiscardFromHandManager,
         PlayerPokemon,
@@ -78,6 +78,7 @@ export default class BattleInterface extends Vue {
     public readonly maxCardsInHand: number = 10
     public readonly delayBetweenDraws: number = 500
 
+    public draggedCardIndex: number | null = null
     public selectedCardIndex: number | null = null
 
     public canEndTurn: boolean = false
@@ -99,25 +100,31 @@ export default class BattleInterface extends Vue {
         return this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex].id
     }
 
-    get hasSelectedCardTarget(): boolean {
-        if(this.selectedCardIndex === null) {
-            return false
-        }
+    public onMouseUpInterface() {
+        if(this.$store.state.battle.selectedCard) {
+            if(this.$store.state.cards.dataCards[this.$store.state.battle.selectedCard]['target']) {
+                this.selectedCardIndex = this.draggedCardIndex
+            }
 
-        else {
-            const cardId = this.hand[this.selectedCardIndex]
-            return this.$store.state.cards.dataCards[cardId]['target']
+            else {
+                this.emitter.emit("playCurrentlySelectedCard", null)
+            }
         }
     }
 
+    public onMouseUpHandArea() {
+        this.selectCard(null)
+    }
+
     public selectCard(cardIndex): void {
+        this.selectedCardIndex = null
         if(cardIndex !== null){
-            this.selectedCardIndex = cardIndex
+            this.draggedCardIndex = cardIndex
             this.$store.commit("selectCard", this.hand[cardIndex])
             
         } 
         else {
-            this.selectedCardIndex = null
+            this.draggedCardIndex = null
             this.$store.commit("selectCard", null)
         } 
         
@@ -212,7 +219,7 @@ export default class BattleInterface extends Vue {
     }
 
     private onDiscardCurrentlySelectedCard() {
-        const cardBeingDiscarded = this.selectedCardIndex
+        const cardBeingDiscarded = this.draggedCardIndex
         this.selectCard(null)
         this.discardFromSelect(cardBeingDiscarded)
     }

@@ -2,22 +2,22 @@ export default {
     "forest": {
         "player": {
             "left": 13,
-            "bottom": -10
+            "bottom": 18
         },
 
 
         "foes": [
             {
                 "left": 44,
-                "bottom": -4
+                "bottom": 23
             },
             {
                 "left": 58,
-                "bottom": -3
+                "bottom": 24
             },
             {
                 "left": 72,
-                "bottom": -2
+                "bottom": 25
             }
         ]
     }

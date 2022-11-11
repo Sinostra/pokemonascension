@@ -27,7 +27,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 75%;
+    height: 100%;
     z-index: 2;
 }
 
@@ -110,5 +110,19 @@
 
     &.disabled {
         background: #000;
+    }
+}
+
+.hand-area {
+    width: 50%;
+    height: 40%;
+    z-index: 4;
+    border-radius: 5px;
+    margin: auto auto 0;
+    pointer-events: none;
+
+    &.active {
+        background: rgba($color: #000000, $alpha: 0.3);
+        pointer-events: all;
     }
 }

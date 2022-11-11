@@ -1,5 +1,5 @@
 <template>
-  <div class="card" :class="cardClass" @mousedown="startDrag()" @mouseup="endDrag()" :style="cardPosition">
+  <div class="card" :class="cardClass" @mousedown="startDrag()" :style="cardPosition">
     <img class="background-img" :src="background">
     <div class="cost" :style="(getFontSize(1))" :class="costClass">
       <img :src="costBackground">
@@ -159,11 +159,6 @@ export default class PlayableCard extends Card {
     if(this.dataCard[this.id]['cost'] <= this.$store.state.battle.currentEnergy) {
       this.$emit("dragCard")
     }
-  }
-
-  public endDrag() {
-    console.log('mouse up card')
-    this.$emit("dragEnd")
   }
 
   public playDrawAnim() {

@@ -8,10 +8,16 @@
     top: auto;
     transition: left .3s, bottom .3s ease-out;
     transform-style: preserve-3d;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
 
     .background-img {
         display: block;
         width: 100%;
+        pointer-events: none;
     }
 
     .cost, .name, .category, .tooltip {
@@ -20,6 +26,10 @@
 
     &.selected {
         cursor: default;
+    }
+
+    &.draggedCard {
+        pointer-events: none;
     }
 
     &.normal {

@@ -4,8 +4,8 @@
         :id="card"
         :state="'drawn'"
         :position="getCardPosition(index)"
+        :class="index === draggedCardIndex ? 'draggedCard' : ''"
         @dragCard="startDrag(index)"
-        @dragEnd="endDrag()"
     >
     </PlayableCard>
 </template>
@@ -23,6 +23,7 @@ import { inject } from 'vue'
     props: {
         content: Array,
         draggedCardIndex: Number,
+        selectedCardIndex: Number,
     },
     emits: {
         onCardDragged: String,
@@ -32,21 +33,16 @@ export default class Hand extends Vue {
 
     public content!: string[]
     public draggedCardIndex!: number | null
+    public selectedCardIndex!: number | null
 
     public isCardBeingPlayed: boolean = false
-
-    private offSetCardY = 100
-    private cardYmultiplier = 10/3
 
     private emitter: any = inject('emitter')
 
     public getCardPosition(index: number): string {
 
-        const selectedCardStyle = 'transform : rotate(0deg) scale(1.2); left: 20%; bottom: 46%; filter: none;'
-        const currentCardYPosition = ((this.$store.getters.mouseCoordinates.y/window.innerHeight * 100) - this.offSetCardY) * this.cardYmultiplier
-
-        if(index === this.draggedCardIndex && currentCardYPosition <= 120 && this.$store.state.cards.dataCards[this.content[this.draggedCardIndex]]["target"]) {
-            return selectedCardStyle
+        if(index === this.selectedCardIndex) {
+            return 'transform : rotate(0deg) scale(1.2); left: 20%; bottom: 46%; filter: none;'
         }
 
         if(index === this.draggedCardIndex) {
@@ -112,20 +108,6 @@ export default class Hand extends Vue {
 
     public startDrag(index) {
         this.$emit("onCardDragged", index)
-    }
-
-    public endDrag() {
-        const currentCardYPosition = ((this.$store.getters.mouseCoordinates.y/window.innerHeight * 100) - this.offSetCardY) * this.cardYmultiplier
-        if(currentCardYPosition > -120) {
-            this.$emit("onCardDragged", null)
-            return
-        }
-        
-        if(this.draggedCardIndex !== null && !this.$store.state.cards.dataCards[this.content[this.draggedCardIndex]]["target"]) {
-            this.emitter.emit("playCurrentlySelectedCard", null)
-            return
-        }
-        // else this.$emit("onCardDragged", null)
     }
 
     private onCardPlaying() {
