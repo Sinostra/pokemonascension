@@ -119,7 +119,7 @@ export default class PlayerPokemon extends Pokemon {
   }
 
   private onEnergy(payload) {
-    this.$store.commit("getEnergy", payload.energy)
+    this.$store.commit("getEnergy", payload.value)
   }
 
   public mounted() {

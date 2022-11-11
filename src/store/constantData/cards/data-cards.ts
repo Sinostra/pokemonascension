@@ -45,7 +45,7 @@ export default {
             "name": "DrawEffect",
             "type": "psychic",
             "params": {
-                "draw": 2,
+                "value": 2,
             }
         },
         "tooltip": 'Draw 2 cards',
@@ -78,7 +78,7 @@ export default {
             "name" : "EnergyEffect",
             "type": "normal",
             "params": {
-                "energy": 2,
+                "value": 2,
             }
         },
         "tooltip": 'Gain 2 energy',
@@ -152,7 +152,7 @@ export default {
                     "name": "DrawEffect",
                     "type": null,
                     "params": {
-                        "draw": 1
+                        "value": 1
                     }
                 }
             }
@@ -247,7 +247,7 @@ export default {
                 {
                     "name": "DrawEffect",
                     "params": {
-                        "draw": 2,
+                        "value": 2,
                     }
                 },
                 {

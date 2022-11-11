@@ -34,7 +34,7 @@ export default class BattleManager extends Vue {
         //         target: null,
         //         type: null,
         //         params: {
-        //             draw: this.cardsBeginningTurn,
+        //             value: this.cardsBeginningTurn,
         //         }
         //     }
         // }
@@ -46,7 +46,7 @@ export default class BattleManager extends Vue {
             type: null,
             // remainingTurns: 2,
             params: {
-                draw: this.cardsBeginningTurn,
+                value: this.cardsBeginningTurn,
             }
         }
     ]
@@ -96,15 +96,15 @@ export default class BattleManager extends Vue {
         const resolvedArray = array.reduce((recipient, effect) => {
             if(effect.name !== "MultiEffect") {
                 if(effect.name === "DrawEffect") {
-                    drawEffects += effect.params.draw
-                    effect.params.draw = 0
+                    drawEffects += effect.params.value
+                    effect.params.value = 0
                 }
             }
             else {
                 effect.params = effect.params.map((subEffect) => {
                     if(subEffect.name === "DrawEffect") {
-                        drawEffects += subEffect.params.draw
-                        subEffect.params.draw = 0
+                        drawEffects += subEffect.params.value
+                        subEffect.params.value = 0
                     }
                     return subEffect
                 })
@@ -115,7 +115,7 @@ export default class BattleManager extends Vue {
             return recipient
         }, [])
 
-        resolvedArray.push({name: "DrawEffect", type: null, params: {draw: drawEffects}})
+        resolvedArray.push({name: "DrawEffect", type: null, params: {value: drawEffects}})
         return resolvedArray
     }
 

@@ -216,7 +216,7 @@ export default class BattleInterface extends Vue {
     }
 
     private oncardToBeDrawn(payload) {
-        this.draw(payload.draw)
+        this.draw(payload.value)
     }
 
     private onDiscardCurrentlySelectedCard() {
