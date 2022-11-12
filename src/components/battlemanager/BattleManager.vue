@@ -122,20 +122,18 @@ export default class BattleManager extends Vue {
 
     private manageCountDownEffects(array): Promise<any[]> {
         return new Promise((resolve) => {
-            const resolvedArray = array.reduce((recipient, currentEffect) => {
-                if(currentEffect.countDownTimer > 0) {
-                    currentEffect.countDownTimer--
-                    recipient.push(currentEffect)
-                }
-                else if(currentEffect.countDownTimer === 0) {
-                    const effect = currentEffect.effect
-                    const playableEffect = new EffectContainer[effect.name]({user: effect.user, target: effect.target, type: effect.type, ...effect.params}, this.emitter)
-                    playableEffect.playEffect()
-                }
-                return recipient
-            }, [])
 
-            resolve(resolvedArray)
+            const effectsToPlay = array.filter((effect) => effect.countDownTimer === 0).map((countDownEffect) => countDownEffect.effect)
+            this.playArrayEffects(effectsToPlay).then(() => {
+                const resolvedArray = array.reduce((recipient, currentEffect) => {
+                    if(currentEffect.countDownTimer > 0) {
+                        currentEffect.countDownTimer--
+                        recipient.push(currentEffect)
+                    }
+                    return recipient
+                }, [])
+                resolve(resolvedArray)
+            })
         })
     }
 
