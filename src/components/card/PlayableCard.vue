@@ -164,7 +164,7 @@ export default class PlayableCard extends Card {
   public playDrawAnim() {
     if(!this.isPlayingDrawAnim) {
       this.isPlayingDrawAnim = true
-      setTimeout(() => { this.isPlayingDrawAnim = false }, 1000 )
+      setTimeout(() => { this.isPlayingDrawAnim = false }, 900 )
     }
   }
 
