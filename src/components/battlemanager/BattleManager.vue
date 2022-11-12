@@ -62,13 +62,14 @@ export default class BattleManager extends Vue {
                 resolve(array)
             })
         }
-        const resolvedDrawArray = this.manageDrawEffects(array)
-        const effects = resolvedDrawArray.map((effect) => {
-            return new EffectContainer[effect.name]({user: effect.user, target: effect.target, type: effect.type, ...effect.params}, this.emitter)
-        })
+        const resolvedDrawArray = this.manageDrawEffects(cloneDeep(array))
         return new Promise((resolve) => {
-            Promise.all(effects.map((effect) => effect.playEffect())).then(() => {
-                const resolvedPassedArray = this.manageRemainingTurns(resolvedDrawArray)
+            Promise.all(resolvedDrawArray.map((effect) => {
+                const user = effect.user ? effect.user : null
+                const target = effect.target ? effect.target : null
+                return this.playEffects(effect, user, target)
+            })).then(() => {
+                const resolvedPassedArray = this.manageRemainingTurns(array)
                 resolve(resolvedPassedArray)
             })
         })
