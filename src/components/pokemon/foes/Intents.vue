@@ -22,13 +22,14 @@
 import { Options, Vue } from 'vue-class-component'
 import getTypeMatchup from "@/engine/TypeMatchup";
 import checkEffectContent from "@/engine/CheckEffectContent"
+import applyModifiers from "@/engine/ApplyModifiers"
 
 @Options({
   name: "Intents",
   props: {
     nextMove: Object,
     mouseOver: Boolean,
-    stats: Object,
+    index: Number
   }
 })
 
@@ -36,7 +37,7 @@ export default class Intents extends Vue {
 
     public nextMove!: any
     public mouseOver!: boolean
-    private stats!: any
+    public index!: number
 
     get nextMoveDamageModifier(): number {
         const playerActivePokemonTypes = this.$store.state.pokedex.constantDex[this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex]['id']]['type']
@@ -62,23 +63,7 @@ export default class Intents extends Vue {
             return 0
         }
         else {
-            let resolvedModifiers = 0
-            const attackStat = 'attack'
-            const defenseStat = 'defense'
-            // const attackStat = reversedStats ? 'defense' : 'attack'
-            // const defenseStat = reversedStats ? 'attack' : 'defense'
-            if(foundEffect.params.modifiers) {
-                resolvedModifiers = foundEffect.params.modifiers.map((modifier) => {
-                    switch(modifier) {
-                        case 'userAttack': return this.stats[attackStat]
-                        case 'userDefense': return this.stats[defenseStat]
-                        case 'targetAttack': return this.$store.state.battle.playerStats[attackStat]
-                        case 'targetDefense': return this.$store.state.battle.playerStats[defenseStat]
-                    }
-                }).reduce((prev, next) => prev + next)
-            }
-
-            const damageWithModifiers = foundEffect.params.value + resolvedModifiers
+            const damageWithModifiers = applyModifiers(foundEffect, this.index, "player", this.$store).params.value
             return damageWithModifiers * this.nextMoveDamageModifier
         }
     }
@@ -89,23 +74,7 @@ export default class Intents extends Vue {
             return 0
         }
         else {
-            let resolvedModifiers = 0
-            const attackStat = 'attack'
-            const defenseStat = 'defense'
-            // const attackStat = reversedStats ? 'defense' : 'attack'
-            // const defenseStat = reversedStats ? 'attack' : 'defense'
-            if(foundEffect.params.modifiers) {
-                resolvedModifiers = foundEffect.params.modifiers.map((modifier) => {
-                    switch(modifier) {
-                        case 'userAttack': return this.stats[attackStat]
-                        case 'userDefense': return this.stats[defenseStat]
-                        case 'targetAttack': return this.$store.state.battle.playerStats[attackStat]
-                        case 'targetDefense': return this.$store.state.battle.playerStats[defenseStat]
-                    }
-                }).reduce((prev, next) => prev + next)
-            }
-
-            return foundEffect.params.value + resolvedModifiers
+            return applyModifiers(foundEffect, this.index, "player", this.$store).params.value
         }
     }
 

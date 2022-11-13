@@ -6,10 +6,7 @@
             <Intents v-if="canShowIntents"
               :nextMove="nextMove"
               :mouseOver="mouseOver"
-              :stats="{
-                attack: $store.getters.getFoeTeam[index]['stats']['attack'],
-                defense: $store.getters.getFoeTeam[index]['stats']['defense'],
-              }"
+              :index="index"
             ></Intents>
             <HealthBar
               :maxHealth="maxHealth"
