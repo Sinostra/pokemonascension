@@ -8,7 +8,8 @@
 import BattleInterface from './BattleInterface.vue'
 import { Options, Vue } from 'vue-class-component'
 import { inject } from 'vue'
-import { EffectContainer } from "../../engine/EffectContainer"
+import { EffectContainer } from "@/engine/EffectContainer"
+import applyModifiers from "@/engine/ApplyModifiers"
 import cloneDeep from "lodash.clonedeep"
 
 @Options({
@@ -160,59 +161,13 @@ export default class BattleManager extends Vue {
             target = "allFoes"
         }
         return new Promise((resolve) => {
-            const cardEffect = this.applyModifiers(effects, user, target)
+            const cardEffect = applyModifiers(effects, user, target, this.$store)
             const effect = new EffectContainer[cardEffect.name]({user, target, type: cardEffect.type, ...cardEffect.params}, this.emitter)
             effect.playEffect().then(() => {
                 this.emitter.emit("cardDonePlayed")
                 resolve()
             })
         })
-    }
-
-
-    private applyModifiers(effect, user, target) {
-        const cardEffect = cloneDeep(effect)
-        if(cardEffect.name !== "MultiEffect") {
-            if(!cardEffect.params.modifiers) {
-                return cardEffect
-            }
-            let resolvedModifiers = 0
-            const attackStat = 'attack'
-            const defenseStat = 'defense'
-            // const attackStat = reversedStats ? 'defense' : 'attack'
-            // const defenseStat = reversedStats ? 'attack' : 'defense'
-            if(cardEffect.params.modifiers) {
-                resolvedModifiers = cardEffect.params.modifiers.map((modifier) => {
-                    if(user === "player") {
-                        switch(modifier) {
-                            case 'userAttack': return this.$store.state.battle.playerStats[attackStat]
-                            case 'userDefense': return this.$store.state.battle.playerStats[defenseStat]
-                            case 'targetAttack': return this.$store.getters.getFoeTeam[target as number]['stats'][attackStat]
-                            case 'targetDefense': return this.$store.getters.getFoeTeam[target as number]['stats'][defenseStat]
-                        }
-                    }
-                    else {
-                        switch(modifier) {
-                            case 'userAttack': return this.$store.getters.getFoeTeam[user as number]['stats'][attackStat]
-                            case 'userDefense': return this.$store.getters.getFoeTeam[user as number]['stats'][defenseStat]
-                            case 'targetAttack': return this.$store.state.battle.playerStats[attackStat]
-                            case 'targetDefense': return this.$store.state.battle.playerStats[defenseStat]
-                        }
-                    }
-                    
-                }).reduce((prev, next) => prev + next)
-            }
-
-            cardEffect.params.value += resolvedModifiers
-        }
-
-        else {
-            cardEffect.params = cardEffect.params.map((subEffect) => {
-                return this.applyModifiers(subEffect, user, target)
-            })
-        }
-        
-        return cardEffect
     }
 
     private getNotFaintedFoesIndexes() {
