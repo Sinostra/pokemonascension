@@ -24,6 +24,7 @@ import Card from "./Card"
 import { Options } from "vue-class-component";
 import getTypeMatchup from "@/engine/TypeMatchup";
 import checkEffectContent from "@/engine/CheckEffectContent"
+import applyModifiers from "@/engine/ApplyModifiers"
 import { inject } from 'vue'
 
 @Options({
@@ -89,44 +90,12 @@ export default class PlayableCard extends Card {
       attackEffect = checkEffectContent(this.dataCard[this.id]['effect'], "MultiAttackEffect")
     }
     if(attackEffect) {
-      let resolvedModifiers = 0
-      const attackStat = 'attack'
-      const defenseStat = 'defense'
-      // const attackStat = reversedStats ? 'defense' : 'attack'
-      // const defenseStat = reversedStats ? 'attack' : 'defense'
-      if(attackEffect.params.modifiers) {
-        resolvedModifiers = attackEffect.params.modifiers.map((modifier) => {
-          switch(modifier) {
-            case 'userAttack': return this.$store.state.battle.playerStats[attackStat]
-            case 'userDefense': return this.$store.state.battle.playerStats[defenseStat]
-            case 'targetAttack': return this.foeHover ? this.foeHover.stats[attackStat] : 0
-            case 'targetDefense': return this.foeHover ? this.foeHover.stats[defenseStat] : 0
-          }
-        }).reduce((prev, next) => prev + next)
-      }
-
-      damageValue = attackEffect.params.value + resolvedModifiers
+      damageValue = applyModifiers(attackEffect, "player", this.$store.state.battle.indexFoeHover, this.$store).params.value
     }
 
     let blockEffect = checkEffectContent(this.dataCard[this.id]['effect'], "BlockEffect")
     if(blockEffect) {
-      let resolvedModifiers = 0
-      const attackStat = 'attack'
-      const defenseStat = 'defense'
-      // const attackStat = reversedStats ? 'defense' : 'attack'
-      // const defenseStat = reversedStats ? 'attack' : 'defense'
-      if(blockEffect.params.modifiers) {
-        resolvedModifiers = blockEffect.params.modifiers.map((modifier) => {
-          switch(modifier) {
-            case 'userAttack': return this.$store.state.battle.playerStats[attackStat]
-            case 'userDefense': return this.$store.state.battle.playerStats[defenseStat]
-            case 'targetAttack': return this.foeHover.stats[attackStat] || 0
-            case 'targetDefense': return this.foeHover.stats[defenseStat] || 0
-          }
-        }).reduce((prev, next) => prev + next)
-      }
-
-      blockValue = blockEffect.params.value + resolvedModifiers
+      blockValue = applyModifiers(blockEffect, "player", this.$store.state.battle.indexFoeHover, this.$store).params.value
     }
 
     finalDamage += damageValue
