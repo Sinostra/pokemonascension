@@ -109,6 +109,10 @@
         scale: 1.1;
     }
 
+    &.locked {
+        pointer-events: none;
+    }
+
     .cost {
         position: absolute;
         width: 16%;

@@ -4,7 +4,7 @@
         :id="card"
         :state="'drawn'"
         :position="getCardPosition(index)"
-        :class="index === draggedCardIndex ? 'draggedCard' : ''"
+        :class="getCardClass(index)"
         @dragCard="startDrag(index)"
     >
     </PlayableCard>
@@ -104,6 +104,15 @@ export default class Hand extends Vue {
         const finalLeft = baseLeft + index * leftShift
 
         return `transform : rotate(${finalRotate}deg); left: ${finalLeft}%; bottom: ${finalBottom}%;`
+    }
+
+    public getCardClass(index) {
+        if(this.isCardBeingPlayed) {
+            return 'locked'
+        }
+        if(index === this.draggedCardIndex) {
+            return 'draggedCard'
+        }
     }
 
     public startDrag(index) {
