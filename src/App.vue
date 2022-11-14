@@ -65,6 +65,7 @@ export default class App extends Vue {
     window.addEventListener("mousemove", this.onMouseMove)
     window.dispatchEvent(new Event('resize'));
     this.$store.commit("changeBackground", 'starter_background')
+    this.$store.dispatch("playEvent", 0)
   }
 
   public beforeUnmount() {
