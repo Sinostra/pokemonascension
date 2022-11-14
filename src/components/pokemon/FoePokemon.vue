@@ -177,15 +177,15 @@ export default class FoePokemon extends Pokemon {
   }
 
   private onDamage(payload) {
+    if(payload.user === this.index && payload.playAttackAnim) {
+      this.playAttackAnim()
+    }
     if(payload.target === this.index || payload.target === "allFoes") {
       const damageDealt = this.takeDamage(payload.value, payload.type, payload.ignoreBlock)
       if(payload.leechlife) {
         const leechValue = Math.floor((damageDealt * (payload.leechlife / 100)))
         this.emitter.emit("heal", {user : payload.user, value: leechValue})
       }
-    }
-    if(payload.user === this.index) {
-      this.playAttackAnim()
     }
   }
 

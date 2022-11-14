@@ -13,6 +13,7 @@ export default [
                     {
                         name: 'AttackEffect',
                         type: 'normal',
+                        playAttackAnim: true,
                         params: {
                             value: 2,
                             modifiers: ["userAttack"]
@@ -42,6 +43,7 @@ export default [
                     {
                         name: 'AttackEffect',
                         type: 'poison',
+                        playAttackAnim: true,
                         params: {
                             value: 2,
                             modifiers: ["userAttack"]
@@ -71,6 +73,7 @@ export default [
                     {
                         name: 'AttackEffect',
                         type: 'normal',
+                        playAttackAnim: true,
                         params: {
                             value: 3,
                             modifiers: ["userAttack"]
@@ -110,6 +113,7 @@ export default [
                     {
                         name: 'AttackEffect',
                         type: 'poison',
+                        playAttackAnim: true,
                         params: {
                             value: 3,
                             modifiers: ["userAttack"]
@@ -147,6 +151,7 @@ export default [
                     {
                         name: 'MultiAttackEffect',
                         type: 'bug',
+                        playAttackAnim: true,
                         params: {
                             value: 2,
                             damageTimes: 2,
@@ -156,6 +161,7 @@ export default [
                     {
                         name: 'AttackEffect',
                         type: 'poison',
+                        playAttackAnim: true,
                         params: {
                             value: 4,
                             modifiers: ["userAttack"]
@@ -185,6 +191,7 @@ export default [
                     {
                         name: 'AttackEffect',
                         type: 'bug',
+                        playAttackAnim: true,
                         params: {
                             value: 4,
                             modifiers: ["userAttack"]
@@ -193,6 +200,7 @@ export default [
                     {
                         name: 'AttackEffect',
                         type: 'flying',
+                        playAttackAnim: true,
                         params: {
                             value: 4,
                             modifiers: ["userAttack"]

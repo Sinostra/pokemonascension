@@ -68,10 +68,10 @@ export default class PlayerPokemon extends Pokemon {
   }
 
   private onDamage(payload) {
-    if(payload.target !== "player" && payload.target !== null) {
+    if(payload.user === "player" && payload.playAttackAnim) {
       this.playAttackAnim()
     }
-    else {
+    if(payload.target === "player") {
       const damageDealt = this.takeDamage(payload.value, payload.type, payload.ignoreBlock)
       if(payload.leechlife) {
         const leechValue = Math.floor((damageDealt * (payload.leechlife / 100)))

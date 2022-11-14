@@ -124,10 +124,10 @@ export default class BattleManager extends Vue {
     private manageCountDownEffects(array): Promise<any[]> {
         return new Promise((resolve) => {
 
-            const effectsToPlay = array.filter((effect) => effect.countDownTimer === 0).map((countDownEffect) => countDownEffect.effect)
+            const effectsToPlay = array.filter((effect) => effect.countDownTimer === 1).map((countDownEffect) => countDownEffect.effect)
             this.playArrayEffects(effectsToPlay).then(() => {
                 const resolvedArray = array.reduce((recipient, currentEffect) => {
-                    if(currentEffect.countDownTimer > 0) {
+                    if(currentEffect.countDownTimer > 1) {
                         currentEffect.countDownTimer--
                         recipient.push(currentEffect)
                     }
@@ -162,7 +162,8 @@ export default class BattleManager extends Vue {
         }
         return new Promise((resolve) => {
             const cardEffect = applyModifiers(effects, user, target, this.$store)
-            const effect = new EffectContainer[cardEffect.name]({user, target, type: cardEffect.type, ...cardEffect.params}, this.emitter)
+            const playAttackAnim = cardEffect.playAttackAnim ? true : false
+            const effect = new EffectContainer[cardEffect.name]({user, target, type: cardEffect.type, playAttackAnim, ...cardEffect.params}, this.emitter)
             effect.playEffect().then(() => {
                 this.emitter.emit("cardDonePlayed")
                 resolve()

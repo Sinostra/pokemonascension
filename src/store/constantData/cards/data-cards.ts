@@ -8,6 +8,7 @@ export default {
         "effect": {
             "name": "AttackEffect",
             "type": "electric",
+            "playAttackAnim": true,
             "params": {
                 "value": 6,
                 "modifiers": ["userAttack"],
@@ -26,6 +27,7 @@ export default {
         "effect": {
             "name": "AttackEffect",
             "type": "electric",
+            "playAttackAnim": true,
             "cardAOE": true,
             "params": {
                 "value": 3,
@@ -93,6 +95,7 @@ export default {
         "effect": {
             "name": "MultiAttackEffect",
             "type": "normal",
+            "playAttackAnim": true,
             "params": {
                 "value": 2,
                 "modifiers": ["userAttack"],
@@ -168,6 +171,7 @@ export default {
         "effect":{
             "name": "AttackEffect",
             "type": "grass",
+            "playAttackAnim": true,
             "params": {
                 "value": 6,
                 "modifiers": ["userAttack"]
@@ -184,6 +188,7 @@ export default {
         "effect":{
             "name": "AttackEffect",
             "type": "fire",
+            "playAttackAnim": true,
             "params": {
                 "value": 60,
                 "modifiers": ["userAttack"]
@@ -200,6 +205,7 @@ export default {
         "effect":{
             "name": "AttackEffect",
             "type": "water",
+            "playAttackAnim": true,
             "params": {
                 "value": 6,
                 "modifiers": ["userAttack"]
@@ -216,6 +222,7 @@ export default {
         "effect": {
             "name": "MultiEffect",
             "type": "fighting",
+            "playAttackAnim": true,
             "params": [
                 {
                     "name": "AttackEffect",
@@ -243,6 +250,7 @@ export default {
         "effect": {
             "name": "MultiEffect",
             "type": "steel",
+            "playAttackAnim": true,
             "params": [
                 {
                     "name": "DrawEffect",
@@ -285,6 +293,7 @@ export default {
         "effect":{
             "name": "AttackEffect",
             "type": "grass",
+            "playAttackAnim": true,
             "params": {
                 "value": 6,
                 "modifiers": ["userAttack"],
