@@ -2,12 +2,13 @@
   <div class="center-interface">
     <div class="overlay">
       <div v-if="currentStep === 1">
-        <div class="txt">Hello, and welcome to our Pokemon center, where we heal your Pokemon</div>
+        <div class="txt">Hello, and welcome to our Pokemon center, we heal your Pokemon back to perfect health !</div>
         <div class="btn" @click="healPlayerPokemon()">Heal</div>
       </div>
 
       <div v-if="currentStep === 2">
-        <div class="txt">Healed</div>
+        <div class="txt">Thank you for waiting, we've restored your Pokémon to full health.</div>
+        <div class="txt">We hope to see you again !</div>
         <div class="btn" @click="$store.dispatch('playNextStep')">Continue</div>
       </div>
       </div>
@@ -40,7 +41,7 @@ export default class PokemonCenter extends Vue {
   align-items: center;
 
   .overlay {
-    background: rgba($color: #000000, $alpha: 0.3);
+    background: rgba($color: #000000, $alpha: 0.7);
     border-radius: 5px;
     padding: 20px;
     color: #fff;
