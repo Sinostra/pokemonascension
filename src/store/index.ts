@@ -34,20 +34,8 @@ export default createStore({
       }
       context.commit("changeBackground", encounter.background)
       context.commit("setFoes", encounter.foes)
-    },
-
-    goToNextBattle(context, foes) {
-      context.commit("setFoes", [])
-      context.commit("setFoes", foes)
-      context.commit("changeBackground", 'forest')
       context.commit("startBattle")
     },
-
-    resetGame(context) {
-      context.commit("emptyPlayerTeam")
-      context.commit("setFoes", [])
-      context.commit("stopBattle")
-    }
   },
   
   modules: {

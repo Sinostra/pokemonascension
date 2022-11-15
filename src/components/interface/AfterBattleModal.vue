@@ -25,12 +25,11 @@ import cloneDeep from "lodash.clonedeep"
 })
 export default class AfterBattleModal extends Vue {
     public onClickNextBattle() {
-        const nextFoes = cloneDeep(this.$store.state.allFoes.dataFoes[1])
-        this.$store.dispatch("goToNextBattle", nextFoes)
+        this.$store.dispatch("playEncounter", 2)
     }
 
     public onClickRestart() {
-        this.$store.dispatch("resetGame")
+        this.$store.commit("emptyPlayerTeam")
         this.$store.dispatch("playEvent", 0)
     }
 
