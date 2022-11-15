@@ -10,6 +10,7 @@ import settings from './settings/settings'
 import allFoes from './constantData/foes/allFoes'
 import encounters from './constantData/encounters'
 import event from './constantData/events'
+import map from './map'
 import app from './app/app'
 
 export default createStore({
@@ -48,6 +49,7 @@ export default createStore({
     settings,
     cards,
     allFoes,
+    map,
     app
   }
 })
