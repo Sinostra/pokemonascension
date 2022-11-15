@@ -26,6 +26,7 @@ export default class PokemonCenter extends Vue {
   public currentStep = 1
 
   public healPlayerPokemon() {
+    this.$store.commit("healAllPlayerPokemon")
     this.currentStep++
   }
 
