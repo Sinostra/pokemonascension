@@ -3,7 +3,7 @@
         <div v-if="playerStillInGame" class="victory-wrapper">
             <div class="modal-txt">Victory !</div>
             <CardChoice></CardChoice>
-            <div class="modal-btn" @click="onClickNextBattle()">Go to the next battle</div>
+            <div class="modal-btn" @click="onClickNextBattle()">Continue</div>
         </div>
         <div v-if="!playerStillInGame" class="defeat-wrapper">
             <div class="modal-txt">Defeat !</div>
@@ -15,7 +15,6 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 import CardChoice from "./CardChoice.vue"
-import cloneDeep from "lodash.clonedeep"
 
 @Options({
     name: "AfterBattleModal",
