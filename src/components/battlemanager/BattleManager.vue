@@ -218,18 +218,10 @@ export default class BattleManager extends Vue {
     }
 
     private checkBattleEnded() {
-        if(!this.$store.getters.getNotFaintedFoes.length) {
+        if(!this.$store.getters.getNotFaintedFoes.length || !this.$store.getters.getNotFaintedPokemon.length) {
             setTimeout(() => {
                 this.$store.commit("setFoes", [])
                 this.$store.commit("stopBattle")
-                this.$store.commit("displayBattleRewards")
-            }, 1000)
-        }
-        if(!this.$store.getters.getNotFaintedPokemon.length) {
-            setTimeout(() => {
-                this.$store.commit("setFoes", [])
-                this.$store.commit("stopBattle")
-                this.$store.commit("playerLost")
             }, 1000)
         }
     }

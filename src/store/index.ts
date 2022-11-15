@@ -22,6 +22,7 @@ export default createStore({
       if(!foundEvent) {
         return
       }
+      context.commit("stopBattleDisplay")
       context.commit("changeBackground", foundEvent.background)
       context.commit("setEvent", foundEvent.name)
     },
@@ -37,7 +38,6 @@ export default createStore({
 
     goToNextBattle(context, foes) {
       context.commit("setFoes", [])
-      context.commit("stopDisplayBattleRewards")
       context.commit("setFoes", foes)
       context.commit("changeBackground", 'forest')
       context.commit("startBattle")
@@ -47,10 +47,6 @@ export default createStore({
       context.commit("emptyPlayerTeam")
       context.commit("setFoes", [])
       context.commit("stopBattle")
-      context.commit("resetPlayerStatus")
-      context.commit("stopDisplayBattleRewards")
-      context.commit("changeBackground", 'starter_background')
-      context.commit("setEvent", 'StarterChoice')
     }
   },
   

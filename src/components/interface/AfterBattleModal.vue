@@ -1,11 +1,11 @@
 <template>
     <div class="modal-wrapper">
-        <div v-if="$store.state.battle.displayBattleRewards" class="victory-wrapper">
+        <div v-if="playerStillInGame" class="victory-wrapper">
             <div class="modal-txt">Victory !</div>
             <CardChoice></CardChoice>
             <div class="modal-btn" @click="onClickNextBattle()">Go to the next battle</div>
         </div>
-        <div v-if="$store.state.battle.playerLost" class="defeat-wrapper">
+        <div v-if="!playerStillInGame" class="defeat-wrapper">
             <div class="modal-txt">Defeat !</div>
             <div class="modal-btn" @click="onClickRestart()">Restart</div>
         </div>
@@ -31,6 +31,11 @@ export default class AfterBattleModal extends Vue {
 
     public onClickRestart() {
         this.$store.dispatch("resetGame")
+        this.$store.dispatch("playEvent", 0)
+    }
+
+    get playerStillInGame(): boolean {
+        return !!this.$store.getters.getNotFaintedPokemon.length
     }
 }
 </script>

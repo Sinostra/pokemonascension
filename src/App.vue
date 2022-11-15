@@ -7,9 +7,9 @@
     </div> -->
     <Background/>
     <GameInterface/>
-    <EventsManager v-if="$store.state.events.currentEvent"/>
-    <BattleManager v-if="$store.state.battle.isBattleOngoing && !$store.state.battle.playerLost"/>
-    <AfterBattleModal v-if="$store.state.battle.displayBattleRewards || $store.state.battle.playerLost"></AfterBattleModal>
+    <EventsManager v-if="!$store.state.battle.battleToDisplay && $store.state.events.currentEvent"/>
+    <BattleManager v-if="$store.state.battle.battleToDisplay && $store.state.battle.isBattleOngoing"/>
+    <AfterBattleModal v-if="$store.state.battle.battleToDisplay && !$store.state.battle.isBattleOngoing"></AfterBattleModal>
   </div>
 </template>
 
@@ -64,7 +64,6 @@ export default class App extends Vue {
     window.addEventListener("resize", this.onResize);
     window.addEventListener("mousemove", this.onMouseMove)
     window.dispatchEvent(new Event('resize'));
-    this.$store.commit("changeBackground", 'starter_background')
     this.$store.dispatch("playEvent", 0)
   }
 

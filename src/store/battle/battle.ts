@@ -10,9 +10,8 @@ export default {
             defense: 0
         },
         indexFoeHover: null,
+        battleToDisplay: false,
         isBattleOngoing: false,
-        displayBattleRewards: false,
-        playerLost: false,
         currentWeather: '',
     },
     mutations: {
@@ -61,27 +60,22 @@ export default {
         },
 
         startBattle(state) {
+            state.battleToDisplay = true
             state.isBattleOngoing = true
         },
         stopBattle(state) {
             state.isBattleOngoing = false
             state.turnCounter = 0
         },
-        displayBattleRewards(state) {
-            state.displayBattleRewards = true
+        stopBattleDisplay(state) {
+            state.battleToDisplay = false
         },
-        stopDisplayBattleRewards(state) {
-            state.displayBattleRewards = false
-        },
-        playerLost(state) {
-            state.playerLost = true
-        },
-        resetPlayerStatus(state) {
-            state.playerLost = false
-        },
+
         setWeather(state, weather) {
             state.currentWeather = weather 
         },
+
+
     },
     getters: {
         selectedCard: state => {
