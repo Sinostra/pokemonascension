@@ -34,7 +34,7 @@ import DisplayPokemon from "../pokemon/DisplayPokemon.vue"
     },
 })
 
-export default class StarterChoice extends Vue {
+export default class StarterChoice  extends Vue {
 
     public clickStarter(id: string) {
         

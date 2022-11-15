@@ -1,5 +1,5 @@
 <template>
-    <div></div>
+  <div>Hello, and welcome to our Pokemon center, where we heal your Pokemon</div>
 </template>
 
 <script lang="ts">

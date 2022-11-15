@@ -3,6 +3,7 @@ export default {
         gameMap: [
             {encounter: 1},
             {encounter: 2},
+            {event: 1},
         ],
         gameMapIndex: 0
     },
