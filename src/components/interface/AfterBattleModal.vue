@@ -3,7 +3,7 @@
         <div v-if="playerStillInGame" class="victory-wrapper">
             <div class="modal-txt">Victory !</div>
             <CardChoice></CardChoice>
-            <div class="modal-btn" @click="onClickNextBattle()">Continue</div>
+            <div class="modal-btn" @click="$store.dispatch('playNextStep')">Continue</div>
         </div>
         <div v-if="!playerStillInGame" class="defeat-wrapper">
             <div class="modal-txt">Defeat !</div>
@@ -23,10 +23,6 @@ import CardChoice from "./CardChoice.vue"
     }
 })
 export default class AfterBattleModal extends Vue {
-    public onClickNextBattle() {
-        this.$store.dispatch("playNextStep")
-    }
-
     public onClickRestart() {
         this.$store.commit("emptyPlayerTeam")
         this.$store.dispatch("playevent", 0)

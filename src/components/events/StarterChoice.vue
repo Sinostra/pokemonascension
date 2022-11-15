@@ -67,10 +67,6 @@ export default class StarterChoice  extends Vue {
     width: 14%;
     cursor: pointer;
 
-    &.bulba {
-        width: 15%;
-    }
-
     &:hover {
         filter: drop-shadow(0 0 0.50rem #f2cd4c) drop-shadow(2px 2px 2px #ffcc00);
     }
