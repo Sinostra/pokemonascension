@@ -64,7 +64,7 @@ export default class App extends Vue {
     window.addEventListener("resize", this.onResize);
     window.addEventListener("mousemove", this.onMouseMove)
     window.dispatchEvent(new Event('resize'));
-    this.$store.dispatch("playEvent", 0)
+    this.$store.dispatch("playevent", 0)
   }
 
   public beforeUnmount() {

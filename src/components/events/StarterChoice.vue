@@ -46,7 +46,7 @@ export default class GameInterface extends Vue {
             fainted: false,
         }
         this.$store.commit("addPokemon", starterData)
-        this.$store.dispatch("playEncounter", 1)
+        this.$store.dispatch("playencounter", 1)
     }
 
 }

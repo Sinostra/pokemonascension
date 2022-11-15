@@ -18,7 +18,7 @@ export default createStore({
 
   actions: {
 
-    playEvent(context, id) {
+    playevent(context, id) {
       const foundEvent = event.find((e) => e.id === id)
       if(!foundEvent) {
         return
@@ -28,7 +28,7 @@ export default createStore({
       context.commit("setEvent", foundEvent.name)
     },
 
-    playEncounter(context, id) {
+    playencounter(context, id) {
       const encounter = encounters.find((e) => e.id === id)
       if(!encounter) {
         return
@@ -40,11 +40,15 @@ export default createStore({
 
     playNextStep(context) {
       context.commit("advanceInMap")
+      // const entries = Object.entries(context.getters.currentStep)
+      // const actionName = "play"+entries[0]
+      // context.dispatch(actionName, entries[1])
+
       if(!!context.getters.currentStep['encounter']) {
-        context.dispatch("playEncounter", context.getters.currentStep['encounter'])
+        context.dispatch("playencounter", context.getters.currentStep['encounter'])
       }
       else {
-        context.dispatch("playEvent", context.getters.currentStep['event'])
+        context.dispatch("playevent", context.getters.currentStep['event'])
       }
     }
   },
