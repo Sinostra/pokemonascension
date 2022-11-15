@@ -26,16 +26,15 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import DisplayPokemon from "../pokemon/DisplayPokemon.vue"
-import cloneDeep from "lodash.clonedeep"
 
 @Options({
-  name: "GameInterface",
+  name: "StarterChoice",
     components: {
         DisplayPokemon
     },
 })
 
-export default class GameInterface extends Vue {
+export default class StarterChoice extends Vue {
 
     public clickStarter(id: string) {
         
