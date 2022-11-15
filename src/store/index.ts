@@ -37,6 +37,16 @@ export default createStore({
       context.commit("setFoes", encounter.foes)
       context.commit("startBattle")
     },
+
+    playNextStep(context) {
+      context.commit("advanceInMap")
+      if(!!context.getters.currentStep['encounter']) {
+        context.dispatch("playEncounter", context.getters.currentStep['encounter'])
+      }
+      else {
+        context.dispatch("playEvent", context.getters.currentStep['event'])
+      }
+    }
   },
   
   modules: {

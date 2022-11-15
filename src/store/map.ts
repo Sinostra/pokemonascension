@@ -19,6 +19,8 @@ export default {
     },
 
     getters: {
-
+        currentStep: state => {
+            return state.gameMap[state.gameMapIndex]
+        }
     }
 }

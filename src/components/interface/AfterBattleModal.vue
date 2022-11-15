@@ -24,7 +24,7 @@ import CardChoice from "./CardChoice.vue"
 })
 export default class AfterBattleModal extends Vue {
     public onClickNextBattle() {
-        this.$store.dispatch("playEncounter", 2)
+        this.$store.dispatch("playNextStep")
     }
 
     public onClickRestart() {
