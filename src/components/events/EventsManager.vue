@@ -1,5 +1,5 @@
 <template>
-    <component v-bind:is="$store.state.events.currentEvent"></component>
+    <component v-bind:is="$store.state.events.currentEvent" class="current-event"></component>
 </template>
 
 <script lang="ts">
@@ -19,3 +19,11 @@ import { Options, Vue } from 'vue-class-component'
 export default class EventsManager extends Vue {}
 
 </script>
+<style lang="scss">
+    .current-event {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+    }
+</style>

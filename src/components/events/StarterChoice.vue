@@ -51,34 +51,29 @@ export default class StarterChoice  extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-.starter-choice {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
 
-    .starters-wrapper {
-        position: absolute;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: flex-end;
-        top: 31%;
-        transform: translateX(32%);
-        width: 60%;
+.starters-wrapper {
+    position: absolute;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    top: 31%;
+    transform: translateX(32%);
+    width: 60%;
+}
+
+.pokemon-sprite {
+    display: block;
+    width: 14%;
+    cursor: pointer;
+
+    &.bulba {
+        width: 15%;
     }
 
-    .pokemon-sprite {
-        display: block;
-        width: 14%;
-        cursor: pointer;
-
-        &.bulba {
-            width: 15%;
-        }
-
-        &:hover {
-            filter: drop-shadow(0 0 0.50rem #f2cd4c) drop-shadow(2px 2px 2px #ffcc00);
-        }
+    &:hover {
+        filter: drop-shadow(0 0 0.50rem #f2cd4c) drop-shadow(2px 2px 2px #ffcc00);
     }
 }
+
 </style>
