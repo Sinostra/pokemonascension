@@ -28,6 +28,18 @@
         &.team {
             background: center / contain no-repeat url('../../assets/img/interface/poke-ball.png');
         }
+
+        &.fullscreen-toggle {
+            margin-left: auto;
+        }
+
+        &.fullscreen {
+            background: center / contain no-repeat url('../../assets/img/interface/fullscreen.png');
+        }
+
+        &.notfullscreen {
+            background: center / contain no-repeat url('../../assets/img/interface/notfullscreen.png');
+        }
     }
 }
 
