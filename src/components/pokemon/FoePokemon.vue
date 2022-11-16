@@ -15,7 +15,7 @@
               :attack="$store.getters.getFoeTeam[index]['stats']['attack']"
               :defense="$store.getters.getFoeTeam[index]['stats']['defense']"
             ></HealthBar>
-            <Helper :id="id" :style="helpToolTipStyle"></Helper>
+            <Helper :id="id"></Helper>
           </div>
           <img :src="spritePath" :class="spriteClass" @mouseover="onHover()" @mouseleave="onHover(false)" class="pokemon-sprite">
         </div>
