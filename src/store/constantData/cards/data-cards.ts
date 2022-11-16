@@ -190,7 +190,7 @@ export default {
             "type": "fire",
             "playAttackAnim": true,
             "params": {
-                "value": 60,
+                "value": 6,
                 "modifiers": ["userAttack"]
             },
         },
