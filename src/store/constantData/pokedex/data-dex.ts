@@ -292,7 +292,7 @@ export default {
         },
         
         "type": ["normal", "flying"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -324,7 +324,7 @@ export default {
         },
         
         "type": ["normal", "flying"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -340,7 +340,7 @@ export default {
         },
         
         "type": ["normal"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -356,7 +356,7 @@ export default {
         },
         
         "type": ["normal"],
-        "size": 30,
+        "size": 90,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -372,7 +372,7 @@ export default {
         },
         
         "type": ["normal", "flying"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -388,7 +388,7 @@ export default {
         },
         
         "type": ["normal", "flying"],
-        "size": 30,
+        "size": 110,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -404,7 +404,7 @@ export default {
         },
         
         "type": ["poison"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -420,7 +420,7 @@ export default {
         },
         
         "type": ["poison"],
-        "size": 30,
+        "size": 90,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -452,7 +452,7 @@ export default {
         },
         
         "type": ["electric"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -468,7 +468,7 @@ export default {
         },
         
         "type": ["ground"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -484,7 +484,7 @@ export default {
         },
         
         "type": ["ground"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -500,7 +500,7 @@ export default {
         },
         
         "type": ["poison"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -516,7 +516,7 @@ export default {
         },
         
         "type": ["poison"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -532,7 +532,7 @@ export default {
         },
         
         "type": ["poison", "ground"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -548,7 +548,7 @@ export default {
         },
         
         "type": ["poison"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -564,7 +564,7 @@ export default {
         },
         
         "type": ["poison"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -580,7 +580,7 @@ export default {
         },
         
         "type": ["poison", "ground"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -596,7 +596,7 @@ export default {
         },
         
         "type": ["fairy"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -612,7 +612,7 @@ export default {
         },
         
         "type": ["fairy"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -628,7 +628,7 @@ export default {
         },
         
         "type": ["fire"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -644,7 +644,7 @@ export default {
         },
         
         "type": ["fire"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -660,7 +660,7 @@ export default {
         },
         
         "type": ["normal", "fairy"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -676,7 +676,7 @@ export default {
         },
         
         "type": ["normal", "fairy"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -692,7 +692,7 @@ export default {
         },
         
         "type": ["poison", "flying"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -708,7 +708,7 @@ export default {
         },
         
         "type": ["poison", "flying"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -724,7 +724,7 @@ export default {
         },
         
         "type": ["grass", "poison"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -740,7 +740,7 @@ export default {
         },
         
         "type": ["grass", "poison"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -756,7 +756,7 @@ export default {
         },
         
         "type": ["grass", "poison"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -772,7 +772,7 @@ export default {
         },
         
         "type": ["bug", "grass"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -788,7 +788,7 @@ export default {
         },
         
         "type": ["bug", "grass"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -804,7 +804,7 @@ export default {
         },
         
         "type": ["bug", "poison"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -820,7 +820,7 @@ export default {
         },
         
         "type": ["bug", "poison"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -836,7 +836,7 @@ export default {
         },
         
         "type": ["ground"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -852,7 +852,7 @@ export default {
         },
         
         "type": ["ground"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -868,7 +868,7 @@ export default {
         },
         
         "type": ["normal"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -884,7 +884,7 @@ export default {
         },
         
         "type": ["normal"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -900,7 +900,7 @@ export default {
         },
         
         "type": ["water"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -916,7 +916,7 @@ export default {
         },
         
         "type": ["water"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -948,7 +948,7 @@ export default {
         },
         
         "type": ["fighting"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -964,7 +964,7 @@ export default {
         },
         
         "type": ["fire"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -980,7 +980,7 @@ export default {
         },
         
         "type": ["fire"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -996,7 +996,7 @@ export default {
         },
         
         "type": ["water"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1012,7 +1012,7 @@ export default {
         },
         
         "type": ["water"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1028,7 +1028,7 @@ export default {
         },
         
         "type": ["water", "fighting"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1044,7 +1044,7 @@ export default {
         },
         
         "type": ["psychic"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1060,7 +1060,7 @@ export default {
         },
         
         "type": ["psychic"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1076,7 +1076,7 @@ export default {
         },
         
         "type": ["psychic"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1092,7 +1092,7 @@ export default {
         },
         
         "type": ["fighting"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1108,7 +1108,7 @@ export default {
         },
         
         "type": ["fighting"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1124,7 +1124,7 @@ export default {
         },
         
         "type": ["fighting"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1140,7 +1140,7 @@ export default {
         },
         
         "type": ["grass", "poison"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1156,7 +1156,7 @@ export default {
         },
         
         "type": ["grass", "poison"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1172,7 +1172,7 @@ export default {
         },
         
         "type": ["grass", "poison"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1188,7 +1188,7 @@ export default {
         },
         
         "type": ["water", "poison"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1204,7 +1204,7 @@ export default {
         },
         
         "type": ["water", "poison"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1220,7 +1220,7 @@ export default {
         },
         
         "type": ["rock", "ground"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1236,7 +1236,7 @@ export default {
         },
         
         "type": ["rock", "ground"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1252,7 +1252,7 @@ export default {
         },
         
         "type": ["rock", "ground"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1268,7 +1268,7 @@ export default {
         },
         
         "type": ["fire"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1284,7 +1284,7 @@ export default {
         },
         
         "type": ["fire"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1300,7 +1300,7 @@ export default {
         },
         
         "type": ["water", "psychic"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1316,7 +1316,7 @@ export default {
         },
         
         "type": ["water", "psychic"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1332,7 +1332,7 @@ export default {
         },
         
         "type": ["electric", "steel"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1348,7 +1348,7 @@ export default {
         },
         
         "type": ["electric", "steel"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1364,7 +1364,7 @@ export default {
         },
         
         "type": ["normal", "flying"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1380,7 +1380,7 @@ export default {
         },
         
         "type": ["normal", "flying"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1396,7 +1396,7 @@ export default {
         },
         
         "type": ["normal", "flying"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1412,7 +1412,7 @@ export default {
         },
         
         "type": ["water"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1428,7 +1428,7 @@ export default {
         },
         
         "type": ["water", "ice"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1444,7 +1444,7 @@ export default {
         },
         
         "type": ["poison"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1460,7 +1460,7 @@ export default {
         },
         
         "type": ["poison"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1476,7 +1476,7 @@ export default {
         },
         
         "type": ["water"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1492,7 +1492,7 @@ export default {
         },
         
         "type": ["water", "ice"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1508,7 +1508,7 @@ export default {
         },
         
         "type": ["ghost", "poison"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1524,7 +1524,7 @@ export default {
         },
         
         "type": ["ghost", "poison"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1540,7 +1540,7 @@ export default {
         },
         
         "type": ["ghost", "poison"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1556,7 +1556,7 @@ export default {
         },
         
         "type": ["rock", "ground"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1572,7 +1572,7 @@ export default {
         },
         
         "type": ["psychic"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1588,7 +1588,7 @@ export default {
         },
         
         "type": ["psychic"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1604,7 +1604,7 @@ export default {
         },
         
         "type": ["water"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1620,7 +1620,7 @@ export default {
         },
         
         "type": ["water"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1636,7 +1636,7 @@ export default {
         },
         
         "type": ["electric"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1652,7 +1652,7 @@ export default {
         },
         
         "type": ["electric"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1668,7 +1668,7 @@ export default {
         },
         
         "type": ["grass", "psychic"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1684,7 +1684,7 @@ export default {
         },
         
         "type": ["grass", "psychic"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1716,7 +1716,7 @@ export default {
         },
         
         "type": ["ground"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1732,7 +1732,7 @@ export default {
         },
         
         "type": ["fighting"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1748,7 +1748,7 @@ export default {
         },
         
         "type": ["fighting"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1764,7 +1764,7 @@ export default {
         },
         
         "type": ["normal"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1780,7 +1780,7 @@ export default {
         },
         
         "type": ["poison"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1796,7 +1796,7 @@ export default {
         },
         
         "type": ["poison"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1812,7 +1812,7 @@ export default {
         },
         
         "type": ["ground", "rock"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1828,7 +1828,7 @@ export default {
         },
         
         "type": ["ground", "rock"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1844,7 +1844,7 @@ export default {
         },
         
         "type": ["normal"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1860,7 +1860,7 @@ export default {
         },
         
         "type": ["grass"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1876,7 +1876,7 @@ export default {
         },
         
         "type": ["normal"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1892,7 +1892,7 @@ export default {
         },
         
         "type": ["water"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1908,7 +1908,7 @@ export default {
         },
         
         "type": ["water"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1924,7 +1924,7 @@ export default {
         },
         
         "type": ["water"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1940,7 +1940,7 @@ export default {
         },
         
         "type": ["water"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1956,7 +1956,7 @@ export default {
         },
         
         "type": ["water"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1972,7 +1972,7 @@ export default {
         },
         
         "type": ["water", "psychic"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -1988,7 +1988,7 @@ export default {
         },
         
         "type": ["psychic", "fairy"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2004,7 +2004,7 @@ export default {
         },
         
         "type": ["bug", "flying"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2020,7 +2020,7 @@ export default {
         },
         
         "type": ["ice", "psychic"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2036,7 +2036,7 @@ export default {
         },
         
         "type": ["electric"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2052,7 +2052,7 @@ export default {
         },
         
         "type": ["fire"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2068,7 +2068,7 @@ export default {
         },
         
         "type": ["bug"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2084,7 +2084,7 @@ export default {
         },
         
         "type": ["normal"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2100,7 +2100,7 @@ export default {
         },
         
         "type": ["water"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2116,7 +2116,7 @@ export default {
         },
         
         "type": ["water", "flying"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2132,7 +2132,7 @@ export default {
         },
         
         "type": ["water", "ice"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2148,7 +2148,7 @@ export default {
         },
         
         "type": ["normal"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2164,7 +2164,7 @@ export default {
         },
         
         "type": ["normal"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2180,7 +2180,7 @@ export default {
         },
         
         "type": ["water"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2196,7 +2196,7 @@ export default {
         },
         
         "type": ["electric"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2212,7 +2212,7 @@ export default {
         },
         
         "type": ["fire"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2228,7 +2228,7 @@ export default {
         },
         
         "type": ["normal"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2244,7 +2244,7 @@ export default {
         },
         
         "type": ["rock", "water"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2260,7 +2260,7 @@ export default {
         },
         
         "type": ["rock", "water"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2276,7 +2276,7 @@ export default {
         },
         
         "type": ["rock", "water"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2292,7 +2292,7 @@ export default {
         },
         
         "type": ["rock", "water"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2308,7 +2308,7 @@ export default {
         },
         
         "type": ["rock", "flying"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2324,7 +2324,7 @@ export default {
         },
         
         "type": ["normal"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2340,7 +2340,7 @@ export default {
         },
         
         "type": ["ice", "flying"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2356,7 +2356,7 @@ export default {
         },
         
         "type": ["electric", "flying"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2372,7 +2372,7 @@ export default {
         },
         
         "type": ["fire", "flying"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2388,7 +2388,7 @@ export default {
         },
         
         "type": ["dragon"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2404,7 +2404,7 @@ export default {
         },
         
         "type": ["dragon"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2420,7 +2420,7 @@ export default {
         },
         
         "type": ["dragon", "flying"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2436,7 +2436,7 @@ export default {
         },
         
         "type": ["psychic"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,
@@ -2452,7 +2452,7 @@ export default {
         },
         
         "type": ["psychic"],
-        "size": 30,
+        "size": 60,
         "baseStats": {
             "hp": 45,
             "attack": 2,

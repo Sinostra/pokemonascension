@@ -45,7 +45,8 @@ export default class StarterChoice  extends Vue {
             maxHp: this.$store.getters.getDex[id]['baseStats']['hp'],
         }
         this.$store.commit("addPokemon", starterData)
-        this.$store.dispatch("playencounter", 1)
+        this.$store.commit("setGameMap")
+        this.$store.dispatch('playNextStep')
     }
 
 }

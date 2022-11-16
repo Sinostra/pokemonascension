@@ -8,7 +8,7 @@ export default {
             state.foeTeam = foes.map((foe) => {
                 return {
                     id: foe.id,
-                    fainted: foe.fainted,
+                    fainted: false,
                     stats: {
                         hp: foe.baseStats.hp,
                         attack: foe.baseStats.attack,
