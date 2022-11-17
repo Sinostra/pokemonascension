@@ -30,6 +30,7 @@
 
     &.draggedCard {
         pointer-events: none;
+        touch-action: auto;
     }
 
     &.normal {
@@ -111,6 +112,7 @@
 
     &.locked {
         pointer-events: none;
+        touch-action: auto;
     }
 
     .cost {
