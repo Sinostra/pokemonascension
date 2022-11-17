@@ -1,6 +1,6 @@
 <template>
     <div class="battle-interface">
-        <div class="battle-wrapper" @mouseup.left="onMouseUpInterface()">
+        <div class="battle-wrapper" @mouseup.left="onMouseUpInterface()" @touchend="onMouseUpInterface()">
             <PlayerPokemon :id="activePokemon"></PlayerPokemon>
             <FoePokemon
                 v-for="(pokemon, index) in $store.getters.getFoeTeam"
@@ -25,7 +25,7 @@
             <div class="number text">{{drawPile.length}}</div>
         </div>
 
-        <div class="hand-area" :class="draggedCardIndex !== null && selectedCardIndex === null ? 'active' : ''" @mouseup="onMouseUpHandArea()"></div>
+        <div class="hand-area" :class="draggedCardIndex !== null && selectedCardIndex === null ? 'active' : ''" @mouseup="onMouseUpHandArea()" @touchend="onMouseUpHandArea()"></div>
         <Hand
             :content="hand"
             :draggedCardIndex="draggedCardIndex"

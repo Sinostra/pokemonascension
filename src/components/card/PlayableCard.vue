@@ -1,5 +1,5 @@
 <template>
-  <div class="card" :class="cardClass" @mousedown="startDrag()" :style="cardPosition">
+  <div class="card" :class="cardClass" @mousedown="startDrag()" @touchstart="startDrag()" :style="cardPosition">
     <img class="background-img" :src="background">
     <div class="cost" :style="(getFontSize(1))" :class="costClass">
       <img :src="costBackground">

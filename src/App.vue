@@ -57,12 +57,15 @@ export default class App extends Vue {
   }
 
   public onMouseMove(event) {
-    this.$store.commit("updateMouseCoordinates", {x: event.x, y: event.y})
+    const coordinates = event.x && event.y ? {x: event.x, y: event.y} : 
+    {x: event.touches[0].clientX, y: event.touches[0].clientY}
+    this.$store.commit("updateMouseCoordinates", coordinates)
   }
 
   public mounted() {
     window.addEventListener("resize", this.onResize);
     window.addEventListener("mousemove", this.onMouseMove)
+    window.addEventListener("touchmove", this.onMouseMove)
     window.dispatchEvent(new Event('resize'));
     this.$store.dispatch("playevent", 0)
   }
@@ -70,6 +73,7 @@ export default class App extends Vue {
   public beforeUnmount() {
     window.removeEventListener("resize", this.onResize)
     window.removeEventListener("mousemove", this.onMouseMove)
+    window.removeEventListener("touchmove", this.onMouseMove)
   }
 }
 </script>
