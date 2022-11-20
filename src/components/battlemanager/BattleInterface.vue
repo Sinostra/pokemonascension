@@ -77,7 +77,7 @@ import cloneDeep from "lodash.clonedeep"
 export default class BattleInterface extends Vue {
 
     public readonly maxCardsInHand: number = 10
-    public readonly delayBetweenDraws: number = 500
+    public readonly delayBetweenDraws: number = 100
 
     public draggedCardIndex: number | null = null
     public selectedCardIndex: number | null = null
