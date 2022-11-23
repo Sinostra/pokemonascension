@@ -8,6 +8,8 @@
     
     <div class="name" :style="(getFontSize(0.7))">{{dataCard[id]['name']}}</div>
 
+    <div class="type-icon"></div>
+
     <div class="illustration" :style="{'background-image':'url(' + illustrationBackground + ')'}"></div>
 
     <div class="category" :style="(getCategoryStyle(0.6))">{{dataCard[id]['category']}}</div>

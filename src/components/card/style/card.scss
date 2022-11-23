@@ -35,74 +35,146 @@
 
     &.normal {
         background-color: #909aa0;
+
+        .type-icon {
+            background: center / contain no-repeat url('../../assets/img/types/normal.png');
+        }
     }
 
     &.electric {
         background-color: #f4d23c;
+
+        .type-icon {
+            background: center / contain no-repeat url('../../assets/img/types/electric.png');
+        }
     }
 
     &.psychic {
         background-color: #fa7179;
+
+        .type-icon {
+            background: center / contain no-repeat url('../../assets/img/types/psychic.png');
+        }
     }
 
     &.grass {
         background-color: #55b774;
+
+        .type-icon {
+            background: center / contain no-repeat url('../../assets/img/types/grass.png');
+        }
     }
 
     &.water {
         background-color: #5090d6;
+
+        .type-icon {
+            background: center / contain no-repeat url('../../assets/img/types/water.png');
+        }
     }
 
     &.fire {
         background-color: #f47932;
+
+        .type-icon {
+            background: center / contain no-repeat url('../../assets/img/types/fire.png');
+        }
     }
 
     &.rock {
         background-color: #d0ad79;
+
+        .type-icon {
+            background: center / contain no-repeat url('../../assets/img/types/rock.png');
+        }
     }
 
     &.ground {
         background-color: #ab8d8b;
+
+        .type-icon {
+            background: center / contain no-repeat url('../../assets/img/types/ground.png');
+        }
     }
 
     &.bug {
         background-color: #9db854;
+
+        .type-icon {
+            background: center / contain no-repeat url('../../assets/img/types/bug.png');
+        }
     }
 
     &.flying {
         background-color: #8fa9de;
+
+        .type-icon {
+            background: center / contain no-repeat url('../../assets/img/types/flying.png');
+        }
     }
 
     &.ghost {
         background-color: #5269ad;
+
+        .type-icon {
+            background: center / contain no-repeat url('../../assets/img/types/ghost.png');
+        }
     }
 
     &.dark {
         background-color: #5a5465;
+
+        .type-icon {
+            background: center / contain no-repeat url('../../assets/img/types/dark.png');
+        }
     }
 
     &.ice {
         background-color: #73cec0;
+
+        .type-icon {
+            background: center / contain no-repeat url('../../assets/img/types/ice.png');
+        }
     }
 
     &.fairy {
         background-color: #e7a9cb;
+
+        .type-icon {
+            background: center / contain no-repeat url('../../assets/img/types/fairy.png');
+        }
     }
 
     &.dragon {
         background-color: #0b6dc3;
+
+        .type-icon {
+            background: center / contain no-repeat url('../../assets/img/types/dragon.png');
+        }
     }
 
     &.fighting {
         background-color: #ce416b;
+
+        .type-icon {
+            background: center / contain no-repeat url('../../assets/img/types/fighting.png');
+        }
     }
 
     &.poison {
         background-color: #aa6bc7;
+
+        .type-icon {
+            background: center / contain no-repeat url('../../assets/img/types/poison.png');
+        }
     }
 
     &.steel {
         background-color: #5a8ea2;
+
+        .type-icon {
+            background: center / contain no-repeat url('../../assets/img/types/steel.png');
+        }
     }
 
     &:not(.selected):hover {
@@ -153,18 +225,13 @@
         align-items: center;
     }
 
-    .type {
+    .type-icon {
         position: absolute;
-        width: 21%;
+        width: 7%;
         height: 5%;
         top: 5.5%;
-        right: 11%;
-        font-family: 'futura condensed';
-        color: #fff;
-        text-transform: uppercase;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        right: 9%;
+        background: black;
     }
 
     .illustration {

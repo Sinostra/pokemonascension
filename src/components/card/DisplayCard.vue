@@ -8,6 +8,8 @@
     
     <div class="name" :style="(getFontSize(0.7))">{{dataCard[id]['name']}}</div>
 
+    <div class="type-icon"></div>
+
     <div class="illustration" :style="{'background-image':'url(' + illustrationBackground + ')'}"></div>
 
     <div class="category" :style="(getCategoryStyle(0.6))">{{dataCard[id]['category']}}</div>
@@ -48,5 +50,6 @@ export default class DisplayCard extends Card {
 </script>
 
 <style lang="scss" scoped>
+@import './style/card.scss';
 @import './style/displayCard.scss';
 </style>
