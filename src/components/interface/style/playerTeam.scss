@@ -7,6 +7,9 @@
   .team-wrapper {
     display: flex;
     padding: 10px 0 20px;
+    width: 100%;
+    justify-content: center;
+    align-items: flex-end;
   
     .team-member-wrapper {
       width: 30%;

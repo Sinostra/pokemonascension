@@ -1,6 +1,21 @@
 export default {
     state: {
-        team: [],
+        team: [
+            {
+                id: "001",
+                deck: [],
+                remainingHp: 45,
+                maxHp: 45,
+                fainted: false
+            },
+            {
+                id: "009",
+                deck: [],
+                remainingHp: 45,
+                maxHp: 45,
+                fainted: false
+            }
+        ],
         activeIndex: 0,
     },
 
