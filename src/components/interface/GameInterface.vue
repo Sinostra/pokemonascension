@@ -6,6 +6,7 @@
     </div>
 
     <div v-if="currentDisplayedComp" class="component-overlay">
+        <img class="close" :src="closeSpritePath" @click="currentDisplayedComp = ''">
         <component v-bind:is="currentDisplayedComp"></component>
     </div>
 </template>
@@ -26,6 +27,10 @@ import GameMap from "./gameinterfacecomponents/GameMap.vue"
 export default class GameInterface extends Vue {
     public currentDisplayedComp = ''
     public fullscreen = false
+
+    get closeSpritePath() {
+        return require(`@/assets/img/interface/close.png`)
+    }
 
     public clickInterfaceButton(buttonName) {
         if(buttonName === this.currentDisplayedComp) {
