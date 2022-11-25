@@ -10,6 +10,7 @@
                     :id="pokemon.id"
                     :width="getWidth(index)"
                     :displayHelpTooltip="false"
+                    @click="selectedPokemon = index"
                     ></DisplayPokemon>
 
                     <div class="healthBar-infos-wrapper" :style="`width: ${getWidth(index)}%`">
@@ -21,14 +22,12 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- <DisplayDeck
-                    :deck="pokemon.deck"
-                ></DisplayDeck> -->
             </div>
         </div>
-        <div class="deck-wrapper">
-
+        <div class="deck-container">
+            <DisplayDeck
+                :deck="selectedPokemonDeck"
+            ></DisplayDeck>
         </div>
     </div>
 </template>
@@ -45,6 +44,12 @@ import DisplayDeck from "../../card/DisplayDeck.vue"
     }
 })
 export default class PlayerTeam extends Vue {
+
+    public selectedPokemon = 0;
+
+    get selectedPokemonDeck() {
+        return this.$store.getters.getPlayerTeam[this.selectedPokemon].deck
+    }
 
     public getMaxHealth(index) {
         const id = this.$store.getters.getPlayerTeam[index]['id']
