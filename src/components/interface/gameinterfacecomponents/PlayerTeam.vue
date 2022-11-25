@@ -1,32 +1,36 @@
 <template>
-    <div class="team-wrapper">
-        <div v-for="(pokemon, index) in $store.getters.getPlayerTeam"
-        :key="index"
-        class="team-member-wrapper"
-        >
-            <div class="pokemon-info">
-                <DisplayPokemon
-                :id="pokemon.id"
-                :width="getWidth(index)"
-                :displayHelpTooltip="false"
-                ></DisplayPokemon>
+    <div class="player-team">
+        <div class="team-wrapper">
+            <div v-for="(pokemon, index) in $store.getters.getPlayerTeam"
+            :key="index"
+            class="team-member-wrapper"
+            >
+                <div class="pokemon-info">
+                    <DisplayPokemon
+                    :id="pokemon.id"
+                    :width="getWidth(index)"
+                    :displayHelpTooltip="false"
+                    ></DisplayPokemon>
 
-                <div class="healthBar-infos-wrapper" :style="`width: ${getWidth(index)}%`">
-                    <div class="healthBar">
-                        <div class="currentHealth" :class="getHealthBarClass(index)" :style="{'width': getHealthBarPercent(index) + '%'}"></div>
-                        <div class="bottom-infos">
-                            <div class="healthAmount" :style="getFontSize(0.8)">{{getCurrentHealth(index)}}/{{getMaxHealth(index)}}</div>
+                    <div class="healthBar-infos-wrapper" :style="`width: ${getWidth(index)}%`">
+                        <div class="healthBar">
+                            <div class="currentHealth" :class="getHealthBarClass(index)" :style="{'width': getHealthBarPercent(index) + '%'}"></div>
+                            <div class="bottom-infos">
+                                <div class="healthAmount" :style="getFontSize(0.8)">{{getCurrentHealth(index)}}/{{getMaxHealth(index)}}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <DisplayDeck
-                :deck="pokemon.deck"
-            ></DisplayDeck>
+                <!-- <DisplayDeck
+                    :deck="pokemon.deck"
+                ></DisplayDeck> -->
+            </div>
+        </div>
+        <div class="deck-wrapper">
+
         </div>
     </div>
-    
 </template>
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
