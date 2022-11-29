@@ -10,7 +10,7 @@
                     :id="pokemon.id"
                     :width="getWidth(index)"
                     :displayHelpTooltip="false"
-                    @click="selectedPokemon = index"
+                    @click.stop="selectedPokemon = index"
                     ></DisplayPokemon>
 
                     <div class="healthBar-infos-wrapper" :style="`width: ${getWidth(index)}%`">

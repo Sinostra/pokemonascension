@@ -5,7 +5,7 @@
         <div class="interface-item fullscreen-toggle" :class="fullscreen ? 'notfullscreen' : 'fullscreen'" @click="toggleFullscreen()"></div>
     </div>
 
-    <div v-if="currentDisplayedComp" class="component-overlay">
+    <div v-if="currentDisplayedComp" class="component-overlay" @click="currentDisplayedComp = ''">
         <img class="close" :src="closeSpritePath" @click="currentDisplayedComp = ''">
         <component v-bind:is="currentDisplayedComp"></component>
     </div>
