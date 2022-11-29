@@ -1,7 +1,7 @@
 <template>
   <div class="deck-wrapper">
     <div v-for="(card, index) in deck" :key="index" class="card-slot">
-      <DisplayCard :id="card"></DisplayCard>
+      <DisplayCard :id="card" @click.stop=""></DisplayCard>
     </div>
   </div>
 </template>
