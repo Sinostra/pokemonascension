@@ -25,11 +25,19 @@
             <div class="number text">{{drawPile.length}}</div>
         </div>
 
-        <div class="hand-area" :class="draggedCardIndex !== null && selectedCardIndex === null ? 'active' : ''" @mouseup="onMouseUpHandArea()" @touchend="onMouseUpHandArea()"></div>
+        <div
+            class="hand-area"
+            :class="draggedCardIndex !== null && selectedCardIndex === null ? 'active' : ''"
+            @mouseup="onMouseUpHandArea()"
+            @mouseenter="onMouseEnterHandArea()"
+            @mouseleave="onMouseLeaveHandArea()"
+            @touchend="onMouseUpHandArea()">
+        </div>
         <Hand
             :content="hand"
             :draggedCardIndex="draggedCardIndex"
             :selectedCardIndex="selectedCardIndex"
+            :mouseInCardArea="mouseInHandArea"
             @onCardDragged="selectCard"
         >
         </Hand>
@@ -82,6 +90,8 @@ export default class BattleInterface extends Vue {
     public draggedCardIndex: number | null = null
     public selectedCardIndex: number | null = null
 
+    public mouseInHandArea: boolean = true
+
     public canEndTurn: boolean = false
 
     public drawPile: string[] = []
@@ -115,6 +125,14 @@ export default class BattleInterface extends Vue {
 
     public onMouseUpHandArea() {
         this.selectCard(null)
+    }
+
+    public onMouseEnterHandArea() {
+        this.mouseInHandArea = true;
+    }
+
+    public onMouseLeaveHandArea() {
+        this.mouseInHandArea = false;
     }
 
     public selectCard(cardIndex): void {

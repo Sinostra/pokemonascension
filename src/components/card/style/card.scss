@@ -33,6 +33,10 @@
         touch-action: auto;
     }
 
+    &.willBePlayed {
+        filter: drop-shadow(0 0 0.50rem #f2cd4c) drop-shadow(2px 2px 2px #ffcc00);
+    }
+
     &.normal {
         background-color: #909aa0;
 

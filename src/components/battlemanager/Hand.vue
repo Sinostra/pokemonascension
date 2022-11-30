@@ -24,6 +24,7 @@ import { inject } from 'vue'
         content: Array,
         draggedCardIndex: Number,
         selectedCardIndex: Number,
+        mouseInCardArea: Boolean
     },
     emits: {
         onCardDragged: String,
@@ -34,6 +35,7 @@ export default class Hand extends Vue {
     public content!: string[]
     public draggedCardIndex!: number | null
     public selectedCardIndex!: number | null
+    public mouseInCardArea!: boolean
 
     public isCardBeingPlayed: boolean = false
 
@@ -111,7 +113,11 @@ export default class Hand extends Vue {
             return 'locked'
         }
         if(index === this.draggedCardIndex) {
-            return 'draggedCard'
+            let cardClass = 'draggedCard'
+            if(!this.mouseInCardArea) {
+                cardClass = 'draggedCard willBePlayed'
+            }
+            return cardClass
         }
     }
 

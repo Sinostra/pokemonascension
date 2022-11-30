@@ -122,7 +122,6 @@
     pointer-events: none;
 
     &.active {
-        background: rgba($color: #000000, $alpha: 0.3);
         pointer-events: all;
     }
 }
