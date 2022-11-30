@@ -109,7 +109,7 @@ export default class Hand extends Vue {
     }
 
     public getCardClass(index) {
-        if(this.isCardBeingPlayed) {
+        if(this.isCardBeingPlayed || (this.draggedCardIndex !== null && index !== this.draggedCardIndex)) {
             return 'locked'
         }
         if(index === this.draggedCardIndex) {
