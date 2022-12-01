@@ -12,9 +12,13 @@
     z-index: 7;
 
     .interface-item {
-        width: 2%;
-        height: 50%;
+        width: 3%;
+        height: 90%;
         cursor: pointer;
+
+        &:not(:last-of-type) {
+            margin-right: 0.5%;
+        }
 
         &.inactive {
             filter: grayscale(50);
@@ -22,11 +26,11 @@
         }
 
         &.town-map {
-            background: center / contain no-repeat url('../../assets/img/interface/town-map.png');
+            background: center / cover no-repeat url('../../assets/img/interface/town-map.png');
         }
 
         &.team {
-            background: center / contain no-repeat url('../../assets/img/interface/poke-ball.png');
+            background: center / cover no-repeat url('../../assets/img/interface/poke-ball.png');
         }
 
         &.fullscreen-toggle {

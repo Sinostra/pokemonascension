@@ -2,7 +2,7 @@
     <div class="modal-wrapper">
         <div v-if="playerStillInGame" class="victory-wrapper">
             <div class="modal-txt">Victory !</div>
-            <CardChoice></CardChoice>
+            <CardChoice class="card-choice"></CardChoice>
             <div class="modal-btn" @click="$store.dispatch('playNextStep')">Continue</div>
         </div>
         <div v-if="!playerStillInGame" class="defeat-wrapper">

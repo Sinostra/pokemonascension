@@ -19,6 +19,13 @@
 
     .modal-txt {
         text-align: center;
+        font-size: 2rem;
+        padding-bottom: 20px;
+    }
+
+    .card-choice {
+        width: 80%;
+        margin: 3% auto 5%;
     }
 
     .modal-btn {
@@ -30,6 +37,6 @@
         border: 2px #fff solid;
         padding: 10px 15px;
         max-width: 30%;
-        margin: 30px auto 0;
+        margin: 0 auto;
     }
 }
