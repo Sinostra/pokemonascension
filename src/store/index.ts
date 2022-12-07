@@ -40,9 +40,6 @@ export default createStore({
 
     playNextStep(context) {
       context.commit("advanceInMap")
-      // const entries = Object.entries(context.getters.currentStep)
-      // const actionName = "play"+entries[0]
-      // context.dispatch(actionName, entries[1])
 
       if(!!context.getters.currentStep['encounter']) {
         context.dispatch("playencounter", context.getters.currentStep['encounter'])

@@ -1,5 +1,11 @@
 <template>
+  <div v-if="isLoading" class="loader-wrapper">
+    <div class="loading-bar-wrapper">
+      <div class="loading-bar" :style="`width: ${loadedAssetsPercentage}%`"></div>
+    </div>
+  </div>
   <div id="global-wrapper"
+  v-if="!isLoading"
   :class="appClass"
   @click.right.prevent="onRightClick()">
     <!-- <div class="debug">
@@ -21,6 +27,7 @@ import EventsManager from './components/events/EventsManager.vue'
 import GameInterface from './components/interface/GameInterface.vue'
 import AfterBattleModal from './components/interface/AfterBattleModal.vue'
 import DebugBox from './components/DebugBox.vue'
+import assetsToLoad from './assetsToLoad'
 import { inject } from 'vue'
 
 @Options({
@@ -37,6 +44,8 @@ import { inject } from 'vue'
 
 export default class App extends Vue {
   public appClass = "width-mesure"
+  public isLoading: boolean = false
+  public loadedAssetsAmount: number = 0
   private emitter: any = inject('emitter')
 
   public onResize() {
@@ -63,15 +72,13 @@ export default class App extends Vue {
   }
 
   public mounted() {
+    this.isLoading = true
     window.addEventListener("resize", this.onResize);
     window.addEventListener("mousemove", this.onMouseMove)
     window.addEventListener("touchmove", this.onMouseMove)
     window.dispatchEvent(new Event('resize'));
     this.$store.dispatch("playevent", 0)
-    this.loadImage('sprites/gif/003.gif').then(() => {
-      console.log('asset chargé')
-    })
-
+    this.loadAllImages(0)
   }
 
   public beforeUnmount() {
@@ -88,6 +95,22 @@ export default class App extends Vue {
         resolve()
       }
     })
+  }
+
+  public loadAllImages(index: number) {
+    if(index === assetsToLoad.length) {
+      this.isLoading = false
+      return
+    }
+
+    this.loadImage(assetsToLoad[index]).then(() => {
+      this.loadedAssetsAmount+=1
+      this.loadAllImages(index+=1)
+    })
+  }
+
+  get loadedAssetsPercentage() {
+    return (this.loadedAssetsAmount / assetsToLoad.length) * 100
   }
 }
 </script>
@@ -185,6 +208,27 @@ body {
   z-index: 200;
   max-width: 300px;
   position: relative;
+}
+
+.loader-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  .loading-bar-wrapper {
+    position: absolute;
+    width: 50%;
+    height: 5%;
+    transform: translateX(-50%);
+    background: #fff;
+    top: 50%;
+    left: 50%;
+
+    .loading-bar {
+      background: blue;
+      height: 100%;
+    }
+  }
 }
 
 .debug {
