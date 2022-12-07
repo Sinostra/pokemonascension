@@ -225,7 +225,7 @@ body {
     left: 50%;
 
     .loading-bar {
-      background: blue;
+      background: #182552;
       height: 100%;
     }
   }
