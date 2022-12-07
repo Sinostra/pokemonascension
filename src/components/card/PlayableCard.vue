@@ -1,5 +1,5 @@
 <template>
-  <div class="card" :class="cardClass" @mousedown="startDrag()" @touchstart="startDrag()" @touchend="test()" :style="cardPosition">
+  <div class="card" :class="cardClass" @mousedown="startDrag()" @touchstart="startDrag()" :style="cardPosition">
     <img class="background-img" :src="background">
     <div class="cost" :style="(getFontSize(1))" :class="costClass">
       <img :src="costBackground">
@@ -44,10 +44,6 @@ export default class PlayableCard extends Card {
   public isPlayingDrawAnim: boolean = false
   public isPlayingDiscardFromSelectAnim: boolean = false
   public isPlayingDiscardFromHand: boolean = false
-
-  public test() {
-    console.log('test')
-  }
 
   private emitter: any = inject('emitter')
 

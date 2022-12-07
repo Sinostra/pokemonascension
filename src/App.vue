@@ -73,11 +73,6 @@ export default class App extends Vue {
 
   public mounted() {
     this.isLoading = true
-    window.addEventListener("resize", this.onResize);
-    window.addEventListener("mousemove", this.onMouseMove)
-    window.addEventListener("touchmove", this.onMouseMove)
-    window.dispatchEvent(new Event('resize'));
-    this.$store.dispatch("playevent", 0)
     this.loadAllImages(0)
   }
 
@@ -85,6 +80,14 @@ export default class App extends Vue {
     window.removeEventListener("resize", this.onResize)
     window.removeEventListener("mousemove", this.onMouseMove)
     window.removeEventListener("touchmove", this.onMouseMove)
+  }
+
+  public afterLoadCallBack() {
+    window.addEventListener("resize", this.onResize);
+    window.addEventListener("mousemove", this.onMouseMove)
+    window.addEventListener("touchmove", this.onMouseMove)
+    window.dispatchEvent(new Event('resize'));
+    this.$store.dispatch("playevent", 0)
   }
 
   public loadImage(path) {
@@ -100,6 +103,7 @@ export default class App extends Vue {
   public loadAllImages(index: number) {
     if(index === assetsToLoad.length) {
       this.isLoading = false
+      this.afterLoadCallBack()
       return
     }
 
