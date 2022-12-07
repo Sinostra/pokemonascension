@@ -68,12 +68,26 @@ export default class App extends Vue {
     window.addEventListener("touchmove", this.onMouseMove)
     window.dispatchEvent(new Event('resize'));
     this.$store.dispatch("playevent", 0)
+    this.loadImage('sprites/gif/003.gif').then(() => {
+      console.log('asset chargé')
+    })
+
   }
 
   public beforeUnmount() {
     window.removeEventListener("resize", this.onResize)
     window.removeEventListener("mousemove", this.onMouseMove)
     window.removeEventListener("touchmove", this.onMouseMove)
+  }
+
+  public loadImage(path) {
+    return new Promise<void>((resolve) => {
+      const myImage = new Image();
+      myImage.src = require(`@/assets/img/${path}`)
+      myImage.onload = () => {
+        resolve()
+      }
+    })
   }
 }
 </script>

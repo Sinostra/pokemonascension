@@ -188,7 +188,7 @@
 
     &.locked {
         pointer-events: none;
-        touch-action: auto;
+        touch-action: none;
     }
 
     .cost {
