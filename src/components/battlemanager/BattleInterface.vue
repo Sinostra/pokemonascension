@@ -1,7 +1,11 @@
 <template>
     <div class="battle-interface">
 
-        <div class="pile-overlay" v-if="pileToDisplay"></div>
+        <div class="pile-overlay" v-if="pileToDisplay" @click="pileToDisplay = null">
+            <div class="display-wrapper">
+                <DisplayDeck :deck="pileToDisplay"/>
+            </div>  
+        </div>
 
         <div class="battle-wrapper" @mouseup.left="onMouseUpInterface()" @touchend="onMouseUpInterface()">
             <PlayerPokemon :id="activePokemon"></PlayerPokemon>
@@ -24,7 +28,7 @@
             {{$store.state.battle.currentEnergy}}/{{$store.state.battle.maxEnergy}}
         </div>
 
-        <div class="drawPile" :style="getFontSize()">
+        <div class="drawPile" :style="getFontSize()" @click="pileToDisplay = drawPile">
             <div class="number text">{{drawPile.length}}</div>
         </div>
 
@@ -54,7 +58,7 @@
             :content="discardFromHandManagerContent"
         ></DiscardFromHandManager>
 
-        <div class="discardPile" :style="getFontSize()">
+        <div class="discardPile" :style="getFontSize()" @click="pileToDisplay = discardPile">
             <div class="number text">{{discardPile.length}}</div>
         </div>
 
@@ -70,6 +74,7 @@ import DiscardFromSelectManager from './discard/DiscardFromSelectManager.vue'
 import DiscardFromHandManager from './discard/DiscardFromHandManager.vue'
 import PlayerPokemon from './../pokemon/PlayerPokemon.vue'
 import FoePokemon from './../pokemon/FoePokemon.vue'
+import DisplayDeck from '../card/DisplayDeck.vue'
 import { Options, Vue } from 'vue-class-component'
 import { inject } from 'vue'
 import cloneDeep from "lodash.clonedeep"
@@ -82,6 +87,7 @@ import cloneDeep from "lodash.clonedeep"
         DiscardFromHandManager,
         PlayerPokemon,
         FoePokemon,
+        DisplayDeck,
     }
 })
 

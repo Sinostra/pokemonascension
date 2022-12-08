@@ -2,12 +2,11 @@
     display: flex;
     flex-wrap: wrap;
     overflow: auto;
-    margin-top: 20px;
     padding: 2%;
     height: 100%;
 
     .card-slot {
         width: 12%;
-        margin: 0 15px 0 0;
+        margin: 10px 15px 0 0;
     }
 }
