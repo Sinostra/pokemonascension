@@ -1,5 +1,8 @@
 <template>
     <div class="battle-interface">
+
+        <div class="pile-overlay" v-if="pileToDisplay"></div>
+
         <div class="battle-wrapper" @mouseup.left="onMouseUpInterface()" @touchend="onMouseUpInterface()">
             <PlayerPokemon :id="activePokemon"></PlayerPokemon>
             <FoePokemon
@@ -98,6 +101,8 @@ export default class BattleInterface extends Vue {
     public hand: string[] = []
     public discardPile: string[] = []
     public exhaustPile: string[] = []
+
+    public pileToDisplay: string[] | null = null
 
     public discardFromHandManagerContent: string[] = []
     public discardFromSelectManagerContent: string[] = []
