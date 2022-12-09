@@ -28,7 +28,7 @@ export default class Card extends Vue {
     }
 
     getFontSize(multiplier = 1): string {
-        return `font-size: ${(this.$store.state.settings.baseFontSize) * multiplier}px;`
+        return `font-size: ${(this.$store.getters.baseFontSize) * multiplier}px;`
     }
 
     getCategoryStyle(multiplier = 1) {

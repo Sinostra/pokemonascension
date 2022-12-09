@@ -1,5 +1,5 @@
 <template>
-    <div v-if="nextMove && nextMove['params']" class="intent">
+    <div v-if="nextMove && nextMove['params']" class="intent" :style="getFontSize(1)">
         <div v-if="attackIntentValue" class="intent-category damage">
             <div class="text-wrapper">
                 <span v-if="nextMoveDamageModifier < 1" :class="damageMoveClass">{{ Math.floor(attackIntentValue)}}</span>
@@ -90,6 +90,10 @@ export default class Intents extends Vue {
 
     public getTpyeIcon(type) {
         return require(`@/assets/img/types/${type}.png`)
+    }
+
+    public getFontSize(multiplier = 1): string {
+        return `font-size: ${(this.$store.getters.baseFontSize) * multiplier}px;`
     }
 }
 </script>

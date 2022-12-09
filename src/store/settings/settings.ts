@@ -9,5 +9,11 @@ export default {
         changeBaseFontSize(state, newSize) {
             state.baseFontSize = newSize
         }
+    },
+
+    getters: {
+        baseFontSize: state => {
+            return state.baseFontSize
+        }
     }
 }

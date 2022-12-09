@@ -234,7 +234,7 @@ export default class BattleInterface extends Vue {
     }
 
     public getFontSize(multiplier = 1) {
-        return 'font-size: ' + (this.$store.state.settings.baseFontSize) * multiplier + 'px;'
+        return 'font-size: ' + (this.$store.getters.baseFontSize) * multiplier + 'px;'
     }
 
     public refillPlayerDeck() {
