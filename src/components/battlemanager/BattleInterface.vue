@@ -28,7 +28,7 @@
             {{$store.state.battle.currentEnergy}}/{{$store.state.battle.maxEnergy}}
         </div>
 
-        <div class="drawPile" :style="getFontSize()" @click="pileToDisplay = drawPile">
+        <div class="drawPile" :style="getFontSize()" @click="onClickDrawPile()">
             <div class="number text">{{drawPile.length}}</div>
         </div>
 
@@ -58,7 +58,7 @@
             :content="discardFromHandManagerContent"
         ></DiscardFromHandManager>
 
-        <div class="discardPile" :style="getFontSize()" @click="pileToDisplay = discardPile">
+        <div class="discardPile" :style="getFontSize()" @click="onClickDiscardPile()">
             <div class="number text">{{discardPile.length}}</div>
         </div>
 
@@ -183,6 +183,26 @@ export default class BattleInterface extends Vue {
             this.draw(amount)
         }, this.delayBetweenDraws)
 
+    }
+
+    public onClickDrawPile() {
+        if(this.pileToDisplay === this.drawPile) {
+            this.pileToDisplay = null
+        }
+
+        else {
+            this.pileToDisplay = this.drawPile
+        }
+    }
+
+    public onClickDiscardPile() {
+        if(this.pileToDisplay === this.discardPile) {
+            this.pileToDisplay = null
+        }
+
+        else {
+            this.pileToDisplay = this.discardPile
+        }
     }
 
     public discardFromSelect(index): void {
