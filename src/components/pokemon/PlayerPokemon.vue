@@ -1,7 +1,11 @@
 <template>
     <div class="pokemon-wrapper" :style="playerPosition" :class="wrapperClass">
       <div class="size-wrapper" :style="{'width': dataPokemon.size + '%'}" @mouseover="onHover()" @mouseleave="onHover(false)">
-        <img class="pokemon-sprite" :src="spritePath">
+        <div class="bottom-wrapper">
+          <img class="pokemon-sprite" :src="spritePath">
+          <div class="damage-fx-wrapper"></div>
+        </div>
+        
         <div class="healthBar-infos-wrapper">
           <HealthBar
             :maxHealth="maxHealth"
