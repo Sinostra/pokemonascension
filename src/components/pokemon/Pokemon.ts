@@ -76,6 +76,7 @@ export default class Pokemon extends Vue {
     }
 
     else {
+      damageDealt = this.currentHealth
       this.currentHealth = 0
       this.fainted = true
       this.faint()
