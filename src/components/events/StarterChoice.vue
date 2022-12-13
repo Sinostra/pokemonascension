@@ -43,6 +43,7 @@ export default class StarterChoice  extends Vue {
             deck: this.$store.getters.getDex[id]['starterDeck'],
             hp: this.$store.getters.getDex[id]['baseStats']['hp'],
             maxHp: this.$store.getters.getDex[id]['baseStats']['hp'],
+            stacks: {},
         }
         this.$store.commit("addPokemon", starterData)
         this.$store.commit("setGameMap")

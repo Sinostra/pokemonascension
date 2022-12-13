@@ -95,6 +95,15 @@ export class DrawEffect extends BaseEffect implements IEffect {
   }
 }
 
+export class AddStack extends BaseEffect implements IEffect {
+  playEffect(): Promise<void> {
+    return new Promise((resolve) => {
+      this.emitter.emit("addStack", this.params)
+      resolve()
+    })
+  }
+}
+
 export class MultiAttackEffect extends BaseEffect implements IEffect {
   playEffect(): Promise<void> {
     return new Promise((resolve) => {

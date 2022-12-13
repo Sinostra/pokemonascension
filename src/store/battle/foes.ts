@@ -15,6 +15,7 @@ export default {
                         defense: foe.baseStats.defense,
                     },
                     patternSetting: foe.patternSetting,
+                    stacks: {},
                 }
             })
         },
