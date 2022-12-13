@@ -33,6 +33,15 @@ export default {
 
             state.foeTeam[payload.index]['stats']['defense'] += payload.buff
         },
+        addStackToFoe(state, payload) {
+            if(!state.foeTeam[payload.target]['stacks'][payload.type]) {
+                state.foeTeam[payload.target]['stacks'][payload.type] = payload.value
+            }
+
+            else {
+                state.foeTeam[payload.target]['stacks'][payload.type] += payload.value
+            }
+        },
         setFoeFainted(state, index) {
             if(!state.foeTeam[index]) {
                 return

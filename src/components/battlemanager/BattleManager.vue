@@ -244,6 +244,12 @@ export default class BattleManager extends Vue {
         })
     }
 
+    private onAddStack(payload) {
+        if(payload.target !== "player") {
+            this.$store.commit("addStackToFoe", payload)
+        }
+    }
+
     private onAddToTurn(payload) {
         let targetArray: any[] = []
         switch(payload.step) {
@@ -274,6 +280,7 @@ export default class BattleManager extends Vue {
         this.emitter.on("playCurrentlySelectedCard", this.onPlayCurrentlySelectedCard)
         this.emitter.on("foePokemonHasBeenClicked", this.onFoePokemonHasBeenClicked)
         this.emitter.on("endPlayerTurn", this.onEndPlayerTurn)
+        this.emitter.on("addStack", this.onAddStack)
         this.emitter.on("addToTurn", this.onAddToTurn)
         this.emitter.on("playFoeMove", this.onPlayFoeMove)
         this.emitter.on("fainted", this.checkBattleEnded)
@@ -285,6 +292,7 @@ export default class BattleManager extends Vue {
         this.emitter.off("playCurrentlySelectedCard", this.onPlayCurrentlySelectedCard)
         this.emitter.off("foePokemonHasBeenClicked", this.onFoePokemonHasBeenClicked)
         this.emitter.off("endPlayerTurn", this.onEndPlayerTurn)
+        this.emitter.off("addStack", this.onAddStack)
         this.emitter.off("addToTurn", this.onAddToTurn)
         this.emitter.off("playFoeMove", this.onPlayFoeMove)
         this.emitter.off("fainted", this.checkBattleEnded)
