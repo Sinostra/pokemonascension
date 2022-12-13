@@ -95,7 +95,7 @@ export class DrawEffect extends BaseEffect implements IEffect {
   }
 }
 
-export class AddStack extends BaseEffect implements IEffect {
+export class AddStackEffect extends BaseEffect implements IEffect {
   playEffect(): Promise<void> {
     return new Promise((resolve) => {
       this.emitter.emit("addStack", this.params)
@@ -209,5 +209,6 @@ export const EffectContainer: any = {
   SelfBuffEffect,
   TargetBuffEffect,
   EnergyEffect,
-  DrawEffect
+  DrawEffect,
+  AddStackEffect,
 }

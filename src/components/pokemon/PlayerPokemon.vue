@@ -2,8 +2,8 @@
     <div class="pokemon-wrapper" :style="playerPosition" :class="wrapperClass">
       <div class="size-wrapper" :style="{'width': dataPokemon.size + '%'}" @mouseover="onHover()" @mouseleave="onHover(false)">
         <div class="bottom-wrapper">
-          <img class="pokemon-sprite" :src="spritePath">
           <div class="damage-fx-wrapper"></div>
+          <img class="pokemon-sprite" :src="spritePath">
         </div>
         
         <div class="healthBar-infos-wrapper">

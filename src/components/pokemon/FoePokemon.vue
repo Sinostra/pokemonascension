@@ -17,8 +17,8 @@
             ></HealthBar>
             <Helper :id="id"></Helper>
           </div>
-          <img :src="spritePath" :class="spriteClass" @mouseover="onHover()" @mouseleave="onHover(false)" class="pokemon-sprite">
           <div class="damage-fx-wrapper"></div>
+          <img :src="spritePath" :class="spriteClass" @mouseover="onHover()" @mouseleave="onHover(false)" class="pokemon-sprite">
         </div>
       </div>
   </div>

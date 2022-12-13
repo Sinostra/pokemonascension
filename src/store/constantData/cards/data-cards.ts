@@ -302,4 +302,33 @@ export default {
         },
         "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy and heals you for 30% of the damage dealt.',
     },
+    "016": {
+        "name": "flamethrower",
+        "category": "attack",
+        "rarity": "common",
+        "cost": 1,
+        "target": true,
+        "effect":{
+            "name": "MultiEffect",
+            "type": "fire",
+            "playAttackAnim": true,
+            "params": [
+                {
+                    "name": "AttackEffect",
+                    "params": {
+                        "value": 6,
+                        "modifiers": ["userAttack"]
+                    }
+                },
+                {
+                    "name": "AddStackEffect",
+                    "params": {
+                        "type": "burn",
+                        "value": 1,
+                    }
+                }
+            ]
+        },
+        "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy and applies 1 burn stack on it.',
+    },
 }

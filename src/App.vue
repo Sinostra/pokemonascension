@@ -52,7 +52,6 @@ export default class App extends Vue {
     if(window.innerWidth > 1.8 * window.innerHeight) this.appClass = 'height-mesure'
     else this.appClass = 'width-mesure'
     this.$store.commit("changeBaseFontSize", Math.round(window.innerWidth / 100))
-    console.log(this.$store.getters.baseFontSize)
     //Attente d'une milliseconde pour avoir les bonnes dimensions
     setTimeout(() => {
       const $wrapper: HTMLElement | null = document.querySelector('#global-wrapper')
