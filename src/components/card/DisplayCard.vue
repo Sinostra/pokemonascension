@@ -14,7 +14,7 @@
 
     <div class="category" :style="(getCategoryStyle(0.6))">{{dataCard[id]['category']}}</div>
     
-    <div class="tooltip" :style="(getFontSize(0.8))">
+    <div class="tooltip" :style="(getFontSize(0.6))">
       <div v-html="dynamicToolTip"></div>
       <div v-if="dataCard[id]['exhaust']" class="bold">Exhaust</div>
     </div>

@@ -329,6 +329,6 @@ export default {
                 }
             ]
         },
-        "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy and applies 1 burn stack on it.',
+        "tooltip": 'Deal <span class="damage-amount">§</span> damage to an ennemy and applies 1 burn stack on it. Deals more damage with each burn stack on the target',
     },
 }
