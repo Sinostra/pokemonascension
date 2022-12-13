@@ -317,7 +317,7 @@ export default {
                     "name": "AttackEffect",
                     "params": {
                         "value": 6,
-                        "modifiers": ["userAttack"]
+                        "modifiers": ["userAttack", "burnStacks"]
                     }
                 },
                 {

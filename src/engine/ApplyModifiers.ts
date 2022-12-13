@@ -21,6 +21,7 @@ export default function applyModifiers(baseEffect, user, target, store) {
                     case 'userDefense': return store.state.battle.playerStats[defenseStat]
                     case 'targetAttack': return target !== null ? store.getters.getFoeTeam[target as number]['stats'][attackStat] : 0
                     case 'targetDefense': return target !== null ? store.getters.getFoeTeam[target as number]['stats'][defenseStat] : 0
+                    case 'burnStacks': return target !== null && store.getters.getFoeTeam[target as number]['stacks']['burn'] ? store.getters.getFoeTeam[target as number]['stacks']['burn'] : 0
                 }
             }
             else {
@@ -29,6 +30,7 @@ export default function applyModifiers(baseEffect, user, target, store) {
                     case 'userDefense': return store.getters.getFoeTeam[user as number]['stats'][defenseStat]
                     case 'targetAttack': return target !== null ? store.state.battle.playerStats[attackStat] : 0
                     case 'targetDefense': return target !== null ? store.state.battle.playerStats[defenseStat] : 0
+                    case 'burnStacks': return target !== null && store.state.battle.playerStats['stacks']['burn'] ? store.state.battle.playerStats['stacks']['burn'] : 0
                 }
             }
             
