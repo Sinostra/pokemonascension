@@ -5,8 +5,13 @@
       <div class="healthAmount" :style="getFontSize(0.8)">{{currentHealth}}/{{maxHealth}}</div>
       <div class="healthAmount" :style="getFontSize(0.8)">{{attack}}/{{defense}}</div>
     </div>
-    <div v-if="block" class="block-wrapper">
-      <div class="blockAmount">{{block}}</div>
+    <div class="status-wrapper">
+      <div v-if="block" class="block-wrapper">
+        <div class="blockAmount">{{block}}</div>
+      </div>
+      <div v-if="stacks && stacks['burn']" class="burn-wrapper">
+        <div class="burnkAmount">{{stacks['burn']}}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -22,6 +27,7 @@ import { Options, Vue } from "vue-class-component";
     block: Number,
     attack: Number,
     defense: Number,
+    stacks: Array,
   }
 })
 
@@ -31,6 +37,7 @@ export default class HealthBar extends Vue {
   public block!: number
   public attack!: number
   public defense!: number
+  public stacks!: Record<string, number>
 
   get healthBarClass(): string {
     if(this.getHealthBarPercent() > 67) return 'green'

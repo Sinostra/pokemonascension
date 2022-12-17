@@ -14,6 +14,7 @@
               :block="block"
               :attack="$store.getters.getFoeTeam[index]['stats']['attack']"
               :defense="$store.getters.getFoeTeam[index]['stats']['defense']"
+              :stacks="$store.getters.getFoeTeam[index]['stacks']"
             ></HealthBar>
             <Helper :id="id"></Helper>
           </div>
