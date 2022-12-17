@@ -13,6 +13,7 @@
             :block="block"
             :attack="$store.state.battle.playerStats.attack"
             :defense="$store.state.battle.playerStats.defense"
+            :stacks="$store.getters.getActivePokemon['stacks']"
           ></HealthBar>
         </div>
         <Helper :id="id"></Helper>
