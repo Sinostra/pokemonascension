@@ -55,6 +55,7 @@ export default [
     'cards/illustrations/013.jpg',
     'cards/illustrations/014.jpg',
     'cards/illustrations/015.jpg',
+    'cards/illustrations/016.jpg',
     'backgrounds/forest.gif',
     'backgrounds/pkmcenter.jpg',
     'backgrounds/starter_background.jpg',
