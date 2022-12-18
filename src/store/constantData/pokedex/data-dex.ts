@@ -77,7 +77,7 @@ export default {
             "defense": 1
         },
         "compatibleCards": [
-            "003", "004", "005", "007", "011"
+            "003", "004", "005", "007", "016"
         ],
         "starterDeck": [
             "016",

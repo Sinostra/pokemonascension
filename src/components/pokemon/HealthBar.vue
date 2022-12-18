@@ -5,7 +5,7 @@
       <div class="healthAmount" :style="getFontSize(0.8)">{{currentHealth}}/{{maxHealth}}</div>
       <div class="healthAmount" :style="getFontSize(0.8)">{{attack}}/{{defense}}</div>
     </div>
-    <div class="status-wrapper">
+    <div class="status-wrapper" :style="getFontSize(0.8)">
       <div v-if="block" class="block-wrapper">
         <div class="blockAmount">{{block}}</div>
       </div>

@@ -1,7 +1,7 @@
 .intent {
     position: absolute;
     left: 50%;
-    width: 5vw;
+    width: 100%;
     transform: translate(-50%, -110%);
     font-family: "ERASDEMI";
     font-weight: 800;
@@ -18,11 +18,9 @@
       filter: drop-shadow(1px 1px 1px black);
 
       &.damage {
-        margin-bottom: 5px;
+        margin-bottom: 2%;
         .img-wrapper {
           flex: 0.4;
-          min-width: 20px;
-          min-height: 20px;
           display: flex;
         }
       }
