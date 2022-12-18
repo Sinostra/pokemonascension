@@ -1,5 +1,5 @@
 <template>
-  <div class="help-tooltip">
+  <div class="help-tooltip" :style="getFontSize(1.5)">
     <div class="pokemon-data">
       <div class="text">{{dataPokemon['name']['english']}}</div>
       <div class="type" v-for="(type, index) in dataPokemon.type" :key="index">
@@ -72,6 +72,10 @@ export default class Helper extends Vue {
 
   public getTpyeIcon(type) {
     return require(`@/assets/img/types/${type}.png`)
+  }
+
+  public getFontSize(multiplier = 1): string {
+    return `font-size: ${(this.$store.getters.baseFontSize) * multiplier}px;`
   }
 }
 

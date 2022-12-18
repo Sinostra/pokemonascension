@@ -6,7 +6,8 @@
     display: none;
     flex-direction: column;
     border-radius: 5px;
-    min-width: 240px;
+    // min-width: 240px;
+    width: 20vw;
 
     .pokemon-data {
       display: flex;
