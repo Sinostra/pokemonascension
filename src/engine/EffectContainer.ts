@@ -183,11 +183,17 @@ export class MultiEffect extends BaseEffect implements IEffect {
         effect,
         user: this.params.user,
         target: this.params.target,
-        type: this.params.type,
+        type: this.params.type, 
       }
     }).map((e) => {
       const effect = e.effect as any
-      return new EffectContainer[effect.name]({user: e.user, target: e.target, type: e.type, ...effect.params}, this.emitter)
+      return new EffectContainer[effect.name]({
+        user: e.user,
+        target: e.target,
+        type: e.type,
+        playAttackAnim: effect.playAttackAnim ? true : false,
+        ...effect.params
+      }, this.emitter)
     })
     
     return new Promise((resolve) => {

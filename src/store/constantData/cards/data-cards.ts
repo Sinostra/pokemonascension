@@ -311,10 +311,10 @@ export default {
         "effect":{
             "name": "MultiEffect",
             "type": "fire",
-            "playAttackAnim": true,
             "params": [
                 {
                     "name": "AttackEffect",
+                    "playAttackAnim": true,
                     "params": {
                         "value": 6,
                         "modifiers": ["userAttack", "burnStacks"]
