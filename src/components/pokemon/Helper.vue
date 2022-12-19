@@ -1,5 +1,5 @@
 <template>
-  <div class="help-tooltip" :style="getFontSize(1.5)">
+  <div class="help-tooltip" :style="getFontSize()">
     <div class="pokemon-data">
       <div class="text">{{dataPokemon['name']['english']}}</div>
       <div class="type" v-for="(type, index) in dataPokemon.type" :key="index">

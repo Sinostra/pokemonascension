@@ -59,7 +59,11 @@ export default {
             else {
                 state.gameMapIndex++
             }
-        }
+        },
+
+        returnToFirstBattle(state) {
+            state.gameMapIndex = -1
+        },
     },
 
     getters: {

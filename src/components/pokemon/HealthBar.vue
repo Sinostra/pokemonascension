@@ -27,7 +27,7 @@ import { Options, Vue } from "vue-class-component";
     block: Number,
     attack: Number,
     defense: Number,
-    stacks: Array,
+    stacks: Object,
   }
 })
 

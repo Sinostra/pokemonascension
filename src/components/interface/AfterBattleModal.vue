@@ -26,6 +26,7 @@ export default class AfterBattleModal extends Vue {
     public onClickRestart() {
         this.$store.commit("emptyPlayerTeam")
         this.$store.dispatch("playevent", 0)
+        this.$store.commit("returnToFirstBattle")
     }
 
     get playerStillInGame(): boolean {
