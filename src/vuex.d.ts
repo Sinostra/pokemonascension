@@ -12,7 +12,6 @@ declare module '@vue/runtime-core' {
     settings: any,
     cards: any,
     types: any,
-    allFoes: any,
     map: any,
     app: any
   }
