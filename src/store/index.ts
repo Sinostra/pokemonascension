@@ -1,7 +1,5 @@
 import { createStore } from 'vuex'
 import pokedex from './constantData/pokedex/pokedex'
-import backgrounds from './constantData/background/background'
-import cards from './constantData/cards/cards'
 import battle from './battle/battle'
 import events from './events/events'
 import playerTeam from './battle/playerTeam'
@@ -51,13 +49,11 @@ export default createStore({
   
   modules: {
     pokedex,
-    backgrounds,
     battle,
     events,
     playerTeam,
     foes,
     settings,
-    cards,
     map,
     app
   }

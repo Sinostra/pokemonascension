@@ -75,6 +75,7 @@ import DiscardFromHandManager from './discard/DiscardFromHandManager.vue'
 import PlayerPokemon from './../pokemon/PlayerPokemon.vue'
 import FoePokemon from './../pokemon/FoePokemon.vue'
 import DisplayDeck from '../card/DisplayDeck.vue'
+import dataCards from "@/store/constantData/cards"
 import { Options, Vue } from 'vue-class-component'
 import { inject } from 'vue'
 import cloneDeep from "lodash.clonedeep"
@@ -124,7 +125,7 @@ export default class BattleInterface extends Vue {
 
     public onMouseUpInterface() {
         if(this.$store.state.battle.selectedCard) {
-            if(this.$store.state.cards.dataCards[this.$store.state.battle.selectedCard]['target']) {
+            if(dataCards[this.$store.state.battle.selectedCard]['target']) {
                 this.selectedCardIndex = this.draggedCardIndex
             }
 
@@ -207,7 +208,7 @@ export default class BattleInterface extends Vue {
 
     public discardFromSelect(index): void {
         const cardDiscarded = this.hand.splice(index, 1)[0]
-        if(this.$store.state.cards.dataCards[cardDiscarded]['exhaust']) {
+        if(dataCards[cardDiscarded]['exhaust']) {
             this.exhaustPile.push(cardDiscarded)
         }
         else {

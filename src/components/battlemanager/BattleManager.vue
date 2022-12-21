@@ -10,6 +10,7 @@ import { Options, Vue } from 'vue-class-component'
 import { inject } from 'vue'
 import { EffectContainer } from "@/engine/EffectContainer"
 import applyModifiers from "@/engine/ApplyModifiers"
+import dataCards from "@/store/constantData/cards"
 import cloneDeep from "lodash.clonedeep"
 
 @Options({
@@ -146,7 +147,7 @@ export default class BattleManager extends Vue {
     }
 
     private playCard(cardId: string, targetIndex: number | null) {
-        this.cardBeingPlayed = this.$store.state.cards.dataCards[cardId]
+        this.cardBeingPlayed = dataCards[cardId]
         this.emitter.emit("cardIsPlaying")
         this.emitter.emit("discardCurrentlySelectedCard")
         this.$store.commit("spendEnergy", this.cardBeingPlayed['cost'])
@@ -231,7 +232,7 @@ export default class BattleManager extends Vue {
     }
 
     private onFoePokemonHasBeenClicked(payload) {
-        if(this.$store.state.cards.dataCards[this.$store.getters.selectedCard]['target']) {
+        if(dataCards[this.$store.getters.selectedCard]['target']) {
             this.playCard(this.$store.getters.selectedCard, payload)
         }
     }

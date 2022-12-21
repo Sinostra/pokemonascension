@@ -26,6 +26,7 @@ import { Options } from "vue-class-component";
 import Pokemon from "./Pokemon";
 import Helper from "./Helper.vue"
 import HealthBar from "./HealthBar.vue"
+import backgroundSlots from "@/store/constantData/backgroundSlots"
 import { inject } from 'vue'
 
 @Options({
@@ -42,7 +43,7 @@ export default class PlayerPokemon extends Pokemon {
 
   get playerPosition(): string {
     const currentBackground: string = this.$store.getters.getBackgroundUsed
-    return `left: ${this.$store.state.backgrounds.slots[currentBackground]['player']['left']}%; bottom: ${this.$store.state.backgrounds.slots[currentBackground]['player']['bottom']}%;`
+    return `left: ${backgroundSlots[currentBackground]['player']['left']}%; bottom: ${backgroundSlots[currentBackground]['player']['bottom']}%;`
   }
 
   public onHover(enter: boolean = true): void {

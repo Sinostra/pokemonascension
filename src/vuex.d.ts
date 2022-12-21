@@ -4,13 +4,11 @@ declare module '@vue/runtime-core' {
   // declare your own store states
   interface State {
     pokedex: any,
-    backgrounds: any,
     battle: any,
     events: any,
     playerTeam: any,
     foes: any,
     settings: any,
-    cards: any,
     types: any,
     map: any,
     app: any

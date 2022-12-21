@@ -33,6 +33,7 @@ import Helper from "./Helper.vue"
 import HealthBar from "./HealthBar.vue"
 import suffleArray from "@/engine/Shuffle";
 import cloneDeep from "lodash.clonedeep"
+import backgroundSlots from "@/store/constantData/backgroundSlots"
 import { inject } from 'vue'
 
 @Options({
@@ -73,7 +74,7 @@ export default class FoePokemon extends Pokemon {
 
   get foePosition(): string {
     const currentBackground: string = this.$store.getters.getBackgroundUsed
-    return `left: ${this.$store.state.backgrounds.slots[currentBackground]['foes'][this.index]['left']}%; bottom: ${this.$store.state.backgrounds.slots[currentBackground]['foes'][this.index]['bottom']}%;`
+    return `left: ${backgroundSlots[currentBackground]['foes'][this.index]['left']}%; bottom: ${backgroundSlots[currentBackground]['foes'][this.index]['bottom']}%;`
   }
 
   get spriteClass(): string {
