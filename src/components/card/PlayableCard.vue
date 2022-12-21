@@ -27,6 +27,7 @@ import { Options } from "vue-class-component";
 import getTypeMatchup from "@/engine/TypeMatchup";
 import checkEffectContent from "@/engine/CheckEffectContent"
 import applyModifiers from "@/engine/ApplyModifiers"
+import pokedex from "@/store/constantData/pokedex"
 import { inject } from 'vue'
 
 @Options({
@@ -115,7 +116,7 @@ export default class PlayableCard extends Card {
 
   get cardDamageTooltipModifier() {
     if(!this.foeHover) return 1
-    const foeHoverTypes = this.$store.getters.getDex[this.foeHover.id].type
+    const foeHoverTypes = pokedex[this.foeHover.id].type
     return getTypeMatchup(this.dataCard[this.id]['effect']['type'], foeHoverTypes)
   }
 

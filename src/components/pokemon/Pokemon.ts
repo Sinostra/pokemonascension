@@ -1,5 +1,5 @@
 import { Options, Vue } from 'vue-class-component';
-import dataDex from "@/store/constantData/pokedex/data-dex"
+import dataDex from "@/store/constantData/pokedex"
 import getTypeMatchup from "@/engine/TypeMatchup";
 
 @Options({

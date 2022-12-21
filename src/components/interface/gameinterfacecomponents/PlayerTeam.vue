@@ -35,6 +35,7 @@
 import { Options, Vue } from "vue-class-component";
 import DisplayPokemon from "../../pokemon/DisplayPokemon.vue"
 import DisplayDeck from "../../card/DisplayDeck.vue"
+import pokedex from "@/store/constantData/pokedex"
 
 @Options({
     name: "PlayerTeam",
@@ -53,12 +54,12 @@ export default class PlayerTeam extends Vue {
 
     public getMaxHealth(index) {
         const id = this.$store.getters.getPlayerTeam[index]['id']
-        return this.$store.getters.getDex[id]['baseStats']['hp']
+        return pokedex[id]['baseStats']['hp']
     }
 
     public getWidth(index) {
         const id = this.$store.getters.getPlayerTeam[index]['id']
-        return this.$store.getters.getDex[id]['size']
+        return pokedex[id]['size']
     }
 
     public getCurrentHealth(index) {

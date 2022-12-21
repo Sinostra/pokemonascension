@@ -23,6 +23,7 @@ import { Options, Vue } from 'vue-class-component'
 import getTypeMatchup from "@/engine/TypeMatchup";
 import checkEffectContent from "@/engine/CheckEffectContent"
 import applyModifiers from "@/engine/ApplyModifiers"
+import pokedex from "@/store/constantData/pokedex"
 
 @Options({
   name: "Intents",
@@ -40,7 +41,7 @@ export default class Intents extends Vue {
     public index!: number
 
     get nextMoveDamageModifier(): number {
-        const playerActivePokemonTypes = this.$store.state.pokedex.constantDex[this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex]['id']]['type']
+        const playerActivePokemonTypes = pokedex[this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex]['id']]['type']
         if(this.nextMove['type']) {
             return getTypeMatchup(this.nextMove['type'], playerActivePokemonTypes) 
         }

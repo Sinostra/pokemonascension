@@ -9,6 +9,7 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 import DisplayCard from "../card/DisplayCard.vue"
+import pokedex from "@/store/constantData/pokedex"
 import cloneDeep from "lodash.clonedeep"
 
 @Options({
@@ -31,7 +32,7 @@ export default class CardChoice extends Vue {
     }
 
     public mounted() {
-        const cardChoice = cloneDeep(this.$store.getters.getDex[this.$store.getters.getActivePokemon.id]['compatibleCards'])
+        const cardChoice = cloneDeep(pokedex[this.$store.getters.getActivePokemon.id]['compatibleCards'])
         cardChoice.sort(() => {
             if(Math.random() > 0.5) return -1
             else return 1

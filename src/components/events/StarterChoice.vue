@@ -26,6 +26,7 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import DisplayPokemon from "../pokemon/DisplayPokemon.vue"
+import pokedex from "@/store/constantData/pokedex"
 import cloneDeep from "lodash.clonedeep"
 
 @Options({
@@ -41,9 +42,9 @@ export default class StarterChoice  extends Vue {
         
         const starterData = {
             id: id,
-            deck: cloneDeep(this.$store.getters.getDex[id]['starterDeck']),
-            hp: cloneDeep(this.$store.getters.getDex[id]['baseStats']['hp']),
-            maxHp: cloneDeep(this.$store.getters.getDex[id]['baseStats']['hp']),
+            deck: cloneDeep(pokedex[id]['starterDeck']),
+            hp: cloneDeep(pokedex[id]['baseStats']['hp']),
+            maxHp: cloneDeep(pokedex[id]['baseStats']['hp']),
             stacks: {},
         }
         this.$store.commit("addPokemon", starterData)
