@@ -26,7 +26,7 @@ import { Options } from "vue-class-component";
 import Pokemon from "./Pokemon";
 import Helper from "./Helper.vue"
 import HealthBar from "./HealthBar.vue"
-import backgroundSlots from "@/store/constantData/backgroundSlots"
+import backgroundSlots from "@/constantData/backgroundSlots"
 import { inject } from 'vue'
 
 @Options({

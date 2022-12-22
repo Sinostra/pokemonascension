@@ -26,7 +26,7 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import DisplayPokemon from "../pokemon/DisplayPokemon.vue"
-import pokedex from "@/store/constantData/pokedex"
+import pokedex from "@/constantData/pokedex"
 import cloneDeep from "lodash.clonedeep"
 
 @Options({

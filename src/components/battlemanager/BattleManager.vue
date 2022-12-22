@@ -10,7 +10,7 @@ import { Options, Vue } from 'vue-class-component'
 import { inject } from 'vue'
 import { EffectContainer } from "@/engine/EffectContainer"
 import applyModifiers from "@/engine/ApplyModifiers"
-import dataCards from "@/store/constantData/cards"
+import dataCards from "@/constantData/cards"
 import cloneDeep from "lodash.clonedeep"
 
 @Options({

@@ -1,5 +1,5 @@
 import { Options, Vue } from 'vue-class-component';
-import dataCard from "@/store/constantData/cards"
+import dataCard from "@/constantData/cards"
 
 @Options({
     props: {

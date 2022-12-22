@@ -35,7 +35,7 @@
 import { Options, Vue } from "vue-class-component";
 import DisplayPokemon from "../../pokemon/DisplayPokemon.vue"
 import DisplayDeck from "../../card/DisplayDeck.vue"
-import pokedex from "@/store/constantData/pokedex"
+import pokedex from "@/constantData/pokedex"
 
 @Options({
     name: "PlayerTeam",

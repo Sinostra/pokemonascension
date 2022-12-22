@@ -9,7 +9,7 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 import DisplayCard from "../card/DisplayCard.vue"
-import pokedex from "@/store/constantData/pokedex"
+import pokedex from "@/constantData/pokedex"
 import cloneDeep from "lodash.clonedeep"
 
 @Options({

@@ -75,7 +75,7 @@ import DiscardFromHandManager from './discard/DiscardFromHandManager.vue'
 import PlayerPokemon from './../pokemon/PlayerPokemon.vue'
 import FoePokemon from './../pokemon/FoePokemon.vue'
 import DisplayDeck from '../card/DisplayDeck.vue'
-import dataCards from "@/store/constantData/cards"
+import dataCards from "@/constantData/cards"
 import { Options, Vue } from 'vue-class-component'
 import { inject } from 'vue'
 import cloneDeep from "lodash.clonedeep"

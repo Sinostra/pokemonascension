@@ -23,7 +23,7 @@ import { Options, Vue } from 'vue-class-component'
 import getTypeMatchup from "@/engine/TypeMatchup";
 import checkEffectContent from "@/engine/CheckEffectContent"
 import applyModifiers from "@/engine/ApplyModifiers"
-import pokedex from "@/store/constantData/pokedex"
+import pokedex from "@/constantData/pokedex"
 
 @Options({
   name: "Intents",

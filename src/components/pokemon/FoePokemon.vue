@@ -33,7 +33,7 @@ import Helper from "./Helper.vue"
 import HealthBar from "./HealthBar.vue"
 import suffleArray from "@/engine/Shuffle";
 import cloneDeep from "lodash.clonedeep"
-import backgroundSlots from "@/store/constantData/backgroundSlots"
+import backgroundSlots from "@/constantData/backgroundSlots"
 import { inject } from 'vue'
 
 @Options({
