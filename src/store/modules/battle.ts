@@ -1,3 +1,4 @@
+import pokedex from '@/constantData/pokedex'
 export default {
     state: {
         currentEnergy: 0,
@@ -9,8 +10,11 @@ export default {
         battleToDisplay: false,
         isBattleOngoing: false,
         currentWeather: '',
-        player: {},
-        foeTeam: [],
+        pokemon: {
+            player: [],
+            foes: []
+        },
+        activePlayerIndex: 0,
     },
 
     mutations: {
@@ -58,8 +62,28 @@ export default {
             state.currentWeather = weather 
         },
 
+        changePlayerActiveIndex(state, newIndex) {
+            state.activePlayerIndex = newIndex
+        },
+
+        setPlayerTeam(state, playerTeam) {
+            state.pokemon.player = playerTeam.map((pokemon) => {
+                return {
+                    id: pokemon.id,
+                    fainted: pokemon.fainted,
+                    stats: {
+                        hp: pokemon.remainingHp,
+                        attack: pokedex[pokemon.id].baseStats.attack,
+                        defense: pokedex[pokemon.id].baseStats.defense,
+                    },
+                    stacks: {},
+                    deck: pokemon.deck
+                }
+            })
+        },
+
         setFoes(state, foes) {
-            state.foeTeam = foes.map((foe) => {
+            state.pokemon.foes = foes.map((foe) => {
                 return {
                     id: foe.id,
                     fainted: false,
@@ -74,33 +98,33 @@ export default {
             })
         },
         buffFoeAttack(state, payload) {
-            if(!state.foeTeam[payload.index]) {
+            if(!state.pokemon.foes[payload.index]) {
                 return
             }
 
-            state.foeTeam[payload.index]['stats']['attack'] += payload.buff
+            state.pokemon.foes[payload.index]['stats']['attack'] += payload.buff
         },
         buffFoeDefense(state, payload) {
-            if(!state.foeTeam[payload.index]) {
+            if(!state.pokemon.foes[payload.index]) {
                 return
             }
 
-            state.foeTeam[payload.index]['stats']['defense'] += payload.buff
+            state.pokemon.foes[payload.index]['stats']['defense'] += payload.buff
         },
         addStackToFoe(state, payload) {
-            if(!state.foeTeam[payload.target]['stacks'][payload.type]) {
-                state.foeTeam[payload.target]['stacks'][payload.type] = payload.value
+            if(!state.pokemon.foes[payload.target]['stacks'][payload.type]) {
+                state.pokemon.foes[payload.target]['stacks'][payload.type] = payload.value
             }
 
             else {
-                state.foeTeam[payload.target]['stacks'][payload.type] += payload.value
+                state.pokemon.foes[payload.target]['stacks'][payload.type] += payload.value
             }
         },
         setFoeFainted(state, index) {
-            if(!state.foeTeam[index]) {
+            if(!state.pokemon.foes[index]) {
                 return
             }
-            state.foeTeam[index].fainted = true
+            state.pokemon.foes[index].fainted = true
         }
     },
 
@@ -110,11 +134,15 @@ export default {
         },
 
         getFoeTeam: state => {
-            return state.foeTeam
+            return state.pokemon.foes
+        },
+
+        getActivePlayerPokemon: state => {
+            return state.pokemon.player[state.activePlayerIndex]
         },
 
         getNotFaintedFoes: state => {
-            return state.foeTeam.filter((foe) => !foe.fainted)
+            return state.pokemon.foes.filter((foe) => !foe.fainted)
         }
     }
 }

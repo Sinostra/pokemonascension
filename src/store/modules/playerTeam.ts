@@ -28,6 +28,8 @@ export default {
     },
 
     getters: {
-
+        getPlayerTeam: state => {
+            return state.team
+        },
     }
 }

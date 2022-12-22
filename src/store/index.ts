@@ -1,8 +1,10 @@
 import { createStore } from 'vuex'
-import battle from './battle/battle'
+// import battle from './battle/battle'
+import battle from './modules/battle'
+import playerTeam from './modules/playerTeam'
 import events from './modules/events'
-import playerTeam from './battle/playerTeam'
-import foes from './battle/foes'
+// import playerTeam from './battle/playerTeam'
+// import foes from './battle/foes'
 import settings from './modules/settings'
 import map from './modules/map'
 import app from './modules/app'
@@ -30,7 +32,9 @@ export default createStore({
       if(!encounter) {
         return
       }
+      
       context.commit("changeBackground", encounter.background)
+      context.commit("setPlayerTeam", context.getters.getPlayerTeam)
       context.commit("setFoes", encounter.foes)
       context.commit("startBattle")
     },
@@ -48,10 +52,11 @@ export default createStore({
   },
   
   modules: {
+    // battle,
     battle,
     events,
     playerTeam,
-    foes,
+    // foes,
     settings,
     map,
     app

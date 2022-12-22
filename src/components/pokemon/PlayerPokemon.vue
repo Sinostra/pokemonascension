@@ -11,9 +11,9 @@
             :maxHealth="maxHealth"
             :currentHealth="currentHealth"
             :block="block"
-            :attack="$store.state.battle.playerStats.attack"
-            :defense="$store.state.battle.playerStats.defense"
-            :stacks="$store.getters.getActivePokemon['stacks']"
+            :attack="$store.getters.getActivePlayerPokemon.stats.attack"
+            :defense="$store.getters.getActivePlayerPokemon.stats.defense"
+            :stacks="$store.getters.getActivePlayerPokemon.stacks"
           ></HealthBar>
         </div>
         <Helper :id="id"></Helper>
@@ -131,12 +131,7 @@ export default class PlayerPokemon extends Pokemon {
   public mounted() {
 
     this.maxHealth = this.dataPokemon.baseStats.hp
-    this.attack = this.dataPokemon.baseStats.attack
-    this.defense = this.dataPokemon.baseStats.defense
-    this.currentHealth = this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex].remainingHp
-
-    this.$store.commit("setPlayerAttack", this.attack)
-    this.$store.commit("setPlayerDefense", this.defense)
+    this.currentHealth = this.$store.getters.getActivePlayerPokemon.stats.hp
 
     this.emitter.on("startNewTurn", this.onNewTurn)
     this.emitter.on("damage", this.onDamage)

@@ -120,7 +120,7 @@ export default class BattleInterface extends Vue {
     private emitter: any = inject('emitter')
 
     get activePokemon() {
-        return this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex].id
+        return this.$store.getters.getPlayerTeam[0].id
     }
 
     public onMouseUpInterface() {
