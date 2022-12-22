@@ -162,7 +162,7 @@ export default class BattleManager extends Vue {
             target = "allFoes"
         }
         return new Promise((resolve) => {
-            const cardEffect = applyModifiers(effects, user, target, this.$store)
+            const cardEffect = applyModifiers(effects, user, target, this.$store.state.battle)
             const playAttackAnim = cardEffect.playAttackAnim ? true : false
             const effect = new EffectContainer[cardEffect.name]({user, target, type: cardEffect.type, playAttackAnim, ...cardEffect.params}, this.emitter)
             effect.playEffect().then(() => {

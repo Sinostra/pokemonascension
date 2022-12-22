@@ -93,12 +93,12 @@ export default class PlayableCard extends Card {
       attackEffect = checkEffectContent(this.dataCard[this.id]['effect'], "MultiAttackEffect")
     }
     if(attackEffect) {
-      damageValue = applyModifiers(attackEffect, "player", this.$store.state.battle.indexFoeHover, this.$store).params.value
+      damageValue = applyModifiers(attackEffect, "player", this.$store.state.battle.indexFoeHover, this.$store.state.battle).params.value
     }
 
     let blockEffect = checkEffectContent(this.dataCard[this.id]['effect'], "BlockEffect")
     if(blockEffect) {
-      blockValue = applyModifiers(blockEffect, "player", this.$store.state.battle.indexFoeHover, this.$store).params.value
+      blockValue = applyModifiers(blockEffect, "player", this.$store.state.battle.indexFoeHover, this.$store.state.battle).params.value
     }
 
     finalDamage += damageValue

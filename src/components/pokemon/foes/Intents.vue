@@ -64,7 +64,7 @@ export default class Intents extends Vue {
             return 0
         }
         else {
-            const damageWithModifiers = applyModifiers(foundEffect, this.index, "player", this.$store).params.value
+            const damageWithModifiers = applyModifiers(foundEffect, this.index, "player", this.$store.state.battle).params.value
             return damageWithModifiers * this.nextMoveDamageModifier
         }
     }
@@ -75,7 +75,7 @@ export default class Intents extends Vue {
             return 0
         }
         else {
-            return applyModifiers(foundEffect, this.index, "player", this.$store).params.value
+            return applyModifiers(foundEffect, this.index, "player", this.$store.state.battle).params.value
         }
     }
 

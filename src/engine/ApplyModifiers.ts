@@ -1,6 +1,6 @@
 import cloneDeep from "lodash.clonedeep"
 
-export default function applyModifiers(baseEffect, user, target, store) {
+export default function applyModifiers(baseEffect, user, target, battle) {
     const effect = cloneDeep(baseEffect)
     if(effect.name !== "MultiEffect") {
         if(!effect.params.modifiers) {
@@ -17,20 +17,20 @@ export default function applyModifiers(baseEffect, user, target, store) {
         resolvedModifiers = effect.params.modifiers.map((modifier) => {
             if(user === "player") {
                 switch(modifier) {
-                    case 'userAttack': return store.state.battle.playerStats[attackStat]
-                    case 'userDefense': return store.state.battle.playerStats[defenseStat]
-                    case 'targetAttack': return target !== null ? store.getters.getFoeTeam[target as number]['stats'][attackStat] : 0
-                    case 'targetDefense': return target !== null ? store.getters.getFoeTeam[target as number]['stats'][defenseStat] : 0
-                    case 'burnStacks': return target !== null && store.getters.getFoeTeam[target as number]['stacks']['burn'] ? store.getters.getFoeTeam[target as number]['stacks']['burn'] : 0
+                    case 'userAttack': return battle.pokemon.player[battle.activePlayerIndex].stats[attackStat]
+                    case 'userDefense': return battle.pokemon.player[battle.activePlayerIndex].stats[defenseStat]
+                    case 'targetAttack': return target !== null ? battle.pokemon.foes[target as number]['stats'][attackStat] : 0
+                    case 'targetDefense': return target !== null ? battle.pokemon.foes[target as number]['stats'][defenseStat] : 0
+                    case 'burnStacks': return target !== null && battle.pokemon.foes[target as number]['stacks']['burn'] ? battle.pokemon.foes[target as number]['stacks']['burn'] : 0
                 }
             }
             else {
                 switch(modifier) {
-                    case 'userAttack': return store.getters.getFoeTeam[user as number]['stats'][attackStat]
-                    case 'userDefense': return store.getters.getFoeTeam[user as number]['stats'][defenseStat]
-                    case 'targetAttack': return target !== null ? store.state.battle.playerStats[attackStat] : 0
-                    case 'targetDefense': return target !== null ? store.state.battle.playerStats[defenseStat] : 0
-                    case 'burnStacks': return target !== null && store.state.battle.playerStats['stacks']['burn'] ? store.state.battle.playerStats['stacks']['burn'] : 0
+                    case 'userAttack': return battle.pokemon.foes[user as number]['stats'][attackStat]
+                    case 'userDefense': return battle.pokemon.foes[user as number]['stats'][defenseStat]
+                    case 'targetAttack': return target !== null ? battle.pokemon.player[battle.activePlayerIndex].stats[attackStat] : 0
+                    case 'targetDefense': return target !== null ? battle.pokemon.player[battle.activePlayerIndex].stats[defenseStat] : 0
+                    case 'burnStacks': return target !== null && battle.pokemon.player[battle.activePlayerIndex]['stacks']['burn'] ? battle.pokemon.player[battle.activePlayerIndex]['stacks']['burn'] : 0
                 }
             }
             
@@ -41,7 +41,7 @@ export default function applyModifiers(baseEffect, user, target, store) {
 
     else {
         effect.params = effect.params.map((subEffect) => {
-            return applyModifiers(subEffect, user, target, store)
+            return applyModifiers(subEffect, user, target, battle)
         })
     }
 
