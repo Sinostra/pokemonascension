@@ -97,6 +97,11 @@ export default {
                 }
             })
         },
+
+        changeActivePokemonHealth(state, hp) {
+            state.pokemon.player[state.activePlayerIndex].stats.hp = hp
+        },
+
         buffFoeAttack(state, payload) {
             if(!state.pokemon.foes[payload.index]) {
                 return
@@ -104,6 +109,7 @@ export default {
 
             state.pokemon.foes[payload.index]['stats']['attack'] += payload.buff
         },
+
         buffFoeDefense(state, payload) {
             if(!state.pokemon.foes[payload.index]) {
                 return
@@ -111,6 +117,7 @@ export default {
 
             state.pokemon.foes[payload.index]['stats']['defense'] += payload.buff
         },
+
         addStackToFoe(state, payload) {
             if(!state.pokemon.foes[payload.target]['stacks'][payload.type]) {
                 state.pokemon.foes[payload.target]['stacks'][payload.type] = payload.value
@@ -120,6 +127,7 @@ export default {
                 state.pokemon.foes[payload.target]['stacks'][payload.type] += payload.value
             }
         },
+
         setFoeFainted(state, index) {
             if(!state.pokemon.foes[index]) {
                 return
