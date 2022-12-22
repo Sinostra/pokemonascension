@@ -239,7 +239,7 @@ export default class BattleInterface extends Vue {
     }
 
     public refillPlayerDeck() {
-        this.drawPile = cloneDeep(this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex].deck)
+        this.drawPile = cloneDeep(this.$store.getters.getActivePlayerPokemon.deck)
         this.drawPile.sort(() => {
             if(Math.random() > 0.5) return -1
             else return 1

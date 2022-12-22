@@ -41,7 +41,7 @@ export default class Intents extends Vue {
     public index!: number
 
     get nextMoveDamageModifier(): number {
-        const playerActivePokemonTypes = pokedex[this.$store.state.playerTeam.team[this.$store.getters.getActiveIndex]['id']]['type']
+        const playerActivePokemonTypes = pokedex[this.$store.getters.getActivePlayerPokemon.id]['type']
         if(this.nextMove['type']) {
             return getTypeMatchup(this.nextMove['type'], playerActivePokemonTypes) 
         }
