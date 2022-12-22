@@ -1,13 +1,14 @@
 import { createStore } from 'vuex'
 import battle from './battle/battle'
-import events from './events/events'
+import events from './modules/events'
 import playerTeam from './battle/playerTeam'
 import foes from './battle/foes'
-import settings from './settings/settings'
+import settings from './modules/settings'
+import map from './modules/map'
+import app from './modules/app'
+
 import encounters from '@/constantData/encounters'
 import event from '@/constantData/events'
-import map from './map'
-import app from './app/app'
 
 export default createStore({
   state: {},
