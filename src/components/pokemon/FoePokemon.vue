@@ -158,7 +158,7 @@ export default class FoePokemon extends Pokemon {
   }
 
   protected faint(): void {
-    this.$store.commit("setFoeFainted", this.index)
+    this.$store.commit("setPokemonFainted", this.index)
     this.emitter.emit("fainted", this.index)
   }
 
@@ -172,10 +172,10 @@ export default class FoePokemon extends Pokemon {
 
   private applyBuff(payload) {
     if(payload.buffAttack) {
-      this.$store.commit("buffFoeAttack", {index: this.index, buff: payload.buffAttack})
+      this.$store.commit("buffPokemonAttack", {index: this.index, target: "foes", buff: payload.buffAttack})
       }
     if(payload.buffDefense) {
-      this.$store.commit("buffFoeDefense", {index: this.index, buff: payload.buffDefense})
+      this.$store.commit("buffPokemonDefense", {index: this.index, target: "foes", buff: payload.buffDefense})
     }
   }
 

@@ -102,33 +102,34 @@ export default {
             state.pokemon.player[state.activePlayerIndex].stats.hp = hp
         },
 
-        buffFoeAttack(state, payload) {
-            if(!state.pokemon.foes[payload.index]) {
+        buffPokemonAttack(state, payload) {
+            if(!state.pokemon[payload.target][payload.index]) {
                 return
             }
 
-            state.pokemon.foes[payload.index]['stats']['attack'] += payload.buff
+            state.pokemon[payload.target][payload.index]['stats']['attack'] += payload.buff
         },
 
-        buffFoeDefense(state, payload) {
-            if(!state.pokemon.foes[payload.index]) {
+        buffPokemonDefense(state, payload) {
+            if(!state.pokemon[payload.target][payload.index]) {
                 return
             }
 
-            state.pokemon.foes[payload.index]['stats']['defense'] += payload.buff
+            state.pokemon[payload.target][payload.index]['stats']['defense'] += payload.buff
         },
 
-        addStackToFoe(state, payload) {
-            if(!state.pokemon.foes[payload.target]['stacks'][payload.type]) {
-                state.pokemon.foes[payload.target]['stacks'][payload.type] = payload.value
+        addStackToPokemon(state, payload) {
+            const targetType = payload.target === "player" ? payload.target : "foes"
+            if(!state.pokemon[targetType][payload.target]['stacks'][payload.type]) {
+                state.pokemon[targetType][payload.target]['stacks'][payload.type] = payload.value
             }
 
             else {
-                state.pokemon.foes[payload.target]['stacks'][payload.type] += payload.value
+                state.pokemon[targetType][payload.target]['stacks'][payload.type] += payload.value
             }
         },
 
-        setFoeFainted(state, index) {
+        setPokemonFainted(state, index) {
             if(!state.pokemon.foes[index]) {
                 return
             }

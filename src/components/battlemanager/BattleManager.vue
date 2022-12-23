@@ -246,9 +246,7 @@ export default class BattleManager extends Vue {
     }
 
     private onAddStack(payload) {
-        if(payload.target !== "player") {
-            this.$store.commit("addStackToFoe", payload)
-        }
+        this.$store.commit("addStackToPokemon", payload)
     }
 
     private onAddToTurn(payload) {
