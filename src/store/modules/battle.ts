@@ -146,6 +146,10 @@ export default {
             return state.pokemon.foes
         },
 
+        getActiveIndex: state => {
+            return state.activePlayerIndex
+        },
+
         getActivePlayerPokemon: state => {
             return state.pokemon.player[state.activePlayerIndex]
         },

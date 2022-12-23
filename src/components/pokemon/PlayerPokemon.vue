@@ -62,10 +62,10 @@ export default class PlayerPokemon extends Pokemon {
 
   private applyBuff(payload) {
     if(payload.buffAttack) {
-        this.$store.commit("buffPlayerAttack", payload.buffAttack)
+        this.$store.commit("buffPokemonAttack", {index: this.$store.getters.getActiveIndex, target: "player", buff: payload.buffAttack})
       }
     if(payload.buffDefense) {
-      this.$store.commit("buffPlayerDefense", payload.buffDefense)
+      this.$store.commit("buffPokemonDefense", {index: this.$store.getters.getActiveIndex, target: "player", buff: payload.buffAttack})
     }
   }
 
